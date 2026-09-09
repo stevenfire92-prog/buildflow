@@ -1,0 +1,50 @@
+{
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "app",
+        "website",
+        "agent"
+      ],
+      "default": "app",
+      "title": "Project type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "building",
+        "ready",
+        "published"
+      ],
+      "default": "draft",
+      "title": "Build status"
+    },
+    "progress": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "title": "Build progress"
+    },
+    "last_activity": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last activity"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

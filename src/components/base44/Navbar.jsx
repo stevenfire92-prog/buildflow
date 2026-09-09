@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 const links = [
@@ -57,12 +58,12 @@ export default function Navbar() {
           >
             Log in
           </a>
-          <a
-            href="#start"
+          <Link
+            to="/dashboard"
             className="px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
           >
             Start building
-          </a>
+          </Link>
         </div>
 
         <button
@@ -89,9 +90,9 @@ export default function Navbar() {
             <a href="#login" className="flex-1 text-center px-4 py-2.5 text-sm text-white border border-white/15 rounded-full">
               Log in
             </a>
-            <a href="#start" className="flex-1 text-center px-4 py-2.5 text-sm font-medium text-black bg-white rounded-full">
+            <Link to="/dashboard" className="flex-1 text-center px-4 py-2.5 text-sm font-medium text-black bg-white rounded-full">
               Start building
-            </a>
+            </Link>
           </div>
         </div>
       )}
