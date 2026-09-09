@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Plus } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import StatsRow from "@/components/dashboard/StatsRow";
+import WeeklyChart from "@/components/dashboard/WeeklyChart";
 import ProjectCard from "@/components/dashboard/ProjectCard";
 
 const tabs = ["All", "Draft", "Building", "Ready", "Published"];
@@ -62,6 +63,10 @@ export default function Dashboard() {
         ) : (
           <>
             <StatsRow projects={projects} />
+
+            <div className="mt-4">
+              <WeeklyChart projects={projects} />
+            </div>
 
             <div className="mt-8 mb-6 flex gap-2 overflow-x-auto pb-1">
               {tabs.map((t) => (
