@@ -5,10 +5,13 @@ import { base44 } from "@/api/base44Client";
 import StatsRow from "@/components/dashboard/StatsRow";
 import WeeklyChart from "@/components/dashboard/WeeklyChart";
 import ProjectCard from "@/components/dashboard/ProjectCard";
+import UpgradeButton from "@/components/dashboard/UpgradeButton";
+import { useToast } from "@/components/ui/use-toast";
 
 const tabs = ["All", "Draft", "Building", "Ready", "Published"];
 
 export default function Dashboard() {
+  const { toast } = useToast();
   const [projects, setProjects] = useState(null);
   const [tab, setTab] = useState("All");
 
@@ -17,6 +20,35 @@ export default function Dashboard() {
       .list("-updated_date", 100)
       .then(setProjects)
       .catch(() => setProjects([]));
+  }, []);
+
+  // Handle return from Stripe checkout
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get("session_id");
+    const checkout = urlParams.get("checkout");
+    if (!sessionId && !checkout) return;
+
+    const cleanUrl = window.location.pathname;
+    window.history.replaceState({}, "", cleanUrl);
+
+    if (checkout === "cancelled") {
+      toast({ title: "Checkout cancelled", description: "No charge was made." });
+      return;
+    }
+    if (sessionId) {
+      base44.functions
+        .invoke("verifyCheckoutSession", { sessionId })
+        .then((res) => {
+          if (res.data.paymentStatus === "paid") {
+            toast({
+              title: "Welcome to Pro!",
+              description: "Your BuildFlow Pro subscription is now active.",
+            });
+          }
+        })
+        .catch(() => {});
+    }
   }, []);
 
   const filtered =
@@ -42,9 +74,12 @@ export default function Dashboard() {
               <span className="font-semibold tracking-tight">base44</span>
             </div>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors">
-            <Plus className="w-4 h-4" /> New project
-          </button>
+          <div className="flex items-center gap-2">
+            <UpgradeButton />
+            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors">
+              <Plus className="w-4 h-4" /> New project
+            </button>
+          </div>
         </div>
 
         <div className="mt-10 mb-8">
