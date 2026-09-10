@@ -4,6 +4,13 @@ import { Smartphone, Globe, Bot } from "lucide-react";
 
 const typeIcons = { app: Smartphone, website: Globe, agent: Bot };
 
+const barFills = {
+  draft: "bg-white/40",
+  building: "bg-amber-400",
+  ready: "bg-sky-400",
+  published: "bg-emerald-400",
+};
+
 export default function ProjectKanbanCard({ project }) {
   const Icon = typeIcons[project.project_type] || Smartphone;
   const progress = Math.min(100, Math.max(0, project.progress || 0));
@@ -21,13 +28,13 @@ export default function ProjectKanbanCard({ project }) {
         <p className="mt-1 text-xs text-white/40 line-clamp-2">{project.description}</p>
       )}
       <div className="mt-3 flex items-center gap-2">
-        <div className="h-1 flex-1 rounded-full bg-white/10 overflow-hidden">
+        <div className="h-1.5 flex-1 rounded-full bg-white/10 overflow-hidden">
           <div
-            className="h-full rounded-full bg-white/70"
+            className={`h-full rounded-full transition-all ${barFills[project.status] || barFills.draft}`}
             style={{ width: `${progress}%` }}
           />
         </div>
-        <span className="text-[10px] text-white/35">{progress}%</span>
+        <span className="text-[10px] text-white/35 shrink-0">{progress}%</span>
       </div>
     </Link>
   );

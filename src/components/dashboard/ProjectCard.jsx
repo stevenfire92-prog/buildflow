@@ -11,6 +11,13 @@ const statusStyles = {
   published: "bg-emerald-500/15 text-emerald-400",
 };
 
+const barFills = {
+  draft: "bg-white/40",
+  building: "bg-amber-400",
+  ready: "bg-sky-400",
+  published: "bg-emerald-400",
+};
+
 export default function ProjectCard({ project }) {
   const [showComments, setShowComments] = useState(false);
   const Icon = typeIcons[project.project_type] || Smartphone;
@@ -41,9 +48,9 @@ export default function ProjectCard({ project }) {
             </span>
             <span className="text-white/40">Updated {updated}</span>
           </div>
-          <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
             <div
-              className="h-full rounded-full bg-white/70 transition-all"
+              className={`h-full rounded-full transition-all ${barFills[project.status] || barFills.draft}`}
               style={{ width: `${progress}%` }}
             />
           </div>
