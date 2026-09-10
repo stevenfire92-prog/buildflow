@@ -1,0 +1,47 @@
+{
+  "name": "Weekly Drive Backup",
+  "description": "Saves a weekly JSON backup of all projects and project files to Google Drive every Monday at 3am",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 3 * * 1",
+      "one_time_date": null,
+      "timezone": "America/Toronto",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "weekly_drive_backup",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_backup": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "backupProjectsToDrive",
+            "args": {
+              "run_key": "bf-drive-backup-5e2a"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Save backup to Drive",
+            "description": "All projects and files"
+          }
+        }
+      }
+    ]
+  }
+}

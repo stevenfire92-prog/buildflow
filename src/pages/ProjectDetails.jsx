@@ -5,6 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import ProjectEditForm from "@/components/projects/ProjectEditForm";
+import ProjectFiles from "@/components/projects/ProjectFiles";
 import { useToast } from "@/components/ui/use-toast";
 
 const typeIcons = { app: Smartphone, website: Globe, agent: Bot };
@@ -224,6 +225,10 @@ export default function ProjectDetails() {
               {project.goals || "No goals defined yet."}
             </p>
           </div>
+        </div>
+
+        <div className="mt-4">
+          <ProjectFiles projectId={id} projectName={project.name} />
         </div>
       </div>
     </div>

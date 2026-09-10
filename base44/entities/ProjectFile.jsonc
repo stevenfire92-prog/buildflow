@@ -1,0 +1,43 @@
+{
+  "name": "ProjectFile",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "title": "Project ID"
+    },
+    "project_name": {
+      "type": "string",
+      "title": "Project name"
+    },
+    "file_name": {
+      "type": "string",
+      "title": "File name"
+    },
+    "mime_type": {
+      "type": "string",
+      "title": "File type"
+    },
+    "size": {
+      "type": "number",
+      "title": "Size in bytes"
+    },
+    "drive_file_id": {
+      "type": "string",
+      "title": "Google Drive file ID"
+    },
+    "drive_link": {
+      "type": "string",
+      "title": "Google Drive link"
+    },
+    "uploaded_by": {
+      "type": "string",
+      "title": "Uploaded by"
+    }
+  },
+  "required": [
+    "project_id",
+    "file_name",
+    "drive_file_id"
+  ]
+}
