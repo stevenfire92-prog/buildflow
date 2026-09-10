@@ -1,5 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.48';
-import { uploadToDrive, getDriveAccessToken } from '../../shared/driveUpload.ts';
+import { uploadToDrive, getDriveAccessToken, findOrCreateDriveFolder } from '../../shared/driveUpload.ts';
 
 const MAX_BYTES = 100 * 1024 * 1024;
 
@@ -26,11 +26,13 @@ export default async function(req) {
 
     const accessToken = await getDriveAccessToken(base44);
     const safeName = String(file_name).slice(0, 200);
+    const folderId = await findOrCreateDriveFolder(accessToken, project_name || project_id);
     const saved = await uploadToDrive(
       accessToken,
       safeName,
       mime_type || 'application/octet-stream',
-      bytes
+      bytes,
+      folderId
     );
 
     const record = await base44.entities.ProjectFile.create({
