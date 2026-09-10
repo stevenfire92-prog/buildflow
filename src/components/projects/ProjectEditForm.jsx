@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { base44 } from "@/api/base44Client";
+import { logActivity } from "@/lib/activityLog";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function ProjectEditForm({ project, onSaved, onCancel }) {
@@ -31,6 +32,7 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
         last_activity: new Date().toISOString(),
       });
       toast({ title: "Settings saved" });
+      logActivity({ action: "updated", projectName: updated.name, projectId: project.id });
       onSaved(updated);
     } catch {
       toast({ title: "Could not save settings", description: "Please try again." });

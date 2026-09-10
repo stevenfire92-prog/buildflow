@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Smartphone, Globe, Bot, Pencil, Trash2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import ProjectEditForm from "@/components/projects/ProjectEditForm";
 import { useToast } from "@/components/ui/use-toast";
@@ -41,6 +42,12 @@ export default function ProjectDetails() {
         last_activity: new Date().toISOString(),
       });
       toast({ title: "Status updated", description: `Moved to ${status}.` });
+      logActivity({
+        action: "status_changed",
+        projectName: project.name,
+        projectId: id,
+        details: `moved to ${status}`,
+      });
     } catch {
       setProject(prev);
       toast({ title: "Could not update status", description: "Please try again." });
@@ -58,6 +65,7 @@ export default function ProjectDetails() {
       const name = project.name;
       await base44.entities.Project.delete(id);
       toast({ title: "Project deleted", description: `${name} has been removed.` });
+      logActivity({ action: "deleted", projectName: name, projectId: id });
       navigate("/dashboard");
     } catch {
       toast({ title: "Could not delete the project", description: "Please try again." });

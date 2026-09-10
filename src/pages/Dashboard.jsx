@@ -7,6 +7,7 @@ import WeeklyChart from "@/components/dashboard/WeeklyChart";
 import ProjectCard from "@/components/dashboard/ProjectCard";
 import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
+import ActivityLog from "@/components/dashboard/ActivityLog";
 import { useToast } from "@/components/ui/use-toast";
 
 const tabs = ["All", "Draft", "Building", "Ready", "Published"];
@@ -140,6 +141,10 @@ export default function Dashboard() {
 
             <div className="mt-4">
               <WeeklyChart projects={projects} />
+            </div>
+
+            <div className="mt-4">
+              <ActivityLog />
             </div>
 
             {view === "board" ? (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { base44 } from "@/api/base44Client";
+import { logActivity } from "@/lib/activityLog";
 import ProjectKanbanCard from "./ProjectKanbanCard";
 
 const columns = [
@@ -27,6 +28,12 @@ export default function ProjectBoard({ projects, onProjectUpdate }) {
       };
       await base44.entities.Project.update(draggableId, updates);
       onProjectUpdate(draggableId, updates);
+      logActivity({
+        action: "status_changed",
+        projectName: project.name,
+        projectId: draggableId,
+        details: `moved to ${newStatus}`,
+      });
     } finally {
       setMovingId(null);
     }

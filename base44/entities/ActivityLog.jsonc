@@ -1,0 +1,41 @@
+{
+  "name": "ActivityLog",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "created",
+        "updated",
+        "status_changed",
+        "deleted"
+      ],
+      "title": "Action"
+    },
+    "project_name": {
+      "type": "string",
+      "title": "Project name"
+    },
+    "project_id": {
+      "type": "string",
+      "title": "Project ID"
+    },
+    "details": {
+      "type": "string",
+      "title": "Details"
+    },
+    "actor_name": {
+      "type": "string",
+      "title": "Actor name"
+    },
+    "actor_email": {
+      "type": "string",
+      "title": "Actor email"
+    }
+  },
+  "required": [
+    "action",
+    "project_name",
+    "actor_name"
+  ]
+}

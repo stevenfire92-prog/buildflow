@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import TypeSelector from "@/components/projects/TypeSelector";
 import { useToast } from "@/components/ui/use-toast";
@@ -34,6 +35,7 @@ export default function NewProject() {
         last_activity: new Date().toISOString(),
       });
       toast({ title: "Project created", description: `${project.name} is ready to build.` });
+      logActivity({ action: "created", projectName: project.name, projectId: project.id });
       navigate(`/project-details?id=${project.id}`);
     } catch {
       toast({ title: "Could not create the project", description: "Please try again." });
