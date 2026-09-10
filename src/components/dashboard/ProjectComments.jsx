@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { logActivity } from "@/lib/activityLog";
 
 const timeAgo = (dateStr) => {
   const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
@@ -41,6 +42,12 @@ export default function ProjectComments({ projectId, projectName }) {
       });
       setComments((prev) => [...(prev || []), created]);
       setText("");
+      logActivity({
+        action: "commented",
+        projectName,
+        projectId,
+        details: value.length > 80 ? `${value.slice(0, 77)}…` : value,
+      });
     } catch {
       // failed post — keep the text so nothing is lost
     }

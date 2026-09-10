@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plus, Pencil, ArrowRightLeft, Trash2, History, Download } from "lucide-react";
+import { Plus, Pencil, ArrowRightLeft, Trash2, History, Download, MessageSquare } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const csvEscape = (value) => {
@@ -12,6 +12,7 @@ const actionConfig = {
   updated: { icon: Pencil, cls: "text-sky-400 bg-sky-500/15", label: "updated settings on" },
   status_changed: { icon: ArrowRightLeft, cls: "text-amber-400 bg-amber-500/15", label: "changed the status of" },
   deleted: { icon: Trash2, cls: "text-red-400 bg-red-500/15", label: "deleted" },
+  commented: { icon: MessageSquare, cls: "text-violet-400 bg-violet-500/15", label: "commented on" },
 };
 
 const timeAgo = (dateStr) => {

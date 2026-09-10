@@ -1,0 +1,11 @@
+{
+  "name": "AlertState",
+  "type": "object",
+  "properties": {
+    "last_sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last alert sent at"
+    }
+  }
+}

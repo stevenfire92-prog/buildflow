@@ -1,0 +1,50 @@
+{
+  "trigger": {
+    "condition": "${ .trigger.data.action | IN(\"created\",\"status_changed\",\"deleted\",\"commented\") }",
+    "config": {
+      "trigger_type": "entity",
+      "entity_name": "ActivityLog",
+      "events": [
+        "create"
+      ]
+    }
+  },
+  "name": "Team Activity Alerts",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "team_activity_alerts",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "batch_window": {
+          "wait": "PT15M",
+          "then": "send_alert",
+          "x-base44": {
+            "title": "Wait to batch activity",
+            "description": "Collect related changes before sending"
+          }
+        }
+      },
+      {
+        "send_alert": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "sendTeamActivityAlert",
+            "args": {
+              "run_key": "bf-team-activity-alert-9d2e"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Email the team",
+            "description": "Summary alert to all team members"
+          }
+        }
+      }
+    ]
+  },
+  "description": "When a significant project update or comment is logged, waits 15 minutes to batch related activity, then emails all team members a summary via Gmail"
+}
