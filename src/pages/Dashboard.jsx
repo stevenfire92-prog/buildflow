@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus } from "lucide-react";
+import { ArrowLeft, Plus, LayoutGrid, KanbanSquare } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import StatsRow from "@/components/dashboard/StatsRow";
 import WeeklyChart from "@/components/dashboard/WeeklyChart";
 import ProjectCard from "@/components/dashboard/ProjectCard";
 import UpgradeButton from "@/components/dashboard/UpgradeButton";
+import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import { useToast } from "@/components/ui/use-toast";
 
 const tabs = ["All", "Draft", "Building", "Ready", "Published"];
@@ -14,6 +15,12 @@ export default function Dashboard() {
   const { toast } = useToast();
   const [projects, setProjects] = useState(null);
   const [tab, setTab] = useState("All");
+  const [view, setView] = useState("grid");
+
+  const handleBoardUpdate = (id, updates) =>
+    setProjects((prev) =>
+      (prev || []).map((p) => (p.id === id ? { ...p, ...updates } : p))
+    );
 
   useEffect(() => {
     base44.entities.Project
@@ -88,13 +95,33 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="mt-10 mb-8">
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-            Your projects
-          </h1>
-          <p className="mt-2 text-white/50">
-            Every active build and its status, at a glance.
-          </p>
+        <div className="mt-10 mb-8 flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+              Your projects
+            </h1>
+            <p className="mt-2 text-white/50">
+              Every active build and its status, at a glance.
+            </p>
+          </div>
+          <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10">
+            <button
+              onClick={() => setView("grid")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
+                view === "grid" ? "bg-white text-black" : "text-white/60 hover:text-white"
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4" /> Grid
+            </button>
+            <button
+              onClick={() => setView("board")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
+                view === "board" ? "bg-white text-black" : "text-white/60 hover:text-white"
+              }`}
+            >
+              <KanbanSquare className="w-4 h-4" /> Board
+            </button>
+          </div>
         </div>
 
         {projects === null ? (
@@ -109,6 +136,13 @@ export default function Dashboard() {
               <WeeklyChart projects={projects} />
             </div>
 
+            {view === "board" ? (
+              <ProjectBoard
+                projects={projects || []}
+                onProjectUpdate={handleBoardUpdate}
+              />
+            ) : (
+            <>
             <div className="mt-8 mb-6 flex gap-2 overflow-x-auto pb-1">
               {tabs.map((t) => (
                 <button
@@ -138,6 +172,8 @@ export default function Dashboard() {
                   Projects will appear as soon as you start building.
                 </p>
               </div>
+            )}
+            </>
             )}
           </>
         )}
