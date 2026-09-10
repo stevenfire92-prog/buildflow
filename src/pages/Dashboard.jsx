@@ -69,9 +69,9 @@ export default function Dashboard() {
             </Link>
             <div className="flex items-center gap-2 text-white">
               <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center">
-                <span className="text-black font-bold text-xs">B</span>
+                <span className="text-black font-bold text-xs">S</span>
               </div>
-              <span className="font-semibold tracking-tight">base44</span>
+              <span className="font-semibold tracking-tight">Se Fire Tech</span>
             </div>
           </div>
           <div className="flex items-center gap-2">

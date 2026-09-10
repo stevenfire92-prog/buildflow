@@ -31,9 +31,9 @@ export default function Navbar() {
       <nav className="mx-auto max-w-7xl px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2.5 text-white">
           <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-            <span className="text-black font-bold text-sm">B</span>
+            <span className="text-black font-bold text-sm">S</span>
           </div>
-          <span className="font-semibold text-lg tracking-tight">base44</span>
+          <span className="font-semibold text-lg tracking-tight">Se Fire Tech</span>
         </a>
 
         <div className="hidden md:flex items-center gap-1">

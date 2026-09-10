@@ -23,9 +23,9 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <a href="#" className="flex items-center gap-2.5 text-white mb-4">
               <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-                <span className="text-black font-bold text-sm">B</span>
+                <span className="text-black font-bold text-sm">S</span>
               </div>
-              <span className="font-semibold text-lg tracking-tight">base44</span>
+              <span className="font-semibold text-lg tracking-tight">Se Fire Tech</span>
             </a>
             <p className="text-sm text-white/40 max-w-xs">
               Every builder needs a base. Build apps, websites and AI agents with
@@ -48,7 +48,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">© 2026 Base44. All rights reserved.</p>
+          <p className="text-xs text-white/40">© 2026 Se Fire Tech. All rights reserved.</p>
           <div className="flex gap-5 text-xs text-white/40">
             <a href="#" className="hover:text-white transition-colors">Privacy</a>
             <a href="#" className="hover:text-white transition-colors">Terms</a>
