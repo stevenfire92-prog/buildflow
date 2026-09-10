@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
@@ -9,6 +10,14 @@ import ScrollToTop from './components/ScrollToTop';
 // Add page imports here
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import ProjectDetails from './pages/ProjectDetails';
+import Subscription from './pages/Subscription';
+import AccountSettings from './pages/AccountSettings';
+import NewProject from './pages/NewProject';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -39,6 +48,16 @@ const AuthenticatedApp = () => {
     {/* Add your page Route elements here */}
     <Route path="/" element={<Home />} />
     <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/project-details" element={<ProjectDetails />} />
+    <Route path="/subscription" element={<Subscription />} />
+    <Route path="/new-project" element={<NewProject />} />
+    <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+      <Route path="/account-settings" element={<AccountSettings />} />
+    </Route>
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
     <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

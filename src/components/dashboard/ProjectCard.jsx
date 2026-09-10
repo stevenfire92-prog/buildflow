@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Smartphone, Globe, Bot, MoreHorizontal } from "lucide-react";
 
 const typeIcons = { app: Smartphone, website: Globe, agent: Bot };
@@ -18,7 +19,10 @@ export default function ProjectCard({ project }) {
     : "—";
 
   return (
-    <div className="group rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 p-5 hover:border-white/25 transition-all">
+    <Link
+      to={`/project-details?id=${project.id}`}
+      className="group block rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 p-5 hover:border-white/25 transition-all"
+    >
       <div className="flex items-start justify-between mb-4">
         <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80">
           <Icon className="w-5 h-5" />
@@ -46,6 +50,6 @@ export default function ProjectCard({ project }) {
         </div>
         <p className="mt-1.5 text-[10px] text-white/30">{progress}% built</p>
       </div>
-    </div>
+    </Link>
   );
 }

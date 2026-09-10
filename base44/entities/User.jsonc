@@ -7,6 +7,31 @@
         "admin",
         "user"
       ]
+    },
+    "display_name": {
+      "type": "string",
+      "title": "Display name"
+    },
+    "contact_email": {
+      "type": "string",
+      "format": "email",
+      "title": "Contact email"
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "product_updates": {
+          "type": "boolean",
+          "default": false,
+          "title": "Product updates"
+        },
+        "weekly_summary": {
+          "type": "boolean",
+          "default": false,
+          "title": "Weekly summary"
+        }
+      },
+      "title": "Preferences"
     }
   },
   "required": [

@@ -41,6 +41,9 @@ export default function Dashboard() {
         .invoke("verifyCheckoutSession", { sessionId })
         .then((res) => {
           if (res.data.paymentStatus === "paid") {
+            localStorage.setItem("bf_plan", "pro");
+            localStorage.setItem("bf_checkout_session", sessionId);
+            localStorage.setItem("bf_plan_date", new Date().toISOString());
             toast({
               title: "Welcome to Pro!",
               description: "Your BuildFlow Pro subscription is now active.",
@@ -76,9 +79,12 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-2">
             <UpgradeButton />
-            <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors">
+            <Link
+              to="/new-project"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
+            >
               <Plus className="w-4 h-4" /> New project
-            </button>
+            </Link>
           </div>
         </div>
 
