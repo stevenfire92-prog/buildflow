@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, LayoutGrid, KanbanSquare } from "lucide-react";
+import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import StatsRow from "@/components/dashboard/StatsRow";
 import WeeklyChart from "@/components/dashboard/WeeklyChart";
@@ -85,6 +85,12 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              to="/team"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"
+            >
+              <Users className="w-4 h-4" /> Team
+            </Link>
             <UpgradeButton />
             <Link
               to="/new-project"

@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import ProjectDetails from './pages/ProjectDetails';
 import Subscription from './pages/Subscription';
 import AccountSettings from './pages/AccountSettings';
+import Team from './pages/Team';
 import NewProject from './pages/NewProject';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -53,6 +54,7 @@ const AuthenticatedApp = () => {
     <Route path="/new-project" element={<NewProject />} />
     <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
       <Route path="/account-settings" element={<AccountSettings />} />
+      <Route path="/team" element={<Team />} />
     </Route>
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
