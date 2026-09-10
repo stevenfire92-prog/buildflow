@@ -48,7 +48,10 @@ export default function Footer() {
           ))}
         </div>
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">© 2026 Se Fire Tech. All rights reserved.</p>
+          <div className="text-xs text-white/40 text-center sm:text-left">
+            <p>© 2026 Se Fire Tech. All rights reserved.</p>
+            <p className="mt-1">Designed &amp; built by Steven Turcott</p>
+          </div>
           <div className="flex gap-5 text-xs text-white/40">
             <a href="#" className="hover:text-white transition-colors">Privacy</a>
             <a href="#" className="hover:text-white transition-colors">Terms</a>
