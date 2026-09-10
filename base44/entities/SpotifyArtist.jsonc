@@ -1,0 +1,17 @@
+{
+  "name": "SpotifyArtist",
+  "type": "object",
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "title": "Spotify artist ID"
+    },
+    "name": {
+      "type": "string",
+      "title": "Artist name"
+    }
+  },
+  "required": [
+    "artist_id"
+  ]
+}

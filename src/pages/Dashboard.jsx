@@ -8,6 +8,7 @@ import ProjectCard from "@/components/dashboard/ProjectCard";
 import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import ActivityLog from "@/components/dashboard/ActivityLog";
+import SpotifyArtists from "@/components/dashboard/SpotifyArtists";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -154,6 +155,10 @@ export default function Dashboard() {
 
             <div className="mt-4">
               <ActivityLog />
+            </div>
+
+            <div className="mt-4">
+              <SpotifyArtists />
             </div>
 
             {view === "board" ? (

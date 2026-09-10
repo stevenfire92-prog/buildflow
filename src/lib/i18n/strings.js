@@ -262,4 +262,20 @@ export const STRINGS = {
   "acct.savedDesc": "Your account is up to date.",
   "acct.saveFailTitle": "Could not save settings",
   "acct.saveFailDesc": "Please try again.",
+
+  // Spotify artists
+  "spot.title": "Spotify artists",
+  "spot.subtitle": "Live stats from your verified artist pages.",
+  "spot.addPlaceholder": "Paste a Spotify artist link or ID…",
+  "spot.add": "Add artist",
+  "spot.invalid": "That doesn't look like a Spotify artist link or ID.",
+  "spot.empty": "No artists yet — add your first Spotify artist page above.",
+  "spot.notConfigured": "Spotify isn't connected yet. Add your app keys (SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET) in Settings → Secrets to see live stats.",
+  "spot.statUnavailable": "Stats unavailable",
+  "spot.followers": "Followers",
+  "spot.popularity": "Popularity",
+  "spot.latestRelease": "Latest release",
+  "spot.openSpotify": "Open on Spotify",
+  "spot.addFailTitle": "Couldn't add artist",
+  "spot.addFailDesc": "Please try again.",
 };
