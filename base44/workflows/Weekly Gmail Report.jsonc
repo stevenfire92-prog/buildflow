@@ -1,0 +1,47 @@
+{
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 9 * * 1",
+      "one_time_date": null,
+      "timezone": "America/Toronto",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "name": "Weekly Gmail Report",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "weekly_gmail_report",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "send_report": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "sendWeeklyGmailReport",
+            "args": {
+              "run_key": "bf-weekly-gmail-report-7f3c"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Send weekly report",
+            "description": "Project activity and growth via Gmail"
+          }
+        }
+      }
+    ]
+  },
+  "description": "Sends the weekly project activity and growth report via Gmail every Monday at 9am"
+}
