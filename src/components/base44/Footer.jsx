@@ -1,21 +1,42 @@
 import React from "react";
-
-const cols = [
-  {
-    title: "Product",
-    links: ["AI App Builder", "AI Website Builder", "AI Agents", "Integrations", "Pricing"],
-  },
-  {
-    title: "Resources",
-    links: ["Documentation", "Blog", "Case Studies", "Community", "Changelog"],
-  },
-  {
-    title: "Company",
-    links: ["About", "Careers", "Security", "Contact", "Terms"],
-  },
-];
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const cols = [
+    {
+      title: t("footer.product"),
+      links: [
+        t("footer.aiAppBuilder"),
+        t("footer.aiWebsiteBuilder"),
+        t("footer.aiAgents"),
+        t("footer.integrations"),
+        t("footer.pricing"),
+      ],
+    },
+    {
+      title: t("footer.resources"),
+      links: [
+        t("footer.documentation"),
+        t("footer.blog"),
+        t("footer.caseStudies"),
+        t("footer.community"),
+        t("footer.changelog"),
+      ],
+    },
+    {
+      title: t("footer.company"),
+      links: [
+        t("footer.about"),
+        t("footer.careers"),
+        t("footer.security"),
+        t("footer.contact"),
+        t("footer.terms"),
+      ],
+    },
+  ];
+
   return (
     <footer className="bg-black border-t border-white/10 pt-16 pb-8">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -28,8 +49,7 @@ export default function Footer() {
               <span className="font-semibold text-lg tracking-tight">Se Fire Tech</span>
             </a>
             <p className="text-sm text-white/40 max-w-xs">
-              Every builder needs a base. Build apps, websites and AI agents with
-              your own words.
+              {t("footer.tagline")}
             </p>
           </div>
           {cols.map((c) => (
@@ -49,13 +69,13 @@ export default function Footer() {
         </div>
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs text-white/40 text-center sm:text-left">
-            <p>© 2026 Se Fire Tech. All rights reserved.</p>
-            <p className="mt-1">Designed &amp; built by Steven Turcott</p>
+            <p>{t("footer.rights")}</p>
+            <p className="mt-1">{t("footer.designedBy")}</p>
           </div>
           <div className="flex gap-5 text-xs text-white/40">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+            <a href="#" className="hover:text-white transition-colors">{t("footer.privacy")}</a>
+            <a href="#" className="hover:text-white transition-colors">{t("footer.terms")}</a>
+            <a href="#" className="hover:text-white transition-colors">{t("footer.cookies")}</a>
           </div>
         </div>
       </div>

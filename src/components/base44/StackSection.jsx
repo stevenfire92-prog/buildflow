@@ -1,28 +1,29 @@
 import React from "react";
 import { Server, Plug, Globe, BarChart3, CreditCard, ShieldCheck } from "lucide-react";
-
-const items = [
-  { icon: Server, title: "Backend and storage, built in", href: "#developers" },
-  { icon: Plug, title: "One-click integrations", href: "#integrations" },
-  { icon: Globe, title: "Stay on brand with custom domain", href: "#domain" },
-  { icon: BarChart3, title: "Easily keep track of analytics", href: "#analytics" },
-  { icon: CreditCard, title: "Get paid directly through Base44", href: "#payments" },
-  { icon: ShieldCheck, title: "Enterprise-grade security", href: "#security" },
-];
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function StackSection() {
+  const { t } = useLanguage();
+
+  const items = [
+    { icon: Server, title: t("stack.backend"), href: "#developers" },
+    { icon: Plug, title: t("stack.integrations"), href: "#integrations" },
+    { icon: Globe, title: t("stack.domain"), href: "#domain" },
+    { icon: BarChart3, title: t("stack.analytics"), href: "#analytics" },
+    { icon: CreditCard, title: t("stack.payments"), href: "#payments" },
+    { icon: ShieldCheck, title: t("stack.security"), href: "#security" },
+  ];
+
   return (
     <section className="bg-black py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-2xl">
           <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white leading-tight">
-            The whole stack.{" "}
-            <span className="text-white/40">No setup slowdown.</span>
+            {t("stack.title")}{" "}
+            <span className="text-white/40">{t("stack.titleAccent")}</span>
           </h2>
           <p className="mt-5 text-lg text-white/60 leading-relaxed">
-            Ship something real with vibe coding — without touching a server,
-            wiring up a payment provider, or configuring a database. It's all
-            already there.
+            {t("stack.subtitle")}
           </p>
         </div>
 
@@ -46,7 +47,7 @@ export default function StackSection() {
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {items.map((it) => (
             <a
-              key={it.title}
+              key={it.href}
               href={it.href}
               className="group flex items-center gap-3 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 hover:bg-white/[0.06] transition-all"
             >

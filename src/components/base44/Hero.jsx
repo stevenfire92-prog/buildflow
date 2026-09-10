@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Send, Mic, Plus, Sparkles } from "lucide-react";
-
-const tabs = ["Apps", "Websites", "Games", "Tools"];
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const cards = [
   { label: "Distance", cls: "col-span-2 row-span-1", tone: "from-emerald-500/20 to-emerald-500/5" },
@@ -13,8 +12,17 @@ const cards = [
 ];
 
 export default function Hero() {
-  const [active, setActive] = useState("Apps");
+  const { t } = useLanguage();
+  const [active, setActive] = useState("apps");
   const [value, setValue] = useState("");
+
+  const tabs = [
+    { key: "apps", label: t("hero.apps"), ph: "hero.placeholderApp" },
+    { key: "websites", label: t("hero.websites"), ph: "hero.placeholderWebsite" },
+    { key: "games", label: t("hero.games"), ph: "hero.placeholderGame" },
+    { key: "tools", label: t("hero.tools"), ph: "hero.placeholderTool" },
+  ];
+  const activeTab = tabs.find((x) => x.key === active) || tabs[0];
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black">
@@ -26,14 +34,13 @@ export default function Hero() {
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 mb-7">
             <Sparkles className="w-3.5 h-3.5" />
-            Build with AI, ship in minutes
+            {t("hero.badge")}
           </div>
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-white leading-[1.05]">
-            Every builder needs a base
+            {t("hero.title")}
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-            Build your own apps, websites, products and AI agents on Base44 using
-            your own words. Get ahead — and make sure it stays that way.
+            {t("hero.subtitle")}
           </p>
         </div>
 
@@ -41,17 +48,17 @@ export default function Hero() {
         <div className="mt-12 max-w-2xl mx-auto">
           <div className="rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-xl p-2 shadow-2xl">
             <div className="flex items-center gap-2 px-2 pt-1.5 pb-2">
-              {tabs.map((t) => (
+              {tabs.map((tab) => (
                 <button
-                  key={t}
-                  onClick={() => setActive(t)}
+                  key={tab.key}
+                  onClick={() => setActive(tab.key)}
                   className={`px-3 py-1 text-xs rounded-full transition-colors ${
-                    active === t
+                    active === tab.key
                       ? "bg-white text-black"
                       : "text-white/50 hover:text-white"
                   }`}
                 >
-                  {t}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -63,7 +70,7 @@ export default function Hero() {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 rows={1}
-                placeholder={`Describe the ${active.slice(0, -1).toLowerCase()} you want to build...`}
+                placeholder={t(activeTab.ph)}
                 className="flex-1 bg-transparent text-white text-sm placeholder:text-white/30 resize-none outline-none py-2.5 min-h-[44px]"
               />
               <button className="p-2 text-white/40 hover:text-white transition-colors">
@@ -75,7 +82,7 @@ export default function Hero() {
             </div>
           </div>
           <p className="text-center text-xs text-white/30 mt-3">
-            No credit card required · Free to start
+            {t("hero.freeStart")}
           </p>
         </div>
 

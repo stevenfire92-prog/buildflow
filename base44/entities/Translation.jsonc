@@ -1,0 +1,23 @@
+{
+  "name": "Translation",
+  "type": "object",
+  "properties": {
+    "language_code": {
+      "type": "string",
+      "title": "Language code"
+    },
+    "key": {
+      "type": "string",
+      "title": "Translation key"
+    },
+    "value": {
+      "type": "string",
+      "title": "Translated value"
+    }
+  },
+  "required": [
+    "language_code",
+    "key",
+    "value"
+  ]
+}

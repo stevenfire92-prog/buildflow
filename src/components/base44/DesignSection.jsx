@@ -1,42 +1,44 @@
 import React from "react";
 import { Users, Video, Wand2, Palette } from "lucide-react";
-
-const features = [
-  {
-    icon: Users,
-    title: "Seamlessly collaborate",
-    desc: "See every page at once. Leave notes, sketch ideas, and send instructions straight to AI — all on one board.",
-  },
-  {
-    icon: Video,
-    title: "Generate high-quality videos",
-    desc: "Describe a video, get one. Add it to any page — hero sections, onboarding screens, product previews.",
-  },
-  {
-    icon: Wand2,
-    title: "Get redesign recommendations",
-    desc: "Ask for design options, pick the one you want. AI shows previews before it touches anything.",
-  },
-  {
-    icon: Palette,
-    title: "Control the design",
-    desc: "Set colors and fonts for your entire app from one place. Your entire app — updated everywhere at once.",
-  },
-];
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function DesignSection() {
+  const { t } = useLanguage();
+
+  const features = [
+    {
+      icon: Users,
+      title: t("design.f1Title"),
+      desc: t("design.f1Desc"),
+    },
+    {
+      icon: Video,
+      title: t("design.f2Title"),
+      desc: t("design.f2Desc"),
+    },
+    {
+      icon: Wand2,
+      title: t("design.f3Title"),
+      desc: t("design.f3Desc"),
+    },
+    {
+      icon: Palette,
+      title: t("design.f4Title"),
+      desc: t("design.f4Desc"),
+    },
+  ];
+
   return (
     <section className="bg-black py-24 border-t border-white/5">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white leading-tight">
-              Beautiful by default.{" "}
-              <span className="text-white/40">Yours by design.</span>
+              {t("design.title")}{" "}
+              <span className="text-white/40">{t("design.titleAccent")}</span>
             </h2>
             <p className="mt-5 text-lg text-white/60 leading-relaxed">
-              Base44 starts with designs that look good before you change a thing
-              — and hold up just as well when you do.
+              {t("design.subtitle")}
             </p>
             <div className="mt-10 space-y-3">
               {features.map((f) => (
