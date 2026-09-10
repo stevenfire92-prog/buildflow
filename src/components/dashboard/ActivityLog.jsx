@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Plus, Pencil, ArrowRightLeft, Trash2, History, Download, MessageSquare } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const csvEscape = (value) => {
   const str = value == null ? "" : String(value);
@@ -8,25 +9,26 @@ const csvEscape = (value) => {
 };
 
 const actionConfig = {
-  created: { icon: Plus, cls: "text-emerald-400 bg-emerald-500/15", label: "created" },
-  updated: { icon: Pencil, cls: "text-sky-400 bg-sky-500/15", label: "updated settings on" },
-  status_changed: { icon: ArrowRightLeft, cls: "text-amber-400 bg-amber-500/15", label: "changed the status of" },
-  deleted: { icon: Trash2, cls: "text-red-400 bg-red-500/15", label: "deleted" },
-  commented: { icon: MessageSquare, cls: "text-violet-400 bg-violet-500/15", label: "commented on" },
+  created: { icon: Plus, cls: "text-emerald-400 bg-emerald-500/15", labelKey: "act.created" },
+  updated: { icon: Pencil, cls: "text-sky-400 bg-sky-500/15", labelKey: "act.updatedSettings" },
+  status_changed: { icon: ArrowRightLeft, cls: "text-amber-400 bg-amber-500/15", labelKey: "act.statusChanged" },
+  deleted: { icon: Trash2, cls: "text-red-400 bg-red-500/15", labelKey: "act.deleted" },
+  commented: { icon: MessageSquare, cls: "text-violet-400 bg-violet-500/15", labelKey: "act.commented" },
 };
 
-const timeAgo = (dateStr) => {
+const timeAgo = (dateStr, t) => {
   const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
-  if (seconds < 60) return "just now";
+  if (seconds < 60) return t("act.justNow");
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return t("act.minutesAgo").replace("{n}", minutes);
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t("act.hoursAgo").replace("{n}", hours);
   const days = Math.floor(hours / 24);
-  return days === 1 ? "yesterday" : `${days}d ago`;
+  return days === 1 ? t("act.yesterday") : t("act.daysAgo").replace("{n}", days);
 };
 
 export default function ActivityLog() {
+  const { t } = useLanguage();
   const [activities, setActivities] = useState(null);
   const [exporting, setExporting] = useState(false);
 
@@ -72,7 +74,7 @@ export default function ActivityLog() {
       <div className="flex items-center justify-between gap-2 mb-4">
         <div className="flex items-center gap-2">
           <History className="w-4 h-4 text-white/60" />
-          <h2 className="text-sm font-medium text-white">Recent activity</h2>
+          <h2 className="text-sm font-medium text-white">{t("act.recentActivity")}</h2>
         </div>
         <button
           onClick={handleDownloadCsv}
@@ -80,7 +82,7 @@ export default function ActivityLog() {
           className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors disabled:opacity-50"
         >
           <Download className="w-3.5 h-3.5" />
-          {exporting ? "Exporting…" : "Export CSV"}
+          {exporting ? t("act.exporting") : t("act.exportCsv")}
         </button>
       </div>
 
@@ -90,7 +92,7 @@ export default function ActivityLog() {
         </div>
       ) : activities.length === 0 ? (
         <p className="py-8 text-center text-sm text-white/40">
-          No activity yet — actions by you and your teammates will show up here.
+          {t("act.empty")}
         </p>
       ) : (
         <ul className="space-y-1">
@@ -108,12 +110,12 @@ export default function ActivityLog() {
                 <div className="min-w-0 flex-1">
                   <p className="text-sm text-white/80 truncate">
                     <span className="font-medium text-white">{a.actor_name}</span>{" "}
-                    {cfg.label}{" "}
+                    {t(cfg.labelKey)}{" "}
                     <span className="font-medium text-white">{a.project_name}</span>
                     {a.details ? <span className="text-white/50"> — {a.details}</span> : null}
                   </p>
                 </div>
-                <span className="text-xs text-white/40 shrink-0">{timeAgo(a.created_date)}</span>
+                <span className="text-xs text-white/40 shrink-0">{timeAgo(a.created_date, t)}</span>
               </li>
             );
           })}

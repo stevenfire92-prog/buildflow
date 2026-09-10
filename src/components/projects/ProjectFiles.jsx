@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { UploadCloud, FileText, ExternalLink, Trash2, HardDrive } from "lucide-react";
+import { UploadCloud, FileText, ExternalLink, Trash2, HardDrive, Eye } from "lucide-react";
+import FilePreviewDialog from "@/components/projects/FilePreviewDialog";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -19,6 +20,7 @@ export default function ProjectFiles({ projectId, projectName }) {
   const { toast } = useToast();
   const [files, setFiles] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [previewFile, setPreviewFile] = useState(null);
   const inputRef = useRef(null);
 
   const loadFiles = () =>
@@ -127,6 +129,13 @@ export default function ProjectFiles({ projectId, projectName }) {
                   {fmtSize(f.size)} · uploaded by {f.uploaded_by || "team"}
                 </p>
               </div>
+              <button
+                onClick={() => setPreviewFile(f)}
+                className="p-2 rounded-full text-white/40 hover:text-white transition-colors"
+                title="Quick preview"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
               {f.drive_link && (
                 <a
                   href={f.drive_link}
@@ -149,6 +158,8 @@ export default function ProjectFiles({ projectId, projectName }) {
           ))}
         </ul>
       )}
+
+      <FilePreviewDialog file={previewFile} onClose={() => setPreviewFile(null)} />
     </div>
   );
 }

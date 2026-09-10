@@ -9,11 +9,20 @@ import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import ActivityLog from "@/components/dashboard/ActivityLog";
 import { useToast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const tabs = ["All", "Draft", "Building", "Ready", "Published"];
 
 export default function Dashboard() {
   const { toast } = useToast();
+  const { t } = useLanguage();
+  const tabLabels = {
+    All: t("dash.tabAll"),
+    Draft: t("dash.tabDraft"),
+    Building: t("dash.tabBuilding"),
+    Ready: t("dash.tabReady"),
+    Published: t("dash.tabPublished"),
+  };
   const [projects, setProjects] = useState(null);
   const [tab, setTab] = useState("All");
   const [view, setView] = useState("grid");
@@ -41,7 +50,7 @@ export default function Dashboard() {
     window.history.replaceState({}, "", cleanUrl);
 
     if (checkout === "cancelled") {
-      toast({ title: "Checkout cancelled", description: "No charge was made." });
+      toast({ title: t("dash.checkoutCancelledTitle"), description: t("dash.checkoutCancelledDesc") });
       return;
     }
     if (sessionId) {
@@ -53,8 +62,8 @@ export default function Dashboard() {
             localStorage.setItem("bf_checkout_session", sessionId);
             localStorage.setItem("bf_plan_date", new Date().toISOString());
             toast({
-              title: "Welcome to Pro!",
-              description: "Your BuildFlow Pro subscription is now active.",
+              title: t("dash.welcomeProTitle"),
+              description: t("dash.welcomeProDesc"),
             });
           }
         })
@@ -90,14 +99,14 @@ export default function Dashboard() {
               to="/team"
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"
             >
-              <Users className="w-4 h-4" /> Team
+              <Users className="w-4 h-4" /> {t("dash.team")}
             </Link>
             <UpgradeButton />
             <Link
               to="/new-project"
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
             >
-              <Plus className="w-4 h-4" /> New project
+              <Plus className="w-4 h-4" /> {t("dash.newProject")}
             </Link>
           </div>
         </div>
@@ -105,10 +114,10 @@ export default function Dashboard() {
         <div className="mt-10 mb-8 flex items-end justify-between gap-4 flex-wrap">
           <div>
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-              Your projects
+              {t("dash.title")}
             </h1>
             <p className="mt-2 text-white/50">
-              Every active build and its status, at a glance.
+              {t("dash.subtitle")}
             </p>
           </div>
           <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10">
@@ -118,7 +127,7 @@ export default function Dashboard() {
                 view === "grid" ? "bg-white text-black" : "text-white/60 hover:text-white"
               }`}
             >
-              <LayoutGrid className="w-4 h-4" /> Grid
+              <LayoutGrid className="w-4 h-4" /> {t("dash.grid")}
             </button>
             <button
               onClick={() => setView("board")}
@@ -126,7 +135,7 @@ export default function Dashboard() {
                 view === "board" ? "bg-white text-black" : "text-white/60 hover:text-white"
               }`}
             >
-              <KanbanSquare className="w-4 h-4" /> Board
+              <KanbanSquare className="w-4 h-4" /> {t("dash.board")}
             </button>
           </div>
         </div>
@@ -155,17 +164,17 @@ export default function Dashboard() {
             ) : (
             <>
             <div className="mt-8 mb-6 flex gap-2 overflow-x-auto pb-1">
-              {tabs.map((t) => (
+              {tabs.map((tb) => (
                 <button
-                  key={t}
-                  onClick={() => setTab(t)}
+                  key={tb}
+                  onClick={() => setTab(tb)}
                   className={`px-4 py-1.5 text-sm rounded-full whitespace-nowrap transition-colors ${
-                    tab === t
+                    tab === tb
                       ? "bg-white text-black"
                       : "bg-white/5 text-white/60 hover:text-white border border-white/10"
                   }`}
                 >
-                  {t}
+                  {tabLabels[tb]}
                 </button>
               ))}
             </div>
@@ -178,9 +187,9 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="rounded-3xl border border-dashed border-white/15 py-20 text-center">
-                <p className="text-white/60 font-medium">No projects here yet</p>
+                <p className="text-white/60 font-medium">{t("dash.emptyTitle")}</p>
                 <p className="mt-1 text-sm text-white/35">
-                  Projects will appear as soon as you start building.
+                  {t("dash.emptySub")}
                 </p>
               </div>
             )}

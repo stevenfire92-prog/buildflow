@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 1;
+export const STRINGS_VERSION = 2;
 
 export const STRINGS = {
   // Navbar
@@ -165,4 +165,101 @@ export const STRINGS = {
   "footer.designedBy": "Designed & built by Steven Turcott",
   "footer.privacy": "Privacy",
   "footer.cookies": "Cookies",
+
+  // Dashboard
+  "dash.team": "Team",
+  "dash.newProject": "New project",
+  "dash.title": "Your projects",
+  "dash.subtitle": "Every active build and its status, at a glance.",
+  "dash.grid": "Grid",
+  "dash.board": "Board",
+  "dash.tabAll": "All",
+  "dash.tabDraft": "Draft",
+  "dash.tabBuilding": "Building",
+  "dash.tabReady": "Ready",
+  "dash.tabPublished": "Published",
+  "dash.emptyTitle": "No projects here yet",
+  "dash.emptySub": "Projects will appear as soon as you start building.",
+  "dash.checkoutCancelledTitle": "Checkout cancelled",
+  "dash.checkoutCancelledDesc": "No charge was made.",
+  "dash.welcomeProTitle": "Welcome to Pro!",
+  "dash.welcomeProDesc": "Your BuildFlow Pro subscription is now active.",
+
+  // Dashboard stats
+  "stat.activeProjects": "Active projects",
+  "stat.currentlyBuilding": "{n} currently building",
+  "stat.inBuild": "In build",
+  "stat.acrossAllTypes": "across all types",
+  "stat.published": "Published",
+  "stat.liveNow": "live right now",
+  "stat.avgProgress": "Avg. progress",
+  "stat.acrossPortfolio": "across the portfolio",
+
+  // Weekly chart
+  "chart.newPerWeek": "New projects per week",
+  "chart.subtitle": "How many projects were created each week",
+  "chart.newProjects": "New projects",
+  "chart.noData": "No data yet",
+
+  // Activity log
+  "act.recentActivity": "Recent activity",
+  "act.exportCsv": "Export CSV",
+  "act.exporting": "Exporting…",
+  "act.empty": "No activity yet — actions by you and your teammates will show up here.",
+  "act.created": "created",
+  "act.updatedSettings": "updated settings on",
+  "act.statusChanged": "changed the status of",
+  "act.deleted": "deleted",
+  "act.commented": "commented on",
+  "act.justNow": "just now",
+  "act.minutesAgo": "{n}m ago",
+  "act.hoursAgo": "{n}h ago",
+  "act.yesterday": "yesterday",
+  "act.daysAgo": "{n}d ago",
+
+  // Board columns
+  "board.todo": "To-Do",
+  "board.inProgress": "In-Progress",
+  "board.ready": "Ready",
+  "board.published": "Published",
+
+  // Project card
+  "card.comments": "Comments",
+  "card.updated": "Updated",
+  "card.noDescription": "No description",
+  "card.built": "{n}% built",
+
+  // Project comments
+  "cmt.placeholder": "Add a comment…",
+
+  // Upgrade button
+  "up.upgradeToPro": "Upgrade to Pro",
+  "up.startingCheckout": "Starting checkout...",
+  "up.iframeAlert": "Checkout works only from the published app — open the app in a new tab to upgrade.",
+  "up.errorAlert": "Could not start checkout. Please try again.",
+
+  // Account settings
+  "acct.title": "Account settings",
+  "acct.subtitle": "Your profile, contact details, and app preferences.",
+  "acct.profile": "Profile",
+  "acct.accountName": "Account name",
+  "acct.accountNameNote": "Your account name is managed by your sign-in.",
+  "acct.signInEmail": "Sign-in email",
+  "acct.displayName": "Display name",
+  "acct.displayNamePlaceholder": "How should we greet you?",
+  "acct.contact": "Contact",
+  "acct.contactEmail": "Contact email",
+  "acct.contactEmailPlaceholder": "Where should we reach you?",
+  "acct.contactNote": "Used for billing receipts and product updates.",
+  "acct.preferences": "Preferences",
+  "acct.productUpdates": "Product updates",
+  "acct.productUpdatesDesc": "News about features and improvements.",
+  "acct.weeklySummary": "Weekly summary",
+  "acct.weeklySummaryDesc": "A weekly recap of your project activity.",
+  "acct.saving": "Saving...",
+  "acct.saveChanges": "Save changes",
+  "acct.savedTitle": "Settings saved",
+  "acct.savedDesc": "Your account is up to date.",
+  "acct.saveFailTitle": "Could not save settings",
+  "acct.saveFailDesc": "Please try again.",
 };

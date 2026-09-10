@@ -8,6 +8,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 function getWeekStart(date) {
   const d = new Date(date);
@@ -18,6 +19,7 @@ function getWeekStart(date) {
 }
 
 export default function WeeklyChart({ projects }) {
+  const { t } = useLanguage();
   const data = useMemo(() => {
     const weekMap = new Map();
     for (const p of projects) {
@@ -36,9 +38,9 @@ export default function WeeklyChart({ projects }) {
     <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="font-medium text-white">New projects per week</h3>
+          <h3 className="font-medium text-white">{t("chart.newPerWeek")}</h3>
           <p className="text-[11px] text-white/35 mt-0.5">
-            How many projects were created each week
+            {t("chart.subtitle")}
           </p>
         </div>
         <span className="text-2xl font-semibold text-white">
@@ -74,12 +76,12 @@ export default function WeeklyChart({ projects }) {
                 labelStyle={{ color: "rgba(255,255,255,0.6)" }}
                 itemStyle={{ color: "#fff" }}
               />
-              <Bar dataKey="count" name="New projects" fill="rgba(255,255,255,0.7)" radius={[6, 6, 0, 0]} maxBarSize={40} />
+              <Bar dataKey="count" name={t("chart.newProjects")} fill="rgba(255,255,255,0.7)" radius={[6, 6, 0, 0]} maxBarSize={40} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
           <div className="h-full flex items-center justify-center text-sm text-white/35">
-            No data yet
+            {t("chart.noData")}
           </div>
         )}
       </div>

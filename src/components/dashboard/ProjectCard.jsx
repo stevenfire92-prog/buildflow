@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Smartphone, Globe, Bot, MessageSquare, ChevronDown } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import ProjectComments from "./ProjectComments";
 
 const typeIcons = { app: Smartphone, website: Globe, agent: Bot };
@@ -19,6 +20,7 @@ const barFills = {
 };
 
 export default function ProjectCard({ project }) {
+  const { t } = useLanguage();
   const [showComments, setShowComments] = useState(false);
   const Icon = typeIcons[project.project_type] || Smartphone;
   const progress = Math.min(100, Math.max(0, project.progress || 0));
@@ -39,14 +41,14 @@ export default function ProjectCard({ project }) {
         </div>
         <h3 className="font-medium text-white truncate">{project.name}</h3>
         <p className="mt-1 text-xs text-white/45 line-clamp-2 min-h-[2rem]">
-          {project.description || "No description"}
+          {project.description || t("card.noDescription")}
         </p>
         <div className="mt-4">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className={`px-2 py-0.5 rounded-full font-medium capitalize ${statusStyles[project.status] || statusStyles.draft}`}>
               {project.status}
             </span>
-            <span className="text-white/40">Updated {updated}</span>
+            <span className="text-white/40">{t("card.updated")} {updated}</span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
             <div
@@ -54,7 +56,7 @@ export default function ProjectCard({ project }) {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="mt-1.5 text-[10px] text-white/30">{progress}% built</p>
+          <p className="mt-1.5 text-[10px] text-white/30">{t("card.built").replace("{n}", progress)}</p>
         </div>
       </Link>
 
@@ -64,7 +66,7 @@ export default function ProjectCard({ project }) {
           className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white transition-colors"
         >
           <MessageSquare className="w-3.5 h-3.5" />
-          Comments
+          {t("card.comments")}
           <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showComments ? "rotate-180" : ""}`} />
         </button>
         {showComments && (

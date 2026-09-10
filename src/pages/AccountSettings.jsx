@@ -4,9 +4,11 @@ import { base44 } from "@/api/base44Client";
 import AppHeader from "@/components/AppHeader";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function AccountSettings() {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [user, setUser] = useState(undefined);
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState({
@@ -44,9 +46,9 @@ export default function AccountSettings() {
           weekly_summary: form.weekly_summary,
         },
       });
-      toast({ title: "Settings saved", description: "Your account is up to date." });
+      toast({ title: t("acct.savedTitle"), description: t("acct.savedDesc") });
     } catch {
-      toast({ title: "Could not save settings", description: "Please try again." });
+      toast({ title: t("acct.saveFailTitle"), description: t("acct.saveFailDesc") });
     }
     setSaving(false);
   };
@@ -69,10 +71,10 @@ export default function AccountSettings() {
 
         <div className="mt-10">
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-            Account settings
+            {t("acct.title")}
           </h1>
           <p className="mt-2 text-white/50">
-            Your profile, contact details, and app preferences.
+            {t("acct.subtitle")}
           </p>
         </div>
 
@@ -80,22 +82,22 @@ export default function AccountSettings() {
           <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6">
             <div className="flex items-center gap-2 text-white/70 mb-5">
               <User className="w-4 h-4" />
-              <h3 className="font-medium">Profile</h3>
+              <h3 className="font-medium">{t("acct.profile")}</h3>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="text-xs text-white/50 mb-1.5 block">Account name</label>
+                <label className="text-xs text-white/50 mb-1.5 block">{t("acct.accountName")}</label>
                 <input
                   value={user.full_name || ""}
                   disabled
                   className={`${inputCls} opacity-50 cursor-not-allowed`}
                 />
                 <p className="mt-1 text-[11px] text-white/30">
-                  Your account name is managed by your sign-in.
+                  {t("acct.accountNameNote")}
                 </p>
               </div>
               <div>
-                <label className="text-xs text-white/50 mb-1.5 block">Sign-in email</label>
+                <label className="text-xs text-white/50 mb-1.5 block">{t("acct.signInEmail")}</label>
                 <input
                   value={user.email || ""}
                   disabled
@@ -103,11 +105,11 @@ export default function AccountSettings() {
                 />
               </div>
               <div>
-                <label className="text-xs text-white/50 mb-1.5 block">Display name</label>
+                <label className="text-xs text-white/50 mb-1.5 block">{t("acct.displayName")}</label>
                 <input
                   value={form.display_name}
                   onChange={(e) => set("display_name", e.target.value)}
-                  placeholder="How should we greet you?"
+                  placeholder={t("acct.displayNamePlaceholder")}
                   className={inputCls}
                 />
               </div>
@@ -117,31 +119,31 @@ export default function AccountSettings() {
           <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6">
             <div className="flex items-center gap-2 text-white/70 mb-5">
               <Mail className="w-4 h-4" />
-              <h3 className="font-medium">Contact</h3>
+              <h3 className="font-medium">{t("acct.contact")}</h3>
             </div>
-            <label className="text-xs text-white/50 mb-1.5 block">Contact email</label>
+            <label className="text-xs text-white/50 mb-1.5 block">{t("acct.contactEmail")}</label>
             <input
               type="email"
               value={form.contact_email}
               onChange={(e) => set("contact_email", e.target.value)}
-              placeholder="Where should we reach you?"
+              placeholder={t("acct.contactEmailPlaceholder")}
               className={inputCls}
             />
             <p className="mt-1 text-[11px] text-white/30">
-              Used for billing receipts and product updates.
+              {t("acct.contactNote")}
             </p>
           </div>
 
           <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6">
             <div className="flex items-center gap-2 text-white/70 mb-5">
               <Bell className="w-4 h-4" />
-              <h3 className="font-medium">Preferences</h3>
+              <h3 className="font-medium">{t("acct.preferences")}</h3>
             </div>
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm text-white">Product updates</p>
-                  <p className="text-xs text-white/40">News about features and improvements.</p>
+                  <p className="text-sm text-white">{t("acct.productUpdates")}</p>
+                  <p className="text-xs text-white/40">{t("acct.productUpdatesDesc")}</p>
                 </div>
                 <Switch
                   checked={form.product_updates}
@@ -150,8 +152,8 @@ export default function AccountSettings() {
               </div>
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm text-white">Weekly summary</p>
-                  <p className="text-xs text-white/40">A weekly recap of your project activity.</p>
+                  <p className="text-sm text-white">{t("acct.weeklySummary")}</p>
+                  <p className="text-xs text-white/40">{t("acct.weeklySummaryDesc")}</p>
                 </div>
                 <Switch
                   checked={form.weekly_summary}
@@ -168,7 +170,7 @@ export default function AccountSettings() {
             disabled={saving}
             className="px-6 py-2.5 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors disabled:opacity-60"
           >
-            {saving ? "Saving..." : "Save changes"}
+            {saving ? t("acct.saving") : t("acct.saveChanges")}
           </button>
         </div>
       </div>

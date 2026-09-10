@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import ProjectKanbanCard from "./ProjectKanbanCard";
 
 const columns = [
-  { id: "draft", title: "To-Do" },
-  { id: "building", title: "In-Progress" },
-  { id: "ready", title: "Ready" },
-  { id: "published", title: "Published" },
+  { id: "draft", titleKey: "board.todo" },
+  { id: "building", titleKey: "board.inProgress" },
+  { id: "ready", titleKey: "board.ready" },
+  { id: "published", titleKey: "board.published" },
 ];
 
 export default function ProjectBoard({ projects, onProjectUpdate }) {
+  const { t } = useLanguage();
   const [movingId, setMovingId] = useState(null);
 
   const handleDragEnd = async ({ destination, draggableId }) => {
@@ -57,7 +59,7 @@ export default function ProjectBoard({ projects, onProjectUpdate }) {
                   }`}
                 >
                   <div className="flex items-center justify-between px-1 pb-3">
-                    <h3 className="text-sm font-medium text-white/70">{col.title}</h3>
+                    <h3 className="text-sm font-medium text-white/70">{t(col.titleKey)}</h3>
                     <span className="text-xs text-white/40">{items.length}</span>
                   </div>
                   <div className="space-y-2">

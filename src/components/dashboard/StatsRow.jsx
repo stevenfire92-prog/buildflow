@@ -1,7 +1,9 @@
 import React from "react";
 import { FolderKanban, Hammer, Rocket } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function StatsRow({ projects }) {
+  const { t } = useLanguage();
   const total = projects.length;
   const building = projects.filter((p) => p.status === "building").length;
   const published = projects.filter((p) => p.status === "published").length;
@@ -10,10 +12,10 @@ export default function StatsRow({ projects }) {
     : 0;
 
   const stats = [
-    { icon: FolderKanban, label: "Active projects", value: total, sub: `${building} currently building` },
-    { icon: Hammer, label: "In build", value: building, sub: "across all types" },
-    { icon: Rocket, label: "Published", value: published, sub: "live right now" },
-    { icon: FolderKanban, label: "Avg. progress", value: `${avg}%`, sub: "across the portfolio" },
+    { icon: FolderKanban, label: t("stat.activeProjects"), value: total, sub: t("stat.currentlyBuilding").replace("{n}", building) },
+    { icon: Hammer, label: t("stat.inBuild"), value: building, sub: t("stat.acrossAllTypes") },
+    { icon: Rocket, label: t("stat.published"), value: published, sub: t("stat.liveNow") },
+    { icon: FolderKanban, label: t("stat.avgProgress"), value: `${avg}%`, sub: t("stat.acrossPortfolio") },
   ];
 
   return (

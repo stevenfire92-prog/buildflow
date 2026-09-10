@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const timeAgo = (dateStr) => {
+const timeAgo = (dateStr, t) => {
   const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
-  if (seconds < 60) return "just now";
+  if (seconds < 60) return t("act.justNow");
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return t("act.minutesAgo").replace("{n}", minutes);
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t("act.hoursAgo").replace("{n}", hours);
   const days = Math.floor(hours / 24);
-  return days === 1 ? "yesterday" : `${days}d ago`;
+  return days === 1 ? t("act.yesterday") : t("act.daysAgo").replace("{n}", days);
 };
 
 export default function ProjectComments({ projectId, projectName }) {
+  const { t } = useLanguage();
   const [comments, setComments] = useState(null);
   const [text, setText] = useState("");
   const [posting, setPosting] = useState(false);
@@ -67,7 +69,7 @@ export default function ProjectComments({ projectId, projectName }) {
               {comments.map((c) => (
                 <div key={c.id} className="rounded-xl bg-white/5 border border-white/10 px-3 py-2">
                   <p className="text-xs text-white/45">
-                    <span className="font-medium text-white/70">{c.author_name}</span> · {timeAgo(c.created_date)}
+                    <span className="font-medium text-white/70">{c.author_name}</span> · {timeAgo(c.created_date, t)}
                   </p>
                   <p className="mt-0.5 text-sm text-white/80 whitespace-pre-wrap">{c.text}</p>
                 </div>
@@ -79,7 +81,7 @@ export default function ProjectComments({ projectId, projectName }) {
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handlePost()}
-              placeholder="Add a comment…"
+              placeholder={t("cmt.placeholder")}
               className="flex-1 rounded-xl bg-white/5 border border-white/10 px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-white/30"
             />
             <button
