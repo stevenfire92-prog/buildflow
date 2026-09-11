@@ -86,7 +86,22 @@
     @apply border-border outline-ring/50;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground font-body;
+    -webkit-tap-highlight-color: transparent;
   }
-}
+  }
+
+  /* Phones: keep inputs at 16px so iOS doesn't auto-zoom on focus.
+   Unlayered so it beats Tailwind's text-sm utility on form fields. */
+  @media (max-width: 640px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }

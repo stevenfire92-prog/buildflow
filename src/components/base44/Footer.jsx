@@ -39,7 +39,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black border-t border-white/10 pt-16 pb-8">
+    <footer className="bg-black border-t border-white/10 pt-16 pb-[calc(env(safe-area-inset-bottom)+2rem)]">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
