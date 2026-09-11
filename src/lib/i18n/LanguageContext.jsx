@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import { STRINGS, STRINGS_VERSION } from "./strings";
-import { RTL_LANGS, languageName } from "./languages";
+import { RTL_LANGS, languageName, REGIONAL_ACCENTS, findAccent } from "./languages";
 
 const LanguageContext = createContext(null);
 
@@ -19,6 +19,7 @@ const readCache = (code) => {
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => localStorage.getItem("bf_lang") || "en");
+  const [accent, setAccentState] = useState(() => localStorage.getItem("bf_accent") || "en-US");
   const [dict, setDict] = useState({});
 
   useEffect(() => {
@@ -67,9 +68,47 @@ export function LanguageProvider({ children }) {
   }, [lang]);
 
   const setLanguage = useCallback((code) => {
-    localStorage.setItem("bf_lang", code);
-    setLang(code);
+    const baseCode = code.split("-")[0];
+    localStorage.setItem("bf_lang", baseCode);
+    setLang(baseCode);
+
+    // If an accent matches this code or has this base lang, sync accent
+    const directAccent = findAccent(code);
+    if (directAccent) {
+      setAccentState(code);
+      localStorage.setItem("bf_accent", code);
+    } else {
+      const defaultForLang = REGIONAL_ACCENTS.find((a) => a.lang === baseCode);
+      if (defaultForLang) {
+        setAccentState(defaultForLang.id);
+        localStorage.setItem("bf_accent", defaultForLang.id);
+      }
+    }
   }, []);
+
+  const setAccent = useCallback((accentId) => {
+    const acc = findAccent(accentId);
+    if (acc) {
+      localStorage.setItem("bf_accent", accentId);
+      setAccentState(accentId);
+      localStorage.setItem("bf_lang", acc.lang);
+      setLang(acc.lang);
+    } else {
+      localStorage.setItem("bf_accent", accentId);
+      setAccentState(accentId);
+    }
+  }, []);
+
+  const activeAccent = findAccent(accent) || {
+    id: `${lang}-${lang.toUpperCase()}`,
+    lang,
+    flag: "🌐",
+    region: languageName(lang),
+    label: `${languageName(lang)} Standard`,
+    speechLang: `${lang}-${lang.toUpperCase()}`,
+    pitch: 1.0,
+    rate: 1.0,
+  };
 
   const t = useCallback(
     (key) => {
@@ -81,7 +120,17 @@ export function LanguageProvider({ children }) {
   );
 
   return (
-    <LanguageContext.Provider value={{ lang, setLanguage, t }}>
+    <LanguageContext.Provider
+      value={{
+        lang,
+        setLanguage,
+        accent,
+        setAccent,
+        activeAccent,
+        regionalAccents: REGIONAL_ACCENTS,
+        t,
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );
@@ -90,6 +139,22 @@ export function LanguageProvider({ children }) {
 export function useLanguage() {
   const ctx = useContext(LanguageContext);
   if (ctx) return ctx;
-  // Graceful fallback if used outside the provider
-  return { lang: "en", setLanguage: () => {}, t: (k) => STRINGS[k] || k };
+  return {
+    lang: "en",
+    setLanguage: () => {},
+    accent: "en-US",
+    setAccent: () => {},
+    activeAccent: {
+      id: "en-US",
+      lang: "en",
+      flag: "🇺🇸",
+      region: "United States",
+      label: "American Standard",
+      speechLang: "en-US",
+      pitch: 0.95,
+      rate: 1.0,
+    },
+    regionalAccents: REGIONAL_ACCENTS,
+    t: (k) => STRINGS[k] || k,
+  };
 }

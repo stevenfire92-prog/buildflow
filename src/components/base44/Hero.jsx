@@ -50,9 +50,9 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 mb-7">
-            <Sparkles className="w-3.5 h-3.5" />
-            {t("hero.badge")}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70 mb-7 flex-wrap justify-center">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span>190+ World Languages & Accents · Steven's Voice Narrator · AI Setup Assistant</span>
           </div>
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-white leading-[1.05]">
             {t("hero.title")}

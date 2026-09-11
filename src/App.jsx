@@ -24,6 +24,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import NarratorGuide from './components/narrator/NarratorGuide';
+import BuilderAiAssistant from './components/assistant/BuilderAiAssistant';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -85,6 +87,8 @@ function App() {
           <ScrollToTop />
           <LanguageProvider>
             <AuthenticatedApp />
+            <NarratorGuide />
+            <BuilderAiAssistant />
           </LanguageProvider>
         </Router>
         <Toaster />

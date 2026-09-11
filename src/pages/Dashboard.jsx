@@ -19,6 +19,7 @@ import KindleBooks from "@/components/dashboard/KindleBooks";
 import DashboardCalendar from "@/components/dashboard/DashboardCalendar";
 import DashboardCalendarView from "@/components/dashboard/DashboardCalendarView";
 import AppFooter from "@/components/AppFooter";
+import LanguageSelector from "@/components/LanguageSelector";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -246,6 +247,7 @@ export default function Dashboard() {
             >
               <Users className="w-4 h-4" /> {t("dash.team")}
             </Link>
+            <LanguageSelector />
             <UpgradeButton />
             <Link
               to="/new-project"
