@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 8;
+export const STRINGS_VERSION = 9;
 
 export const STRINGS = {
   // Navbar
@@ -23,7 +23,7 @@ export const STRINGS = {
   "hero.badge": "Build with AI, ship in minutes",
   "hero.title": "Every builder needs a base",
   "hero.subtitle":
-    "Build your own apps, websites, products and AI agents on Base44 using your own words. Get ahead — and make sure it stays that way.",
+    "Build your own apps, websites, products and AI agents on Builder Flow using your own words. Get ahead — and make sure it stays that way.",
   "hero.apps": "Apps",
   "hero.websites": "Websites",
   "hero.games": "Games",
@@ -43,12 +43,12 @@ export const STRINGS = {
   "stack.integrations": "One-click integrations",
   "stack.domain": "Stay on brand with custom domain",
   "stack.analytics": "Easily keep track of analytics",
-  "stack.payments": "Get paid directly through Base44",
+  "stack.payments": "Get paid directly through Builder Flow",
   "stack.security": "Enterprise-grade security",
 
   // Build types
   "build.title": "What will you build?",
-  "build.subtitle": "Whatever you're imagining, you can use vibe coding to build it on Base44.",
+  "build.subtitle": "Whatever you're imagining, you can use vibe coding to build it on Builder Flow.",
   "build.appTitle": "Apps",
   "build.appDesc":
     "Turn any idea into a fully functional app — with backend, auth, payments, and hosting already built in. No setup, no engineers, no waiting.",
@@ -66,7 +66,7 @@ export const STRINGS = {
   "design.title": "Beautiful by default.",
   "design.titleAccent": "Yours by design.",
   "design.subtitle":
-    "Base44 starts with designs that look good before you change a thing — and hold up just as well when you do.",
+    "Builder Flow starts with designs that look good before you change a thing — and hold up just as well when you do.",
   "design.f1Title": "Seamlessly collaborate",
   "design.f1Desc":
     "See every page at once. Leave notes, sketch ideas, and send instructions straight to AI — all on one board.",
@@ -83,16 +83,16 @@ export const STRINGS = {
   // Marketing tools
   "mk.title": "Built-in marketing tools to grow after you ship",
   "mk.subtitle":
-    "Base44 doesn't stop when you publish your creation. You can also grow your business right from within the platform.",
+    "Builder Flow doesn't stop when you publish your creation. You can also grow your business right from within the platform.",
   "mk.tool1Title": "SEO/GEO dashboard",
   "mk.tool1Desc":
     "Get found where people are actually looking – on Google, ChatGPT, Gemini and more. Run a scan, get a prioritized fix list, and let AI apply the fixes.",
   "mk.tool2Title": "Social presence",
   "mk.tool2Desc":
-    "Base44 reads what you build, picks the right social platforms, and generates ready-to-post content – in your voice.",
+    "Builder Flow reads what you build, picks the right social platforms, and generates ready-to-post content – in your voice.",
   "mk.tool3Title": "App analytics",
   "mk.tool3Desc":
-    "Track traffic, sales, customize your dashboard, and measure the actions that matter most in your Base44 app.",
+    "Track traffic, sales, customize your dashboard, and measure the actions that matter most in your Builder Flow app.",
   "mk.quote": "It took about a week to come up with a product that works end-to-end.",
   "mk.readStory": "Read full story",
   "mk.stat1": "to launch",
@@ -122,23 +122,23 @@ export const STRINGS = {
 
   // FAQ
   "faq.title": "Frequently asked questions",
-  "faq.q1": "What is Base44?",
+  "faq.q1": "What is Builder Flow?",
   "faq.a1":
-    "Base44 is a no-code AI platform for building apps, websites and AI agents — no coding required. Describe what you want, and Base44 generates the structure, design and logic for you. It handles the technical side so you can focus on the idea.",
-  "faq.q2": "How does Base44 work?",
+    "Builder Flow is a no-code AI platform for building apps, websites and AI agents — no coding required. Describe what you want, and Builder Flow generates the structure, design and logic for you. It handles the technical side so you can focus on the idea.",
+  "faq.q2": "How does Builder Flow work?",
   "faq.a2":
-    "Base44 uses vibe coding to build apps, websites, agents and more. Describe your idea in plain language — as a rough thought or a detailed spec. Base44 generates the code, structure, design and logic. From there, keep iterating by chatting with the AI until everything works the way you want.",
+    "Builder Flow uses vibe coding to build apps, websites, agents and more. Describe your idea in plain language — as a rough thought or a detailed spec. Builder Flow generates the code, structure, design and logic. From there, keep iterating by chatting with the AI until everything works the way you want.",
   "faq.q3": "How much does it cost?",
   "faq.a3":
-    "Base44 has a free plan — no credit card needed to start. The free plan includes monthly credits to build and test your first apps. Paid plans start at $16/month (billed annually) and unlock more credits, advanced features and team capabilities.",
+    "Builder Flow has a free plan — no credit card needed to start. The free plan includes monthly credits to build and test your first apps. Paid plans start at $16/month (billed annually) and unlock more credits, advanced features and team capabilities.",
   "faq.q4": "Do I need coding experience?",
-  "faq.a4": "No. Describe what you need in plain language and Base44 handles the rest.",
+  "faq.a4": "No. Describe what you need in plain language and Builder Flow handles the rest.",
   "faq.q5": "Which AI no-code platform is best to build an app?",
   "faq.a5":
-    "The best AI no-code platform is the one that can turn your idea into a fully functional app — not just a static design — without requiring any coding experience. Base44 covers full-stack generation, iteration speed, built-in hosting, integrations, and scalability out of the box.",
-  "faq.q6": "Can I build a complete website with Base44?",
+    "The best AI no-code platform is the one that can turn your idea into a fully functional app — not just a static design — without requiring any coding experience. Builder Flow covers full-stack generation, iteration speed, built-in hosting, integrations, and scalability out of the box.",
+  "faq.q6": "Can I build a complete website with Builder Flow?",
   "faq.a6":
-    "Yes. Base44's AI website builder lets you generate a complete, fully functional website in minutes — just describe what you need in plain language. The AI handles layout, design, and content for you, with no coding or setup required.",
+    "Yes. Builder Flow's AI website builder lets you generate a complete, fully functional website in minutes — just describe what you need in plain language. The AI handles layout, design, and content for you, with no coding or setup required.",
 
   // Footer
   "footer.tagline": "Every builder needs a base. Build apps, websites and AI agents with your own words.",
