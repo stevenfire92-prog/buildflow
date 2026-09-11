@@ -49,6 +49,25 @@
       ],
       "default": "Kindle Edition",
       "title": "Format"
+    },
+    "buy_price": {
+      "type": "number",
+      "default": 4.99,
+      "title": "Buy price (USD)"
+    },
+    "rent_price": {
+      "type": "number",
+      "default": 1.99,
+      "title": "Rent price (USD)"
+    },
+    "rent_duration_days": {
+      "type": "number",
+      "default": 30,
+      "title": "Rent duration in days"
+    },
+    "stripe_product_id": {
+      "type": "string",
+      "title": "Stripe Product ID"
     }
   },
   "required": [
