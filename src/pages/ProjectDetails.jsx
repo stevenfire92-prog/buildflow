@@ -7,6 +7,7 @@ import AppHeader from "@/components/AppHeader";
 import ProjectEditForm from "@/components/projects/ProjectEditForm";
 import ProjectFiles from "@/components/projects/ProjectFiles";
 import TaskChecklist from "@/components/projects/TaskChecklist";
+import ProjectComments from "@/components/dashboard/ProjectComments";
 import { useToast } from "@/components/ui/use-toast";
 
 const typeIcons = { app: Smartphone, website: Globe, agent: Bot };
@@ -251,6 +252,14 @@ export default function ProjectDetails() {
 
         <div className="mt-4">
           <TaskChecklist projectId={id} tasks={project.tasks} onUpdated={setProject} />
+        </div>
+
+        <div className="mt-4 rounded-2xl bg-white/[0.03] border border-white/10 p-5">
+          <p className="text-xs text-white/50">Discussion</p>
+          <p className="mt-0.5 text-xs text-white/35">
+            Discuss this project's goals and tasks with your team.
+          </p>
+          <ProjectComments projectId={id} projectName={project.name} />
         </div>
 
         <div className="mt-4">
