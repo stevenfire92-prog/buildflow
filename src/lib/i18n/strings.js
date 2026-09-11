@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 12;
+export const STRINGS_VERSION = 13;
 
 export const STRINGS = {
   // Navbar
@@ -200,6 +200,8 @@ export const STRINGS = {
   "dash.bulkFailDesc": "Please try again.",
   "dash.templates": "Templates",
   "dash.growth": "Growth",
+  "dash.calendar": "Calendar",
+  "dash.portfolio": "Portfolio",
 
   // Dashboard stats
   "stat.activeProjects": "Active projects",
@@ -322,6 +324,42 @@ export const STRINGS = {
   "gd.legendAvg": "Average",
   "gd.totalProjects": "Total projects",
   "gd.newProjects": "New projects",
+
+  // Portfolio (public share page)
+  "pf.title": "Portfolio",
+  "pf.subtitle":
+    "Published builds from Se Fire Tech — designed, built and shipped on Builder Flow.",
+  "pf.emptyTitle": "Nothing published yet",
+  "pf.emptySub": "Projects you publish will show up here, ready to share with the world.",
+  "pf.built": "{n}% built",
+  "pf.copyLink": "Copy link",
+  "pf.copied": "Link copied",
+  "pf.copyFail": "Could not copy the link",
+  "pf.shareText": "Check out the Se Fire Tech portfolio on Builder Flow",
+  "pf.statPublished": "Published projects",
+  "pf.statAvg": "Average progress",
+  "pf.footer": "Built on Builder Flow by Se Fire Tech",
+
+  // Deadline calendar
+  "cal.title": "Deadline calendar",
+  "cal.subtitle": "Every project deadline in one view, color-coded by urgency.",
+  "cal.today": "Today",
+  "cal.upcoming": "Upcoming deadlines",
+  "cal.empty": "No deadlines set — add one from a project's edit settings.",
+  "cal.overdue": "Overdue",
+  "cal.dueToday": "Due today",
+  "cal.dueTomorrow": "Due tomorrow",
+  "cal.dueIn": "Due in {n} days",
+
+  // Onboarding checklist
+  "ob.title": "Getting started",
+  "ob.subtitle": "A few quick steps to get the most out of Builder Flow.",
+  "ob.createProject": "Create your first project",
+  "ob.publishProject": "Publish a project",
+  "ob.saveTemplate": "Save a reusable template",
+  "ob.inviteTeam": "Invite a teammate",
+  "ob.of": "{done} of {total} done",
+  "ob.dismiss": "Dismiss",
 
   // Spotify artists
   "spot.title": "Spotify artists",

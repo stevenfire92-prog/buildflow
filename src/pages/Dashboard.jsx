@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate, TrendingUp, Search } from "lucide-react";
+import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate, TrendingUp, Search, CalendarDays, Share2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
 import StatsRow from "@/components/dashboard/StatsRow";
@@ -13,6 +13,7 @@ import BulkActions from "@/components/dashboard/BulkActions";
 import MusicProfiles from "@/components/dashboard/MusicProfiles";
 import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import GrowthSummary from "@/components/dashboard/GrowthSummary";
+import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -181,6 +182,18 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-2">
             <Link
+              to="/calendar"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"
+            >
+              <CalendarDays className="w-4 h-4" /> {t("dash.calendar")}
+            </Link>
+            <Link
+              to="/portfolio"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"
+            >
+              <Share2 className="w-4 h-4" /> {t("dash.portfolio")}
+            </Link>
+            <Link
               to="/growth-dashboard"
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"
             >
@@ -267,6 +280,8 @@ export default function Dashboard() {
           </div>
         ) : (
           <>
+            <OnboardingChecklist projects={projects} />
+
             <GrowthSummary projects={projects} />
 
             <StatsRow projects={projects} />
