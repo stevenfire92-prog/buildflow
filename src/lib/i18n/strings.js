@@ -291,4 +291,13 @@ export const STRINGS = {
   "rev.newSubs": "New subs",
   "rev.totalSubs": "Total subs",
   "rev.loadError": "Revenue data unavailable",
+
+  // Growth summary
+  "gs.overallProgress": "Overall progress",
+  "gs.portfolio": "Average build progress across all projects",
+  "gs.inProgress": "in progress",
+  "gs.published": "published",
+  "gs.weekTrend": "{n} new this week · {m} last week",
+  "gs.latestActivity": "Latest activity",
+  "gs.noActivity": "No activity yet",
 };
