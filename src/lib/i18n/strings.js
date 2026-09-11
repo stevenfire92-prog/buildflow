@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 15;
+export const STRINGS_VERSION = 16;
 
 export const STRINGS = {
   // Navbar
@@ -326,19 +326,35 @@ export const STRINGS = {
   "gd.newProjects": "New projects",
 
   // Portfolio (public share page)
-  "pf.title": "Portfolio",
+  "pf.title": "Public Project Tracker",
   "pf.subtitle":
-    "Published builds from Se Fire Tech — designed, built and shipped on Builder Flow.",
-  "pf.emptyTitle": "Nothing published yet",
-  "pf.emptySub": "Projects you publish will show up here, ready to share with the world.",
+    "Live build progress, status updates, and shipped products from Se Fire Tech — no sign-in required.",
+  "pf.emptyTitle": "No projects shared yet",
+  "pf.emptySub": "Projects will appear here as soon as builds are created or updated.",
   "pf.built": "{n}% built",
   "pf.copyLink": "Copy link",
-  "pf.copied": "Link copied",
+  "pf.copied": "Link copied to clipboard",
   "pf.copyFail": "Could not copy the link",
-  "pf.shareText": "Check out the Se Fire Tech portfolio on Builder Flow",
-  "pf.statPublished": "Published projects",
-  "pf.statAvg": "Average progress",
+  "pf.shareText": "Check out the live project status and progress on Builder Flow",
+  "pf.statTotal": "Total projects",
+  "pf.statActive": "Active builds",
+  "pf.statPublished": "Published",
+  "pf.statAvg": "Avg. progress",
   "pf.footer": "Built on Builder Flow by Se Fire Tech",
+  "pf.tabAll": "All",
+  "pf.tabActive": "Active in build",
+  "pf.tabReady": "Ready",
+  "pf.tabPublished": "Published",
+  "pf.searchPlaceholder": "Search projects...",
+  "pf.noProjectsMatch": "No projects match your search",
+  "pf.noProjectsMatchSub": "Try a different name or keyword.",
+  "pf.publicBadge": "Public view · No login required",
+  "pf.viewDetails": "View progress",
+  "pf.projectOverview": "Project overview",
+  "pf.goals": "Project goals",
+  "pf.checklist": "Tasks & milestones",
+  "pf.launchTarget": "Launch deadline",
+  "pf.tasksDone": "{done} of {total} done",
 
   // Deadline calendar
   "cal.title": "Deadline calendar",

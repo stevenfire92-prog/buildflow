@@ -60,6 +60,7 @@ const AuthenticatedApp = () => {
     <Route path="/templates" element={<Templates />} />
     <Route path="/growth-dashboard" element={<GrowthDashboard />} />
     <Route path="/portfolio" element={<Portfolio />} />
+    <Route path="/share" element={<Portfolio />} />
     <Route path="/calendar" element={<DeadlineCalendar />} />
     <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
       <Route path="/account-settings" element={<AccountSettings />} />
