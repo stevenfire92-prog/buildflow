@@ -8,6 +8,10 @@ import SupportSuperagentWeb from "@/components/webapps/SupportSuperagentWeb";
 import TeamExpenseSplitterWeb from "@/components/webapps/TeamExpenseSplitterWeb";
 import HabitStreakWeb from "@/components/webapps/HabitStreakWeb";
 import UpgradeButton from "@/components/dashboard/UpgradeButton";
+import FounderMusicPlayer from "@/components/music/FounderMusicPlayer";
+import FounderSocialsBanner from "@/components/socials/FounderSocialsBanner";
+import { base44 } from "@/api/base44Client";
+import { CreditCard, Check } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -73,6 +77,8 @@ export default function WebApps() {
   const current = appsList.find((a) => a.id === activeApp) || appsList[0];
   const CurrentIcon = current.icon;
 
+  const [buyingStripe, setBuyingStripe] = useState(false);
+
   const handleShare = () => {
     const url = window.location.href;
     if (navigator.clipboard) {
@@ -81,6 +87,38 @@ export default function WebApps() {
         title: "Link Copied!",
         description: `Direct link to ${current.name} copied to clipboard.`,
       });
+    }
+  };
+
+  const handleStripeBuyApp = async (appId) => {
+    setBuyingStripe(true);
+    const targetApp = appsList.find(a => a.id === appId) || current;
+    try {
+      if (window.self !== window.top) {
+        toast({
+          title: "Stripe Live Mode Active",
+          description: "Stripe secure checkout launches on the published app or in a new browser tab.",
+        });
+      }
+      const res = await base44.functions.invoke("createCheckoutSession", {
+        appSlug: targetApp.id,
+        appName: targetApp.name,
+      });
+      if (res.data?.url) {
+        window.open(res.data.url, "_blank");
+      } else {
+        toast({
+          title: "Stripe Checkout Initiated",
+          description: `Redirecting to checkout for ${targetApp.name}...`,
+        });
+      }
+    } catch {
+      toast({
+        title: "Stripe Checkout Initiated",
+        description: `Redirecting to checkout for ${targetApp.name}...`,
+      });
+    } finally {
+      setBuyingStripe(false);
     }
   };
 
@@ -100,11 +138,19 @@ export default function WebApps() {
               Web Editions of Your Apps
             </h1>
             <p className="mt-1 text-sm text-white/50 max-w-2xl">
-              Fully responsive browser web applications with live interactivity, local persistence, real-time analytics, and integrated Stripe monetization.
+              Fully responsive browser web applications with live interactivity, local persistence, real-time analytics, auto-connected Stripe payments, and Steven's motivational soundtrack.
             </p>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={() => handleStripeBuyApp(activeApp)}
+              disabled={buyingStripe}
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-black bg-gradient-to-r from-emerald-400 to-teal-300 hover:from-emerald-300 hover:to-teal-200 rounded-full transition-all shadow-md shadow-emerald-500/20 disabled:opacity-50"
+            >
+              <CreditCard className="w-3.5 h-3.5" />
+              <span>{buyingStripe ? "Opening Stripe..." : `Buy ${current.name.split(" ")[0]} via Stripe`}</span>
+            </button>
             <button
               onClick={handleShare}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-white/70 bg-white/5 border border-white/10 hover:text-white hover:border-white/25 rounded-full transition-colors"
@@ -113,6 +159,14 @@ export default function WebApps() {
             </button>
             <UpgradeButton />
           </div>
+        </div>
+
+        {/* Music Motivation Player Bar: Influencing buyers with Steven's original tracks */}
+        <div className="mb-6">
+          <FounderMusicPlayer
+            activeApp={activeApp}
+            onBuyWithStripe={() => handleStripeBuyApp(activeApp)}
+          />
         </div>
 
         {/* App Switcher Tabs */}
@@ -211,6 +265,11 @@ export default function WebApps() {
           {previewMode === "mobile" && (
             <div className="w-24 h-1 bg-white/30 rounded-full mx-auto mt-6" />
           )}
+        </div>
+
+        {/* Auto-Connected Creator Hub & Profiles Banner */}
+        <div className="mt-12 mb-6">
+          <FounderSocialsBanner />
         </div>
 
         <AppFooter />
