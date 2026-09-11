@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 6;
+export const STRINGS_VERSION = 7;
 
 export const STRINGS = {
   // Navbar
@@ -275,6 +275,22 @@ export const STRINGS = {
   "acct.savedDesc": "Your account is up to date.",
   "acct.saveFailTitle": "Could not save settings",
   "acct.saveFailDesc": "Please try again.",
+
+  // Music profiles (all platforms)
+  "mp.title": "Verified music profiles",
+  "mp.subtitle":
+    "Your artist pages across Spotify, Apple Music, Deezer, SoundCloud and Amazon Music.",
+  "mp.add": "Add profile",
+  "mp.addPlaceholder": "Paste your profile link…",
+  "mp.invalid": "That doesn't look like a valid profile link for this platform.",
+  "mp.empty": "No profiles yet — add your first one above.",
+  "mp.followers": "Followers",
+  "mp.latestRelease": "Latest release",
+  "mp.openProfile": "Open profile",
+  "mp.addFailTitle": "Couldn't add the profile",
+  "mp.addFailDesc": "Please try again.",
+  "mp.spotifyNotConfigured":
+    "Live Spotify stats need SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in Settings → Secrets. Profile links work either way.",
 
   // Spotify artists
   "spot.title": "Spotify artists",

@@ -1,0 +1,33 @@
+{
+  "name": "MusicProfile",
+  "type": "object",
+  "properties": {
+    "platform": {
+      "type": "string",
+      "enum": [
+        "spotify",
+        "apple_music",
+        "deezer",
+        "soundcloud",
+        "amazon_music"
+      ],
+      "title": "Platform"
+    },
+    "artist_id": {
+      "type": "string",
+      "title": "Artist ID or handle"
+    },
+    "profile_url": {
+      "type": "string",
+      "title": "Profile URL"
+    },
+    "name": {
+      "type": "string",
+      "title": "Display name"
+    }
+  },
+  "required": [
+    "platform",
+    "profile_url"
+  ]
+}

@@ -10,7 +10,7 @@ import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import ActivityLog from "@/components/dashboard/ActivityLog";
 import BulkActions from "@/components/dashboard/BulkActions";
-import SpotifyArtists from "@/components/dashboard/SpotifyArtists";
+import MusicProfiles from "@/components/dashboard/MusicProfiles";
 import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import GrowthSummary from "@/components/dashboard/GrowthSummary";
 import { useToast } from "@/components/ui/use-toast";
@@ -258,7 +258,7 @@ export default function Dashboard() {
             </div>
 
             <div className="mt-4">
-              <SpotifyArtists />
+              <MusicProfiles />
             </div>
 
             {view === "board" ? (
