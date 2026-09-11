@@ -1,0 +1,45 @@
+{
+  "name": "Project Deadline To Calendar",
+  "description": "Automatically adds and updates project launch deadlines in Google Calendar",
+  "trigger": {
+    "config": {
+      "trigger_type": "entity",
+      "entity_name": "Project",
+      "events": [
+        "create",
+        "update",
+        "delete"
+      ]
+    },
+    "condition": "${ .trigger.event_type == \"delete\" or (.trigger.event_type == \"create\" and .trigger.data.deadline != null) or (.trigger.event_type == \"update\" and (.trigger.changed_fields != null and ((.trigger.changed_fields | index(\"deadline\") != null) or (.trigger.changed_fields | index(\"name\") != null)))) }"
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "project_deadline_to_calendar",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "sync_calendar": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "syncProjectDeadlinesToCalendar",
+            "args": {
+              "event_type": "${ .trigger.event_type }",
+              "project_id": "${ .trigger.entity_id }",
+              "project": "${ .trigger.data }",
+              "old_project": "${ .trigger.old_data }"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Sync deadline to Google Calendar",
+            "description": "Upserts or deletes event on primary calendar"
+          }
+        }
+      }
+    ]
+  }
+}

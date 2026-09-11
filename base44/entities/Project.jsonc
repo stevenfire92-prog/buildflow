@@ -51,6 +51,15 @@
       "type": "string",
       "title": "Deadline alert sent for"
     },
+    "google_calendar_event_id": {
+      "type": "string",
+      "title": "Google Calendar event ID"
+    },
+    "google_calendar_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Google Calendar synced at"
+    },
     "tasks": {
       "type": "array",
       "title": "Tasks",

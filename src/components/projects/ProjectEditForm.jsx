@@ -84,7 +84,10 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
         />
       </div>
       <div>
-        <label className="text-xs text-white/50 mb-1.5 block">Deadline</label>
+        <div className="flex items-center justify-between mb-1.5">
+          <label className="text-xs text-white/50 block">Deadline</label>
+          <span className="text-[11px] text-emerald-400/90 font-medium">Auto-syncs to Google Calendar</span>
+        </div>
         <input
           type="date"
           value={form.deadline}

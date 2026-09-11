@@ -1,14 +1,38 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, CalendarDays, RefreshCw, CheckCircle2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useToast } from "@/components/ui/use-toast";
 import MonthGrid from "@/components/calendar/MonthGrid";
 import { daysUntil, urgencyClasses } from "@/lib/deadlines";
 
 export default function DeadlineCalendar() {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [projects, setProjects] = useState(null);
+  const [syncing, setSyncing] = useState(false);
+
+  const handleSyncCalendar = async () => {
+    setSyncing(true);
+    try {
+      const res = await base44.functions.invoke("syncProjectDeadlinesToCalendar", { syncAll: true });
+      const count = res.data?.syncedCount ?? 0;
+      const fresh = await base44.entities.Project.list("-updated_date", 100);
+      setProjects(fresh);
+      toast({
+        title: t("cal.syncedTitle"),
+        description: t("cal.syncedDesc").replace("{n}", count),
+      });
+    } catch {
+      toast({
+        title: t("cal.syncFailTitle"),
+        description: t("cal.syncFailDesc"),
+      });
+    } finally {
+      setSyncing(false);
+    }
+  };
   const [cursor, setCursor] = useState(() => {
     const n = new Date();
     return new Date(n.getFullYear(), n.getMonth(), 1);
@@ -73,6 +97,20 @@ export default function DeadlineCalendar() {
               <span className="font-semibold tracking-tight">Se Fire Tech</span>
             </div>
           </div>
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <div className="flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>{t("cal.gcalActive")}</span>
+            </div>
+            <button
+              onClick={handleSyncCalendar}
+              disabled={syncing}
+              className="flex items-center gap-2 px-4 py-1.5 text-sm font-medium text-white bg-white/10 hover:bg-white/15 border border-white/15 rounded-full transition-colors disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${syncing ? "animate-spin" : ""}`} />
+              {syncing ? t("cal.syncing") : t("cal.syncGCal")}
+            </button>
+          </div>
         </div>
 
         <div className="mt-10 mb-6 flex items-end justify-between gap-4 flex-wrap">
@@ -135,15 +173,22 @@ export default function DeadlineCalendar() {
                         <p className="text-sm font-medium text-white truncate">
                           {p.name}
                         </p>
-                        <p className="text-xs text-white/40">
-                          {new Date(
-                            `${String(p.deadline).slice(0, 10)}T00:00:00`
-                          ).toLocaleDateString(undefined, {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </p>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <p className="text-xs text-white/40">
+                            {new Date(
+                              `${String(p.deadline).slice(0, 10)}T00:00:00`
+                            ).toLocaleDateString(undefined, {
+                              month: "long",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </p>
+                          {p.google_calendar_event_id && (
+                            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400/80">
+                              <CheckCircle2 className="w-3 h-3" /> GCal
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <span
                         className={`shrink-0 px-2.5 py-1 rounded-full text-xs font-medium border ${urgencyClasses(

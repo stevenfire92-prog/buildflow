@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 14;
+export const STRINGS_VERSION = 15;
 
 export const STRINGS = {
   // Navbar
@@ -350,6 +350,14 @@ export const STRINGS = {
   "cal.dueToday": "Due today",
   "cal.dueTomorrow": "Due tomorrow",
   "cal.dueIn": "Due in {n} days",
+  "cal.syncGCal": "Sync Google Calendar",
+  "cal.syncing": "Syncing...",
+  "cal.syncedTitle": "Google Calendar synced",
+  "cal.syncedDesc": "{n} deadline(s) added or updated in your personal calendar.",
+  "cal.syncFailTitle": "Could not sync calendar",
+  "cal.syncFailDesc": "Please try again.",
+  "cal.gcalActive": "Google Calendar auto-sync active",
+  "cal.syncedBadge": "Synced to Google Calendar",
 
   // Dashboard calendar widget
   "dc.title": "Deadlines this month",
