@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 10;
+export const STRINGS_VERSION = 11;
 
 export const STRINGS = {
   // Navbar
@@ -161,7 +161,7 @@ export const STRINGS = {
   "footer.contact": "Contact",
   "footer.terms": "Terms",
   "footer.rights": "© 2026 Se Fire Tech. All rights reserved.",
-  "footer.designedBy": "Designed & built by Steven Turcott",
+  "footer.designedBy": "Designed & built by Steven Turcott — Founder of Se Fire Tech",
   "footer.privacy": "Privacy",
   "footer.cookies": "Cookies",
 
