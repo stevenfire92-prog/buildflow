@@ -3,6 +3,7 @@ import { BookOpen, ExternalLink, Plus, Sparkles, BookMarked, Layers, ShieldCheck
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
+import { logActivity } from "@/lib/activityLog";
 import BookPurchaseCard from "@/components/books/BookPurchaseCard";
 import BulkEditBooksDialog from "@/components/books/BulkEditBooksDialog";
 import BulkBooksBar from "@/components/books/BulkBooksBar";
@@ -115,24 +116,71 @@ export default function KindleBooks() {
   const handleBulkEditSubmit = async (updates) => {
     if (selection.length === 0 || bulkBusy) return;
     setBulkBusy(true);
+    const targetIds = [...selection];
     try {
-      const payload = selection.map((id) => ({
+      const payload = targetIds.map((id) => ({
         id,
         ...updates,
       }));
       await base44.entities.KindleBook.bulkUpdate(payload);
+
+      // Optimistic local state update
+      setBooks((prev) =>
+        (prev || []).map((b) => (targetIds.includes(b.id) ? { ...b, ...updates } : b))
+      );
+
+      // Log detailed activity for the team feed & real-time updates
+      const updatedTitles = (books || [])
+        .filter((b) => targetIds.includes(b.id))
+        .map((b) => b.title)
+        .slice(0, 3)
+        .join(", ");
+      const extraCount = targetIds.length > 3 ? ` and ${targetIds.length - 3} more` : "";
+      const fieldList = Object.keys(updates)
+        .map((k) => {
+          if (k === "buy_price") return `Buy: $${updates[k]}`;
+          if (k === "rent_price") return `Rent: $${updates[k]}`;
+          if (k === "rent_duration_days") return `${updates[k]}d rental`;
+          return `${k}: ${updates[k]}`;
+        })
+        .join(", ");
+
+      logActivity({
+        action: "updated",
+        projectName: `Kindle Books (${targetIds.length})`,
+        projectId: targetIds[0],
+        details: `Bulk updated [${fieldList}] for ${updatedTitles}${extraCount}`,
+      });
+
       toast({
         title: "Books updated",
-        description: `Updated prices & metadata for ${selection.length} book(s).`,
+        description: `Successfully updated prices & metadata for ${targetIds.length} book(s).`,
       });
       setShowBulkEdit(false);
       exitSelectMode();
       loadBooks();
     } catch {
-      toast({
-        title: "Could not update books",
-        description: "Please check your inputs and try again.",
-      });
+      // Fallback: update in parallel if bulkUpdate hits schema validation nuances
+      try {
+        await Promise.all(
+          targetIds.map((id) => base44.entities.KindleBook.update(id, updates))
+        );
+        setBooks((prev) =>
+          (prev || []).map((b) => (targetIds.includes(b.id) ? { ...b, ...updates } : b))
+        );
+        toast({
+          title: "Books updated",
+          description: `Successfully updated prices & metadata for ${targetIds.length} book(s).`,
+        });
+        setShowBulkEdit(false);
+        exitSelectMode();
+        loadBooks();
+      } catch (err) {
+        toast({
+          title: "Could not update books",
+          description: err.message || "Please check your inputs and try again.",
+        });
+      }
     } finally {
       setBulkBusy(false);
     }

@@ -7,6 +7,8 @@ const PRESETS = [
   { label: "$3.99 Buy · $0.99 Rent (30d)", buy: "3.99", rent: "0.99", days: "30" },
   { label: "$2.99 Buy · $0.99 Rent (14d)", buy: "2.99", rent: "0.99", days: "14" },
   { label: "$9.99 Buy · $2.99 Rent (60d)", buy: "9.99", rent: "2.99", days: "60" },
+  { label: "$0.99 Promo · $0.99 Rent (30d)", buy: "0.99", rent: "0.99", days: "30" },
+  { label: "$5.99 Buy · $2.49 Rent (45d)", buy: "5.99", rent: "2.49", days: "45" },
 ];
 
 export default function BulkEditBooksDialog({
@@ -37,6 +39,9 @@ export default function BulkEditBooksDialog({
 
   const [updatePublicationDate, setUpdatePublicationDate] = useState(false);
   const [publicationDate, setPublicationDate] = useState("2026");
+
+  const [updateDescription, setUpdateDescription] = useState(false);
+  const [description, setDescription] = useState("");
 
   const applyPreset = (preset) => {
     setUpdateBuyPrice(true);
@@ -70,6 +75,9 @@ export default function BulkEditBooksDialog({
     if (updatePublicationDate && publicationDate.trim()) {
       updates.publication_date = publicationDate.trim();
     }
+    if (updateDescription && description.trim()) {
+      updates.description = description.trim();
+    }
 
     if (Object.keys(updates).length === 0) return;
     onSubmit(updates);
@@ -82,7 +90,8 @@ export default function BulkEditBooksDialog({
     updateSeriesName ||
     updateAuthor ||
     updateFormat ||
-    updatePublicationDate;
+    updatePublicationDate ||
+    updateDescription;
 
   const count = selectedBooks.length;
 
@@ -331,6 +340,27 @@ export default function BulkEditBooksDialog({
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-amber-400 disabled:opacity-30"
                   />
                 </div>
+              </div>
+
+              {/* Description */}
+              <div className="rounded-xl p-3 bg-white/[0.02] border border-white/5">
+                <label className="flex items-center gap-2 cursor-pointer mb-2">
+                  <input
+                    type="checkbox"
+                    checked={updateDescription}
+                    onChange={(e) => setUpdateDescription(e.target.checked)}
+                    className="rounded border-white/20 bg-white/10 text-amber-500 focus:ring-0"
+                  />
+                  <span className="text-xs font-medium text-white">Book Synopsis / Description</span>
+                </label>
+                <textarea
+                  rows={2}
+                  disabled={!updateDescription}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Set shared synopsis or description for selected books..."
+                  className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-amber-400 disabled:opacity-30 resize-none"
+                />
               </div>
             </div>
           </div>
