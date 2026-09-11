@@ -7,6 +7,7 @@ import PortfolioGrowthChart from "@/components/growth/PortfolioGrowthChart";
 import StatusTrendChart from "@/components/growth/StatusTrendChart";
 import ProgressTrendChart from "@/components/growth/ProgressTrendChart";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import AppFooter from "@/components/AppFooter";
 
 export default function GrowthDashboard() {
   const { t } = useLanguage();
@@ -88,6 +89,8 @@ export default function GrowthDashboard() {
               <StatusTrendChart weekly={weekly} />
               <ProgressTrendChart weekly={weekly} trends={trends} />
             </div>
+
+            <AppFooter />
           </>
         )}
       </div>

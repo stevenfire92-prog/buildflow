@@ -69,11 +69,17 @@ export default function Footer() {
           ))}
         </div>
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-white/40 text-center sm:text-left">
-            <p>{t("footer.rights")}</p>
-            <p className="mt-1">{t("footer.designedBy")}</p>
+          <div className="text-xs text-center sm:text-left">
+            <div className="flex items-center gap-2 justify-center sm:justify-start font-medium text-white/90">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
+              <span>{t("footer.rights")}</span>
+            </div>
+            <p className="mt-1 text-white/70 font-medium">{t("footer.designedBy")}</p>
+            <p className="mt-0.5 text-[11px] text-white/50">
+              BuildFlow™ platform, all proprietary code, music catalog & Shadow Path dark fantasy series are protected by copyright.
+            </p>
           </div>
-          <div className="flex gap-5 text-xs text-white/40">
+          <div className="flex gap-5 text-xs text-white/60">
             <a href="#faq" className="hover:text-white transition-colors">{t("footer.privacy")}</a>
             <a href="#faq" className="hover:text-white transition-colors">{t("footer.terms")}</a>
             <a href="#faq" className="hover:text-white transition-colors">{t("footer.cookies")}</a>

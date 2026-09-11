@@ -17,6 +17,7 @@ import GrowthSummary from "@/components/dashboard/GrowthSummary";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
 import KindleBooks from "@/components/dashboard/KindleBooks";
 import DashboardCalendar from "@/components/dashboard/DashboardCalendar";
+import AppFooter from "@/components/AppFooter";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -425,6 +426,8 @@ export default function Dashboard() {
                 onCancel={exitSelectMode}
               />
             )}
+
+            <AppFooter />
           </>
         )}
       </div>

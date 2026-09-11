@@ -6,6 +6,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import MonthGrid from "@/components/calendar/MonthGrid";
 import { daysUntil, urgencyClasses } from "@/lib/deadlines";
+import AppFooter from "@/components/AppFooter";
 
 export default function DeadlineCalendar() {
   const { t } = useLanguage();
@@ -208,6 +209,8 @@ export default function DeadlineCalendar() {
                 </div>
               )}
             </div>
+
+            <AppFooter />
           </>
         )}
       </div>

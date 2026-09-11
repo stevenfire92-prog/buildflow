@@ -9,6 +9,7 @@ import ShareBar from "@/components/portfolio/ShareBar";
 import StanStoreCard from "@/components/portfolio/StanStoreCard";
 import SheetsSalesActivityChart from "@/components/portfolio/SheetsSalesActivityChart";
 import KindleBooks from "@/components/dashboard/KindleBooks";
+import AppFooter from "@/components/AppFooter";
 
 const tabs = ["all", "active", "ready", "published"];
 
@@ -239,12 +240,7 @@ export default function Portfolio() {
           <KindleBooks />
         </div>
 
-        <div className="mt-16 pt-6 border-t border-white/10 flex items-center justify-between gap-4 flex-wrap text-xs text-white/35">
-          <p>{t("pf.footer")} · {t("footer.rights")}</p>
-          <Link to="/" className="text-white/60 hover:text-white underline-offset-4 hover:underline">
-            Home
-          </Link>
-        </div>
+        <AppFooter />
       </div>
     </div>
   );
