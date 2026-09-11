@@ -1,0 +1,38 @@
+{
+  "name": "ProjectTemplate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Template name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "goals": {
+      "type": "string",
+      "title": "Goals"
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "app",
+        "website",
+        "agent"
+      ],
+      "default": "app",
+      "title": "Project type"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tasks"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

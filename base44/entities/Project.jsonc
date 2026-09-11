@@ -51,6 +51,27 @@
       "type": "string",
       "title": "Deadline alert sent for"
     },
+    "tasks": {
+      "type": "array",
+      "title": "Tasks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Task"
+          },
+          "done": {
+            "type": "boolean",
+            "default": false,
+            "title": "Done"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
     "last_activity": {
       "type": "string",
       "format": "date-time",

@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 5;
+export const STRINGS_VERSION = 6;
 
 export const STRINGS = {
   // Navbar
@@ -195,6 +195,7 @@ export const STRINGS = {
   "dash.bulkDeleteDesc": "{n} project(s) removed.",
   "dash.bulkFailTitle": "Could not update",
   "dash.bulkFailDesc": "Please try again.",
+  "dash.templates": "Templates",
 
   // Dashboard stats
   "stat.activeProjects": "Active projects",
@@ -312,4 +313,42 @@ export const STRINGS = {
   "gs.weekTrend": "{n} new this week · {m} last week",
   "gs.latestActivity": "Latest activity",
   "gs.noActivity": "No activity yet",
+
+  // Project tasks
+  "proj.tasks": "Tasks",
+  "proj.tasksDone": "{done} of {total} done",
+  "proj.taskFail": "Could not update the task",
+
+  // Templates
+  "tpl.title": "Project templates",
+  "tpl.subtitle": "Save a project's structure once, reuse it for every new build.",
+  "tpl.new": "New template",
+  "tpl.formSubtitle": "Name it, describe it, and list the tasks it should include.",
+  "tpl.name": "Template name",
+  "tpl.namePlaceholder": "e.g. Product launch campaign",
+  "tpl.type": "Project type",
+  "tpl.description": "Description",
+  "tpl.goals": "Goals",
+  "tpl.tasksLabel": "Tasks",
+  "tpl.tasksHint": "One task per line",
+  "tpl.save": "Save template",
+  "tpl.saving": "Saving...",
+  "tpl.savedTitle": "Template saved",
+  "tpl.savedDesc": "You can reuse it for your next build.",
+  "tpl.failTitle": "Could not save the template",
+  "tpl.taskCount": "{n} tasks",
+  "tpl.use": "Use template",
+  "tpl.delete": "Delete",
+  "tpl.confirmDelete": "Confirm",
+  "tpl.deletedTitle": "Template deleted",
+  "tpl.delFail": "Could not delete the template",
+  "tpl.empty": "No templates yet",
+  "tpl.emptySub": "Save a project as a template, or create one from scratch.",
+  "tpl.useTitle": "Start from template",
+  "tpl.useSubtitle": "Your new project will copy this template's goals and tasks.",
+  "tpl.useHint": "{n} tasks will be copied over as a checklist.",
+  "tpl.projectName": "Project name",
+  "tpl.createProject": "Create project",
+  "tpl.creating": "Creating...",
+  "tpl.useFail": "Could not create the project",
 };

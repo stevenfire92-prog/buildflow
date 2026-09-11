@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Smartphone, Globe, Bot, Pencil, Trash2 } from "lucide-react";
+import { Smartphone, Globe, Bot, Pencil, Trash2, BookMarked } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import ProjectEditForm from "@/components/projects/ProjectEditForm";
 import ProjectFiles from "@/components/projects/ProjectFiles";
+import TaskChecklist from "@/components/projects/TaskChecklist";
 import { useToast } from "@/components/ui/use-toast";
 
 const typeIcons = { app: Smartphone, website: Globe, agent: Bot };
@@ -52,6 +53,21 @@ export default function ProjectDetails() {
     } catch {
       setProject(prev);
       toast({ title: "Could not update status", description: "Please try again." });
+    }
+  };
+
+  const handleSaveTemplate = async () => {
+    try {
+      await base44.entities.ProjectTemplate.create({
+        name: project.name,
+        description: project.description || "",
+        goals: project.goals || "",
+        project_type: project.project_type || "app",
+        tasks: (project.tasks || []).map((tk) => tk.title),
+      });
+      toast({ title: "Template saved", description: "Find it on the Templates page." });
+    } catch {
+      toast({ title: "Could not save the template", description: "Please try again." });
     }
   };
 
@@ -150,6 +166,12 @@ export default function ProjectDetails() {
           </div>
           <div className="flex items-center gap-2">
             <button
+              onClick={handleSaveTemplate}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white/70 bg-white/5 border border-white/10 rounded-full hover:text-white hover:border-white/25 transition-colors"
+            >
+              <BookMarked className="w-3.5 h-3.5" /> Save as template
+            </button>
+            <button
               onClick={() => setEditing(!editing)}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white/70 bg-white/5 border border-white/10 rounded-full hover:text-white hover:border-white/25 transition-colors"
             >
@@ -225,6 +247,10 @@ export default function ProjectDetails() {
               {project.goals || "No goals defined yet."}
             </p>
           </div>
+        </div>
+
+        <div className="mt-4">
+          <TaskChecklist projectId={id} tasks={project.tasks} onUpdated={setProject} />
         </div>
 
         <div className="mt-4">
