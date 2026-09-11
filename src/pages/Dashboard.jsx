@@ -131,6 +131,14 @@ export default function Dashboard() {
       toast({ title: t("dash.checkoutCancelledTitle"), description: t("dash.checkoutCancelledDesc") });
       return;
     }
+    if (checkout === "book_success") {
+      const action = urlParams.get("action");
+      toast({
+        title: action === "rent" ? "Book Rental Confirmed!" : "Book Purchased!",
+        description: "Your digital book order has been processed via Stripe.",
+      });
+      return;
+    }
     if (sessionId) {
       base44.functions
         .invoke("verifyCheckoutSession", { sessionId })

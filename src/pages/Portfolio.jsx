@@ -1,16 +1,20 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Search, Globe2, Sparkles, Layers, CheckCircle2, TrendingUp } from "lucide-react";
+import { ArrowLeft, Search, Globe2, Sparkles, Layers, CheckCircle2, TrendingUp, BookOpen, CreditCard } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useToast } from "@/components/ui/use-toast";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
 import ShareBar from "@/components/portfolio/ShareBar";
+import BookPurchaseCard from "@/components/books/BookPurchaseCard";
 
 const tabs = ["all", "active", "ready", "published"];
 
 export default function Portfolio() {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [projects, setProjects] = useState(null);
+  const [books, setBooks] = useState(null);
   const [tab, setTab] = useState("all");
   const [search, setSearch] = useState("");
 
@@ -18,6 +22,26 @@ export default function Portfolio() {
     base44.entities.Project.list("-updated_date", 100)
       .then(setProjects)
       .catch(() => setProjects([]));
+
+    base44.entities.KindleBook.list()
+      .then((data) => {
+        const sorted = [...(data || [])].sort((a, b) => (a.series_order || 0) - (b.series_order || 0));
+        setBooks(sorted);
+      })
+      .catch(() => setBooks([]));
+
+    // Handle return from book purchase
+    const urlParams = new URLSearchParams(window.location.search);
+    const checkout = urlParams.get("checkout");
+    const bookTitle = urlParams.get("book_title");
+    const action = urlParams.get("action");
+    if (checkout === "book_success") {
+      toast({
+        title: action === "rent" ? "Digital Rental Active!" : "Purchase Successful!",
+        description: `Thank you for supporting Steven Thomas Turcott. Your access is confirmed.`,
+      });
+      window.history.replaceState({}, "", window.location.pathname);
+    }
   }, []);
 
   const tabLabels = {
@@ -208,27 +232,50 @@ export default function Portfolio() {
 
         {/* Published Books & Works */}
         <div className="mt-14 pt-10 border-t border-white/10">
-          <div className="flex items-center justify-between gap-4 flex-wrap mb-4">
+          <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full mb-2">
-                <span>Amazon Kindle Official Series</span>
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Amazon Kindle Official Series · Stripe Direct Checkout</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
                 Published Books by Steven Thomas Turcott
               </h2>
-              <p className="mt-1 text-xs sm:text-sm text-white/50">
-                Explore the complete 9-book Shadow Path dark fantasy epic on Amazon Kindle.
+              <p className="mt-1 text-xs sm:text-sm text-white/50 max-w-2xl">
+                Buy or rent any title directly with Stripe, or read on Amazon Kindle. All 9 installments of the Shadow Path dark fantasy epic.
               </p>
             </div>
-            <a
-              href="https://www.amazon.com/dp/B0GX2WYHTH"
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 text-xs font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
-            >
-              View Series on Amazon
-            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.amazon.com/dp/B0GX2WYHTH"
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 text-xs font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
+              >
+                View Series on Amazon
+              </a>
+            </div>
           </div>
+
+          {books === null ? (
+            <div className="flex justify-center py-12">
+              <div className="w-6 h-6 border-2 border-white/15 border-t-white rounded-full animate-spin" />
+            </div>
+          ) : books.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-white/10 py-10 text-center text-xs text-white/40">
+              No books published yet.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {books.map((book) => (
+                <BookPurchaseCard
+                  key={book.id}
+                  book={book}
+                  canDelete={false}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="mt-16 pt-6 border-t border-white/10 flex items-center justify-between gap-4 flex-wrap text-xs text-white/35">
