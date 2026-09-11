@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate, TrendingUp } from "lucide-react";
+import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate, TrendingUp, Search } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
 import StatsRow from "@/components/dashboard/StatsRow";
@@ -31,6 +31,7 @@ export default function Dashboard() {
   const [projects, setProjects] = useState(null);
   const [tab, setTab] = useState("All");
   const [view, setView] = useState("grid");
+  const [search, setSearch] = useState("");
   const [selectMode, setSelectMode] = useState(false);
   const [selection, setSelection] = useState([]);
   const [bulkBusy, setBulkBusy] = useState(false);
@@ -150,6 +151,16 @@ export default function Dashboard() {
       ? projects
       : projects.filter((p) => p.status === tab.toLowerCase());
 
+  const q = search.trim().toLowerCase();
+  const visible =
+    !q
+      ? filtered
+      : (filtered || []).filter(
+          (p) =>
+            (p.name || "").toLowerCase().includes(q) ||
+            (p.description || "").toLowerCase().includes(q)
+        );
+
   return (
     <div className="min-h-screen bg-black">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 py-6">
@@ -207,6 +218,15 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={t("dash.searchPlaceholder")}
+                className="w-36 sm:w-56 bg-white/5 border border-white/10 rounded-full pl-9 pr-4 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/25"
+              />
+            </div>
             {view === "grid" && (
               <button
                 onClick={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
@@ -269,7 +289,7 @@ export default function Dashboard() {
 
             {view === "board" ? (
               <ProjectBoard
-                projects={projects || []}
+                projects={visible || []}
                 onProjectUpdate={handleBoardUpdate}
               />
             ) : (
@@ -290,9 +310,9 @@ export default function Dashboard() {
               ))}
             </div>
 
-            {filtered && filtered.length > 0 ? (
+            {visible && visible.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filtered.map((p) => (
+                {visible.map((p) => (
                   <ProjectCard
                     key={p.id}
                     project={p}
@@ -304,9 +324,11 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="rounded-3xl border border-dashed border-white/15 py-20 text-center">
-                <p className="text-white/60 font-medium">{t("dash.emptyTitle")}</p>
+                <p className="text-white/60 font-medium">
+                  {q ? t("dash.noResults") : t("dash.emptyTitle")}
+                </p>
                 <p className="mt-1 text-sm text-white/35">
-                  {t("dash.emptySub")}
+                  {q ? t("dash.noResultsSub") : t("dash.emptySub")}
                 </p>
               </div>
             )}

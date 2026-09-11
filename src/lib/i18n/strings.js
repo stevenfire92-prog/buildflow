@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 11;
+export const STRINGS_VERSION = 12;
 
 export const STRINGS = {
   // Navbar
@@ -184,6 +184,9 @@ export const STRINGS = {
   "dash.welcomeProTitle": "Welcome to Pro!",
   "dash.welcomeProDesc": "Your BuildFlow Pro subscription is now active.",
   "dash.select": "Select",
+  "dash.searchPlaceholder": "Search projects...",
+  "dash.noResults": "No projects match your search",
+  "dash.noResultsSub": "Try a different name or keyword.",
   "dash.doneSelect": "Done",
   "dash.selectedCount": "{n} selected",
   "dash.deleteSelected": "Delete",
