@@ -1,0 +1,58 @@
+{
+  "name": "KindleBook",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Book title"
+    },
+    "series_name": {
+      "type": "string",
+      "default": "Shadow Path",
+      "title": "Series name"
+    },
+    "series_order": {
+      "type": "number",
+      "title": "Book number in series"
+    },
+    "author": {
+      "type": "string",
+      "default": "Steven Thomas Turcott",
+      "title": "Author name"
+    },
+    "asin": {
+      "type": "string",
+      "title": "Amazon ASIN"
+    },
+    "amazon_url": {
+      "type": "string",
+      "title": "Amazon Kindle URL"
+    },
+    "cover_image": {
+      "type": "string",
+      "title": "Cover image URL"
+    },
+    "description": {
+      "type": "string",
+      "title": "Book synopsis"
+    },
+    "publication_date": {
+      "type": "string",
+      "title": "Publication date"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "Kindle Edition",
+        "Paperback",
+        "Hardcover"
+      ],
+      "default": "Kindle Edition",
+      "title": "Format"
+    }
+  },
+  "required": [
+    "title",
+    "amazon_url"
+  ]
+}

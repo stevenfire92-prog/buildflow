@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Send, Mic, Plus, Sparkles } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -13,8 +14,25 @@ const cards = [
 
 export default function Hero() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [active, setActive] = useState("apps");
   const [value, setValue] = useState("");
+
+  const handleSubmit = (e) => {
+    if (e) e.preventDefault();
+    const trimmed = value.trim();
+    const typeParam =
+      active === "websites"
+        ? "website"
+        : active === "tools"
+        ? "agent"
+        : "app";
+    if (trimmed) {
+      navigate(`/new-project?name=${encodeURIComponent(trimmed)}&type=${typeParam}`);
+    } else {
+      navigate(`/new-project?type=${typeParam}`);
+    }
+  };
 
   const tabs = [
     { key: "apps", label: t("hero.apps"), ph: "hero.placeholderApp" },
@@ -62,24 +80,53 @@ export default function Hero() {
                 </button>
               ))}
             </div>
-            <div className="flex items-end gap-2 px-3 pb-1">
-              <button className="p-2 text-white/40 hover:text-white transition-colors">
+            <form onSubmit={handleSubmit} className="flex items-end gap-2 px-3 pb-1">
+              <button
+                type="button"
+                onClick={() => navigate("/new-project")}
+                title="New project"
+                className="p-2 text-white/40 hover:text-white transition-colors"
+              >
                 <Plus className="w-5 h-5" />
               </button>
               <textarea
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSubmit();
+                  }
+                }}
                 rows={1}
                 placeholder={t(activeTab.ph)}
                 className="flex-1 bg-transparent text-white text-sm placeholder:text-white/30 resize-none outline-none py-2.5 min-h-[44px]"
               />
-              <button className="p-2 text-white/40 hover:text-white transition-colors">
+              <button
+                type="button"
+                onClick={() => {
+                  if (navigator.mediaDevices && window.SpeechRecognition || window.webkitSpeechRecognition) {
+                    const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    const rec = new Speech();
+                    rec.onresult = (evt) => {
+                      const transcript = evt.results[0][0].transcript;
+                      setValue(transcript);
+                    };
+                    rec.start();
+                  }
+                }}
+                title="Voice input"
+                className="p-2 text-white/40 hover:text-white transition-colors"
+              >
                 <Mic className="w-5 h-5" />
               </button>
-              <button className="p-2.5 rounded-xl bg-white text-black hover:bg-white/90 transition-colors">
+              <button
+                type="submit"
+                className="p-2.5 rounded-xl bg-white text-black hover:bg-white/90 transition-colors"
+              >
                 <Send className="w-4 h-4" />
               </button>
-            </div>
+            </form>
           </div>
           <p className="text-center text-xs text-white/30 mt-3">
             {t("hero.freeStart")}

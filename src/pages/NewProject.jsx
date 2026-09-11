@@ -12,9 +12,13 @@ const steps = ["Name", "Type", "Goals"];
 export default function NewProject() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [step, setStep] = useState(1);
-  const [name, setName] = useState("");
-  const [type, setType] = useState(null);
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialName = urlParams.get("name") || urlParams.get("prompt") || "";
+  const initialType = urlParams.get("type") || null;
+
+  const [step, setStep] = useState(initialName && initialType ? 3 : initialName ? 2 : 1);
+  const [name, setName] = useState(initialName);
+  const [type, setType] = useState(initialType);
   const [goals, setGoals] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState("");

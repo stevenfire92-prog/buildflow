@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Smartphone, Globe, Bot, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -11,18 +12,21 @@ export default function BuildTypes() {
       title: t("build.appTitle"),
       desc: t("build.appDesc"),
       cta: t("build.appCta"),
+      to: "/new-project?type=app",
     },
     {
       icon: Globe,
       title: t("build.webTitle"),
       desc: t("build.webDesc"),
       cta: t("build.webCta"),
+      to: "/new-project?type=website",
     },
     {
       icon: Bot,
       title: t("build.agentTitle"),
       desc: t("build.agentDesc"),
       cta: t("build.agentCta"),
+      to: "/new-project?type=agent",
     },
   ];
 
@@ -51,13 +55,13 @@ export default function BuildTypes() {
                 </div>
                 <h3 className="text-2xl font-semibold text-white mb-3">{type.title}</h3>
                 <p className="text-sm text-white/55 leading-relaxed mb-6">{type.desc}</p>
-                <a
-                  href="#start"
+                <Link
+                  to={type.to}
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-white group-hover:gap-2.5 transition-all"
                 >
                   {type.cta}
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
               </div>
             </div>
           ))}

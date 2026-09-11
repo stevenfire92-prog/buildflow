@@ -14,6 +14,7 @@ import MusicProfiles from "@/components/dashboard/MusicProfiles";
 import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import GrowthSummary from "@/components/dashboard/GrowthSummary";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
+import KindleBooks from "@/components/dashboard/KindleBooks";
 import DashboardCalendar from "@/components/dashboard/DashboardCalendar";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
@@ -302,6 +303,10 @@ export default function Dashboard() {
 
             <div className="mt-4">
               <MusicProfiles />
+            </div>
+
+            <div className="mt-4">
+              <KindleBooks />
             </div>
 
             {view === "board" ? (

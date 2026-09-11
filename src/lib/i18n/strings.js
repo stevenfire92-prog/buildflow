@@ -282,6 +282,12 @@ export const STRINGS = {
   "acct.saveFailTitle": "Could not save settings",
   "acct.saveFailDesc": "Please try again.",
 
+  // Kindle books
+  "kb.title": "Kindle Books & Publications",
+  "kb.subtitle": "All published novels and books by Steven Thomas Turcott (Se Fire Tech) on Amazon Kindle.",
+  "kb.seriesTitle": "Shadow Path Dark Fantasy Series",
+  "kb.readKindle": "Read on Kindle",
+
   // Music profiles (all platforms)
   "mp.title": "Verified music profiles",
   "mp.bioTitle": "About the artist",

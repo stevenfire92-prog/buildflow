@@ -206,6 +206,31 @@ export default function Portfolio() {
           </div>
         )}
 
+        {/* Published Books & Works */}
+        <div className="mt-14 pt-10 border-t border-white/10">
+          <div className="flex items-center justify-between gap-4 flex-wrap mb-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full mb-2">
+                <span>Amazon Kindle Official Series</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
+                Published Books by Steven Thomas Turcott
+              </h2>
+              <p className="mt-1 text-xs sm:text-sm text-white/50">
+                Explore the complete 9-book Shadow Path dark fantasy epic on Amazon Kindle.
+              </p>
+            </div>
+            <a
+              href="https://www.amazon.com/dp/B0GX2WYHTH"
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2 text-xs font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
+            >
+              View Series on Amazon
+            </a>
+          </div>
+        </div>
+
         <div className="mt-16 pt-6 border-t border-white/10 flex items-center justify-between gap-4 flex-wrap text-xs text-white/35">
           <p>{t("pf.footer")} · {t("footer.rights")}</p>
           <Link to="/" className="text-white/60 hover:text-white underline-offset-4 hover:underline">
