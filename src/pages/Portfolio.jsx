@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
 import ShareBar from "@/components/portfolio/ShareBar";
 import BookPurchaseCard from "@/components/books/BookPurchaseCard";
+import StanStoreCard from "@/components/portfolio/StanStoreCard";
 
 const tabs = ["all", "active", "ready", "published"];
 
@@ -229,6 +230,11 @@ export default function Portfolio() {
             ))}
           </div>
         )}
+
+        {/* Stan Store Showcase */}
+        <div className="mt-12">
+          <StanStoreCard />
+        </div>
 
         {/* Published Books & Works */}
         <div className="mt-14 pt-10 border-t border-white/10">
