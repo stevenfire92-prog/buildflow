@@ -52,6 +52,12 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
+          <Link
+            to="/apps"
+            className="px-3.5 py-1.5 text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-full hover:bg-emerald-500/20 transition-colors"
+          >
+            Web Apps
+          </Link>
           <LanguageSelector />
           <Link
             to="/login"
@@ -87,7 +93,10 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <div className="pt-3 flex gap-2">
+          <div className="pt-3 flex gap-2 flex-wrap">
+            <Link to="/apps" className="w-full text-center px-4 py-2 text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-full mb-1">
+              🚀 Explore Web Apps Live
+            </Link>
             <Link to="/login" className="flex-1 text-center px-4 py-2.5 text-sm text-white border border-white/15 rounded-full">
               {t("nav.login")}
             </Link>

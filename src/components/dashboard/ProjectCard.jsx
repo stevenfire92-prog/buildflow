@@ -71,6 +71,25 @@ export default function ProjectCard({ project, selectable, selected, onToggle })
           <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80">
             <Icon className="w-5 h-5" />
           </div>
+          {(() => {
+            const nameLower = (project.name || "").toLowerCase();
+            let appParam = "fitness";
+            if (nameLower.includes("support")) appParam = "support";
+            else if (nameLower.includes("expense")) appParam = "expenses";
+            else if (nameLower.includes("habit")) appParam = "habits";
+            return (
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.location.href = `/apps?app=${appParam}`;
+                }}
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30 transition-colors"
+                title="Launch full web app edition"
+              >
+                <Globe className="w-3 h-3" /> Web Live
+              </span>
+            );
+          })()}
         </div>
         <h3 className="font-medium text-white truncate">{project.name}</h3>
         <p className="mt-1 text-xs text-white/45 line-clamp-2 min-h-[2rem]">

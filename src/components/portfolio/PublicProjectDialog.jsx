@@ -137,7 +137,24 @@ export default function PublicProjectDialog({ project, open, onOpenChange }) {
           </div>
         )}
 
-        <div className="mt-6 pt-4 border-t border-white/10 flex justify-end">
+        <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">
+          {(() => {
+            const nameLower = (project.name || "").toLowerCase();
+            let appParam = "fitness";
+            if (nameLower.includes("support")) appParam = "support";
+            else if (nameLower.includes("expense")) appParam = "expenses";
+            else if (nameLower.includes("habit")) appParam = "habits";
+            return (
+              <a
+                href={`/apps?app=${appParam}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-black rounded-full transition-colors"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span>Launch Web Edition</span>
+              </a>
+            );
+          })()}
+
           <button
             onClick={() => onOpenChange(false)}
             className="px-4 py-2 text-xs font-medium text-white/70 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors"

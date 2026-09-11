@@ -97,7 +97,24 @@ export default function PortfolioCard({ project }) {
             />
           </div>
 
-          <div className="mt-3 flex justify-end">
+          <div className="mt-3 flex items-center justify-between gap-2">
+            {(() => {
+              const nameLower = (project.name || "").toLowerCase();
+              let appParam = "fitness";
+              if (nameLower.includes("support")) appParam = "support";
+              else if (nameLower.includes("expense")) appParam = "expenses";
+              else if (nameLower.includes("habit")) appParam = "habits";
+              return (
+                <a
+                  href={`/apps?app=${appParam}`}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+                >
+                  <Globe className="w-3 h-3" />
+                  <span>Launch Web</span>
+                </a>
+              );
+            })()}
+
             <button
               onClick={() => setDialogOpen(true)}
               className="inline-flex items-center gap-1 text-xs font-medium text-white/70 hover:text-white transition-colors"

@@ -20,6 +20,7 @@ import Templates from './pages/Templates';
 import GrowthDashboard from './pages/GrowthDashboard';
 import Portfolio from './pages/Portfolio';
 import DeadlineCalendar from './pages/DeadlineCalendar';
+import WebApps from './pages/WebApps';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
@@ -64,6 +65,8 @@ const AuthenticatedApp = () => {
     <Route path="/portfolio" element={<Portfolio />} />
     <Route path="/share" element={<Portfolio />} />
     <Route path="/calendar" element={<DeadlineCalendar />} />
+    <Route path="/apps" element={<WebApps />} />
+    <Route path="/web-apps" element={<WebApps />} />
     <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
       <Route path="/account-settings" element={<AccountSettings />} />
       <Route path="/team" element={<Team />} />

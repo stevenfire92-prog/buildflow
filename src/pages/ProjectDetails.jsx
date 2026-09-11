@@ -165,7 +165,22 @@ export default function ProjectDetails() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            {(() => {
+              const nameLower = (project.name || "").toLowerCase();
+              let appParam = "fitness";
+              if (nameLower.includes("support")) appParam = "support";
+              else if (nameLower.includes("expense")) appParam = "expenses";
+              else if (nameLower.includes("habit")) appParam = "habits";
+              return (
+                <a
+                  href={`/apps?app=${appParam}`}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-black bg-emerald-400 hover:bg-emerald-300 rounded-full transition-colors"
+                >
+                  <Globe className="w-3.5 h-3.5" /> Launch Web Edition
+                </a>
+              );
+            })()}
             <button
               onClick={handleSaveTemplate}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white/70 bg-white/5 border border-white/10 rounded-full hover:text-white hover:border-white/25 transition-colors"
