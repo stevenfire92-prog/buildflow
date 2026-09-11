@@ -9,6 +9,7 @@ import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import ActivityLog from "@/components/dashboard/ActivityLog";
 import SpotifyArtists from "@/components/dashboard/SpotifyArtists";
+import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -151,6 +152,10 @@ export default function Dashboard() {
 
             <div className="mt-4">
               <WeeklyChart projects={projects} />
+            </div>
+
+            <div className="mt-4">
+              <RevenueSummary />
             </div>
 
             <div className="mt-4">

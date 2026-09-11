@@ -278,4 +278,17 @@ export const STRINGS = {
   "spot.openSpotify": "Open on Spotify",
   "spot.addFailTitle": "Couldn't add artist",
   "spot.addFailDesc": "Please try again.",
+
+  // Revenue summary
+  "rev.earnings": "Earnings",
+  "rev.earningsSub": "Successful payments over the last 6 months",
+  "rev.last6": "last 6 months",
+  "rev.subGrowth": "Subscription growth",
+  "rev.subGrowthSub": "New and total subscriptions by month",
+  "rev.activeSubs": "Active subscriptions",
+  "rev.noPayments": "No payments yet",
+  "rev.noSubs": "No subscriptions yet",
+  "rev.newSubs": "New subs",
+  "rev.totalSubs": "Total subs",
+  "rev.loadError": "Revenue data unavailable",
 };
