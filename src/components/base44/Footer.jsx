@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Footer() {
@@ -8,31 +9,31 @@ export default function Footer() {
     {
       title: t("footer.product"),
       links: [
-        t("footer.aiAppBuilder"),
-        t("footer.aiWebsiteBuilder"),
-        t("footer.aiAgents"),
-        t("footer.integrations"),
-        t("footer.pricing"),
+        { label: t("footer.aiAppBuilder"), href: "#build" },
+        { label: t("footer.aiWebsiteBuilder"), href: "#build" },
+        { label: t("footer.aiAgents"), href: "#build" },
+        { label: t("footer.integrations"), href: "#stack" },
+        { label: t("footer.pricing"), href: "#pricing" },
       ],
     },
     {
       title: t("footer.resources"),
       links: [
-        t("footer.documentation"),
-        t("footer.blog"),
-        t("footer.caseStudies"),
-        t("footer.community"),
-        t("footer.changelog"),
+        { label: t("footer.documentation"), href: "#stack" },
+        { label: t("footer.blog"), href: "#faq" },
+        { label: t("footer.caseStudies"), href: "#marketing" },
+        { label: t("footer.community"), href: "#faq" },
+        { label: t("footer.changelog"), href: "#design" },
       ],
     },
     {
       title: t("footer.company"),
       links: [
-        t("footer.about"),
-        t("footer.careers"),
-        t("footer.security"),
-        t("footer.contact"),
-        t("footer.terms"),
+        { label: t("footer.about"), href: "#stack" },
+        { label: t("footer.careers"), href: "#marketing" },
+        { label: t("footer.security"), href: "#stack" },
+        { label: t("footer.contact"), href: "#faq" },
+        { label: t("footer.terms"), href: "#faq" },
       ],
     },
   ];
@@ -42,12 +43,12 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
-            <a href="#" className="flex items-center gap-2.5 text-white mb-4">
+            <Link to="/" className="flex items-center gap-2.5 text-white mb-4">
               <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
                 <span className="text-black font-bold text-sm">S</span>
               </div>
               <span className="font-semibold text-lg tracking-tight">Se Fire Tech</span>
-            </a>
+            </Link>
             <p className="text-sm text-white/40 max-w-xs">
               {t("footer.tagline")}
             </p>
@@ -57,9 +58,9 @@ export default function Footer() {
               <h4 className="text-sm font-medium text-white mb-4">{c.title}</h4>
               <ul className="space-y-2.5">
                 {c.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="text-sm text-white/50 hover:text-white transition-colors">
-                      {l}
+                  <li key={l.label}>
+                    <a href={l.href} className="text-sm text-white/50 hover:text-white transition-colors">
+                      {l.label}
                     </a>
                   </li>
                 ))}
@@ -73,9 +74,9 @@ export default function Footer() {
             <p className="mt-1">{t("footer.designedBy")}</p>
           </div>
           <div className="flex gap-5 text-xs text-white/40">
-            <a href="#" className="hover:text-white transition-colors">{t("footer.privacy")}</a>
-            <a href="#" className="hover:text-white transition-colors">{t("footer.terms")}</a>
-            <a href="#" className="hover:text-white transition-colors">{t("footer.cookies")}</a>
+            <a href="#faq" className="hover:text-white transition-colors">{t("footer.privacy")}</a>
+            <a href="#faq" className="hover:text-white transition-colors">{t("footer.terms")}</a>
+            <a href="#faq" className="hover:text-white transition-colors">{t("footer.cookies")}</a>
           </div>
         </div>
       </div>

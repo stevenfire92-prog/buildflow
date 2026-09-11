@@ -1,15 +1,14 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 2;
+export const STRINGS_VERSION = 3;
 
 export const STRINGS = {
   // Navbar
-  "nav.developers": "Developers",
-  "nav.integrations": "Integrations",
+  "nav.platform": "Platform",
+  "nav.design": "Design",
+  "nav.marketing": "Marketing",
   "nav.pricing": "Pricing",
-  "nav.security": "Security",
-  "nav.blog": "Blog",
-  "nav.resources": "Resources",
+  "nav.faq": "FAQ",
   "nav.login": "Log in",
   "nav.startBuilding": "Start building",
 

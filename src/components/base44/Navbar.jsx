@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import LanguageSelector from "@/components/LanguageSelector";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -10,11 +10,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { label: t("nav.developers"), href: "#developers" },
-    { label: t("nav.integrations"), href: "#integrations" },
+    { label: t("nav.platform"), href: "#stack" },
+    { label: t("nav.design"), href: "#design" },
+    { label: t("nav.marketing"), href: "#marketing" },
     { label: t("nav.pricing"), href: "#pricing" },
-    { label: t("nav.security"), href: "#security" },
-    { label: t("nav.blog"), href: "#blog" },
+    { label: t("nav.faq"), href: "#faq" },
   ];
 
   useEffect(() => {
@@ -32,12 +32,12 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto max-w-7xl px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2.5 text-white">
+        <Link to="/" className="flex items-center gap-2.5 text-white">
           <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
             <span className="text-black font-bold text-sm">S</span>
           </div>
           <span className="font-semibold text-lg tracking-tight">Se Fire Tech</span>
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-1">
           {links.map((l) => (
@@ -49,19 +49,16 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <button className="ml-2 flex items-center gap-1 px-3.5 py-2 text-sm text-white/70 hover:text-white transition-colors">
-            {t("nav.resources")} <ChevronDown className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         <div className="hidden md:flex items-center gap-2">
           <LanguageSelector />
-          <a
-            href="#login"
+          <Link
+            to="/login"
             className="px-4 py-2 text-sm text-white/80 hover:text-white transition-colors"
           >
             {t("nav.login")}
-          </a>
+          </Link>
           <Link
             to="/dashboard"
             className="px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
@@ -91,9 +88,9 @@ export default function Navbar() {
             </a>
           ))}
           <div className="pt-3 flex gap-2">
-            <a href="#login" className="flex-1 text-center px-4 py-2.5 text-sm text-white border border-white/15 rounded-full">
+            <Link to="/login" className="flex-1 text-center px-4 py-2.5 text-sm text-white border border-white/15 rounded-full">
               {t("nav.login")}
-            </a>
+            </Link>
             <Link to="/dashboard" className="flex-1 text-center px-4 py-2.5 text-sm font-medium text-black bg-white rounded-full">
               {t("nav.startBuilding")}
             </Link>
