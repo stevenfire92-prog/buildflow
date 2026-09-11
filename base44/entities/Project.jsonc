@@ -42,6 +42,15 @@
       "default": 0,
       "title": "Build progress"
     },
+    "deadline": {
+      "type": "string",
+      "format": "date",
+      "title": "Deadline"
+    },
+    "deadline_alert_sent": {
+      "type": "string",
+      "title": "Deadline alert sent for"
+    },
     "last_activity": {
       "type": "string",
       "format": "date-time",

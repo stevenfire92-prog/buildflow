@@ -17,6 +17,7 @@ export default function NewProject() {
   const [type, setType] = useState(null);
   const [goals, setGoals] = useState("");
   const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState("");
   const [creating, setCreating] = useState(false);
 
   const canContinue =
@@ -30,6 +31,7 @@ export default function NewProject() {
         project_type: type,
         goals: goals.trim(),
         description: description.trim(),
+        ...(deadline ? { deadline } : {}),
         status: "draft",
         progress: 0,
         last_activity: new Date().toISOString(),
@@ -117,6 +119,17 @@ export default function NewProject() {
                 rows={3}
                 placeholder="A short summary of the project"
                 className="mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/30 outline-none focus:border-white/30 resize-none"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium text-white/80">
+                Deadline <span className="text-white/30">(optional)</span>
+              </label>
+              <input
+                type="date"
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+                className="mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-white/30"
               />
             </div>
           </div>

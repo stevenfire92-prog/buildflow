@@ -1,0 +1,47 @@
+{
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 9 * * *",
+      "one_time_date": null,
+      "timezone": "America/Toronto",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "name": "Project Deadline Alerts",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "project_deadline_alerts",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "check_deadlines": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "sendDeadlineAlerts",
+            "args": {
+              "run_key": "bf-deadline-alert-4c8a"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Check deadlines and email team",
+            "description": "Alerts for deadlines within 3 days"
+          }
+        }
+      }
+    ]
+  },
+  "description": "Every day at 9am, emails all team members when an active project's deadline is within 3 days or overdue"
+}

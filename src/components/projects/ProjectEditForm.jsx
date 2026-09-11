@@ -12,6 +12,7 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
     progress: Math.min(100, Math.max(0, project.progress || 0)),
     description: project.description || "",
     goals: project.goals || "",
+    deadline: project.deadline || "",
   });
 
   const set = (key, value) => setForm((f) => ({ ...f, [key]: value }));
@@ -29,6 +30,10 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
         progress: Math.min(100, Math.max(0, Number(form.progress) || 0)),
         description: form.description,
         goals: form.goals,
+        deadline: form.deadline || null,
+        ...((project.deadline || "") !== (form.deadline || "")
+          ? { deadline_alert_sent: "" }
+          : {}),
         last_activity: new Date().toISOString(),
       });
       toast({ title: "Settings saved" });
@@ -75,6 +80,15 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
           max={100}
           value={form.progress}
           onChange={(e) => set("progress", e.target.value)}
+          className={inputCls}
+        />
+      </div>
+      <div>
+        <label className="text-xs text-white/50 mb-1.5 block">Deadline</label>
+        <input
+          type="date"
+          value={form.deadline}
+          onChange={(e) => set("deadline", e.target.value)}
           className={inputCls}
         />
       </div>
