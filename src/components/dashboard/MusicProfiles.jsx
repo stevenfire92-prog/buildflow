@@ -116,6 +116,15 @@ export default function MusicProfiles() {
         </div>
       </div>
 
+      <div className="mt-4 rounded-xl bg-white/[0.03] border border-white/10 p-4">
+        <h3 className="flex items-center gap-2 text-sm font-medium text-white">
+          <BadgeCheck className="w-4 h-4 text-sky-400" /> {t("mp.bioTitle")}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-white/60">
+          {t("mp.bio")}
+        </p>
+      </div>
+
       <div className="mt-4 flex gap-1.5 flex-wrap">
         {PLATFORMS.map((p) => (
           <button

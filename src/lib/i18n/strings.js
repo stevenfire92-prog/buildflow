@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 7;
+export const STRINGS_VERSION = 8;
 
 export const STRINGS = {
   // Navbar
@@ -278,6 +278,9 @@ export const STRINGS = {
 
   // Music profiles (all platforms)
   "mp.title": "Verified music profiles",
+  "mp.bioTitle": "About the artist",
+  "mp.bio":
+    "Steven Turcott is an independent recording artist, producer and the founder of Se Fire Tech. He writes, records and owns 100% of the rights to every track he releases — all music on his Spotify, Apple Music, Deezer, SoundCloud and Amazon Music profiles is his original, fully owned work. He also designed and built BuildFlow, this platform, which is copyrighted. All rights reserved.",
   "mp.subtitle":
     "Your artist pages across Spotify, Apple Music, Deezer, SoundCloud and Amazon Music.",
   "mp.add": "Add profile",
