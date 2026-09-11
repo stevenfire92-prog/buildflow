@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 4;
+export const STRINGS_VERSION = 5;
 
 export const STRINGS = {
   // Navbar
@@ -183,6 +183,18 @@ export const STRINGS = {
   "dash.checkoutCancelledDesc": "No charge was made.",
   "dash.welcomeProTitle": "Welcome to Pro!",
   "dash.welcomeProDesc": "Your BuildFlow Pro subscription is now active.",
+  "dash.select": "Select",
+  "dash.doneSelect": "Done",
+  "dash.selectedCount": "{n} selected",
+  "dash.deleteSelected": "Delete",
+  "dash.confirmDelete": "Confirm",
+  "dash.cancelSelection": "Cancel",
+  "dash.bulkStatusTitle": "Status updated",
+  "dash.bulkStatusDesc": "{n} project(s) moved to {status}.",
+  "dash.bulkDeleteTitle": "Projects deleted",
+  "dash.bulkDeleteDesc": "{n} project(s) removed.",
+  "dash.bulkFailTitle": "Could not update",
+  "dash.bulkFailDesc": "Please try again.",
 
   // Dashboard stats
   "stat.activeProjects": "Active projects",

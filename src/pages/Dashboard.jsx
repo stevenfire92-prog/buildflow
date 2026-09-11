@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users } from "lucide-react";
+import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { logActivity } from "@/lib/activityLog";
 import StatsRow from "@/components/dashboard/StatsRow";
 import WeeklyChart from "@/components/dashboard/WeeklyChart";
 import ProjectCard from "@/components/dashboard/ProjectCard";
 import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import ActivityLog from "@/components/dashboard/ActivityLog";
+import BulkActions from "@/components/dashboard/BulkActions";
 import SpotifyArtists from "@/components/dashboard/SpotifyArtists";
 import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import GrowthSummary from "@/components/dashboard/GrowthSummary";
@@ -29,6 +31,75 @@ export default function Dashboard() {
   const [projects, setProjects] = useState(null);
   const [tab, setTab] = useState("All");
   const [view, setView] = useState("grid");
+  const [selectMode, setSelectMode] = useState(false);
+  const [selection, setSelection] = useState([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+
+  const toggleSelected = (id) =>
+    setSelection((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+
+  const exitSelectMode = () => {
+    setSelectMode(false);
+    setSelection([]);
+  };
+
+  const applyBulkStatus = async (status) => {
+    if (bulkBusy || selection.length === 0 || !projects) return;
+    setBulkBusy(true);
+    const targets = selection
+      .map((id) => projects.find((p) => p.id === id))
+      .filter(Boolean);
+    try {
+      const now = new Date().toISOString();
+      await base44.entities.Project.bulkUpdate(
+        selection.map((id) => ({ id, status, last_activity: now }))
+      );
+      const fresh = await base44.entities.Project.list("-updated_date", 100);
+      setProjects(fresh);
+      targets.forEach((p) =>
+        logActivity({
+          action: "status_changed",
+          projectName: p.name,
+          projectId: p.id,
+          details: `moved to ${status}`,
+        })
+      );
+      toast({
+        title: t("dash.bulkStatusTitle"),
+        description: t("dash.bulkStatusDesc")
+          .replace("{n}", targets.length)
+          .replace("{status}", status),
+      });
+      exitSelectMode();
+    } catch {
+      toast({ title: t("dash.bulkFailTitle"), description: t("dash.bulkFailDesc") });
+    }
+    setBulkBusy(false);
+  };
+
+  const applyBulkDelete = async () => {
+    if (bulkBusy || selection.length === 0) return;
+    setBulkBusy(true);
+    const targets = (projects || []).filter((p) => selection.includes(p.id));
+    try {
+      await base44.entities.Project.deleteMany({ id: { $in: selection } });
+      const fresh = await base44.entities.Project.list("-updated_date", 100);
+      setProjects(fresh);
+      targets.forEach((p) =>
+        logActivity({ action: "deleted", projectName: p.name, projectId: p.id })
+      );
+      toast({
+        title: t("dash.bulkDeleteTitle"),
+        description: t("dash.bulkDeleteDesc").replace("{n}", targets.length),
+      });
+      exitSelectMode();
+    } catch {
+      toast({ title: t("dash.bulkFailTitle"), description: t("dash.bulkFailDesc") });
+    }
+    setBulkBusy(false);
+  };
 
   const handleBoardUpdate = (id, updates) =>
     setProjects((prev) =>
@@ -123,23 +194,38 @@ export default function Dashboard() {
               {t("dash.subtitle")}
             </p>
           </div>
-          <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10">
-            <button
-              onClick={() => setView("grid")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
-                view === "grid" ? "bg-white text-black" : "text-white/60 hover:text-white"
-              }`}
-            >
-              <LayoutGrid className="w-4 h-4" /> {t("dash.grid")}
-            </button>
-            <button
-              onClick={() => setView("board")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
-                view === "board" ? "bg-white text-black" : "text-white/60 hover:text-white"
-              }`}
-            >
-              <KanbanSquare className="w-4 h-4" /> {t("dash.board")}
-            </button>
+          <div className="flex items-center gap-2">
+            {view === "grid" && (
+              <button
+                onClick={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full border transition-colors ${
+                  selectMode
+                    ? "bg-white text-black border-white"
+                    : "text-white/70 border-white/10 hover:text-white hover:border-white/25"
+                }`}
+              >
+                <ListChecks className="w-4 h-4" />
+                {selectMode ? t("dash.doneSelect") : t("dash.select")}
+              </button>
+            )}
+            <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10">
+              <button
+                onClick={() => setView("grid")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
+                  view === "grid" ? "bg-white text-black" : "text-white/60 hover:text-white"
+                }`}
+              >
+                <LayoutGrid className="w-4 h-4" /> {t("dash.grid")}
+              </button>
+              <button
+                onClick={() => setView("board")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
+                  view === "board" ? "bg-white text-black" : "text-white/60 hover:text-white"
+                }`}
+              >
+                <KanbanSquare className="w-4 h-4" /> {t("dash.board")}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -195,7 +281,13 @@ export default function Dashboard() {
             {filtered && filtered.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filtered.map((p) => (
-                  <ProjectCard key={p.id} project={p} />
+                  <ProjectCard
+                    key={p.id}
+                    project={p}
+                    selectable={selectMode}
+                    selected={selection.includes(p.id)}
+                    onToggle={() => toggleSelected(p.id)}
+                  />
                 ))}
               </div>
             ) : (
@@ -207,6 +299,16 @@ export default function Dashboard() {
               </div>
             )}
             </>
+            )}
+
+            {selectMode && selection.length > 0 && (
+              <BulkActions
+                count={selection.length}
+                busy={bulkBusy}
+                onSetStatus={applyBulkStatus}
+                onDelete={applyBulkDelete}
+                onCancel={exitSelectMode}
+              />
             )}
           </>
         )}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Smartphone, Globe, Bot, MessageSquare, ChevronDown } from "lucide-react";
+import { Smartphone, Globe, Bot, MessageSquare, ChevronDown, Check } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import ProjectComments from "./ProjectComments";
 
@@ -19,7 +19,7 @@ const barFills = {
   published: "bg-emerald-400",
 };
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, selectable, selected, onToggle }) {
   const { t } = useLanguage();
   const [showComments, setShowComments] = useState(false);
   const Icon = typeIcons[project.project_type] || Smartphone;
@@ -29,15 +29,35 @@ export default function ProjectCard({ project }) {
     : "—";
 
   return (
-    <div className="rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 hover:border-white/25 transition-all">
+    <div
+      className={`rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border transition-all ${
+        selected ? "border-white/70" : "border-white/10 hover:border-white/25"
+      }`}
+    >
       <Link
         to={`/project-details?id=${project.id}`}
         className="group block p-5 pb-4"
+        onClick={(e) => {
+          if (!selectable) return;
+          e.preventDefault();
+          onToggle();
+        }}
       >
         <div className="flex items-start justify-between mb-4">
           <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80">
             <Icon className="w-5 h-5" />
           </div>
+          {selectable && (
+            <span
+              className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 transition-colors ${
+                selected
+                  ? "bg-white border-white text-black"
+                  : "border-white/30 text-transparent"
+              }`}
+            >
+              <Check className="w-4 h-4" />
+            </span>
+          )}
         </div>
         <h3 className="font-medium text-white truncate">{project.name}</h3>
         <p className="mt-1 text-xs text-white/45 line-clamp-2 min-h-[2rem]">
