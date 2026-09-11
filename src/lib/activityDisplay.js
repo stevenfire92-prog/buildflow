@@ -1,4 +1,4 @@
-import { Plus, Pencil, ArrowRightLeft, Trash2, MessageSquare } from "lucide-react";
+import { Plus, Pencil, ArrowRightLeft, Trash2, MessageSquare, Upload } from "lucide-react";
 
 export const csvEscape = (value) => {
   const str = value == null ? "" : String(value);
@@ -11,6 +11,7 @@ export const actionConfig = {
   status_changed: { icon: ArrowRightLeft, cls: "text-amber-400 bg-amber-500/15", labelKey: "act.statusChanged" },
   deleted: { icon: Trash2, cls: "text-red-400 bg-red-500/15", labelKey: "act.deleted" },
   commented: { icon: MessageSquare, cls: "text-violet-400 bg-violet-500/15", labelKey: "act.commented" },
+  file_uploaded: { icon: Upload, cls: "text-cyan-400 bg-cyan-500/15", labelKey: "act.fileUploaded" },
 };
 
 export const timeAgo = (dateStr, t) => {

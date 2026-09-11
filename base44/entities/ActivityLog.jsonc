@@ -9,7 +9,8 @@
         "updated",
         "status_changed",
         "deleted",
-        "commented"
+        "commented",
+        "file_uploaded"
       ],
       "title": "Action"
     },

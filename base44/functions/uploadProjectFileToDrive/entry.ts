@@ -46,6 +46,20 @@ export default async function(req) {
       uploaded_by: user.email || '',
     });
 
+    // Fire-and-forget: alerting must never break the upload itself.
+    try {
+      await base44.entities.ActivityLog.create({
+        action: 'file_uploaded',
+        project_name: project_name || String(project_id),
+        project_id: String(project_id),
+        details: `${safeName} (${Math.max(1, Math.round(bytes.length / 1024))} KB)`,
+        actor_name: user.full_name || user.email || 'Someone',
+        actor_email: user.email || '',
+      });
+    } catch (e) {
+      console.log('Activity log for file upload failed:', e.message);
+    }
+
     return Response.json({ file: record });
   } catch (error) {
     console.log('uploadProjectFileToDrive error:', error.message);

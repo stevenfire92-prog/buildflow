@@ -2,7 +2,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.48';
 import { createMimeMessage } from 'npm:mimetext@2';
 
 const RUN_KEY = 'bf-team-activity-alert-9d2e';
-const SIGNIFICANT_ACTIONS = ['created', 'status_changed', 'deleted', 'commented'];
+const SIGNIFICANT_ACTIONS = ['created', 'status_changed', 'deleted', 'commented', 'file_uploaded'];
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 export default async function(req) {

@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 3;
+export const STRINGS_VERSION = 4;
 
 export const STRINGS = {
   // Navbar
@@ -210,6 +210,7 @@ export const STRINGS = {
   "act.statusChanged": "changed the status of",
   "act.deleted": "deleted",
   "act.commented": "commented on",
+  "act.fileUploaded": "uploaded a file to",
   "act.justNow": "just now",
   "act.minutesAgo": "{n}m ago",
   "act.hoursAgo": "{n}h ago",

@@ -1,6 +1,6 @@
 {
   "trigger": {
-    "condition": "${ .trigger.data.action | IN(\"created\",\"status_changed\",\"deleted\",\"commented\") }",
+    "condition": "${ .trigger.data.action | IN(\"created\",\"status_changed\",\"deleted\",\"commented\",\"file_uploaded\") }",
     "config": {
       "trigger_type": "entity",
       "entity_name": "ActivityLog",
@@ -46,5 +46,5 @@
       }
     ]
   },
-  "description": "When a significant project update or comment is logged, waits 15 minutes to batch related activity, then emails all team members a summary via Gmail"
+  "description": "When a significant project update, comment or file upload is logged, waits 15 minutes to batch related activity, then emails all team members a summary via Gmail"
 }
