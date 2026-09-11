@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 13;
+export const STRINGS_VERSION = 14;
 
 export const STRINGS = {
   // Navbar
@@ -350,6 +350,10 @@ export const STRINGS = {
   "cal.dueToday": "Due today",
   "cal.dueTomorrow": "Due tomorrow",
   "cal.dueIn": "Due in {n} days",
+
+  // Dashboard calendar widget
+  "dc.title": "Deadlines this month",
+  "dc.viewAll": "View full calendar",
 
   // Onboarding checklist
   "ob.title": "Getting started",

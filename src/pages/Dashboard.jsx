@@ -14,6 +14,7 @@ import MusicProfiles from "@/components/dashboard/MusicProfiles";
 import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import GrowthSummary from "@/components/dashboard/GrowthSummary";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
+import DashboardCalendar from "@/components/dashboard/DashboardCalendar";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -286,8 +287,9 @@ export default function Dashboard() {
 
             <StatsRow projects={projects} />
 
-            <div className="mt-4">
+            <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
               <WeeklyChart projects={projects} />
+              <DashboardCalendar projects={projects} />
             </div>
 
             <div className="mt-4">
