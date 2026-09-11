@@ -15,6 +15,15 @@ export default function GrowthSummary({ projects = [] }) {
       .list("-created_date", 3)
       .then(setActivities)
       .catch(() => setActivities([]));
+
+    const unsubscribe = base44.entities.ActivityLog.subscribe((event) => {
+      if (event?.type === "create" && event?.data) {
+        setActivities((prev) => (prev ? [event.data, ...prev.slice(0, 2)] : [event.data]));
+      }
+    });
+    return () => {
+      if (typeof unsubscribe === "function") unsubscribe();
+    };
   }, []);
 
   const total = projects.length;

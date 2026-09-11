@@ -37,7 +37,20 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
         last_activity: new Date().toISOString(),
       });
       toast({ title: "Settings saved" });
-      logActivity({ action: "updated", projectName: updated.name, projectId: project.id });
+      const newProg = Math.min(100, Math.max(0, Number(form.progress) || 0));
+      const oldProg = Math.min(100, Math.max(0, Number(project.progress) || 0));
+      const details =
+        newProg !== oldProg
+          ? `progress changed from ${oldProg}% to ${newProg}%`
+          : form.deadline && form.deadline !== project.deadline
+          ? `deadline updated to ${form.deadline}`
+          : "updated project settings";
+      logActivity({
+        action: "updated",
+        projectName: updated.name,
+        projectId: project.id,
+        details,
+      });
       onSaved(updated);
     } catch {
       toast({ title: "Could not save settings", description: "Please try again." });
