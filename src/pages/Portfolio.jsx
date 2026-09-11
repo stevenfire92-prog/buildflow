@@ -8,6 +8,7 @@ import PortfolioCard from "@/components/portfolio/PortfolioCard";
 import ShareBar from "@/components/portfolio/ShareBar";
 import BookPurchaseCard from "@/components/books/BookPurchaseCard";
 import StanStoreCard from "@/components/portfolio/StanStoreCard";
+import SheetsSalesActivityChart from "@/components/portfolio/SheetsSalesActivityChart";
 
 const tabs = ["all", "active", "ready", "published"];
 
@@ -173,6 +174,11 @@ export default function Portfolio() {
               {stats.avg}%
             </p>
           </div>
+        </div>
+
+        {/* Google Sheets Book Sales & Activity Chart */}
+        <div className="mt-8">
+          <SheetsSalesActivityChart />
         </div>
 
         {/* Filters and search */}

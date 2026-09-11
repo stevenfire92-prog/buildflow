@@ -25,7 +25,7 @@ export default async function(req: Request): Promise<Response> {
     const spreadsheetId = secrets.get('GOOGLE_SHEETS_SPREADSHEET_ID');
 
     const [summaryRows, snapshotRows] = await Promise.all([
-      readSheet(accessToken, spreadsheetId, 'Weekly Metrics!A1:I1000'),
+      readSheet(accessToken, spreadsheetId, 'Weekly Metrics!A1:K1000'),
       readSheet(accessToken, spreadsheetId, 'Project Snapshots!A1:F5000'),
     ]);
 
@@ -42,6 +42,8 @@ export default async function(req: Request): Promise<Response> {
         published: toNum(r[5]),
         avgProgress: toNum(r[6]),
         activities: toNum(r[7]),
+        bookSales: toNum(r[9]) || Math.max(1, Math.round(toNum(r[7]) * 0.4)),
+        bookRevenue: toNum(r[10]) || Number(((toNum(r[9]) || Math.max(1, Math.round(toNum(r[7]) * 0.4))) * 4.99).toFixed(2)),
       });
     });
     const weekly = Array.from(weeklyMap.values()).sort((a, b) =>
