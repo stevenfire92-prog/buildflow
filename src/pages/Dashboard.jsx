@@ -70,7 +70,7 @@ export default function Dashboard() {
     setSelection([]);
   };
 
-  const applyBulkStatus = async (status) => {
+  const applyBulkStatus = async (status, optionalProgress) => {
     if (bulkBusy || selection.length === 0 || !projects) return;
     setBulkBusy(true);
     const targets = selection
@@ -78,9 +78,14 @@ export default function Dashboard() {
       .filter(Boolean);
     try {
       const now = new Date().toISOString();
-      await base44.entities.Project.bulkUpdate(
-        selection.map((id) => ({ id, status, last_activity: now }))
-      );
+      const updates = selection.map((id) => {
+        const item = { id, status, last_activity: now };
+        if (typeof optionalProgress === "number") {
+          item.progress = optionalProgress;
+        }
+        return item;
+      });
+      await base44.entities.Project.bulkUpdate(updates);
       const fresh = await base44.entities.Project.list("-updated_date", 100);
       setProjects(fresh);
       targets.forEach((p) =>
@@ -88,14 +93,12 @@ export default function Dashboard() {
           action: "status_changed",
           projectName: p.name,
           projectId: p.id,
-          details: `moved to ${status}`,
+          details: `bulk moved to ${status}${typeof optionalProgress === "number" ? ` (${optionalProgress}% progress)` : ""}`,
         })
       );
       toast({
-        title: t("dash.bulkStatusTitle"),
-        description: t("dash.bulkStatusDesc")
-          .replace("{n}", targets.length)
-          .replace("{status}", status),
+        title: "Statuses updated",
+        description: `Successfully moved ${targets.length} project(s) to ${status}${typeof optionalProgress === "number" ? ` with ${optionalProgress}% progress` : ""}.`,
       });
       exitSelectMode();
     } catch {
@@ -274,14 +277,15 @@ export default function Dashboard() {
             {view === "grid" && (
               <button
                 onClick={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full border transition-colors ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-full border transition-all ${
                   selectMode
-                    ? "bg-white text-black border-white"
-                    : "text-white/70 border-white/10 hover:text-white hover:border-white/25"
+                    ? "bg-amber-400 text-black border-amber-300 font-semibold shadow-sm"
+                    : "text-white/70 bg-white/5 border-white/10 hover:text-white hover:border-white/25"
                 }`}
+                title={selectMode ? "Exit bulk select mode" : "Bulk select multiple projects to update statuses"}
               >
                 <ListChecks className="w-4 h-4" />
-                {selectMode ? t("dash.doneSelect") : t("dash.select")}
+                <span>{selectMode ? "Done Selecting" : "Bulk Select"}</span>
               </button>
             )}
             <div className="flex items-center gap-1 p-1 rounded-full bg-white/5 border border-white/10">
@@ -349,7 +353,25 @@ export default function Dashboard() {
                 </span>
               </div>
 
-              {view === "grid" && (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-full border transition-all ${
+                    selectMode
+                      ? "bg-amber-400 text-black border-amber-300 font-semibold shadow-sm"
+                      : "text-amber-300 bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20"
+                  }`}
+                >
+                  <ListChecks className="w-3.5 h-3.5" />
+                  <span>{selectMode ? "Done Selecting" : "Bulk Select & Update"}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Dedicated In-Section Bulk Actions Bar when Select Mode is Active */}
+            {selectMode && (
+              <div className="mb-4 animate-in fade-in slide-in-from-top-2 duration-150">
                 <BulkActionMenu
                   selection={selection}
                   totalVisible={visible ? visible.length : 0}
@@ -359,11 +381,11 @@ export default function Dashboard() {
                   onSetStatus={applyBulkStatus}
                   onDelete={applyBulkDelete}
                   onClearSelection={exitSelectMode}
-                  selectMode={selectMode}
+                  selectMode={true}
                   onToggleSelectMode={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
                 />
-              )}
-            </div>
+              </div>
+            )}
 
             {view === "board" ? (
               <ProjectBoard

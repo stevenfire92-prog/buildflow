@@ -32,7 +32,9 @@ export default function ProjectCard({ project, selectable, selected, onToggle })
     <div
       className={`rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border transition-all relative group ${
         selected
-          ? "border-white/80 ring-2 ring-white/20 bg-white/[0.08]"
+          ? "border-amber-400/80 ring-2 ring-amber-400/30 bg-amber-500/[0.07] shadow-lg shadow-amber-500/5"
+          : selectable
+          ? "border-white/20 hover:border-white/40 cursor-pointer"
           : "border-white/10 hover:border-white/25"
       }`}
     >
@@ -44,16 +46,16 @@ export default function ProjectCard({ project, selectable, selected, onToggle })
           e.preventDefault();
           onToggle();
         }}
-        aria-label={selected ? "Deselect project" : "Select project"}
-        className={`absolute top-4 right-4 z-10 w-6 h-6 rounded-full border flex items-center justify-center transition-all ${
+        aria-label={selected ? `Deselect ${project.name}` : `Select ${project.name}`}
+        className={`absolute top-3.5 right-3.5 z-10 w-7 h-7 rounded-lg border flex items-center justify-center transition-all ${
           selected
-            ? "bg-white border-white text-black opacity-100 scale-100 shadow-sm"
+            ? "bg-amber-400 border-amber-300 text-black opacity-100 scale-100 shadow-md ring-2 ring-amber-400/40"
             : selectable
-            ? "border-white/40 bg-black/40 text-transparent hover:border-white opacity-100"
-            : "border-white/25 bg-black/40 text-transparent hover:border-white opacity-0 group-hover:opacity-100 scale-95 hover:scale-100"
+            ? "border-white/40 bg-zinc-900/80 text-transparent hover:border-amber-400 hover:text-amber-400/50 opacity-100"
+            : "border-white/25 bg-zinc-900/80 text-transparent hover:border-white opacity-0 group-hover:opacity-100 scale-95 hover:scale-100"
         }`}
       >
-        <Check className="w-3.5 h-3.5" />
+        <Check className={`w-4 h-4 ${selected ? "stroke-[3] text-black" : ""}`} />
       </button>
 
       <Link
