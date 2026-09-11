@@ -289,8 +289,6 @@ export const STRINGS = {
   "mp.openProfile": "Open profile",
   "mp.addFailTitle": "Couldn't add the profile",
   "mp.addFailDesc": "Please try again.",
-  "mp.spotifyNotConfigured":
-    "Live Spotify stats need SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in Settings → Secrets. Profile links work either way.",
 
   // Spotify artists
   "spot.title": "Spotify artists",

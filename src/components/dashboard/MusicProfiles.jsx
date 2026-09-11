@@ -149,12 +149,6 @@ export default function MusicProfiles() {
         </button>
       </div>
 
-      {data && data.spotify_not_configured && (
-        <p className="mt-4 rounded-xl bg-amber-500/10 border border-amber-500/20 px-4 py-3 text-xs text-amber-300">
-          {t("mp.spotifyNotConfigured")}
-        </p>
-      )}
-
       {loading ? (
         <div className="mt-6 flex justify-center py-8">
           <div className="w-6 h-6 border-2 border-white/15 border-t-white rounded-full animate-spin" />
