@@ -1,0 +1,42 @@
+{
+  "name": "Project Autosave To Drive",
+  "description": "Saves a snapshot of a project to its Google Drive folder whenever the project is created or updated",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "entity_name": "Project",
+      "events": [
+        "create",
+        "update"
+      ]
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "project_autosave_to_drive",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "save_snapshot": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "backupProjectToDrive",
+            "args": {
+              "run_key": "bf-project-autosave-9d1f",
+              "project_id": "${ .trigger.entity_id }"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Save project snapshot to Drive",
+            "description": "One current JSON snapshot per project folder"
+          }
+        }
+      }
+    ]
+  }
+}
