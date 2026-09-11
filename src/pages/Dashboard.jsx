@@ -17,6 +17,7 @@ import GrowthSummary from "@/components/dashboard/GrowthSummary";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
 import KindleBooks from "@/components/dashboard/KindleBooks";
 import DashboardCalendar from "@/components/dashboard/DashboardCalendar";
+import DashboardCalendarView from "@/components/dashboard/DashboardCalendarView";
 import AppFooter from "@/components/AppFooter";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
@@ -292,7 +293,7 @@ export default function Dashboard() {
               <button
                 onClick={() => setView("grid")}
                 className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
-                  view === "grid" ? "bg-white text-black" : "text-white/60 hover:text-white"
+                  view === "grid" ? "bg-white text-black font-medium" : "text-white/60 hover:text-white"
                 }`}
               >
                 <LayoutGrid className="w-4 h-4" /> {t("dash.grid")}
@@ -300,10 +301,18 @@ export default function Dashboard() {
               <button
                 onClick={() => setView("board")}
                 className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
-                  view === "board" ? "bg-white text-black" : "text-white/60 hover:text-white"
+                  view === "board" ? "bg-white text-black font-medium" : "text-white/60 hover:text-white"
                 }`}
               >
                 <KanbanSquare className="w-4 h-4" /> {t("dash.board")}
+              </button>
+              <button
+                onClick={() => setView("calendar")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${
+                  view === "calendar" ? "bg-white text-black font-medium" : "text-white/60 hover:text-white"
+                }`}
+              >
+                <CalendarDays className="w-4 h-4" /> Calendar
               </button>
             </div>
           </div>
@@ -323,7 +332,14 @@ export default function Dashboard() {
 
             <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
               <WeeklyChart projects={projects} />
-              <DashboardCalendar projects={projects} />
+              <DashboardCalendar
+                projects={projects}
+                onSwitchToCalendarView={() => {
+                  setView("calendar");
+                  const el = document.getElementById("projects-view-anchor");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+              />
             </div>
 
             <div className="mt-4">
@@ -343,7 +359,7 @@ export default function Dashboard() {
             </div>
 
             {/* Projects Section Header & Bulk Action Toolbar */}
-            <div className="mt-10 mb-4 flex items-center justify-between gap-4 flex-wrap">
+            <div id="projects-view-anchor" className="mt-10 mb-4 flex items-center justify-between gap-4 flex-wrap">
               <div className="flex items-center gap-3">
                 <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
                   {t("dash.title")}
@@ -390,6 +406,11 @@ export default function Dashboard() {
             {view === "board" ? (
               <ProjectBoard
                 projects={visible || []}
+                onProjectUpdate={handleBoardUpdate}
+              />
+            ) : view === "calendar" ? (
+              <DashboardCalendarView
+                projects={projects || []}
                 onProjectUpdate={handleBoardUpdate}
               />
             ) : (
