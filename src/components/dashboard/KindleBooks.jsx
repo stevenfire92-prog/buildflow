@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { BookOpen, ExternalLink, Plus, Sparkles, BookMarked, Layers, CreditCard, ShieldCheck } from "lucide-react";
+import { BookOpen, ExternalLink, Plus, Sparkles, BookMarked, Layers, ShieldCheck, CheckSquare } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import BookPurchaseCard from "@/components/books/BookPurchaseCard";
+import BulkEditBooksDialog from "@/components/books/BulkEditBooksDialog";
+import BulkBooksBar from "@/components/books/BulkBooksBar";
+import BulkDeleteBooksDialog from "@/components/books/BulkDeleteBooksDialog";
+import AddBookForm from "@/components/books/AddBookForm";
 
 const AMAZON_SERIES_URL = "https://www.amazon.com/dp/B0GX2WYHTH";
 const AMAZON_AUTHOR_URL = "https://www.amazon.ca/Steven-Thomas-Turcott/e/B0GX64C5FQ";
@@ -14,15 +18,13 @@ export default function KindleBooks() {
   const [books, setBooks] = useState(null);
   const [showAdd, setShowAdd] = useState(false);
 
-  // Form state
-  const [title, setTitle] = useState("");
-  const [asin, setAsin] = useState("");
-  const [url, setUrl] = useState("");
-  const [order, setOrder] = useState("");
-  const [desc, setDesc] = useState("");
-  const [buyPrice, setBuyPrice] = useState("4.99");
-  const [rentPrice, setRentPrice] = useState("1.99");
-  const [saving, setSaving] = useState(false);
+  // Bulk edit state
+  const [selectMode, setSelectMode] = useState(false);
+  const [selection, setSelection] = useState([]);
+  const [showBulkEdit, setShowBulkEdit] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [savingAdd, setSavingAdd] = useState(false);
 
   const loadBooks = () => {
     base44.entities.KindleBook.list()
@@ -37,8 +39,7 @@ export default function KindleBooks() {
     loadBooks();
   }, []);
 
-  const handleAdd = async (e) => {
-    e.preventDefault();
+  const handleAdd = async ({ title, asin, url, order, desc, buyPrice, rentPrice, defaultOrder }) => {
     const trimmedTitle = title.trim();
     if (!trimmedTitle) return;
 
@@ -49,12 +50,12 @@ export default function KindleBooks() {
       return;
     }
 
-    setSaving(true);
+    setSavingAdd(true);
     try {
       await base44.entities.KindleBook.create({
         title: trimmedTitle,
         series_name: "Shadow Path",
-        series_order: order ? Number(order) : (books?.length || 0) + 1,
+        series_order: order ? Number(order) : defaultOrder,
         author: "Steven Thomas Turcott",
         asin: trimmedAsin,
         amazon_url: finalUrl,
@@ -65,20 +66,17 @@ export default function KindleBooks() {
         rent_price: parseFloat(rentPrice) || 1.99,
         rent_duration_days: 30,
       });
-      toast({ title: "Kindle book added", description: `${trimmedTitle} is now connected with Stripe Buy & Rent options.` });
-      setTitle("");
-      setAsin("");
-      setUrl("");
-      setOrder("");
-      setDesc("");
-      setBuyPrice("4.99");
-      setRentPrice("1.99");
+      toast({
+        title: "Kindle book added",
+        description: `${trimmedTitle} is now connected with Stripe Buy & Rent options.`,
+      });
       setShowAdd(false);
       loadBooks();
     } catch {
       toast({ title: "Could not add book", description: "Please check the details and try again." });
+    } finally {
+      setSavingAdd(false);
     }
-    setSaving(false);
   };
 
   const handleDelete = async (id, bookTitle) => {
@@ -88,6 +86,77 @@ export default function KindleBooks() {
       loadBooks();
     } catch {
       toast({ title: "Could not remove book" });
+    }
+  };
+
+  const toggleSelect = (id) => {
+    setSelection((prev) => {
+      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+      if (next.length > 0) setSelectMode(true);
+      return next;
+    });
+  };
+
+  const selectAll = () => {
+    if (!books) return;
+    if (selection.length === books.length) {
+      setSelection([]);
+    } else {
+      setSelection(books.map((b) => b.id));
+      setSelectMode(true);
+    }
+  };
+
+  const exitSelectMode = () => {
+    setSelectMode(false);
+    setSelection([]);
+  };
+
+  const handleBulkEditSubmit = async (updates) => {
+    if (selection.length === 0 || bulkBusy) return;
+    setBulkBusy(true);
+    try {
+      const payload = selection.map((id) => ({
+        id,
+        ...updates,
+      }));
+      await base44.entities.KindleBook.bulkUpdate(payload);
+      toast({
+        title: "Books updated",
+        description: `Updated prices & metadata for ${selection.length} book(s).`,
+      });
+      setShowBulkEdit(false);
+      exitSelectMode();
+      loadBooks();
+    } catch {
+      toast({
+        title: "Could not update books",
+        description: "Please check your inputs and try again.",
+      });
+    } finally {
+      setBulkBusy(false);
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selection.length === 0 || bulkBusy) return;
+    setBulkBusy(true);
+    try {
+      await Promise.all(selection.map((id) => base44.entities.KindleBook.delete(id)));
+      toast({
+        title: "Books removed",
+        description: `Removed ${selection.length} book(s).`,
+      });
+      setShowDeleteConfirm(false);
+      exitSelectMode();
+      loadBooks();
+    } catch {
+      toast({
+        title: "Could not delete books",
+        description: "Please try again.",
+      });
+    } finally {
+      setBulkBusy(false);
     }
   };
 
@@ -135,6 +204,18 @@ export default function KindleBooks() {
           </a>
 
           <button
+            onClick={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-full border transition-colors ${
+              selectMode
+                ? "bg-amber-400 text-black border-amber-300 font-semibold shadow-sm"
+                : "text-white/70 bg-white/5 border border-white/10 hover:text-white hover:border-white/25"
+            }`}
+          >
+            <CheckSquare className="w-3.5 h-3.5" />
+            <span>{selectMode ? "Done Selecting" : "Select & Bulk Edit"}</span>
+          </button>
+
+          <button
             onClick={() => setShowAdd(!showAdd)}
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
           >
@@ -173,107 +254,24 @@ export default function KindleBooks() {
 
       {/* Add book form */}
       {showAdd && (
-        <form onSubmit={handleAdd} className="mt-4 rounded-xl bg-white/[0.03] border border-white/10 p-4 space-y-3">
-          <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
-            Connect New Kindle Book
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-white/60 block mb-1">Book Title *</label>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Shadow Path Book 10"
-                required
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="text-xs text-white/60 block mb-1">ASIN</label>
-                <input
-                  value={asin}
-                  onChange={(e) => setAsin(e.target.value)}
-                  placeholder="e.g. B0H132QN3M"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-white/60 block mb-1">Series #</label>
-                <input
-                  type="number"
-                  value={order}
-                  onChange={(e) => setOrder(e.target.value)}
-                  placeholder="e.g. 10"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30"
-                />
-              </div>
-            </div>
-          </div>
+        <AddBookForm
+          onSave={handleAdd}
+          onCancel={() => setShowAdd(false)}
+          saving={savingAdd}
+          bookCount={list.length}
+        />
+      )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-white/60 block mb-1">Buy Price (USD)</label>
-              <input
-                type="number"
-                step="0.01"
-                value={buyPrice}
-                onChange={(e) => setBuyPrice(e.target.value)}
-                placeholder="4.99"
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30"
-              />
-            </div>
-            <div>
-              <label className="text-xs text-white/60 block mb-1">Rent Price (USD, 30 days)</label>
-              <input
-                type="number"
-                step="0.01"
-                value={rentPrice}
-                onChange={(e) => setRentPrice(e.target.value)}
-                placeholder="1.99"
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="text-xs text-white/60 block mb-1">Amazon Kindle URL (optional if ASIN provided)</label>
-            <input
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://www.amazon.com/dp/..."
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs text-white/60 block mb-1">Synopsis / Description</label>
-            <textarea
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-              rows={2}
-              placeholder="Brief overview of the book..."
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 resize-none"
-            />
-          </div>
-
-          <div className="flex justify-end gap-2 pt-1">
-            <button
-              type="button"
-              onClick={() => setShowAdd(false)}
-              className="px-3 py-1.5 text-xs text-white/60 hover:text-white"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={saving}
-              className="px-4 py-1.5 text-xs font-medium text-black bg-white rounded-full hover:bg-white/90 disabled:opacity-50"
-            >
-              {saving ? "Saving..." : "Save Book"}
-            </button>
-          </div>
-        </form>
+      {/* Bulk Action Toolbar when in select mode */}
+      {selectMode && (
+        <BulkBooksBar
+          selectionCount={selection.length}
+          totalCount={list.length}
+          onSelectAll={selectAll}
+          onOpenBulkEdit={() => setShowBulkEdit(true)}
+          onOpenDeleteConfirm={() => setShowDeleteConfirm(true)}
+          onExit={exitSelectMode}
+        />
       )}
 
       {/* Book Grid */}
@@ -291,12 +289,33 @@ export default function KindleBooks() {
             <BookPurchaseCard
               key={book.id}
               book={book}
-              canDelete={true}
+              canDelete={!selectMode}
               onDelete={handleDelete}
+              selectable={selectMode}
+              selected={selection.includes(book.id)}
+              onToggleSelect={() => toggleSelect(book.id)}
             />
           ))}
         </div>
       )}
+
+      {/* Bulk Edit Modal */}
+      <BulkEditBooksDialog
+        open={showBulkEdit}
+        onOpenChange={setShowBulkEdit}
+        selectedBooks={list.filter((b) => selection.includes(b.id))}
+        onSubmit={handleBulkEditSubmit}
+        busy={bulkBusy}
+      />
+
+      {/* Bulk Delete Confirmation Dialog */}
+      <BulkDeleteBooksDialog
+        open={showDeleteConfirm}
+        onOpenChange={setShowDeleteConfirm}
+        selectedBooks={list.filter((b) => selection.includes(b.id))}
+        onConfirm={handleBulkDelete}
+        busy={bulkBusy}
+      />
     </section>
   );
 }

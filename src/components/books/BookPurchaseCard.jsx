@@ -8,6 +8,9 @@ export default function BookPurchaseCard({
   onDelete,
   canDelete = false,
   returnUrl,
+  selectable = false,
+  selected = false,
+  onToggleSelect,
 }) {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("buy"); // "buy" | "rent"
@@ -64,11 +67,31 @@ export default function BookPurchaseCard({
   };
 
   return (
-    <div className="group rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 p-5 flex flex-col justify-between hover:border-white/20 transition-all duration-200">
+    <div
+      className={`group rounded-2xl bg-gradient-to-b border p-5 flex flex-col justify-between transition-all duration-200 relative ${
+        selected
+          ? "from-amber-500/[0.08] to-transparent border-amber-400/60 shadow-lg shadow-amber-500/5 ring-1 ring-amber-400/30"
+          : "from-white/[0.05] to-transparent border-white/10 hover:border-white/20"
+      }`}
+    >
       <div>
         {/* Top Badges & Actions */}
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-1.5 flex-wrap">
+            {selectable && (
+              <button
+                type="button"
+                onClick={onToggleSelect}
+                aria-label={`Select book ${book.title}`}
+                className={`w-5 h-5 rounded-md flex items-center justify-center transition-colors ${
+                  selected
+                    ? "bg-amber-400 text-black border border-amber-300 shadow-sm"
+                    : "bg-white/10 text-transparent border border-white/30 hover:border-white/60"
+                }`}
+              >
+                <Check className={`w-3.5 h-3.5 ${selected ? "text-black stroke-[3]" : ""}`} />
+              </button>
+            )}
             <span className="inline-flex items-center text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
               Book {book.series_order || "•"}
             </span>

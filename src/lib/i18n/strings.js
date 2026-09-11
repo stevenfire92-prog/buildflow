@@ -295,6 +295,13 @@ export const STRINGS = {
   "kb.subtitle": "All published novels and books by Steven Thomas Turcott (Se Fire Tech) on Amazon Kindle.",
   "kb.seriesTitle": "Shadow Path Dark Fantasy Series",
   "kb.readKindle": "Read on Kindle",
+  "kb.bulkEdit": "Bulk Edit",
+  "kb.select": "Select",
+  "kb.doneSelect": "Done",
+  "kb.selectedCount": "{n} books selected",
+  "kb.selectAll": "Select all",
+  "kb.deselectAll": "Deselect all",
+  "kb.deleteSelected": "Delete",
 
   // Music profiles (all platforms)
   "mp.title": "Verified music profiles",
