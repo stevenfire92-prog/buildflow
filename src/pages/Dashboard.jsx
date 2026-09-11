@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate } from "lucide-react";
+import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate, TrendingUp } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { logActivity } from "@/lib/activityLog";
 import StatsRow from "@/components/dashboard/StatsRow";
@@ -169,6 +169,12 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              to="/growth-dashboard"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"
+            >
+              <TrendingUp className="w-4 h-4" /> {t("dash.growth")}
+            </Link>
             <Link
               to="/templates"
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/25 rounded-full transition-colors"

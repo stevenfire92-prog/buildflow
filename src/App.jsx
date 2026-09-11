@@ -17,6 +17,7 @@ import AccountSettings from './pages/AccountSettings';
 import Team from './pages/Team';
 import NewProject from './pages/NewProject';
 import Templates from './pages/Templates';
+import GrowthDashboard from './pages/GrowthDashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
@@ -55,6 +56,7 @@ const AuthenticatedApp = () => {
     <Route path="/subscription" element={<Subscription />} />
     <Route path="/new-project" element={<NewProject />} />
     <Route path="/templates" element={<Templates />} />
+    <Route path="/growth-dashboard" element={<GrowthDashboard />} />
     <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
       <Route path="/account-settings" element={<AccountSettings />} />
       <Route path="/team" element={<Team />} />

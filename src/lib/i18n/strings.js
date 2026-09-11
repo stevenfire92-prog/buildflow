@@ -1,6 +1,6 @@
 // English source strings for the entire translated UI.
 // Keys are stable identifiers — never rename them once shipped.
-export const STRINGS_VERSION = 9;
+export const STRINGS_VERSION = 10;
 
 export const STRINGS = {
   // Navbar
@@ -196,6 +196,7 @@ export const STRINGS = {
   "dash.bulkFailTitle": "Could not update",
   "dash.bulkFailDesc": "Please try again.",
   "dash.templates": "Templates",
+  "dash.growth": "Growth",
 
   // Dashboard stats
   "stat.activeProjects": "Active projects",
@@ -292,6 +293,32 @@ export const STRINGS = {
   "mp.openProfile": "Open profile",
   "mp.addFailTitle": "Couldn't add the profile",
   "mp.addFailDesc": "Please try again.",
+
+  // Growth dashboard (Google Sheets)
+  "gd.title": "Growth dashboard",
+  "gd.subtitle": "Weekly trends pulled live from your Google Sheets.",
+  "gd.refresh": "Refresh",
+  "gd.errorTitle": "Couldn't load sheet data",
+  "gd.errorDesc": "Please check the Google Sheets connection and try again.",
+  "gd.emptyTitle": "No weekly data yet",
+  "gd.emptySub": "Your metrics export runs weekly — charts appear once the first snapshot lands in the sheet.",
+  "gd.statTotal": "Total projects",
+  "gd.statNew": "New this week",
+  "gd.statAvgProgress": "Avg. progress",
+  "gd.statActivities": "Activities",
+  "gd.vsPrev": "vs {n} last week",
+  "gd.chartPortfolio": "Portfolio growth",
+  "gd.chartPortfolioSub": "Total projects and new projects per week",
+  "gd.chartStatus": "Status over time",
+  "gd.chartStatusSub": "Where projects sit each week",
+  "gd.chartProgress": "Progress trends",
+  "gd.chartProgressSub": "Average progress plus each project's weekly trend",
+  "gd.legendBuilding": "Building",
+  "gd.legendReady": "Ready",
+  "gd.legendPublished": "Published",
+  "gd.legendAvg": "Average",
+  "gd.totalProjects": "Total projects",
+  "gd.newProjects": "New projects",
 
   // Spotify artists
   "spot.title": "Spotify artists",
