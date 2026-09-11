@@ -1,0 +1,44 @@
+{
+  "name": "Daily Sales and Metrics To Sheet",
+  "description": "Automatically syncs Stripe sales data, book sales revenue, and project activity metrics to Google Sheets every day at 9:00 AM so portfolio charts remain up to date without manual work",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 9 * * *",
+      "one_time_date": null,
+      "timezone": "America/Toronto",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "daily_sales_and_metrics_to_sheet",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "sync_sales_and_metrics": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "exportWeeklyMetricsToSheet"
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Daily Sales & Metrics Export to Google Sheets",
+            "description": "Appends latest Stripe sales and project snapshot rows"
+          }
+        }
+      }
+    ]
+  }
+}

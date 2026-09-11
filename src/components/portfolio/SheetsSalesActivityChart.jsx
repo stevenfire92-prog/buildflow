@@ -92,11 +92,11 @@ export default function SheetsSalesActivityChart() {
               </h3>
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <CheckCircle2 className="w-3 h-3" />
-                Google Sheets Live Sync
+                Google Sheets Daily Sync
               </span>
             </div>
             <p className="text-xs text-white/50 mt-0.5">
-              Weekly sales performance and team activity pulled directly from Google Sheets.
+              Automated daily sales data and team activity pulled directly from Google Sheets.
             </p>
           </div>
         </div>
@@ -163,13 +163,13 @@ export default function SheetsSalesActivityChart() {
         <div className="col-span-2 sm:col-span-1 rounded-2xl bg-white/[0.02] border border-white/5 p-3.5">
           <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium mb-1">
             <Table className="w-3.5 h-3.5" />
-            <span>Report Cadence</span>
+            <span>Sync Cadence</span>
           </div>
-          <div className="text-sm font-semibold text-white tracking-tight mt-1">
-            Weekly Auto-Export
+          <div className="text-sm font-semibold text-emerald-400 tracking-tight mt-1">
+            Daily Auto-Sync
           </div>
           <p className="text-[11px] text-white/40 mt-1">
-            Synced with Google Sheets API
+            9:00 AM EDT · Google Sheets API
           </p>
         </div>
       </div>
