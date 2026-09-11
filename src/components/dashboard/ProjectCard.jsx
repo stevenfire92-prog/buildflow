@@ -30,13 +30,35 @@ export default function ProjectCard({ project, selectable, selected, onToggle })
 
   return (
     <div
-      className={`rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border transition-all ${
-        selected ? "border-white/70" : "border-white/10 hover:border-white/25"
+      className={`rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent border transition-all relative group ${
+        selected
+          ? "border-white/80 ring-2 ring-white/20 bg-white/[0.08]"
+          : "border-white/10 hover:border-white/25"
       }`}
     >
+      {/* Selection Checkbox */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          onToggle();
+        }}
+        aria-label={selected ? "Deselect project" : "Select project"}
+        className={`absolute top-4 right-4 z-10 w-6 h-6 rounded-full border flex items-center justify-center transition-all ${
+          selected
+            ? "bg-white border-white text-black opacity-100 scale-100 shadow-sm"
+            : selectable
+            ? "border-white/40 bg-black/40 text-transparent hover:border-white opacity-100"
+            : "border-white/25 bg-black/40 text-transparent hover:border-white opacity-0 group-hover:opacity-100 scale-95 hover:scale-100"
+        }`}
+      >
+        <Check className="w-3.5 h-3.5" />
+      </button>
+
       <Link
         to={`/project-details?id=${project.id}`}
-        className="group block p-5 pb-4"
+        className="block p-5 pb-4"
         onClick={(e) => {
           if (!selectable) return;
           e.preventDefault();
@@ -47,17 +69,6 @@ export default function ProjectCard({ project, selectable, selected, onToggle })
           <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80">
             <Icon className="w-5 h-5" />
           </div>
-          {selectable && (
-            <span
-              className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 transition-colors ${
-                selected
-                  ? "bg-white border-white text-black"
-                  : "border-white/30 text-transparent"
-              }`}
-            >
-              <Check className="w-4 h-4" />
-            </span>
-          )}
         </div>
         <h3 className="font-medium text-white truncate">{project.name}</h3>
         <p className="mt-1 text-xs text-white/45 line-clamp-2 min-h-[2rem]">

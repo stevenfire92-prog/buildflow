@@ -10,6 +10,7 @@ import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import ProjectBoard from "@/components/dashboard/ProjectBoard";
 import ActivityLog from "@/components/dashboard/ActivityLog";
 import BulkActions from "@/components/dashboard/BulkActions";
+import BulkActionMenu from "@/components/dashboard/BulkActionMenu";
 import MusicProfiles from "@/components/dashboard/MusicProfiles";
 import RevenueSummary from "@/components/dashboard/RevenueSummary";
 import GrowthSummary from "@/components/dashboard/GrowthSummary";
@@ -40,9 +41,28 @@ export default function Dashboard() {
   const [bulkBusy, setBulkBusy] = useState(false);
 
   const toggleSelected = (id) =>
-    setSelection((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
+    setSelection((prev) => {
+      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+      if (next.length > 0) {
+        setSelectMode(true);
+      }
+      return next;
+    });
+
+  const selectAllVisible = () => {
+    if (!visible || visible.length === 0) return;
+    const visibleIds = visible.map((p) => p.id);
+    const allSelected = visibleIds.length > 0 && visibleIds.every((id) => selection.includes(id));
+    if (allSelected) {
+      setSelection((prev) => prev.filter((id) => !visibleIds.includes(id)));
+      if (selection.length <= visibleIds.length) {
+        setSelectMode(false);
+      }
+    } else {
+      setSelection((prev) => Array.from(new Set([...prev, ...visibleIds])));
+      setSelectMode(true);
+    }
+  };
 
   const exitSelectMode = () => {
     setSelectMode(false);
@@ -88,7 +108,7 @@ export default function Dashboard() {
     setBulkBusy(true);
     const targets = (projects || []).filter((p) => selection.includes(p.id));
     try {
-      await base44.entities.Project.deleteMany({ id: { $in: selection } });
+      await Promise.all(selection.map((id) => base44.entities.Project.delete(id)));
       const fresh = await base44.entities.Project.list("-updated_date", 100);
       setProjects(fresh);
       targets.forEach((p) =>
@@ -317,6 +337,33 @@ export default function Dashboard() {
               <KindleBooks />
             </div>
 
+            {/* Projects Section Header & Bulk Action Toolbar */}
+            <div className="mt-10 mb-4 flex items-center justify-between gap-4 flex-wrap">
+              <div className="flex items-center gap-3">
+                <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
+                  {t("dash.title")}
+                </h2>
+                <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-white/60 text-xs font-medium">
+                  {projects.length}
+                </span>
+              </div>
+
+              {view === "grid" && (
+                <BulkActionMenu
+                  selection={selection}
+                  totalVisible={visible ? visible.length : 0}
+                  selectedProjects={(projects || []).filter((p) => selection.includes(p.id))}
+                  busy={bulkBusy}
+                  onSelectAll={selectAllVisible}
+                  onSetStatus={applyBulkStatus}
+                  onDelete={applyBulkDelete}
+                  onClearSelection={exitSelectMode}
+                  selectMode={selectMode}
+                  onToggleSelectMode={() => (selectMode ? exitSelectMode() : setSelectMode(true))}
+                />
+              )}
+            </div>
+
             {view === "board" ? (
               <ProjectBoard
                 projects={visible || []}
@@ -324,7 +371,7 @@ export default function Dashboard() {
               />
             ) : (
             <>
-            <div className="mt-8 mb-6 flex gap-2 overflow-x-auto pb-1">
+            <div className="mb-6 flex gap-2 overflow-x-auto pb-1">
               {tabs.map((tb) => (
                 <button
                   key={tb}
@@ -365,10 +412,14 @@ export default function Dashboard() {
             </>
             )}
 
-            {selectMode && selection.length > 0 && (
+            {selection.length > 0 && (
               <BulkActions
                 count={selection.length}
+                totalVisible={visible ? visible.length : 0}
+                selection={selection}
+                selectedProjects={(projects || []).filter((p) => selection.includes(p.id))}
                 busy={bulkBusy}
+                onSelectAll={selectAllVisible}
                 onSetStatus={applyBulkStatus}
                 onDelete={applyBulkDelete}
                 onCancel={exitSelectMode}
