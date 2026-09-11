@@ -26,7 +26,20 @@
     },
     "do": [
       {
-        "send_report": {
+        "sync_google_sheets": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "exportWeeklyMetricsToSheet"
+          },
+          "then": "send_sheets_email_report",
+          "x-base44": {
+            "title": "Export metrics to Google Sheets",
+            "description": "Appends latest project progress snapshots and sales data"
+          }
+        }
+      },
+      {
+        "send_sheets_email_report": {
           "call": "invoke_backend_function",
           "with": {
             "function_name": "sendWeeklyGmailReport",
@@ -36,12 +49,12 @@
           },
           "then": "end",
           "x-base44": {
-            "title": "Send weekly report",
-            "description": "Project activity and growth via Gmail"
+            "title": "Send weekly email report",
+            "description": "Pulls progress & metric data from Google Sheets and emails via Gmail"
           }
         }
       }
     ]
   },
-  "description": "Sends the weekly project activity and growth report via Gmail every Monday at 9am"
+  "description": "Exports latest project progress to Google Sheets and sends an automated weekly email report via Gmail every Monday at 9:00 AM"
 }
