@@ -1,0 +1,19 @@
+name: Vercel backend security checks
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - chatgpt/backend-safety-tests-20261027
+jobs:
+  backend-security:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate backend boundaries
+        run: node --test tests/backend-security.test.js
