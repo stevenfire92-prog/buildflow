@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Bot, Sparkles, Send, X, RefreshCw, Volume2, CheckCircle2, ChevronRight, Copy, Check, ShieldCheck, Zap } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { vercelApi } from "@/lib/vercelApi";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import ReactMarkdown from "react-markdown";
 
@@ -61,12 +61,13 @@ export default function BuilderAiAssistant() {
     setLoading(true);
 
     try {
-      const res = await base44.functions.invoke("aiAssistantChat", {
-        message: text,
-        history: messages.slice(-5),
+      const res = await vercelApi("/api/ai-assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, history: messages.slice(-5) }),
       });
 
-      const reply = res.data?.reply || "I'm ready to help with your setup. What would you like to configure next?";
+      const reply = res.reply || "I'm ready to help with your setup. What would you like to configure next?";
       setMessages([...newHistory, { role: "assistant", content: reply }]);
     } catch (err) {
       setMessages([
@@ -74,7 +75,7 @@ export default function BuilderAiAssistant() {
         {
           role: "assistant",
           content:
-            "I encountered a temporary connection issue. Please make sure your project functions are deployed and try again.",
+            "The independent AI service is not ready yet. Secure sign-in and an AI provider must be configured in Vercel.",
         },
       ]);
     } finally {
