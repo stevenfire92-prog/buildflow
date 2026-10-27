@@ -8,7 +8,7 @@ export default function handler(req, res) {
   const nonce = bytes();
   const state = sign({ nonce, redirect: returnPath(req.query?.returnTo), exp: Date.now() + 600000 }, c.sessionSecret);
   res.setHeader('Set-Cookie', cookie('buildflow_oauth_state', state, 600));
-  const callback = new URL('/api/auth/google-callback', 'https://' + req.headers.host).toString();
+  const origin = process.env.APP_ORIGIN;\n  if (!origin || !/^https:\\/\\/[^/]+$/.test(origin)) return res.status(503).json({ error: 'app_origin_not_configured' });\n  const callback = origin + '/api/auth/google-callback';
   const params = new URLSearchParams({
     client_id: c.clientId, redirect_uri: callback, response_type: 'code',
     scope: 'openid email profile', state, nonce,
