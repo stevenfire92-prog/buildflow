@@ -1,20 +1,24 @@
-// Read-only Vercel auth boundary. Fail closed until a real identity provider is integrated.
-// IMPORTANT: Never trust client-supplied roles, emails, founder flags or localStorage.
+import { verifySession } from "./_lib/verifySession.js";
+
+// Auth adapter only: an identity provider must issue and rotate verified tokens.
+// Customer paid entitlements must still come from server-verified billing records.
 export default function handler(req, res) {
-  res.setHeader("Cache-Control", "no-store, private");
-  res.setHeader("Vary", "Cookie, Authorization");
+  res.setHeader("Cache-Control", "private, no-store");
+  res.setHeader("Vary", "Authorization");
   res.setHeader("X-Content-Type-Options", "nosniff");
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
     return res.status(405).json({ error: "method_not_allowed" });
   }
-  // Reject requests while the Vercel session-verification adapter is unconfigured.
-  // Do NOT infer login from cookie presence: cookies must be cryptographically verified.
-  return res.status(401).json({
-    authenticated: false,
-    founder: false,
-    lifetime: false,
-    unlockedPlans: ["free"],
-    error: "identity_provider_not_configured"
+  const session = verifySession(req);
+  if (!session) return res.status(401).json({ authenticated: false, founder: false, error: "invalid_or_missing_session" });
+  const founderId = process.env.FOUNDER_SUBJECT_ID;
+  const founder = Boolean(founderId && session.subject === founderId);
+  return res.status(200).json({
+    authenticated: true,
+    founder,
+    lifetime: founder,
+    // Do not grant customer plans without verified subscription records.
+    unlockedPlans: founder ? ["standard", "pro", "starter", "builder", "elite"] : ["free"]
   });
 }
