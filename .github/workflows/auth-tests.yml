@@ -1,0 +1,18 @@
+name: Auth security checks
+on:
+  push:
+    branches: ["chatgpt/**"]
+  pull_request:
+    branches: [main]
+jobs:
+  auth-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify auth boundaries
+        run: node --test tests/auth-boundary.test.mjs
