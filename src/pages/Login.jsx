@@ -33,7 +33,7 @@ export default function Login() {
   };
 
   const handleGoogle = () => {
-    base44.auth.loginWithProvider("google", returnTo);
+    window.location.assign("/api/auth/google?returnTo=" + encodeURIComponent(returnTo));
   };
 
   return (
