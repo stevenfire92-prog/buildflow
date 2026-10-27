@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   if (!stored || stored !== state || !stateData || !req.query?.code) return res.status(400).json({ error: 'invalid_oauth_state' });
   res.setHeader('Set-Cookie', cookie('buildflow_oauth_state', '', 0));
   try {
-    const callback = new URL('/api/auth/google-callback', 'https://' + req.headers.host).toString();
+    const origin = process.env.APP_ORIGIN;\n  if (!origin || !/^https:\\/\\/[^/]+$/.test(origin)) return res.status(503).json({ error: 'app_origin_not_configured' });\n  const callback = origin + '/api/auth/google-callback';
     const exchange = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ code: req.query.code, client_id: c.clientId, client_secret: c.clientSecret,
