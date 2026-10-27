@@ -15,4 +15,4 @@ jobs:
         with:
           node-version: "22"
       - name: Verify auth boundaries
-        run: node --test tests/auth-boundary.test.mjs
+        run: node --test tests/auth-boundary.test.mjs tests/auth-methods.test.mjs
