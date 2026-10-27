@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Founder verification · Preview</title>
+<style>body{font:16px system-ui;background:#081322;color:#f1f7ff;margin:0;min-height:100vh;display:grid;place-items:center}main{max-width:540px;margin:20px;padding:28px;background:#12233b;border:1px solid #314b6c;border-radius:18px}h1{margin-top:0}p{line-height:1.6;color:#b8cee7}label{display:block;margin-top:18px}input{background:#07182b;color:white;padding:12px;border-radius:8px;border:1px solid #7393b2;width:100%;box-sizing:border-box;font-size:18px}button{margin-top:15px;background:#65e4c5;border:0;color:#062f2a;border-radius:9px;padding:12px 16px;font-weight:700;cursor:pointer}button:disabled{opacity:.5}#message{padding-top:15px;color:#bcefdc}a{color:#8ac8ff}</style></head>
+<body><main><h1>Founder verification</h1><p>Preview setup only. Sign in with your verified Google account, then enter a current six-digit code from Google Authenticator. Never send codes to anyone.</p><div id="google"></div>
+<form id="second" hidden><label for="totp">Google Authenticator code</label><input id="totp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required/><button id="verify" type="submit">Verify founder account</button></form>
+<div id="message" role="status" aria-live="polite">Loading secure sign-in…</div><p><small>Verification requires configured Google OAuth credentials and a founder TOTP secret on the Vercel preview. No purchases or account changes occur here. Completing this preview test does not yet activate production membership.</small></p></main>
+<script src="https://accounts.google.com/gsi/client" async defer></script><script>
+(()=>{"use strict";let token=null;const message=document.querySelector("#message"),form=document.querySelector("#second");
+async function initialize(){try{
+const config=await fetch("/api/auth/config",{cache:"no-store"});if(!config.ok)throw Error("Google login setup is not configured on this preview");
+const data=await config.json();if(!data.googleClientId || !window.google?.accounts?.id)throw Error("Google Sign-In is unavailable");
+google.accounts.id.initialize({client_id:data.googleClientId,callback:response=>{token=response.credential;form.hidden=false;message.textContent="Google sign-in received. Complete your authenticator challenge.";},auto_select:false});
+google.accounts.id.renderButton(document.querySelector("#google"),{theme:"filled_blue",size:"large",text:"signin_with",width:260});
+message.textContent="Sign in with Google to begin verification.";
+}catch(e){message.textContent=e.message||"Unable to initialize Google Sign-In."}}
+let checks=0;const timer=setInterval(()=>{checks++;if(window.google?.accounts?.id){clearInterval(timer);initialize()}else if(checks>=40){clearInterval(timer);message.textContent="Google Sign-In failed to load."}},250);
+form.addEventListener("submit",async e=>{e.preventDefault();const verify=document.querySelector("#verify");verify.disabled=true;message.textContent="Verifying identity…";try{
+const response=await fetch("/api/auth/google",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idToken:token,totp:document.querySelector("#totp").value})});
+if(!response.ok)throw Error("Verification failed. Confirm preview credentials and the current authenticator code.");
+const data=await response.json();if(!data.founder)throw Error("Google identity verified, but this account is not the designated founder.");
+const session=await fetch("/api/session",{headers:{Authorization:"Bearer "+data.token},cache:"no-store"});const result=await session.json();
+if(!session.ok||!result.founder)throw Error("Founder session verification failed");
+message.textContent="Founder identity and second factor verified for this preview session. Production activation remains pending.";form.hidden=true;
+}catch(err){message.textContent=err.message||"Verification failed";}finally{verify.disabled=false;document.querySelector("#totp").value="";token=null;}});
+})();
+</script></body></html>
