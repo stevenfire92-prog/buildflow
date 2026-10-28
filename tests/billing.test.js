@@ -68,3 +68,10 @@ test('webhook verifies raw signature and canonical event',async()=>{const f=fixt
 test('webhook rejects invalid signatures',async()=>{const f=fixture();assert.equal((await hook(f,{},'t=1,v1=invalid')).body.error,'invalid_signature');});
 test('webhook refuses test events on live handler',async()=>{const f=fixture();assert.equal((await hook(f,{id:'evt_test',type:'checkout.session.completed',livemode:false})).body.error,'event_mode_mismatch');});
 test('replayed webhook is idempotent',async()=>{const f=fixture();const e={id:'evt_ok',type:'checkout.session.completed',livemode:true};assert.equal((await hook(f,e)).statusCode,200);assert.equal((await hook(f,e)).statusCode,200);assert.equal(f.state.sessions.length,0);});
+
+test('readiness reveals no secret values',async()=>{const f=fixture();const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,200);assert.equal(r.body.configured,true);assert.equal(JSON.stringify(r.body).includes('sk_live'),false);});
+test('readiness reports missing credentials without exposing environment',async()=>{const f=fixture({env:{STRIPE_SECRET_KEY:''}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,503);assert.equal(r.body.error,'payments_not_configured');});
+test('legacy key candidate is accepted only after account validation',async()=>{const f=fixture({env:{STRIPE_SECRET_KEY:'',se_fire_tech:'rk_live_not_a_real_key'}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,200);assert.equal(r.body.configured,true);});
+test('legacy key from another account fails closed',async()=>{const f=fixture({account:'acct_wrong',env:{STRIPE_SECRET_KEY:'',se_fire_tech:'rk_live_not_a_real_key'}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,503);assert.equal(r.body.error,'stripe_account_mismatch');});
+
+test('webhook can use the same validated legacy key as checkout',async()=>{const f=fixture({env:{STRIPE_SECRET_KEY:'',se_fire_tech:'rk_live_not_a_real_key'}});assert.equal((await hook(f,{id:'evt_ok',type:'checkout.session.completed',livemode:true})).statusCode,200);});

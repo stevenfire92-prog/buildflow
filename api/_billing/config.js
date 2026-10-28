@@ -4,6 +4,7 @@ export default {
   "origin": "https://buildflow-plum.vercel.app",
   "hostedOrigin": "https://builderflowstudio.base44.app",
   "defaultPlan": "pro",
+  "legacySecretKeys": ["se_fire_tech", "Steven_Thomas_Turcott"],
   "defaultReturnPath": "/dashboard",
   "plans": {
     "pro": {

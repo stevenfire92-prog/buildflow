@@ -41,10 +41,15 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
   function origin() {
     return env.APP_URL || (env.VERCEL_ENV === 'preview' && env.VERCEL_URL ? `https://${env.VERCEL_URL}` : config.origin);
   }
+  function stripeKey() {
+    return env.STRIPE_SECRET_KEY || (config.legacySecretKeys || [])
+      .map(name => env[name])
+      .find(value => typeof value === 'string' && /^(sk|rk)_live_/.test(value));
+  }
   // No secret values are ever returned, logged, or imported by the browser.
   async function stripe() {
     const mode = env.STRIPE_MODE || 'test';
-    const key = env.STRIPE_SECRET_KEY;
+    const key = stripeKey();
     const accountId = mode === 'live' ? config.accountId : env.STRIPE_TEST_ACCOUNT_ID;
     if (!['live', 'test'].includes(mode) || !accountId || typeof key !== 'string' ||
         !new RegExp(`^(sk|rk)_${mode}_`).test(key)) {
@@ -192,14 +197,14 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     res.setHeader('Cache-Control', 'no-store');
     if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'method_not_allowed' }); }
     if (!req.headers?.['stripe-signature']) return res.status(400).json({ error: 'missing_signature' });
-    if (!env.STRIPE_WEBHOOK_SECRET || !env.STRIPE_SECRET_KEY) return res.status(503).json({ error: 'webhook_not_configured' });
+    if (!env.STRIPE_WEBHOOK_SECRET || !stripeKey()) return res.status(503).json({ error: 'webhook_not_configured' });
     let data = Buffer.alloc(0);
     try {
       for await (const chunk of req) {
         data = Buffer.concat([data, Buffer.from(chunk)]);
         if (data.length > 1048576) return res.status(413).json({ error: 'body_too_large' });
       }
-      const verifier = new StripeClient(env.STRIPE_SECRET_KEY);
+      const verifier = new StripeClient(stripeKey());
       let event;
       try { event = verifier.webhooks.constructEvent(data, req.headers['stripe-signature'], env.STRIPE_WEBHOOK_SECRET); }
       catch { return res.status(400).json({ error: 'invalid_signature' }); }
@@ -213,5 +218,9 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
       return res.status(200).json({ received: true, status: EVENTS.has(event.type) ? 'verified' : 'ignored' });
     } catch { return res.status(503).json({ error: 'webhook_processing_failed' }); }
   };
-  return { checkout, verify, entitlements, portal, webhook };
+  const readiness = wrap(async () => {
+    const { live } = await stripe();
+    return { configured: true, live, checkoutEnabled: env.CHECKOUT_ENABLED === 'true' };
+  }, true);
+  return { checkout, verify, entitlements, portal, webhook, readiness };
 }
