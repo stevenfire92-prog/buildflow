@@ -32,8 +32,8 @@ export default function Portfolio() {
     const action = urlParams.get("action");
     if (checkout === "book_success") {
       toast({
-        title: action === "rent" ? "Digital Rental Active!" : "Purchase Successful!",
-        description: `Thank you for supporting Steven Thomas Turcott. Your access is confirmed.`,
+        title: "Payment verification required",
+        description: "Check your Stripe receipt. This return link alone does not confirm payment or access.",
       });
       window.history.replaceState({}, "", window.location.pathname);
     }

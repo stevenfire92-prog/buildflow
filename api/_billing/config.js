@@ -4,6 +4,7 @@ export default {
   "origin": "https://buildflow-plum.vercel.app",
   "hostedOrigin": "https://builderflowstudio.base44.app",
   "defaultPlan": "pro",
+  "defaultReturnPath": "/dashboard",
   "plans": {
     "pro": {
       "monthly": {

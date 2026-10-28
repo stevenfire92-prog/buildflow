@@ -157,25 +157,18 @@ export default function Dashboard() {
       toast({ title: t("dash.checkoutCancelledTitle"), description: t("dash.checkoutCancelledDesc") });
       return;
     }
-    if (checkout === "book_success") {
-      const action = urlParams.get("action");
-      toast({
-        title: action === "rent" ? "Book Rental Confirmed!" : "Book Purchased!",
-        description: "Your digital book order has been processed via Stripe.",
-      });
+    if (checkout === "book_success" && !sessionId) {
+      toast({ title: "Payment not verified", description: "Check your billing receipt before making another payment.", variant: "destructive" });
       return;
     }
     if (sessionId) {
       base44.functions
         .invoke("verifyCheckoutSession", { sessionId })
         .then((res) => {
-          if (res.data.paymentStatus === "paid") {
-            localStorage.setItem("bf_plan", "pro");
-            localStorage.setItem("bf_checkout_session", sessionId);
-            localStorage.setItem("bf_plan_date", new Date().toISOString());
+          if (res.data.paid === true) {
             toast({
-              title: t("dash.welcomeProTitle"),
-              description: t("dash.welcomeProDesc"),
+              title: "Payment confirmed",
+              description: "Your billing status has been verified with Stripe.",
             });
           }
         })
