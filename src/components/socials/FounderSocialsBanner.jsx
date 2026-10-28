@@ -11,10 +11,10 @@ export default function FounderSocialsBanner({ className = "" }) {
           <div>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-amber-400" /> Auto-Connected Creator Ecosystem
+                <Sparkles className="w-3 h-3 text-amber-400" /> Creator Ecosystem
               </span>
               <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
-                <ShieldCheck className="w-3 h-3" /> Stripe Live Mode Active
+                <ShieldCheck className="w-3 h-3" /> Stripe Secure Checkout
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -130,9 +130,9 @@ export default function FounderSocialsBanner({ className = "" }) {
               <span>Live Monetization</span>
             </div>
             <p className="text-sm font-bold text-white mb-1">Automated Stripe Engine</p>
-            <p className="text-xs text-white/50 mb-3">Instant checkout sessions, recurring subscriptions, and license sales enabled.</p>
+            <p className="text-xs text-white/50 mb-3">Checkout and subscriptions are available when payment setup is complete.</p>
             <span className="text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
-              <Disc3 className="w-3 h-3 animate-spin text-emerald-400" /> Connected to All 4 Apps
+              <Disc3 className="w-3 h-3 animate-spin text-emerald-400" /> Payment setup required
             </span>
           </div>
         </div>

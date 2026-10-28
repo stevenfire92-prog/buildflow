@@ -137,7 +137,7 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     const session = await client.checkout.sessions.create({
       mode, customer: customer.id, client_reference_id: String(user.id),
       line_items: [{ price: selectedId, quantity: 1 }],
-      ...returnUrls(origin(), body.returnPath || (body.appSlug ? `/apps?app=${encodeURIComponent(selection.key)}` : '/')),
+      ...returnUrls(origin(), body.returnPath || (body.appSlug ? `/apps?app=${encodeURIComponent(selection.key)}` : config.defaultReturnPath || '/')),
       metadata: tags,
       ...(mode === 'subscription' ? { subscription_data: { metadata: tags, billing_mode: { type: 'flexible' } } } : { payment_intent_data: { metadata: tags } }),
       integration_identifier: `vercel_${config.appId}_${randomUUID().replaceAll('-', '').slice(0, 8).replace(/[0-9]/g, 'a')}`,
