@@ -44,7 +44,9 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
   // No secret values are ever returned, logged, or imported by the browser.
   async function stripe() {
     const mode = env.STRIPE_MODE || 'test';
-    const key = env.STRIPE_SECRET_KEY;
+    const key = env.STRIPE_SECRET_KEY || (config.legacySecretKeys || [])
+      .map(name => env[name])
+      .find(value => typeof value === 'string' && /^(sk|rk)_live_/.test(value));
     const accountId = mode === 'live' ? config.accountId : env.STRIPE_TEST_ACCOUNT_ID;
     if (!['live', 'test'].includes(mode) || !accountId || typeof key !== 'string' ||
         !new RegExp(`^(sk|rk)_${mode}_`).test(key)) {
@@ -213,5 +215,9 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
       return res.status(200).json({ received: true, status: EVENTS.has(event.type) ? 'verified' : 'ignored' });
     } catch { return res.status(503).json({ error: 'webhook_processing_failed' }); }
   };
-  return { checkout, verify, entitlements, portal, webhook };
+  const readiness = wrap(async () => {
+    const { live } = await stripe();
+    return { configured: true, live, checkoutEnabled: env.CHECKOUT_ENABLED === 'true' };
+  }, true);
+  return { checkout, verify, entitlements, portal, webhook, readiness };
 }
