@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Receipt, Plus, Trash2, ArrowRight, DollarSign, Download, CreditCard, Sparkles, CheckCircle2, Split } from "lucide-react";
+import { Receipt, Plus, Trash2, ArrowRight, DollarSign, Download, CreditCard, Sparkles, Split } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const defaultMembers = ["Steven (Host)", "Sarah", "Alex", "Jordan"];

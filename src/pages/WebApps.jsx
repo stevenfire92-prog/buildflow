@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, Smartphone, Globe, Bot, Dumbbell, Receipt, Flame, Sparkles, ExternalLink, ShieldCheck, Share2, Crown, LayoutGrid, Monitor, CheckCircle2 } from "lucide-react";
+import { Smartphone, Bot, Dumbbell, Receipt, Flame, Sparkles, Share2, Monitor } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
 import FitnessTrackerWeb from "@/components/webapps/FitnessTrackerWeb";
@@ -11,7 +11,8 @@ import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import FounderMusicPlayer from "@/components/music/FounderMusicPlayer";
 import FounderSocialsBanner from "@/components/socials/FounderSocialsBanner";
 import { base44 } from "@/api/base44Client";
-import { CreditCard, Check } from "lucide-react";
+import { validatedCheckoutUrl } from "@/api/billingClient";
+import { CreditCard } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -96,7 +97,7 @@ export default function WebApps() {
     try {
       if (window.self !== window.top) {
         toast({
-          title: "Stripe Live Mode Active",
+          title: "Open the published app",
           description: "Stripe secure checkout launches on the published app or in a new browser tab.",
         });
       }
@@ -104,18 +105,12 @@ export default function WebApps() {
         appSlug: targetApp.id,
         appName: targetApp.name,
       });
-      if (res.data?.url) {
-        window.open(res.data.url, "_blank");
-      } else {
-        toast({
-          title: "Stripe Checkout Initiated",
-          description: `Redirecting to checkout for ${targetApp.name}...`,
-        });
-      }
-    } catch {
+      window.location.assign(validatedCheckoutUrl(res.data?.url));
+    } catch (error) {
       toast({
-        title: "Stripe Checkout Initiated",
-        description: `Redirecting to checkout for ${targetApp.name}...`,
+        title: "Checkout unavailable",
+        description: error?.message || "Checkout could not be started. No charge was made.",
+        variant: "destructive",
       });
     } finally {
       setBuyingStripe(false);

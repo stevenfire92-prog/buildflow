@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { History, Activity, ChevronDown, Sparkles } from "lucide-react";
+import { History, Activity, ChevronDown } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { csvEscape } from "@/lib/activityDisplay";

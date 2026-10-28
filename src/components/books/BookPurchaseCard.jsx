@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CreditCard, ShoppingBag, Clock, ExternalLink, Check, Copy, Trash2, ShieldCheck, Sparkles, AlertCircle } from "lucide-react";
+import { CreditCard, ShoppingBag, Clock, ExternalLink, Check, Copy, Trash2, ShieldCheck } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
 

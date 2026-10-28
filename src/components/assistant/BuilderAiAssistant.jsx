@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Bot, Sparkles, Send, X, RefreshCw, Volume2, CheckCircle2, ChevronRight, Copy, Check, ShieldCheck, Zap } from "lucide-react";
+import { Bot, Sparkles, Send, X, RefreshCw, Volume2, CheckCircle2, Copy, Check, ShieldCheck, Zap } from "lucide-react";
 import { vercelApi } from "@/lib/vercelApi";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import ReactMarkdown from "react-markdown";

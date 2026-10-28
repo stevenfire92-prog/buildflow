@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { DollarSign, Clock, Layers, User, Calendar, BookOpen, Check, Sparkles } from "lucide-react";
+import { DollarSign, Layers, BookOpen, Check, Sparkles } from "lucide-react";
 
 const PRESETS = [
   { label: "$4.99 Buy · $1.99 Rent (30d)", buy: "4.99", rent: "1.99", days: "30" },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Play, Pause, Volume2, VolumeX, Music, Disc3, Sparkles, ExternalLink, Flame, CreditCard } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Music, Disc3, ExternalLink, Flame, CreditCard } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
 

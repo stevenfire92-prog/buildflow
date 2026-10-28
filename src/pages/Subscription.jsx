@@ -19,7 +19,9 @@ export default function Subscription() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setPlan(localStorage.getItem("bf_plan") === "pro" ? "pro" : "free");
+    base44.functions.invoke("getEntitlements", {})
+      .then(({ data }) => setPlan(data.plan === "pro" ? "pro" : "free"))
+      .catch(() => { setPlan("free"); setError("Your subscription could not be verified. Please try again later."); });
   }, []);
 
   const startCheckout = async () => {
@@ -40,18 +42,13 @@ export default function Subscription() {
 
   const openPortal = async () => {
     setError("");
-    const sessionId = localStorage.getItem("bf_checkout_session");
-    if (!sessionId) {
-      setError("Upgrade to Pro first — your payment methods appear after your first checkout.");
-      return;
-    }
     if (window.self !== window.top) {
       setError("The billing portal works only from the published app — open the app in a new tab.");
       return;
     }
     setPortalLoading(true);
     try {
-      const res = await base44.functions.invoke("createBillingPortalSession", { sessionId });
+      const res = await base44.functions.invoke("createBillingPortalSession", {});
       window.location.href = res.data.url;
     } catch {
       setError("Could not open the billing portal. Please try again.");
@@ -67,7 +64,7 @@ export default function Subscription() {
     );
   }
 
-  const planDate = localStorage.getItem("bf_plan_date");
+  const planDate = null;
 
   return (
     <div className="min-h-screen bg-black">

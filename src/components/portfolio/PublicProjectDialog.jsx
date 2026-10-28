@@ -1,5 +1,5 @@
 import React from "react";
-import { X, Smartphone, Globe, Bot, CalendarDays, CheckCircle2, Circle, Target, Clock } from "lucide-react";
+import { Smartphone, Globe, Bot, CalendarDays, CheckCircle2, Circle, Target } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 

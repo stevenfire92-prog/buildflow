@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Store, ExternalLink, Copy, Check, Sparkles, Clock, ArrowUpRight } from "lucide-react";
+import { Store, Copy, Check, Sparkles, Clock, ArrowUpRight } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const STAN_STORE_URL = "https://stan.store/DeezNutz";

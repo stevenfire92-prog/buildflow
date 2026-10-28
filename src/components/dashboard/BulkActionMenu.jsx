@@ -3,24 +3,15 @@ import {
   CheckSquare, 
   Square, 
   MinusSquare, 
-  ChevronDown, 
   Trash2, 
-  Check, 
   X, 
   Layers, 
   AlertTriangle,
-  Sliders,
-  Sparkles
+  Sliders
 } from "lucide-react";
 import BulkStatusDialog from "./BulkStatusDialog";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+
+
 import {
   Dialog,
   DialogContent,

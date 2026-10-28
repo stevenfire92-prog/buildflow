@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, Download, RotateCw, Radio } from "lucide-react";
+import { Search, Download, RotateCw } from "lucide-react";
 
 export default function ActivityFeedFilter({
   activeTab,
