@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ShieldCheck, Copyright } from "lucide-react";
+import { Copyright } from "lucide-react";
 
 export default function AppFooter({ className = "" }) {
   return (

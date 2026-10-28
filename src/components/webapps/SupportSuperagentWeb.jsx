@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Bot, Send, Sparkles, CheckCircle2, AlertTriangle, Calendar, RefreshCw, ShieldCheck, Heart, User, Check, Star } from "lucide-react";
+import { Bot, Send, Sparkles, CheckCircle2, Calendar, ShieldCheck, Heart, User, Star } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const initialMessages = [

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dumbbell, Plus, Trash2, CheckCircle2, Flame, Award, HeartPulse, Sparkles, Share2, Download, RefreshCw } from "lucide-react";
+import { Dumbbell, Plus, Trash2, CheckCircle2, Flame, Award, HeartPulse, Sparkles } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const initialExercises = [

@@ -9,7 +9,8 @@
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc -p ./jsconfig.json",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:billing": "node tests/billing.test.js"
   },
   "dependencies": {
     "@base44/sdk": "^0.8.57",
@@ -72,6 +73,7 @@
     "react-router-dom": "^6.26.0",
     "recharts": "^2.15.4",
     "sonner": "^2.0.1",
+    "stripe": "^23.0.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.171.0",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Volume2, VolumeX, Play, Pause, RotateCcw, SkipForward, Headphones, Sparkles, X, ChevronUp, ChevronDown, Radio, Mic, Settings2 } from "lucide-react";
+import { Play, Pause, RotateCcw, SkipForward, Headphones, X, Radio, Mic } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const NARRATOR_CHAPTERS = [

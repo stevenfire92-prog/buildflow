@@ -5,8 +5,6 @@ import {
   ChevronRight,
   Calendar as CalendarIcon,
   Clock,
-  CheckCircle2,
-  AlertCircle,
   ExternalLink,
   RefreshCw,
   Sparkles

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flame, Plus, CheckCircle2, Circle, Shield, Sparkles, Award, Trash2, CalendarCheck, TrendingUp, Sun, Moon } from "lucide-react";
+import { Flame, Plus, CheckCircle2, Shield, Trash2, CalendarCheck, TrendingUp } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const initialHabits = [
