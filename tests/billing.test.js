@@ -14,7 +14,7 @@ function fixture(options = {}) {
   const env = { STRIPE_MODE: 'live', STRIPE_SECRET_KEY: 'sk_live_not_a_real_key', CHECKOUT_ENABLED: 'true', STRIPE_WEBHOOK_SECRET: 'whsec_test_only', ...options.env };
   class FakeStripe {
     constructor() {
-      this.accounts = { retrieve: async () => {state.calls.push('account');return { id: options.account || config.accountId, charges_enabled: options.charges !== false };} };
+      this.accounts = { retrieve: async () => {state.calls.push('account');if(options.stripeError)throw options.stripeError;return { id: options.account || config.accountId, charges_enabled: options.charges !== false };} };
       this.prices = { retrieve: async id => ({ id, active: true, livemode: true, currency: first.currency, unit_amount: first.amount, recurring: first.interval ? { interval: first.interval } : null, ...options.price }) };
       this.customers = { list: async () => ({ data: options.customers || [customer], has_more: false }), create: async () => customer };
       this.checkout = { sessions: {
@@ -71,6 +71,8 @@ test('replayed webhook is idempotent',async()=>{const f=fixture();const e={id:'e
 
 test('readiness reveals no secret values',async()=>{const f=fixture();const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,200);assert.equal(r.body.configured,true);assert.equal(JSON.stringify(r.body).includes('sk_live'),false);});
 test('readiness reports missing credentials without exposing environment',async()=>{const f=fixture({env:{STRIPE_SECRET_KEY:''}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,503);assert.equal(r.body.error,'payments_not_configured');});
+test('accidental surrounding whitespace does not invalidate a live key',async()=>{const f=fixture({env:{STRIPE_SECRET_KEY:' sk_live_not_a_real_key\n'}});assert.equal((await f.call('readiness',{}, {method:'GET',headers:{}})).statusCode,200);});
+for(const [type,code] of Object.entries({StripeAuthenticationError:'stripe_key_rejected',StripePermissionError:'stripe_permission_denied',StripeConnectionError:'stripe_connection_failed',StripeInvalidRequestError:'stripe_request_rejected',StripeRateLimitError:'stripe_rate_limited',UnexpectedError:'stripe_account_check_failed'}))test(`safe account-check failure: ${type}`,async()=>{const f=fixture({stripeError:{type,message:'secret sk_live_do_not_expose',raw:{secret:'private'}}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,503);assert.equal(r.body.error,code);assert.equal(JSON.stringify(r.body).includes('sk_live_'),false);assert.equal(JSON.stringify(r.body).includes('private'),false);assert.equal(f.state.sessions.length,0);});
 test('legacy key candidate is accepted only after account validation',async()=>{const f=fixture({env:{STRIPE_SECRET_KEY:'',se_fire_tech:'rk_live_not_a_real_key'}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,200);assert.equal(r.body.configured,true);});
 test('legacy key from another account fails closed',async()=>{const f=fixture({account:'acct_wrong',env:{STRIPE_SECRET_KEY:'',se_fire_tech:'rk_live_not_a_real_key'}});const r=await f.call('readiness',{}, {method:'GET',headers:{}});assert.equal(r.statusCode,503);assert.equal(r.body.error,'stripe_account_mismatch');});
 

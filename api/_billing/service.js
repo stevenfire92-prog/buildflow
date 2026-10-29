@@ -42,9 +42,10 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     return env.APP_URL || (env.VERCEL_ENV === 'preview' && env.VERCEL_URL ? `https://${env.VERCEL_URL}` : config.origin);
   }
   function stripeKey() {
-    return env.STRIPE_SECRET_KEY || (config.legacySecretKeys || [])
+    const key = env.STRIPE_SECRET_KEY || (config.legacySecretKeys || [])
       .map(name => env[name])
       .find(value => typeof value === 'string' && /^(sk|rk)_live_/.test(value));
+    return typeof key === 'string' ? key.trim() : key;
   }
   // No secret values are ever returned, logged, or imported by the browser.
   async function stripe() {
@@ -56,7 +57,20 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
       throw new BillingError(503, 'payments_not_configured', 'Payments are not available yet. No charge was made.');
     }
     const client = new StripeClient(key, { apiVersion: '2026-09-30.endive', maxNetworkRetries: 2 });
-    const account = await client.accounts.retrieve();
+    let account;
+    try {
+      account = await client.accounts.retrieve();
+    } catch (error) {
+      // Never return Stripe's raw message: authentication errors may contain key fragments.
+      const category = {
+        StripeAuthenticationError: 'stripe_key_rejected',
+        StripePermissionError: 'stripe_permission_denied',
+        StripeConnectionError: 'stripe_connection_failed',
+        StripeInvalidRequestError: 'stripe_request_rejected',
+        StripeRateLimitError: 'stripe_rate_limited',
+      }[error.type] || 'stripe_account_check_failed';
+      throw new BillingError(503, category, 'The Stripe account connection could not be verified. No charge was made.');
+    }
     if (account.id !== accountId) {
       throw new BillingError(503, 'stripe_account_mismatch', 'Payments are unavailable while the account connection is corrected.');
     }
