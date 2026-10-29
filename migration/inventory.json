@@ -1,0 +1,695 @@
+{
+  "schemaVersion": 1,
+  "scope": "static-source-only; dynamically constructed SDK access may be missed",
+  "entities": [
+    "base44/entities/ActivityLog.jsonc",
+    "base44/entities/AlertState.jsonc",
+    "base44/entities/Comment.jsonc",
+    "base44/entities/KindleBook.jsonc",
+    "base44/entities/MusicProfile.jsonc",
+    "base44/entities/Project.jsonc",
+    "base44/entities/ProjectFile.jsonc",
+    "base44/entities/ProjectTemplate.jsonc",
+    "base44/entities/Translation.jsonc",
+    "base44/entities/User.jsonc"
+  ],
+  "backendFunctions": [
+    "base44/functions/aiAssistantChat/entry.ts",
+    "base44/functions/backupProjectToDrive/entry.ts",
+    "base44/functions/backupProjectsToDrive/entry.ts",
+    "base44/functions/createBillingPortalSession/entry.ts",
+    "base44/functions/createBookCheckoutSession/entry.ts",
+    "base44/functions/createCheckoutSession/entry.ts",
+    "base44/functions/deleteProjectFileFromDrive/entry.ts",
+    "base44/functions/exportWeeklyMetricsToSheet/entry.ts",
+    "base44/functions/getDriveFilePreviewUrl/entry.ts",
+    "base44/functions/getMusicProfileStats/entry.ts",
+    "base44/functions/getRevenueSummary/entry.ts",
+    "base44/functions/getSheetGrowthDashboard/entry.ts",
+    "base44/functions/getTranslations/entry.ts",
+    "base44/functions/sendDeadlineAlerts/entry.ts",
+    "base44/functions/sendTeamActivityAlert/entry.ts",
+    "base44/functions/sendWeeklyGmailReport/entry.ts",
+    "base44/functions/syncProjectDeadlinesToCalendar/entry.ts",
+    "base44/functions/uploadProjectFileToDrive/entry.ts",
+    "base44/functions/verifyCheckoutSession/entry.ts"
+  ],
+  "workflows": [
+    "base44/workflows/Daily Sales and Metrics To Sheet.jsonc",
+    "base44/workflows/Project Autosave To Drive.jsonc",
+    "base44/workflows/Project Deadline Alerts.jsonc",
+    "base44/workflows/Project Deadline To Calendar.jsonc",
+    "base44/workflows/Team Activity Alerts.jsonc",
+    "base44/workflows/Weekly Drive Backup.jsonc",
+    "base44/workflows/Weekly Gmail Report.jsonc",
+    "base44/workflows/Weekly Metrics To Sheet.jsonc"
+  ],
+  "connectors": [
+    "base44/connectors/gmail.jsonc",
+    "base44/connectors/googlecalendar.jsonc",
+    "base44/connectors/googledrive.jsonc",
+    "base44/connectors/googlesheets.jsonc",
+    "base44/connectors/wix.jsonc"
+  ],
+  "existingVercelRoutes": [
+    "api/_billing/config.js",
+    "api/_billing/index.js",
+    "api/_billing/service.js",
+    "api/_lib/auth.js",
+    "api/_lib/serverConfig.js",
+    "api/ai-assistant.js",
+    "api/auth/session.js",
+    "api/backend-readiness.js",
+    "api/billing-portal.js",
+    "api/checkout.js",
+    "api/entitlements.js",
+    "api/health.js",
+    "api/payment-readiness.js",
+    "api/projects.js",
+    "api/verify-checkout.js",
+    "api/webhooks/stripe.js"
+  ],
+  "environmentNamesReferencedDirectly": [
+    "DATABASE_URL",
+    "OPENAI_API_KEY",
+    "OPENAI_MODEL",
+    "VITE_BASE44_FUNCTIONS_VERSION"
+  ],
+  "base44References": [
+    {
+      "path": "src/components/books/BookPurchaseCard.jsx",
+      "line": 37,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/dashboard/ActivityLog.jsx",
+      "line": 23,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/ActivityLog.jsx",
+      "line": 44,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/ActivityLog.jsx",
+      "line": 84,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/DashboardCalendarView.jsx",
+      "line": 48,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/dashboard/GrowthSummary.jsx",
+      "line": 14,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/GrowthSummary.jsx",
+      "line": 19,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/KindleBooks.jsx",
+      "line": 31,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/KindleBooks.jsx",
+      "line": 56,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/KindleBooks.jsx",
+      "line": 85,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/KindleBooks.jsx",
+      "line": 125,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/KindleBooks.jsx",
+      "line": 166,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/KindleBooks.jsx",
+      "line": 193,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/MusicProfiles.jsx",
+      "line": 66,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/dashboard/MusicProfiles.jsx",
+      "line": 85,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/MusicProfiles.jsx",
+      "line": 101,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/OnboardingChecklist.jsx",
+      "line": 15,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/OnboardingChecklist.jsx",
+      "line": 18,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/ProjectBoard.jsx",
+      "line": 31,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/ProjectComments.jsx",
+      "line": 26,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/ProjectComments.jsx",
+      "line": 30,
+      "service": "auth"
+    },
+    {
+      "path": "src/components/dashboard/ProjectComments.jsx",
+      "line": 38,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/dashboard/RevenueSummary.jsx",
+      "line": 30,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/dashboard/UpgradeButton.jsx",
+      "line": 18,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/music/FounderMusicPlayer.jsx",
+      "line": 188,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/portfolio/SheetsSalesActivityChart.jsx",
+      "line": 25,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/portfolio/SheetsSalesActivityChart.jsx",
+      "line": 43,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/projects/FilePreviewDialog.jsx",
+      "line": 19,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/projects/ProjectEditForm.jsx",
+      "line": 27,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/projects/ProjectFiles.jsx",
+      "line": 27,
+      "service": "entities"
+    },
+    {
+      "path": "src/components/projects/ProjectFiles.jsx",
+      "line": 44,
+      "service": "integrations"
+    },
+    {
+      "path": "src/components/projects/ProjectFiles.jsx",
+      "line": 45,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/projects/ProjectFiles.jsx",
+      "line": 70,
+      "service": "functions"
+    },
+    {
+      "path": "src/components/projects/TaskChecklist.jsx",
+      "line": 19,
+      "service": "entities"
+    },
+    {
+      "path": "src/lib/AuthContext.jsx",
+      "line": 84,
+      "service": "auth"
+    },
+    {
+      "path": "src/lib/AuthContext.jsx",
+      "line": 111,
+      "service": "auth"
+    },
+    {
+      "path": "src/lib/AuthContext.jsx",
+      "line": 114,
+      "service": "auth"
+    },
+    {
+      "path": "src/lib/AuthContext.jsx",
+      "line": 120,
+      "service": "auth"
+    },
+    {
+      "path": "src/lib/PageNotFound.jsx",
+      "line": 14,
+      "service": "auth"
+    },
+    {
+      "path": "src/lib/activityLog.js",
+      "line": 5,
+      "service": "auth"
+    },
+    {
+      "path": "src/lib/activityLog.js",
+      "line": 13,
+      "service": "entities"
+    },
+    {
+      "path": "src/lib/i18n/LanguageContext.jsx",
+      "line": 42,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/AccountSettings.jsx",
+      "line": 22,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/AccountSettings.jsx",
+      "line": 41,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Dashboard.jsx",
+      "line": 90,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Dashboard.jsx",
+      "line": 91,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Dashboard.jsx",
+      "line": 117,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Dashboard.jsx",
+      "line": 118,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Dashboard.jsx",
+      "line": 140,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Dashboard.jsx",
+      "line": 165,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/DeadlineCalendar.jsx",
+      "line": 20,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/DeadlineCalendar.jsx",
+      "line": 22,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/DeadlineCalendar.jsx",
+      "line": 43,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/ForgotPassword.jsx",
+      "line": 19,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/GrowthDashboard.jsx",
+      "line": 23,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/GrowthDashboard.jsx",
+      "line": 32,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/GrowthDashboard.jsx",
+      "line": 45,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/GrowthDashboard.jsx",
+      "line": 47,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/Login.jsx",
+      "line": 26,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Login.jsx",
+      "line": 36,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/NewProject.jsx",
+      "line": 33,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/OAuthConsent.jsx",
+      "line": 48,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Portfolio.jsx",
+      "line": 24,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/ProjectDetails.jsx",
+      "line": 36,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/ProjectDetails.jsx",
+      "line": 43,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/ProjectDetails.jsx",
+      "line": 62,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/ProjectDetails.jsx",
+      "line": 84,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Register.jsx",
+      "line": 32,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Register.jsx",
+      "line": 45,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Register.jsx",
+      "line": 47,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Register.jsx",
+      "line": 60,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Register.jsx",
+      "line": 71,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/ResetPassword.jsx",
+      "line": 28,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Subscription.jsx",
+      "line": 22,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/Subscription.jsx",
+      "line": 35,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/Subscription.jsx",
+      "line": 51,
+      "service": "functions"
+    },
+    {
+      "path": "src/pages/Team.jsx",
+      "line": 20,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Team.jsx",
+      "line": 26,
+      "service": "auth"
+    },
+    {
+      "path": "src/pages/Templates.jsx",
+      "line": 24,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Templates.jsx",
+      "line": 33,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Templates.jsx",
+      "line": 45,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/Templates.jsx",
+      "line": 56,
+      "service": "entities"
+    },
+    {
+      "path": "src/pages/WebApps.jsx",
+      "line": 104,
+      "service": "functions"
+    },
+    {
+      "path": "base44/functions/aiAssistantChat/entry.ts",
+      "line": 26,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/aiAssistantChat/entry.ts",
+      "line": 28,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/aiAssistantChat/entry.ts",
+      "line": 59,
+      "service": "integrations"
+    },
+    {
+      "path": "base44/functions/backupProjectToDrive/entry.ts",
+      "line": 26,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/backupProjectsToDrive/entry.ts",
+      "line": 19,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/backupProjectsToDrive/entry.ts",
+      "line": 20,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/backupProjectsToDrive/entry.ts",
+      "line": 21,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/createBookCheckoutSession/entry.ts",
+      "line": 26,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/createBookCheckoutSession/entry.ts",
+      "line": 29,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/deleteProjectFileFromDrive/entry.ts",
+      "line": 10,
+      "service": "auth"
+    },
+    {
+      "path": "base44/functions/deleteProjectFileFromDrive/entry.ts",
+      "line": 14,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/deleteProjectFileFromDrive/entry.ts",
+      "line": 28,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/exportWeeklyMetricsToSheet/entry.ts",
+      "line": 12,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/exportWeeklyMetricsToSheet/entry.ts",
+      "line": 13,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/exportWeeklyMetricsToSheet/entry.ts",
+      "line": 14,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/getDriveFilePreviewUrl/entry.ts",
+      "line": 7,
+      "service": "auth"
+    },
+    {
+      "path": "base44/functions/getDriveFilePreviewUrl/entry.ts",
+      "line": 19,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/getMusicProfileStats/entry.ts",
+      "line": 6,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/getTranslations/entry.ts",
+      "line": 29,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/getTranslations/entry.ts",
+      "line": 64,
+      "service": "integrations"
+    },
+    {
+      "path": "base44/functions/getTranslations/entry.ts",
+      "line": 96,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendDeadlineAlerts/entry.ts",
+      "line": 21,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendDeadlineAlerts/entry.ts",
+      "line": 22,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendDeadlineAlerts/entry.ts",
+      "line": 96,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendTeamActivityAlert/entry.ts",
+      "line": 24,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendTeamActivityAlert/entry.ts",
+      "line": 30,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendTeamActivityAlert/entry.ts",
+      "line": 34,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendTeamActivityAlert/entry.ts",
+      "line": 43,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendTeamActivityAlert/entry.ts",
+      "line": 103,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendTeamActivityAlert/entry.ts",
+      "line": 105,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendWeeklyGmailReport/entry.ts",
+      "line": 41,
+      "service": "auth"
+    },
+    {
+      "path": "base44/functions/sendWeeklyGmailReport/entry.ts",
+      "line": 55,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/sendWeeklyGmailReport/entry.ts",
+      "line": 132,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/syncProjectDeadlinesToCalendar/entry.ts",
+      "line": 53,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/syncProjectDeadlinesToCalendar/entry.ts",
+      "line": 132,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/syncProjectDeadlinesToCalendar/entry.ts",
+      "line": 159,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/syncProjectDeadlinesToCalendar/entry.ts",
+      "line": 167,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/uploadProjectFileToDrive/entry.ts",
+      "line": 12,
+      "service": "auth"
+    },
+    {
+      "path": "base44/functions/uploadProjectFileToDrive/entry.ts",
+      "line": 38,
+      "service": "entities"
+    },
+    {
+      "path": "base44/functions/uploadProjectFileToDrive/entry.ts",
+      "line": 51,
+      "service": "entities"
+    }
+  ]
+}
