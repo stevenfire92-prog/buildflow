@@ -34,8 +34,16 @@ Framework: Other. Node: 24.x. Root: `products/quote-studio`. Build: `npm run bui
 
 The browser cannot choose its customer, plan price or founder status. Stripe Customer ID maps to a verified user UUID in the private database. Checkout success does not grant access. The webhook reads current Stripe subscription/invoice state and transactionally records event IDs and entitlement periods. A subscription must be active with a paid latest invoice and an unexpired billing period. Webhooks fail with a non-2xx response if storage fails so Stripe can retry. Risk events conservatively block the entire customer's cloud access for manual review; later renewal events do not clear the hold. An operator must review the incident and remove the hold deliberately. This is not an automated refund or dispute resolution service.
 
-Checkout retries reuse one session in a 30-minute window. Before launch, concurrency tests must verify no duplicate active subscriptions under repeated requests. Local business profile and service library remain browser-local even in cloud mode; only estimates are synchronized. There is no team collaboration, public quote acceptance, automated email sending, payment collection for a business's own customers, or automated tax advice.
+Checkout retries reuse one session in a 30-minute window. Before launch, concurrency tests must verify no duplicate active subscriptions under repeated requests. Local business profile and service library remain browser-local even in cloud mode; only estimates are synchronized. There is no team collaboration, automated email sending, payment collection for a business's own customers, or automated tax advice. Public quote acceptance source is now provided by the cleaning extension; activation requires the migration and tests below.
 
 ## Verification recorded during implementation
 
 See `tests/` for calculation, input validation, HTML escaping, founder boundary, configuration gating and closed-by-default API checks. Those tests do not replace real Stripe events, SMTP delivery, a provisioned database, browser verification or cross-account authorization tests. No actual credentials are included.
+
+## Cleaning workflow extension (not yet browser-verified or deployed)
+
+Adds editable regular/deep/move-out scopes with business-entered rates, local repeat-customer records, per-estimate task checklists, follow-up due lists, email drafts, calendar reminder files, and private job cost/contribution estimates. These are software tools, not guaranteed market rates or earned profit. Customer records and service libraries remain on-device; estimates can sync after account configuration.
+
+Cloud approval code creates 14-day, token-protected customer snapshots with internal costs excluded. The token is hashed at rest. Creation/edit/acceptance use database locks and ownership checks. Apply db/cleaning-migration.sql after schema.sql before enabling this feature. Link holders supply their name and consent; identity is not independently verified. Edits revoke existing review links. No public approvals are operational until cloud storage, schema and account membership are configured. Test concurrent edits/approvals and ownership isolation against a real database before use.
+
+21 Node tests currently pass. Browser verification of the extension and database integration remains pending. Follow-up emails are drafts for manual review and sending. Calendar reminders require the user to import the .ics file; there is no automatic outbound messaging.

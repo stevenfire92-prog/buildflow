@@ -16,7 +16,10 @@ export function normalizeQuote(input) {
     title:text(input.title,150),notes:text(input.notes,2000),date:date.test(input.date)?input.date:new Date().toISOString().slice(0,10),
     validUntil:date.test(input.validUntil)?input.validUntil:'',currency:['CAD','USD','GBP','EUR'].includes(input.currency)?input.currency:'CAD',
     discount:decimal(input.discount ?? 0,'discount',100),tax:decimal(input.tax ?? 0,'tax',100),deposit:decimal(input.deposit ?? 0,'deposit',100),
-    status:['draft','sent','accepted','declined'].includes(input.status)?input.status:'draft',items
+    status:['draft','sent','accepted','declined'].includes(input.status)?input.status:'draft',items,
+    customerId:text(input.customerId,80),followUpDate:date.test(input.followUpDate)?input.followUpDate:'',lastContacted:date.test(input.lastContacted)?input.lastContacted:'',
+    checklist:(Array.isArray(input.checklist)?input.checklist:[]).slice(0,50).map(c=>({label:text(c.label,200),done:c.done===true})).filter(c=>c.label),
+    jobCosts:Object.fromEntries(['labourHours','labourRate','supplies','travel','overhead'].map(k=>[k,decimal(input.jobCosts?.[k]??0,k,1000000)]))
   };
 }
 export function totals(q) {
