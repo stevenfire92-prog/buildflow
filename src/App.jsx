@@ -1,11 +1,11 @@
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import { AuthProvider } from '@/lib/AuthContext';
+import AuthGate from '@/components/AuthGate';
 import ScrollToTop from './components/ScrollToTop';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 // Add page imports here
@@ -29,45 +29,25 @@ import NarratorGuide from './components/narrator/NarratorGuide';
 import BuilderAiAssistant from './components/assistant/BuilderAiAssistant';
 
 const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
-
-  // Show loading spinner while checking app public settings or auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  // Handle authentication errors
-  if (authError) {
-    if (authError.type === 'user_not_registered') {
-      return <UserNotRegisteredError />;
-    } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
-      navigateToLogin();
-      return null;
-    }
-  }
-
   // Render the main app
   return (
+    <AuthGate>
     <Routes>
     {/* Add your page Route elements here */}
     <Route path="/" element={<Home />} />
+    <Route path="/portfolio" element={<Portfolio />} />
+    <Route path="/share" element={<Portfolio />} />
+    <Route path="/apps" element={<WebApps />} />
+    <Route path="/web-apps" element={<WebApps />} />
+
+    <Route element={<ProtectedRoute />} >
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/project-details" element={<ProjectDetails />} />
     <Route path="/subscription" element={<Subscription />} />
     <Route path="/new-project" element={<NewProject />} />
     <Route path="/templates" element={<Templates />} />
     <Route path="/growth-dashboard" element={<GrowthDashboard />} />
-    <Route path="/portfolio" element={<Portfolio />} />
-    <Route path="/share" element={<Portfolio />} />
     <Route path="/calendar" element={<DeadlineCalendar />} />
-    <Route path="/apps" element={<WebApps />} />
-    <Route path="/web-apps" element={<WebApps />} />
-    <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
       <Route path="/account-settings" element={<AccountSettings />} />
       <Route path="/team" element={<Team />} />
     </Route>
@@ -77,6 +57,7 @@ const AuthenticatedApp = () => {
     <Route path="/reset-password" element={<ResetPassword />} />
     <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </AuthGate>
   );
 };
 
