@@ -1,0 +1,1 @@
+export default function handler(req,res){res.setHeader('Cache-Control','no-store');if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});return res.status(200).json({app:'buildflow-independent',status:'ok',storage:'browser-local',templateBuilder:true,codeEditor:true,htmlExport:true,aiGeneration:false,cloudAccounts:false,cloudDeployment:false});}
