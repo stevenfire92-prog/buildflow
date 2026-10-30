@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import MusicSection from '../components/MusicSection';
+import ShareButtons from '../components/ShareButtons';
 
 const FEATURES = [
   { icon: BarChart3, title: 'Live revenue dashboard', text: 'Gross volume, MRR, sales streaks and every payment — live from Stripe, beautifully visualized.' },
@@ -179,6 +181,18 @@ export default function Landing() {
               </Card>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Music + share */}
+      <section className="px-4 py-10">
+        <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4">
+          <motion.div {...fadeUp}>
+            <MusicSection />
+          </motion.div>
+          <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
+            <ShareButtons title="GlobePay — Monetize everything" text="Monetize everything with GlobePay — products, payment links, live revenue dashboard." />
+          </motion.div>
         </div>
       </section>
 
