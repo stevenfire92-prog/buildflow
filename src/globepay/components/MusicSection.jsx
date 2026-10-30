@@ -4,13 +4,17 @@ import { Music2, ExternalLink } from 'lucide-react';
 
 export const SE_FIRE_SPOTIFY = 'https://open.spotify.com/artist/0pvxsVN3Cj3MochJhfROvm';
 export const SE_FIRE_SPOTIFY_EMBED = 'https://open.spotify.com/embed/artist/0pvxsVN3Cj3MochJhfROvm?utm_source=generator&theme=0';
-export const STEVEN_APPLE_MUSIC = 'https://music.apple.com/ca/artist/steven-thomas-turcott/1729066564';
+export const STEVEN_APPLE_MUSIC = [
+  { name: 'Apple Music', url: 'https://music.apple.com/ca/artist/steven-thomas-turcott/1729066564' },
+  { name: 'Apple Music 2', url: 'https://music.apple.com/ca/artist/steven-turcott/1727817453' },
+];
 
 export default function MusicSection({ soundcloud, appleMusic = STEVEN_APPLE_MUSIC, amazonMusic, accent = 'emerald' }) {
+  const appleLinks = Array.isArray(appleMusic) ? appleMusic : (appleMusic ? [{ name: 'Apple Music', url: appleMusic }] : []);
   const platforms = [
     { name: 'Spotify', url: SE_FIRE_SPOTIFY, color: 'bg-[#1DB954]/15 border-[#1DB954]/40 text-[#1DB954]' },
+    ...appleLinks.map((a) => ({ name: a.name, url: a.url, color: 'bg-rose-500/15 border-rose-500/40 text-rose-400' })),
     soundcloud && { name: 'SoundCloud', url: soundcloud, color: 'bg-orange-500/15 border-orange-500/40 text-orange-400' },
-    appleMusic && { name: 'Apple Music', url: appleMusic, color: 'bg-rose-500/15 border-rose-500/40 text-rose-400' },
     amazonMusic && { name: 'Amazon Music', url: amazonMusic, color: 'bg-sky-500/15 border-sky-500/40 text-sky-400' },
   ].filter(Boolean);
 
