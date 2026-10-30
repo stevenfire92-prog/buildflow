@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Play, Check, Lock } from 'lucide-react';
 import { toast } from 'sonner';
-import { isFounder } from '../lib/founder';
 
 // Track bundles — buy outright or rent monthly. Edit tracks/pricing here.
 export const BUNDLES = [
@@ -58,12 +57,6 @@ export default function MerchHub() {
   const setTier = (bundleId, tier) => setTiers((t) => ({ ...t, [bundleId]: tier }));
 
   const handleBuy = (bundle) => {
-    const tier = getTier(bundle.id);
-    // Founder: free instant access, no checkout
-    if (isFounder()) {
-      toast.success(`Founder access granted — "${bundle.name}" (${tier}) is yours 👑`);
-      return;
-    }
     if (!STRIPE_CONNECTED) {
       toast.info('Checkout coming soon — paid features are under maintenance.');
       return;
@@ -152,17 +145,15 @@ export default function MerchHub() {
 
               <button
                 onClick={() => handleBuy(bundle)}
-                disabled={!STRIPE_CONNECTED && !isFounder()}
+                disabled={!STRIPE_CONNECTED}
                 className={`w-full rounded-xl py-3.5 font-bold flex items-center justify-center gap-2 transition ${
-                  STRIPE_CONNECTED || isFounder()
+                  STRIPE_CONNECTED
                     ? 'bg-gradient-to-r from-orange-500 to-red-600 hover:brightness-110'
                     : 'bg-white/5 border border-white/10 text-slate-500 cursor-not-allowed'
                 }`}
               >
-                {!STRIPE_CONNECTED && !isFounder() && <Lock className="w-4 h-4" />}
-                {isFounder()
-                  ? `Get free — Founder 👑`
-                  : STRIPE_CONNECTED
+                {!STRIPE_CONNECTED && <Lock className="w-4 h-4" />}
+                {STRIPE_CONNECTED
                   ? getTier(bundle.id) === 'buy'
                     ? `Buy now — $${bundle.buyPrice}`
                     : `Rent now — $${bundle.rentPrice}/mo`
