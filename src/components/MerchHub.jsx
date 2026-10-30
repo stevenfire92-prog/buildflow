@@ -56,7 +56,25 @@ export default function MerchHub() {
   const getTier = (bundleId) => tiers[bundleId] || 'buy';
   const setTier = (bundleId, tier) => setTiers((t) => ({ ...t, [bundleId]: tier }));
 
+  const isFounder = () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('founder') === 'sefire2026') {
+        localStorage.setItem('sfi:founder', 'true');
+        const url = new URL(window.location.href);
+        url.searchParams.delete('founder');
+        window.history.replaceState({}, '', url.toString());
+      }
+      return localStorage.getItem('sfi:founder') === 'true';
+    } catch { return false; }
+  };
+
   const handleBuy = (bundle) => {
+    const tier = getTier(bundle.id);
+    if (isFounder()) {
+      toast.success(`Founder access — "${bundle.name}" (${tier}) is yours`);
+      return;
+    }
     if (!STRIPE_CONNECTED) {
       toast.info('Checkout coming soon — paid features are under maintenance.');
       return;
@@ -145,15 +163,15 @@ export default function MerchHub() {
 
               <button
                 onClick={() => handleBuy(bundle)}
-                disabled={!STRIPE_CONNECTED}
+                disabled={!STRIPE_CONNECTED && !isFounder()}
                 className={`w-full rounded-xl py-3.5 font-bold flex items-center justify-center gap-2 transition ${
-                  STRIPE_CONNECTED
+                  STRIPE_CONNECTED || isFounder()
                     ? 'bg-gradient-to-r from-orange-500 to-red-600 hover:brightness-110'
                     : 'bg-white/5 border border-white/10 text-slate-500 cursor-not-allowed'
                 }`}
               >
-                {!STRIPE_CONNECTED && <Lock className="w-4 h-4" />}
-                {STRIPE_CONNECTED
+                {!STRIPE_CONNECTED && !isFounder() && <Lock className="w-4 h-4" />}
+                {isFounder() ? `Get free — Founder` : STRIPE_CONNECTED
                   ? getTier(bundle.id) === 'buy'
                     ? `Buy now — $${bundle.buyPrice}`
                     : `Rent now — $${bundle.rentPrice}/mo`
