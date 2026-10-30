@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import MusicSection from '../components/MusicSection';
+import ShareButtons from '../components/ShareButtons';
 
 const FEATURES = [
   { icon: MessageSquareText, title: 'Describe it in words', text: 'No code, no drag-and-drop puzzles. Just tell Dr Build what you want like you\'d tell a developer.' },
@@ -171,6 +173,18 @@ export default function Landing() {
               </Card>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Music + share */}
+      <section className="px-4 py-10">
+        <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4">
+          <motion.div {...fadeUp}>
+            <MusicSection />
+          </motion.div>
+          <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
+            <ShareButtons title="Dr Build AI — Describe it. Ship it." text="Build apps with AI: describe it, watch it build live, ship it. Try Dr Build AI free." />
+          </motion.div>
         </div>
       </section>
 
