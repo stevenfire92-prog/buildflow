@@ -63,6 +63,9 @@ const AuthenticatedApp = () => {
 
 
 function App() {
+  React.useEffect(() => {
+    import('@/lib/founder').then(({ checkFounderUrl }) => checkFounderUrl());
+  }, []);
 
   return (
     <AuthProvider>
