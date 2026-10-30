@@ -1,4 +1,4 @@
-import { getAccessToken } from '@base44/sdk';
+import { getAccessToken } from './base44Client';
 
 const ROUTES = {
   createCheckoutSession: '/api/checkout',
