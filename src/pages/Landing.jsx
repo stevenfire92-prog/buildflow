@@ -8,6 +8,7 @@ import {
 import { toast } from 'sonner';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import MerchHub from '../components/MerchHub';
 
 const TRACKS = [
   { title: 'NOW I SEE THA REAPER', tag: 'Latest heat', icon: '🔥' },
@@ -60,6 +61,12 @@ export default function Landing() {
             <span className="font-bold text-lg tracking-tight">Se Fire</span>
             <span className="hidden sm:inline text-xs text-slate-500 border border-white/10 rounded-full px-2.5 py-1">Official Hub</span>
           </div>
+          <a
+            href="#merch"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-orange-300 transition"
+          >
+            <ShoppingBag className="w-4 h-4" /> Merch
+          </a>
           <a
             href="https://open.spotify.com/artist/0pvxsVN3Cj3MochJhfROvm"
             target="_blank"
@@ -177,13 +184,16 @@ export default function Landing() {
       </section>
 
       {/* Music embed */}
-      <section className="px-4 py-12">
+      <section id="music" className="px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <MusicSection accent="orange" />
           </motion.div>
         </div>
       </section>
+
+      {/* Merch hub */}
+      <MerchHub />
 
       {/* About */}
       <section className="px-4 py-12">
