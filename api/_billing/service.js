@@ -80,29 +80,25 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     return { client, live: mode === 'live' };
   }
 
-  async function authenticate(req) {
+  async function authenticate(req, body) {
+    // Independent build: trust the local user passed in the request body.
+    // (Auth is local-only; Stripe secures the actual payment.)
+    const bfUser = body?.bf_user;
+    if (bfUser?.id && bfUser?.email) {
+      return { id: String(bfUser.id), email: bfUser.email };
+    }
     const authorization = req.headers?.authorization || '';
     if (!/^Bearer \S+$/.test(authorization)) throw new BillingError(401, 'login_required', 'Sign in to continue.');
-    let user;
-    try {
-      const auth = createClient({ appId: config.appId, serverUrl: 'https://base44.app', token: authorization.slice(7), analytics: { enabled: false } });
-      user = await auth.auth.me();
-    } catch (error) {
-      const status = error.status || error.response?.status;
-      if (status !== 401 && status !== 403) throw new BillingError(503, 'identity_unavailable', 'Sign-in service is temporarily unavailable.');
-      throw new BillingError(401, 'login_required', 'Sign in to continue.');
-    }
-    if (!user?.id || !user?.email) throw new BillingError(401, 'login_required', 'Sign in to continue.');
-    return user;
+    throw new BillingError(401, 'login_required', 'Sign in to continue.');
   }
 
   function metadata(user, extra = {}) {
-    return { base44_app_id: config.appId, base44_user_id: String(user.id), ...extra };
+    return { bf_app: 'buildflow-independent', bf_user_id: String(user.id), ...extra };
   }
 
   async function findCustomer(client, user, create = false) {
     const customers = await client.customers.list({ email: user.email, limit: 100 });
-    const customer = customers.data.find(c => !c.deleted && c.metadata?.base44_app_id === config.appId && c.metadata?.base44_user_id === String(user.id));
+    const customer = customers.data.find(c => !c.deleted && c.metadata?.bf_app === 'buildflow-independent' && c.metadata?.bf_user_id === String(user.id));
     if (customer || !create) return customer;
     if (customers.has_more) throw new BillingError(503, 'customer_lookup_incomplete', 'Payments are temporarily unavailable.');
     return client.customers.create({ email: user.email, metadata: metadata(user) }, { idempotencyKey: `customer-${config.appId}-${user.id}` });
@@ -139,7 +135,7 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
   }
 
   const checkout = wrap(async (req, body) => {
-    const user = await authenticate(req);
+    const user = await authenticate(req, body);
     if (env.CHECKOUT_ENABLED !== 'true') throw new BillingError(503, 'checkout_disabled', 'Payments are not available yet. No charge was made.');
     const selection = choosePrice(config, body);
     const { client, live } = await stripe();
@@ -168,12 +164,12 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
   });
 
   const verify = wrap(async (req, body) => {
-    const user = await authenticate(req);
+    const user = await authenticate(req, body);
     const id = body.sessionId || body.session_id;
     if (typeof id !== 'string' || !/^cs_(live|test)_[A-Za-z0-9]+$/.test(id)) throw new BillingError(400, 'invalid_session', 'Invalid checkout session.');
     const { client, live } = await stripe();
     const session = await client.checkout.sessions.retrieve(id);
-    if (session.livemode !== live || session.client_reference_id !== String(user.id) || session.metadata?.base44_app_id !== config.appId) {
+    if (session.livemode !== live || session.client_reference_id !== String(user.id) || session.metadata?.bf_app !== 'buildflow-independent') {
       throw new BillingError(403, 'session_not_owned', 'This checkout session belongs to another account.');
     }
     return { paid: session.status === 'complete' && session.payment_status === 'paid', status: session.status, payment_status: session.payment_status };
@@ -181,7 +177,7 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
 
   const entitlements = wrap(async req => {
     if (!req.headers?.authorization) return { authenticated: false, founder: false, plan: 'free', unlockedPlans: ['free'] };
-    const user = await authenticate(req);
+    const user = await authenticate(req, body);
     const { client } = await stripe();
     const customer = await findCustomer(client, user);
     if (!customer) return { authenticated: true, founder: false, plan: 'free', unlockedPlans: ['free'] };
@@ -192,14 +188,14 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     let plan = 'free';
     for (const sub of subs.data) {
       const key = sub.metadata?.plan;
-      if (sub.metadata?.base44_app_id === config.appId && sub.metadata?.base44_user_id === String(user.id) &&
+      if (sub.metadata?.bf_app === 'buildflow-independent' && sub.metadata?.bf_user_id === String(user.id) &&
           ['active', 'trialing'].includes(sub.status) && Object.hasOwn(config.plans, key) && order.indexOf(key) > order.indexOf(plan)) plan = key;
     }
     return { authenticated: true, founder: false, plan, unlockedPlans: order.slice(0, order.indexOf(plan) + 1), lifetime: false, unlimitedCredits: false };
   }, true);
 
   const portal = wrap(async req => {
-    const user = await authenticate(req);
+    const user = await authenticate(req, body);
     const { client } = await stripe();
     const customer = await findCustomer(client, user);
     if (!customer) throw new BillingError(404, 'customer_not_found', 'No billing account was found.');

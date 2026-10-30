@@ -212,13 +212,18 @@ const BILLING_ROUTES = {
 async function invokeFunction(name, data = {}) {
   if (BILLING_ROUTES[name]) {
     const token = auth.getToken();
+    const user = getUser();
     const response = await fetch(BILLING_ROUTES[name], {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        // Independent build: identify the local user to the billing backend.
+        bf_user: user ? { id: user.id, email: user.email } : undefined,
+      }),
     });
     const result = await response.json().catch(() => ({ error: 'invalid_response' }));
     if (!response.ok) {
