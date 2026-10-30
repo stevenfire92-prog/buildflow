@@ -1,0 +1,1 @@
+import {mkdir,cp} from 'node:fs/promises';await mkdir('public/lib',{recursive:true});await cp('src','public',{recursive:true});await cp('lib/generator.js','public/lib/generator.js');console.log('Built independent BuildFlow Studio. No package installation required.');
