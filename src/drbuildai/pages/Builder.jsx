@@ -44,7 +44,11 @@ function ChatMessage({ msg }) {
             ))}
           </div>
         ) : (
-          <span dangerouslySetInnerHTML={{ __html: msg.text.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>') }} />
+          <span>{msg.text.split(/(\*\*.+?\*\*)/g).map((part, index) => (
+            part.startsWith('**') && part.endsWith('**')
+              ? <strong key={index}>{part.slice(2, -2)}</strong>
+              : part
+          ))}</span>
         )}
       </div>
     </motion.div>
@@ -77,13 +81,14 @@ export default function Builder() {
     setMessages((m) => [...m, { role: 'ai', text: aiGreeting(prompt, blueprint, appName) }]);
     await wait(800);
 
-    const stepsMsg = { role: 'ai', steps: blueprint.steps, stepsDone: 0 };
+    const stepsId = crypto.randomUUID();
+    const stepsMsg = { id: stepsId, role: 'ai', steps: blueprint.steps, stepsDone: 0 };
     setMessages((m) => [...m, stepsMsg]);
 
     for (let i = 0; i < blueprint.steps.length; i++) {
       await wait(900 + Math.random() * 700);
       const done = i + 1;
-      setMessages((m) => m.map((msg) => (msg === stepsMsg ? { ...msg, stepsDone: done } : msg)));
+      setMessages((m) => m.map((msg) => (msg.id === stepsId ? { ...msg, stepsDone: done } : msg)));
       if (done === 2) setPreview({ blueprintId: blueprint.id, appName, partial: true });
     }
 
