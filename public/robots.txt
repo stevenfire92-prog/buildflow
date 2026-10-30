@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://defiant-build-flow-labs.base44.app/sitemap.xml
+Sitemap: https://se-fire-quote-studio.vercel.app/sitemap.xml
