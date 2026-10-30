@@ -199,7 +199,7 @@ export default function Landing() {
             <Globe2 className="w-4 h-4 text-emerald-300" />
             <span className="font-semibold text-slate-300">GlobePay</span> · Monetize everything, everywhere.
           </div>
-          <p>Payments processed securely by Stripe. GlobePay never holds your funds.</p>
+          <p>Payments processed securely by Stripe. GlobePay never holds your funds. <a href="/disclaimer" class="underline hover:text-slate-300">Disclaimer</a></p>
         </div>
       </footer>
     </div>

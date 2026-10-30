@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import PaymentLinks from './pages/PaymentLinks';
 import Goals from './pages/Goals';
 import Settings from './pages/Settings';
+import Disclaimer from './pages/Disclaimer';
 
 export default function GlobePayApp() {
   return (
@@ -18,6 +19,7 @@ export default function GlobePayApp() {
         <Route path="/links" element={<PaymentLinks />} />
         <Route path="/goals" element={<Goals />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
