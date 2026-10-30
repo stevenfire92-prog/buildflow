@@ -9,7 +9,9 @@ export const STEVEN_APPLE_MUSIC = [
   { name: 'Apple Music 2', url: 'https://music.apple.com/ca/artist/steven-turcott/1727817453' },
 ];
 
-export default function MusicSection({ soundcloud, appleMusic = STEVEN_APPLE_MUSIC, amazonMusic, accent = 'emerald' }) {
+export const STEVEN_SOUNDCLOUD = 'https://on.soundcloud.com/nvLoq8RUuO1CK8OpJA';
+
+export default function MusicSection({ soundcloud = STEVEN_SOUNDCLOUD, appleMusic = STEVEN_APPLE_MUSIC, amazonMusic, accent = 'emerald' }) {
   const appleLinks = Array.isArray(appleMusic) ? appleMusic : (appleMusic ? [{ name: 'Apple Music', url: appleMusic }] : []);
   const platforms = [
     { name: 'Spotify', url: SE_FIRE_SPOTIFY, color: 'bg-[#1DB954]/15 border-[#1DB954]/40 text-[#1DB954]' },
