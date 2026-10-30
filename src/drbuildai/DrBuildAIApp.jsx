@@ -7,6 +7,7 @@ import Builder from './pages/Builder';
 import Templates from './pages/Templates';
 import MyApps from './pages/MyApps';
 import Settings from './pages/Settings';
+import Disclaimer from './pages/Disclaimer';
 
 export default function DrBuildAIApp() {
   return (
@@ -18,6 +19,7 @@ export default function DrBuildAIApp() {
         <Route path="/templates" element={<Templates />} />
         <Route path="/apps" element={<MyApps />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

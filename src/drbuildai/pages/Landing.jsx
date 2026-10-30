@@ -190,7 +190,7 @@ export default function Landing() {
             <Stethoscope className="w-4 h-4 text-violet-300" />
             <span className="font-semibold text-slate-300">Dr Build AI</span> · Describe it. Ship it.
           </div>
-          <p>Your apps are your property. No lock-in, ever.</p>
+          <p>Your apps are your property. No lock-in, ever. <a href="/disclaimer" class="underline hover:text-slate-300">Disclaimer</a></p>
         </div>
       </footer>
     </div>
