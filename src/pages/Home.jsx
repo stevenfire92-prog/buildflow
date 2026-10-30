@@ -16,7 +16,7 @@ export default function Home() {
       <div className="pt-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-center text-sm text-amber-200">
-            Our apps are currently being upgraded and under maintenance — paid features don't work right now. Enjoy the full free demo.
+            This app is under construction — in no way, shape, or form is the pay option supposed to work right now. Enjoy the full free demo.
           </div>
         </div>
       </div>
