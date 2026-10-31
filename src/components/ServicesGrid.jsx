@@ -27,7 +27,7 @@ const SERVICES = [
     icon: Smartphone,
     name: 'Mobile Apps',
     tagline: 'iOS & Android apps',
-    price: 'from $6,000',
+    price: 'from $3,500',
     market: '$10,000+ elsewhere',
     features: ['iOS + Android', 'Push notifications', 'Offline mode', 'App store launch', 'Analytics'],
   },
