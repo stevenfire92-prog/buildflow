@@ -19,6 +19,20 @@ export default function Subscription() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    // Founder mode: check URL param or saved flag (inline)
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('founder') === 'sefire2026') {
+        localStorage.setItem('sfi:founder', 'true');
+        const url = new URL(window.location.href);
+        url.searchParams.delete('founder');
+        window.history.replaceState({}, '', url.toString());
+      }
+      if (localStorage.getItem('sfi:founder') === 'true') {
+        setPlan("pro");
+        return;
+      }
+    } catch (e) { /* ignore */ }
     client.functions.invoke("getEntitlements", {})
       .then(({ data }) => setPlan(data.plan === "pro" ? "pro" : "free"))
       .catch(() => { setPlan("free"); setError("Your subscription could not be verified. Please try again later."); });
