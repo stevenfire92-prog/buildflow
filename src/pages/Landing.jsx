@@ -4,6 +4,7 @@ import { QrCode } from 'lucide-react';
 import QRGenerator from '../components/QRGenerator';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -26,6 +27,9 @@ export default function Landing() {
             QR codes, <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">instantly.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Links, text, WiFi, contacts — encode anything and download it in seconds.</p>
+          <div className="mt-5">
+            <ProUpgrade appName="Se Fire QR" />
+          </div>
         </motion.div>
       </div>
 
