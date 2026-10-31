@@ -9,7 +9,7 @@ const SERVICES = [
     icon: Globe,
     name: 'Websites',
     tagline: 'Stunning sites that convert',
-    price: 'from $1,200',
+    price: 'from $2,500',
     market: '$2,000+ elsewhere',
     features: ['Custom design', 'Mobile responsive', 'SEO optimized', 'Fast loading', 'Contact forms'],
   },
