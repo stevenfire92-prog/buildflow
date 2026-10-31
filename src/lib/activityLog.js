@@ -1,8 +1,8 @@
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 
 let userPromise = null;
 const getCurrentUser = () => {
-  if (!userPromise) userPromise = base44.auth.me().catch(() => null);
+  if (!userPromise) userPromise = client.auth.me().catch(() => null);
   return userPromise;
 };
 
@@ -10,7 +10,7 @@ const getCurrentUser = () => {
 export async function logActivity({ action, projectName, projectId, details }) {
   try {
     const user = await getCurrentUser();
-    await base44.entities.ActivityLog.create({
+    await client.entities.ActivityLog.create({
       action,
       project_name: projectName || "",
       project_id: projectId || "",

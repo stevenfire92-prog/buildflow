@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CheckSquare, Check } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -16,7 +16,7 @@ export default function TaskChecklist({ projectId, tasks, onUpdated }) {
     const next = tasks.map((tk, i) => (i === index ? { ...tk, done: !tk.done } : tk));
     setBusy(true);
     try {
-      const updated = await base44.entities.Project.update(projectId, {
+      const updated = await client.entities.Project.update(projectId, {
         tasks: next,
         last_activity: new Date().toISOString(),
       });

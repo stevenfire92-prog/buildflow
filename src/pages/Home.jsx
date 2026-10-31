@@ -1,13 +1,13 @@
 import React from "react";
-import Navbar from "@/components/base44/Navbar";
-import Hero from "@/components/base44/Hero";
-import StackSection from "@/components/base44/StackSection";
-import BuildTypes from "@/components/base44/BuildTypes";
-import DesignSection from "@/components/base44/DesignSection";
-import MarketingTools from "@/components/base44/MarketingTools";
-import Pricing from "@/components/base44/Pricing";
-import FAQ from "@/components/base44/FAQ";
-import Footer from "@/components/base44/Footer";
+import Navbar from "@/components/landing/Navbar";
+import Hero from "@/components/landing/Hero";
+import StackSection from "@/components/landing/StackSection";
+import BuildTypes from "@/components/landing/BuildTypes";
+import DesignSection from "@/components/landing/DesignSection";
+import MarketingTools from "@/components/landing/MarketingTools";
+import Pricing from "@/components/landing/Pricing";
+import FAQ from "@/components/landing/FAQ";
+import Footer from "@/components/landing/Footer";
 
 export default function Home() {
   return (

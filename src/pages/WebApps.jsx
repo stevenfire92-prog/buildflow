@@ -10,7 +10,7 @@ import HabitStreakWeb from "@/components/webapps/HabitStreakWeb";
 import UpgradeButton from "@/components/dashboard/UpgradeButton";
 import FounderMusicPlayer from "@/components/music/FounderMusicPlayer";
 import FounderSocialsBanner from "@/components/socials/FounderSocialsBanner";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { validatedCheckoutUrl } from "@/api/billingClient";
 import { CreditCard } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
@@ -101,7 +101,7 @@ export default function WebApps() {
           description: "Stripe secure checkout launches on the published app or in a new browser tab.",
         });
       }
-      const res = await base44.functions.invoke("createCheckoutSession", {
+      const res = await client.functions.invoke("createCheckoutSession", {
         appSlug: targetApp.id,
         appName: targetApp.name,
       });

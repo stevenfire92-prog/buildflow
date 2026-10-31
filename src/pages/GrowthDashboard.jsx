@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RefreshCw, Sheet, Mail, ExternalLink, Send, CheckCircle2 } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import AppHeader from "@/components/AppHeader";
 import GrowthStatsCards from "@/components/growth/GrowthStatsCards";
 import PortfolioGrowthChart from "@/components/growth/PortfolioGrowthChart";
@@ -20,7 +20,7 @@ export default function GrowthDashboard() {
   const [emailSentSuccess, setEmailSentSuccess] = useState(false);
 
   useEffect(() => {
-    base44.functions
+    client.functions
       .invoke("getSheetGrowthDashboard", {})
       .then((res) => setData(res.data))
       .catch(() => setError(true));
@@ -29,7 +29,7 @@ export default function GrowthDashboard() {
   const refresh = async () => {
     setRefreshing(true);
     try {
-      const res = await base44.functions.invoke("getSheetGrowthDashboard", {});
+      const res = await client.functions.invoke("getSheetGrowthDashboard", {});
       setData(res.data);
       setError(false);
     } catch {
@@ -42,9 +42,9 @@ export default function GrowthDashboard() {
     setSendingEmail(true);
     try {
       // First ensure Google Sheets has fresh metrics
-      await base44.functions.invoke("exportWeeklyMetricsToSheet", {});
+      await client.functions.invoke("exportWeeklyMetricsToSheet", {});
       // Now send the email report reading directly from Google Sheets
-      const res = await base44.functions.invoke("sendWeeklyGmailReport", {
+      const res = await client.functions.invoke("sendWeeklyGmailReport", {
         run_key: "bf-weekly-gmail-report-7f3c"
       });
       if (res.data?.ok) {

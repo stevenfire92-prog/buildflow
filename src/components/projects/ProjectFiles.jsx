@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { UploadCloud, FileText, ExternalLink, Trash2, HardDrive, Eye } from "lucide-react";
 import FilePreviewDialog from "@/components/projects/FilePreviewDialog";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useToast } from "@/components/ui/use-toast";
 
 const fmtSize = (bytes) => {
@@ -24,7 +24,7 @@ export default function ProjectFiles({ projectId, projectName }) {
   const inputRef = useRef(null);
 
   const loadFiles = () =>
-    base44.entities.ProjectFile
+    client.entities.ProjectFile
       .filter({ project_id: projectId }, "-created_date", 100)
       .then(setFiles)
       .catch(() => setFiles([]));
@@ -41,8 +41,8 @@ export default function ProjectFiles({ projectId, projectName }) {
     let ok = 0;
     for (const file of list) {
       try {
-        const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
-        const res = await base44.functions.invoke("uploadProjectFileToDrive", {
+        const { file_url } = await client.integrations.Core.UploadPublicFile({ file });
+        const res = await client.functions.invoke("uploadProjectFileToDrive", {
           file_url,
           file_name: file.name,
           mime_type: file.type,
@@ -67,7 +67,7 @@ export default function ProjectFiles({ projectId, projectName }) {
 
   const handleDelete = async (file) => {
     try {
-      await base44.functions.invoke("deleteProjectFileFromDrive", { file_id: file.id });
+      await client.functions.invoke("deleteProjectFileFromDrive", { file_id: file.id });
       setFiles((prev) => (prev || []).filter((f) => f.id !== file.id));
       toast({ title: "File deleted", description: "Removed from Google Drive." });
     } catch {

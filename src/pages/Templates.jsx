@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import TemplateCard from "@/components/templates/TemplateCard";
@@ -21,7 +21,7 @@ export default function Templates() {
   const [using, setUsing] = useState(false);
 
   useEffect(() => {
-    base44.entities.ProjectTemplate
+    client.entities.ProjectTemplate
       .list("-created_date", 100)
       .then(setTemplates)
       .catch(() => setTemplates([]));
@@ -30,7 +30,7 @@ export default function Templates() {
   const handleCreate = async (data) => {
     setCreating(true);
     try {
-      const created = await base44.entities.ProjectTemplate.create(data);
+      const created = await client.entities.ProjectTemplate.create(data);
       setTemplates((prev) => [created, ...(prev || [])]);
       toast({ title: t("tpl.savedTitle"), description: t("tpl.savedDesc") });
       setFormOpen(false);
@@ -42,7 +42,7 @@ export default function Templates() {
 
   const handleDelete = async (template) => {
     try {
-      await base44.entities.ProjectTemplate.delete(template.id);
+      await client.entities.ProjectTemplate.delete(template.id);
       setTemplates((prev) => (prev || []).filter((x) => x.id !== template.id));
       toast({ title: t("tpl.deletedTitle") });
     } catch {
@@ -53,7 +53,7 @@ export default function Templates() {
   const handleUse = async (template, name) => {
     setUsing(true);
     try {
-      const project = await base44.entities.Project.create({
+      const project = await client.entities.Project.create({
         name,
         description: template.description || "",
         goals: template.goals || "",

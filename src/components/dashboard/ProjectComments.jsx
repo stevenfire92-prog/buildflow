@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Send } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -23,11 +23,11 @@ export default function ProjectComments({ projectId, projectName }) {
   const [me, setMe] = useState(null);
 
   useEffect(() => {
-    base44.entities.Comment
+    client.entities.Comment
       .filter({ project_id: projectId }, "created_date", 100)
       .then(setComments)
       .catch(() => setComments([]));
-    base44.auth.me().then(setMe).catch(() => setMe(null));
+    client.auth.me().then(setMe).catch(() => setMe(null));
   }, [projectId]);
 
   const handlePost = async () => {
@@ -35,7 +35,7 @@ export default function ProjectComments({ projectId, projectName }) {
     if (!value || posting) return;
     setPosting(true);
     try {
-      const created = await base44.entities.Comment.create({
+      const created = await client.entities.Comment.create({
         project_id: projectId,
         project_name: projectName || "",
         author_name: me?.full_name || me?.email || "Someone",

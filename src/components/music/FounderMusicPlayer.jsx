@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2, VolumeX, Music, Disc3, ExternalLink, Flame, CreditCard } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useToast } from "@/components/ui/use-toast";
 
 const TRACKS = [
@@ -185,7 +185,7 @@ export default function FounderMusicPlayer({ activeApp = null, compact = false, 
         });
       }
       const slug = activeApp || "pro";
-      const res = await base44.functions.invoke("createCheckoutSession", {
+      const res = await client.functions.invoke("createCheckoutSession", {
         appSlug: slug,
         appName: currentTrack.title,
       });

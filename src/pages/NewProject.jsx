@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import TypeSelector from "@/components/projects/TypeSelector";
@@ -30,7 +30,7 @@ export default function NewProject() {
   const handleCreate = async () => {
     setCreating(true);
     try {
-      const project = await base44.entities.Project.create({
+      const project = await client.entities.Project.create({
         name: name.trim(),
         project_type: type,
         goals: goals.trim(),

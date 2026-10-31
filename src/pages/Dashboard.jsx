@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Plus, LayoutGrid, KanbanSquare, Users, ListChecks, LayoutTemplate, TrendingUp, Search, CalendarDays, Share2, Globe } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import StatsRow from "@/components/dashboard/StatsRow";
 import WeeklyChart from "@/components/dashboard/WeeklyChart";
@@ -87,8 +87,8 @@ export default function Dashboard() {
         }
         return item;
       });
-      await base44.entities.Project.bulkUpdate(updates);
-      const fresh = await base44.entities.Project.list("-updated_date", 100);
+      await client.entities.Project.bulkUpdate(updates);
+      const fresh = await client.entities.Project.list("-updated_date", 100);
       setProjects(fresh);
       targets.forEach((p) =>
         logActivity({
@@ -114,8 +114,8 @@ export default function Dashboard() {
     setBulkBusy(true);
     const targets = (projects || []).filter((p) => selection.includes(p.id));
     try {
-      await Promise.all(selection.map((id) => base44.entities.Project.delete(id)));
-      const fresh = await base44.entities.Project.list("-updated_date", 100);
+      await Promise.all(selection.map((id) => client.entities.Project.delete(id)));
+      const fresh = await client.entities.Project.list("-updated_date", 100);
       setProjects(fresh);
       targets.forEach((p) =>
         logActivity({ action: "deleted", projectName: p.name, projectId: p.id })
@@ -137,7 +137,7 @@ export default function Dashboard() {
     );
 
   useEffect(() => {
-    base44.entities.Project
+    client.entities.Project
       .list("-updated_date", 100)
       .then(setProjects)
       .catch(() => setProjects([]));
@@ -162,7 +162,7 @@ export default function Dashboard() {
       return;
     }
     if (sessionId) {
-      base44.functions
+      client.functions
         .invoke("verifyCheckoutSession", { sessionId })
         .then((res) => {
           if (res.data.paid === true) {

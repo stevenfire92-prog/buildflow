@@ -10,7 +10,7 @@ import {
   Legend,
 } from "recharts";
 import { Table, RefreshCw, BookOpen, Activity, ExternalLink, CheckCircle2 } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function SheetsSalesActivityChart() {
@@ -22,7 +22,7 @@ export default function SheetsSalesActivityChart() {
 
   const fetchData = async () => {
     try {
-      const res = await base44.functions.invoke("getSheetGrowthDashboard", {});
+      const res = await client.functions.invoke("getSheetGrowthDashboard", {});
       const weekly = res.data?.weekly || [];
       setData(weekly);
     } catch (err) {
@@ -40,7 +40,7 @@ export default function SheetsSalesActivityChart() {
   const handleSync = async () => {
     setRefreshing(true);
     try {
-      const exportRes = await base44.functions.invoke("exportWeeklyMetricsToSheet", {});
+      const exportRes = await client.functions.invoke("exportWeeklyMetricsToSheet", {});
       if (exportRes.data?.spreadsheet_url) {
         setSheetUrl(exportRes.data.spreadsheet_url);
       }

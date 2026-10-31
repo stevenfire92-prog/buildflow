@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -24,7 +24,7 @@ export default function ProjectEditForm({ project, onSaved, onCancel }) {
     }
     setSaving(true);
     try {
-      const updated = await base44.entities.Project.update(project.id, {
+      const updated = await client.entities.Project.update(project.id, {
         name: form.name.trim(),
         project_type: form.project_type,
         progress: Math.min(100, Math.max(0, Number(form.progress) || 0)),

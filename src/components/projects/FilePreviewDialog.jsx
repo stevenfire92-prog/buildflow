@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ export default function FilePreviewDialog({ file, onClose }) {
     if (!file) return;
     setPreviewUrl(null);
     setFailed(false);
-    base44.functions
+    client.functions
       .invoke("getDriveFilePreviewUrl", { file_id: file.id })
       .then((res) => setPreviewUrl(res.data.preview_url))
       .catch(() => setFailed(true));

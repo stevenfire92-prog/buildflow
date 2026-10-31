@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Music, Plus, X, BadgeCheck, Disc3, ExternalLink } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import { Image } from "@/components/ui/image";
@@ -63,7 +63,7 @@ export default function MusicProfiles() {
 
   const load = useCallback(() => {
     setLoading(true);
-    base44.functions
+    client.functions
       .invoke("getMusicProfileStats", {})
       .then((res) => setData(res.data))
       .catch(() => setData({ profiles: [] }))
@@ -82,7 +82,7 @@ export default function MusicProfiles() {
     }
     setAdding(true);
     try {
-      await base44.entities.MusicProfile.create({
+      await client.entities.MusicProfile.create({
         platform,
         artist_id: parsed.artist_id || "",
         profile_url: parsed.profile_url,
@@ -98,7 +98,7 @@ export default function MusicProfiles() {
 
   const handleRemove = async (recordId) => {
     try {
-      await base44.entities.MusicProfile.delete(recordId);
+      await client.entities.MusicProfile.delete(recordId);
     } catch {}
     load();
   };

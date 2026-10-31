@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BookOpen, ExternalLink, Plus, Sparkles, BookMarked, Layers, ShieldCheck, CheckSquare } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import { logActivity } from "@/lib/activityLog";
@@ -28,7 +28,7 @@ export default function KindleBooks() {
   const [savingAdd, setSavingAdd] = useState(false);
 
   const loadBooks = () => {
-    base44.entities.KindleBook.list()
+    client.entities.KindleBook.list()
       .then((data) => {
         const sorted = [...(data || [])].sort((a, b) => (a.series_order || 0) - (b.series_order || 0));
         setBooks(sorted);
@@ -53,7 +53,7 @@ export default function KindleBooks() {
 
     setSavingAdd(true);
     try {
-      await base44.entities.KindleBook.create({
+      await client.entities.KindleBook.create({
         title: trimmedTitle,
         series_name: "Shadow Path",
         series_order: order ? Number(order) : defaultOrder,
@@ -82,7 +82,7 @@ export default function KindleBooks() {
 
   const handleDelete = async (id, bookTitle) => {
     try {
-      await base44.entities.KindleBook.delete(id);
+      await client.entities.KindleBook.delete(id);
       toast({ title: "Book removed", description: `${bookTitle} removed.` });
       loadBooks();
     } catch {
@@ -122,7 +122,7 @@ export default function KindleBooks() {
         id,
         ...updates,
       }));
-      await base44.entities.KindleBook.bulkUpdate(payload);
+      await client.entities.KindleBook.bulkUpdate(payload);
 
       // Optimistic local state update
       setBooks((prev) =>
@@ -163,7 +163,7 @@ export default function KindleBooks() {
       // Fallback: update in parallel if bulkUpdate hits schema validation nuances
       try {
         await Promise.all(
-          targetIds.map((id) => base44.entities.KindleBook.update(id, updates))
+          targetIds.map((id) => client.entities.KindleBook.update(id, updates))
         );
         setBooks((prev) =>
           (prev || []).map((b) => (targetIds.includes(b.id) ? { ...b, ...updates } : b))
@@ -190,7 +190,7 @@ export default function KindleBooks() {
     if (selection.length === 0 || bulkBusy) return;
     setBulkBusy(true);
     try {
-      await Promise.all(selection.map((id) => base44.entities.KindleBook.delete(id)));
+      await Promise.all(selection.map((id) => client.entities.KindleBook.delete(id)));
       toast({
         title: "Books removed",
         description: `Removed ${selection.length} book(s).`,

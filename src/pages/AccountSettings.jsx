@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { User, Bell, Mail } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import AppHeader from "@/components/AppHeader";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
@@ -19,7 +19,7 @@ export default function AccountSettings() {
   });
 
   useEffect(() => {
-    base44.auth
+    client.auth
       .me()
       .then((me) => {
         setUser(me);
@@ -38,7 +38,7 @@ export default function AccountSettings() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      await base44.auth.updateMe({
+      await client.auth.updateMe({
         display_name: form.display_name.trim(),
         contact_email: form.contact_email.trim(),
         preferences: {

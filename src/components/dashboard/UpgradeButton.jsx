@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Crown } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { validatedCheckoutUrl } from "@/api/billingClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -15,7 +15,7 @@ export default function UpgradeButton() {
     }
     setLoading(true);
     try {
-      const res = await base44.functions.invoke("createCheckoutSession", {});
+      const res = await client.functions.invoke("createCheckoutSession", {});
       window.location.href = validatedCheckoutUrl(res.data?.url);
     } catch (error) {
       alert(error.message || t("up.errorAlert"));

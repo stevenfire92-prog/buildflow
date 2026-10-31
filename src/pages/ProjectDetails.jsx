@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Smartphone, Globe, Bot, Pencil, Trash2, BookMarked } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import AppHeader from "@/components/AppHeader";
 import ProjectEditForm from "@/components/projects/ProjectEditForm";
@@ -33,14 +33,14 @@ export default function ProjectDetails() {
       setProject(null);
       return;
     }
-    base44.entities.Project.get(id).then(setProject).catch(() => setProject(null));
+    client.entities.Project.get(id).then(setProject).catch(() => setProject(null));
   }, [id]);
 
   const handleStatus = async (status) => {
     const prev = project;
     setProject({ ...project, status });
     try {
-      await base44.entities.Project.update(id, {
+      await client.entities.Project.update(id, {
         status,
         last_activity: new Date().toISOString(),
       });
@@ -59,7 +59,7 @@ export default function ProjectDetails() {
 
   const handleSaveTemplate = async () => {
     try {
-      await base44.entities.ProjectTemplate.create({
+      await client.entities.ProjectTemplate.create({
         name: project.name,
         description: project.description || "",
         goals: project.goals || "",
@@ -81,7 +81,7 @@ export default function ProjectDetails() {
     setDeleting(true);
     try {
       const name = project.name;
-      await base44.entities.Project.delete(id);
+      await client.entities.Project.delete(id);
       toast({ title: "Project deleted", description: `${name} has been removed.` });
       logActivity({ action: "deleted", projectName: name, projectId: id });
       navigate("/dashboard");

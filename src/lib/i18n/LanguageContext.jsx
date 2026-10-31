@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { STRINGS, STRINGS_VERSION } from "./strings";
 import { RTL_LANGS, languageName, REGIONAL_ACCENTS, findAccent } from "./languages";
 
@@ -39,7 +39,7 @@ export function LanguageProvider({ children }) {
     let cancelled = false;
     (async () => {
       try {
-        const res = await base44.functions.invoke("getTranslations", {
+        const res = await client.functions.invoke("getTranslations", {
           run_key: "bf-translations-7c4f",
           language_code: lang,
           language_name: languageName(lang),

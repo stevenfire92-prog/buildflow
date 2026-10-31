@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Rocket, Globe, LayoutTemplate, Users, X, Check } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function OnboardingChecklist({ projects }) {
@@ -12,10 +12,10 @@ export default function OnboardingChecklist({ projects }) {
   const [users, setUsers] = useState(0);
 
   useEffect(() => {
-    base44.entities.ProjectTemplate.list()
+    client.entities.ProjectTemplate.list()
       .then((l) => setTemplates(l.length))
       .catch(() => setTemplates(0));
-    base44.entities.User.list()
+    client.entities.User.list()
       .then((l) => setUsers(l.length))
       .catch(() => setUsers(0));
   }, []);

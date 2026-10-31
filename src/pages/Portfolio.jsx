@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search, Globe2, Sparkles, Layers, CheckCircle2, TrendingUp } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import PortfolioCard from "@/components/portfolio/PortfolioCard";
@@ -21,7 +21,7 @@ export default function Portfolio() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    base44.entities.Project.list("-updated_date", 100)
+    client.entities.Project.list("-updated_date", 100)
       .then(setProjects)
       .catch(() => setProjects([]));
 

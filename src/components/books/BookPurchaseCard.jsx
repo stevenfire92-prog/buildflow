@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CreditCard, ShoppingBag, Clock, ExternalLink, Check, Copy, Trash2, ShieldCheck } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function BookPurchaseCard({
@@ -34,7 +34,7 @@ export default function BookPurchaseCard({
     setLoadingAction(action);
     try {
       const currentUrl = returnUrl || window.location.href.split("?")[0];
-      const res = await base44.functions.invoke("createBookCheckoutSession", {
+      const res = await client.functions.invoke("createBookCheckoutSession", {
         bookId: book.id,
         action,
         returnUrl: currentUrl,

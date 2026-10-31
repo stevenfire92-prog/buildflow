@@ -11,7 +11,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const usd = (cents) =>
@@ -27,7 +27,7 @@ export default function RevenueSummary() {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    base44.functions
+    client.functions
       .invoke("getRevenueSummary", {})
       .then((res) => setData(res.data))
       .catch(() => setFailed(true));

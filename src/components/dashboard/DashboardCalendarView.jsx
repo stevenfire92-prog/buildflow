@@ -10,7 +10,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { daysUntil, urgencyClasses } from "@/lib/deadlines";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useToast } from "@/components/ui/use-toast";
 
 const statusStyles = {
@@ -45,7 +45,7 @@ export default function DashboardCalendarView({ projects, onProjectUpdate }) {
   const handleSyncGCal = async () => {
     setSyncing(true);
     try {
-      const res = await base44.functions.invoke("syncProjectDeadlinesToCalendar", { syncAll: true });
+      const res = await client.functions.invoke("syncProjectDeadlinesToCalendar", { syncAll: true });
       const count = res.data?.syncedCount ?? 0;
       toast({
         title: "Calendar Synced",

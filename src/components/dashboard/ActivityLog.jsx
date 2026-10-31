@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { History, Activity, ChevronDown } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { csvEscape } from "@/lib/activityDisplay";
 import ActivityFeedItem from "./ActivityFeedItem";
@@ -18,9 +18,9 @@ export default function ActivityLog() {
   const [searchQuery, setSearchQuery] = useState("");
   const [hasMore, setHasMore] = useState(true);
 
-  // Load activities from Base44
+  // Load activities from local storage
   const loadActivities = useCallback((fetchLimit = INITIAL_LIMIT) => {
-    return base44.entities.ActivityLog
+    return client.entities.ActivityLog
       .list("-created_date", fetchLimit)
       .then((records) => {
         setActivities(records || []);
@@ -41,7 +41,7 @@ export default function ActivityLog() {
     loadActivities(limit);
 
     // Subscribe to live activity stream
-    const unsubscribe = base44.entities.ActivityLog.subscribe((event) => {
+    const unsubscribe = client.entities.ActivityLog.subscribe((event) => {
       if (event?.type === "create" && event?.data) {
         setActivities((prev) => {
           if (!prev) return [event.data];
@@ -81,7 +81,7 @@ export default function ActivityLog() {
     if (exporting) return;
     setExporting(true);
     try {
-      const records = await base44.entities.ActivityLog.list("-created_date", 1000);
+      const records = await client.entities.ActivityLog.list("-created_date", 1000);
       const header = ["Date", "Action", "Project", "Details", "Team member", "Email"];
       const rows = (records || []).map((a) => [
         a.created_date,

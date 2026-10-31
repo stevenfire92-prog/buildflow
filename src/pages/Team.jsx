@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Users, UserPlus, Mail, ShieldCheck, Clock } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import AppHeader from "@/components/AppHeader";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -17,13 +17,13 @@ export default function Team() {
   const [sending, setSending] = useState(false);
 
   const loadMembers = () =>
-    base44.entities.User
+    client.entities.User
       .list("-created_date", 100)
       .then(setMembers)
       .catch(() => setMembers([]));
 
   useEffect(() => {
-    base44.auth.me().then(setMe).catch(() => setMe(null));
+    client.auth.me().then(setMe).catch(() => setMe(null));
     loadMembers();
   }, []);
 
@@ -38,7 +38,7 @@ export default function Team() {
     }
     setSending(true);
     try {
-      await base44.users.inviteUser(trimmed, "user");
+      await client.users.inviteUser(trimmed, "user");
       toast({
         title: "Invite sent",
         description: `${trimmed} now has access to your projects.`,

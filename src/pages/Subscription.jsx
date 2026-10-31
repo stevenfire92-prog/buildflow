@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CreditCard, Crown } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import AppHeader from "@/components/AppHeader";
 import PlanCard from "@/components/subscription/PlanCard";
 
@@ -19,7 +19,7 @@ export default function Subscription() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    base44.functions.invoke("getEntitlements", {})
+    client.functions.invoke("getEntitlements", {})
       .then(({ data }) => setPlan(data.plan === "pro" ? "pro" : "free"))
       .catch(() => { setPlan("free"); setError("Your subscription could not be verified. Please try again later."); });
   }, []);
@@ -32,7 +32,7 @@ export default function Subscription() {
     }
     setUpgradeLoading(true);
     try {
-      const res = await base44.functions.invoke("createCheckoutSession", {});
+      const res = await client.functions.invoke("createCheckoutSession", {});
       window.location.href = res.data.url;
     } catch {
       setError("Could not start checkout. Please try again.");
@@ -48,7 +48,7 @@ export default function Subscription() {
     }
     setPortalLoading(true);
     try {
-      const res = await base44.functions.invoke("createBillingPortalSession", {});
+      const res = await client.functions.invoke("createBillingPortalSession", {});
       window.location.href = res.data.url;
     } catch {
       setError("Could not open the billing portal. Please try again.");

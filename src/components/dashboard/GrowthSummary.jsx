@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { actionConfig, timeAgo } from "@/lib/activityDisplay";
 
@@ -11,12 +11,12 @@ export default function GrowthSummary({ projects = [] }) {
   const [activities, setActivities] = useState(null);
 
   useEffect(() => {
-    base44.entities.ActivityLog
+    client.entities.ActivityLog
       .list("-created_date", 3)
       .then(setActivities)
       .catch(() => setActivities([]));
 
-    const unsubscribe = base44.entities.ActivityLog.subscribe((event) => {
+    const unsubscribe = client.entities.ActivityLog.subscribe((event) => {
       if (event?.type === "create" && event?.data) {
         setActivities((prev) => (prev ? [event.data, ...prev.slice(0, 2)] : [event.data]));
       }

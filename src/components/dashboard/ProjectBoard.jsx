@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { logActivity } from "@/lib/activityLog";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import ProjectKanbanCard from "./ProjectKanbanCard";
@@ -28,7 +28,7 @@ export default function ProjectBoard({ projects, onProjectUpdate }) {
         status: newStatus,
         last_activity: new Date().toISOString(),
       };
-      await base44.entities.Project.update(draggableId, updates);
+      await client.entities.Project.update(draggableId, updates);
       onProjectUpdate(draggableId, updates);
       logActivity({
         action: "status_changed",

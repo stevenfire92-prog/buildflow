@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight, CalendarDays, RefreshCw, CheckCircle2 } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { client } from "@/api/localClient";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useToast } from "@/components/ui/use-toast";
 import MonthGrid from "@/components/calendar/MonthGrid";
@@ -17,9 +17,9 @@ export default function DeadlineCalendar() {
   const handleSyncCalendar = async () => {
     setSyncing(true);
     try {
-      const res = await base44.functions.invoke("syncProjectDeadlinesToCalendar", { syncAll: true });
+      const res = await client.functions.invoke("syncProjectDeadlinesToCalendar", { syncAll: true });
       const count = res.data?.syncedCount ?? 0;
-      const fresh = await base44.entities.Project.list("-updated_date", 100);
+      const fresh = await client.entities.Project.list("-updated_date", 100);
       setProjects(fresh);
       toast({
         title: t("cal.syncedTitle"),
@@ -40,7 +40,7 @@ export default function DeadlineCalendar() {
   });
 
   useEffect(() => {
-    base44.entities.Project.list("-updated_date", 100)
+    client.entities.Project.list("-updated_date", 100)
       .then(setProjects)
       .catch(() => setProjects([]));
   }, []);
