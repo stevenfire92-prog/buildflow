@@ -1,63 +1,39 @@
-import React from "react";
-import { Link2, Twitter, Facebook, Linkedin } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
-import { useLanguage } from "@/lib/i18n/LanguageContext";
+// Share bar — fixed for lucide-react (no brand icons)
+import { Share2, Link2, MessageCircle, Send, Globe } from 'lucide-react';
 
-export default function ShareBar() {
-  const { t } = useLanguage();
-  const { toast } = useToast();
+export default function ShareBar({ title }) {
+  const url = typeof window !== 'undefined' ? window.location.href : '';
+  const text = title || 'Check this out';
 
-  const url = window.location.href;
-  const encoded = encodeURIComponent(url);
-
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-      toast({ title: t("pf.copied") });
-    } catch {
-      toast({ title: t("pf.copyFail") });
-    }
+  const share = (platform) => {
+    const encoded = encodeURIComponent(url);
+    const encodedText = encodeURIComponent(text);
+    const links = {
+      x: `https://twitter.com/intent/tweet?url=${encoded}&text=${encodedText}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encoded}`,
+      whatsapp: `https://wa.me/?text=${encodedText}%20${encoded}`,
+      telegram: `https://t.me/share/url?url=${encoded}&text=${encodedText}`,
+    };
+    if (links[platform]) window.open(links[platform], '_blank', 'noopener');
   };
 
-  const links = [
-    {
-      label: "X",
-      icon: Twitter,
-      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        t("pf.shareText")
-      )}&url=${encoded}`,
-    },
-    {
-      label: "Facebook",
-      icon: Facebook,
-      href: `https://www.facebook.com/sharer/sharer.php?u=${encoded}`,
-    },
-    {
-      label: "LinkedIn",
-      icon: Linkedin,
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`,
-    },
-  ];
-
   return (
-    <div className="mt-6 flex items-center gap-2 flex-wrap">
-      <button
-        onClick={copyLink}
-        className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors"
-      >
-        <Link2 className="w-4 h-4" /> {t("pf.copyLink")}
+    <div className="flex gap-2 items-center">
+      <button onClick={() => share('x')} title="Share on X" className="p-2 rounded hover:bg-white/10">
+        <Share2 size={18} />
       </button>
-      {links.map(({ label, icon: Icon, href }) => (
-        <a
-          key={label}
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white/70 border border-white/10 rounded-full hover:text-white hover:border-white/25 transition-colors"
-        >
-          <Icon className="w-4 h-4" /> {label}
-        </a>
-      ))}
+      <button onClick={() => share('facebook')} title="Share on Facebook" className="p-2 rounded hover:bg-white/10">
+        <Globe size={18} />
+      </button>
+      <button onClick={() => share('whatsapp')} title="Share on WhatsApp" className="p-2 rounded hover:bg-white/10">
+        <MessageCircle size={18} />
+      </button>
+      <button onClick={() => share('telegram')} title="Share on Telegram" className="p-2 rounded hover:bg-white/10">
+        <Send size={18} />
+      </button>
+      <button onClick={() => { navigator.clipboard.writeText(url); }} title="Copy link" className="p-2 rounded hover:bg-white/10">
+        <Link2 size={18} />
+      </button>
     </div>
   );
 }
