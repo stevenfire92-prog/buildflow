@@ -4,6 +4,7 @@ import { StickyNote } from 'lucide-react';
 import NotesApp from '../components/NotesApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -26,6 +27,9 @@ export default function Landing() {
             Capture it <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">before it's gone.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Quick notes, pinned ideas, color-coded thoughts. All yours, saved on your device.</p>
+          <div className="mt-5">
+            <ProUpgrade appName="Se Fire Notes" />
+          </div>
         </motion.div>
       </div>
 
