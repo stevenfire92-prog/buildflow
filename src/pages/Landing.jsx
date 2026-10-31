@@ -4,6 +4,7 @@ import { Timer } from 'lucide-react';
 import FocusTimer from '../components/FocusTimer';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -28,6 +29,9 @@ export default function Landing() {
             Lock in. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Stay focused.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">The Pomodoro technique — 25 minutes of deep work, then a break. Simple and it works.</p>
+          <div className="mt-5">
+            <ProUpgrade appName="Se Fire Focus" />
+          </div>
         </motion.div>
       </div>
 
