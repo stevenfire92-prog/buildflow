@@ -5,6 +5,7 @@ import { Flame, ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { APPS, CATEGORIES } from '../data/apps';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import BookPromo from '../components/BookPromo';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Home() {
@@ -76,6 +77,10 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-4 pb-8">
+        <BookPromo compact />
       </div>
 
       <div className="border-t border-white/5 mt-8">
