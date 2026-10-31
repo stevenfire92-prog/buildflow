@@ -5,6 +5,7 @@ import Booker from '../components/Booker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
+import ProUpgrade from '../components/ProUpgrade';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,6 +27,9 @@ export default function Landing() {
             Book it. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Show up. Get paid.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Clients book your services in seconds — you manage every appointment in one place.</p>
+          <div className="mt-5 flex justify-center">
+            <ProUpgrade appName="Se Fire Bookings" />
+          </div>
         </motion.div>
       </div>
 
