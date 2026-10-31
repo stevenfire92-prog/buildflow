@@ -203,9 +203,10 @@ export default function Landing() {
             <h2 className="text-2xl font-black tracking-tight">The artist behind the tech</h2>
             <p className="mt-3 text-slate-400 max-w-xl mx-auto leading-relaxed">
               Se Fire is the sound of the grind — tracks built in late-night sessions,
-              stories from the block, energy for the club. Every track is 100% human-made:
-              real writing, real recording, real artistry. No AI generates this music.
-              The same fire that built Se Fire Tech lives in every bar.
+              stories from the block, energy for the club. Everything released on Spotify,
+              Apple Music, SoundCloud, Deezer and Amazon Music is 100% human-made:
+              real writing, real recording, real artistry. The same fire that built
+              Se Fire Tech lives in every bar.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-slate-500">
               <span className="inline-flex items-center gap-1.5"><Radio className="w-4 h-4 text-orange-400" /> Independent artist</span>
