@@ -4,6 +4,7 @@ import { Flame } from 'lucide-react';
 import Tracker from '../components/Tracker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -26,6 +27,9 @@ export default function Landing() {
             Build streaks. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Become unstoppable.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Small daily wins compound into massive change. Track it, streak it, own it.</p>
+          <div className="mt-5">
+            <ProUpgrade appName="Se Fire Habits" />
+          </div>
         </motion.div>
       </div>
 
