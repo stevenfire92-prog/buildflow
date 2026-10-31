@@ -5,6 +5,7 @@ import ContractGen from '../components/ContractGen';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
+import ProUpgrade from '../components/ProUpgrade';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,6 +27,9 @@ export default function Landing() {
             Contracts in minutes, <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">not billable hours.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Professional templates for freelancers, services, NDAs and music licenses.</p>
+          <div className="mt-5 flex justify-center">
+            <ProUpgrade appName="Se Fire Contracts" />
+          </div>
         </motion.div>
       </div>
 
