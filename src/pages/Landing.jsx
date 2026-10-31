@@ -4,6 +4,7 @@ import { ArrowLeftRight } from 'lucide-react';
 import Converter from '../components/Converter';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -28,6 +29,9 @@ export default function Landing() {
           <p className="text-slate-400 max-w-xl mx-auto">
             Length, weight, temperature, volume, speed, time & data — instant results, no sign-up, no fuss.
           </p>
+          <div className="mt-5">
+            <ProUpgrade appName="Se Fire Convert" />
+          </div>
         </motion.div>
       </div>
 
