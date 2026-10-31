@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
-import { getAccessToken } from '@/api/base44Client';
-import { base44 } from '@/api/base44Client';
+import { getAccessToken } from '@/api/localClient';
+import { client } from '@/api/localClient';
 import { readSession, publicSettingsError, loginPath } from './auth-session';
 
 const AuthContext = createContext(null);
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const checkUserAuth = useCallback(async () => {
     setIsLoadingAuth(true);
     try {
-      const state = await readSession(base44, getAccessToken());
+      const state = await readSession(client, getAccessToken());
       setUser(state.user);
       setAuthError(state.error);
     } finally {
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoadingAuth(true);
     setAuthError(null);
     try {
-      const settings = await base44.app.getPublicSettings();
+      const settings = await client.app.getPublicSettings();
       setAppPublicSettings(settings);
       await checkUserAuth();
     } catch (error) {
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setAuthError(null);
-    base44.auth.logout(window.location.origin + '/');
+    client.auth.logout(window.location.origin + '/');
   };
 
   const navigateToLogin = () => { window.location.assign(loginPath(window.location)); };

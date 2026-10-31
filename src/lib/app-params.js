@@ -1,4 +1,4 @@
-import { getAccessToken } from '@/api/base44Client';
+import { getAccessToken } from '@/api/localClient';
 import { resolveAppConfig } from './app-config';
 
 const isNode = typeof window === 'undefined';
@@ -8,7 +8,7 @@ const isClearAccessTokenRequested = () =>
 
 const clearStoredAccessToken = () => {
 	window.localStorage.removeItem('bf:auth:token');
-	window.localStorage.removeItem('base44_access_token');
+	window.localStorage.removeItem('bf_access_token');
 	window.localStorage.removeItem('token');
 }
 
