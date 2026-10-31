@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Play, Check, Lock } from 'lucide-react';
+import { ShoppingBag, Play, Check, Lock, Speaker, Shirt, Disc3, FileAudio } from 'lucide-react';
 import { toast } from 'sonner';
 
 // Track bundles — buy outright or rent monthly. Edit tracks/pricing here.
@@ -11,6 +11,8 @@ export const BUNDLES = [
     buyPrice: 15,
     rentPrice: 5,
     currency: 'USD',
+    dolby: true,
+    formats: ['MP3 320kbps', 'WAV 24-bit', 'FLAC', 'Dolby Atmos'],
     tracks: [
       'NOW I SEE THA REAPER',
       'Car Banger',
@@ -27,6 +29,8 @@ export const BUNDLES = [
     buyPrice: 15,
     rentPrice: 5,
     currency: 'USD',
+    dolby: true,
+    formats: ['MP3 320kbps', 'WAV 24-bit', 'FLAC', 'Dolby Atmos'],
     tracks: [
       'Chillin In Tha Studio',
       'Neon Dreams',
@@ -37,6 +41,13 @@ export const BUNDLES = [
     ],
     tag: 'New',
   },
+];
+
+// Physical merch — update when silk screener is ready
+export const MERCH = [
+  { name: 'Se Fire Tee', price: 29.99, status: 'coming-soon', desc: 'Premium cotton, fire logo front print' },
+  { name: 'Se Fire Hoodie', price: 59.99, status: 'coming-soon', desc: 'Heavyweight fleece, embroidered logo' },
+  { name: 'Se Fire Snapback', price: 24.99, status: 'coming-soon', desc: 'Flat brim, 3D puff embroidery' },
 ];
 
 const fadeUp = {
@@ -99,6 +110,10 @@ export default function MerchHub() {
           </span>
           <h2 className="mt-4 text-3xl font-black tracking-tight">Own the music</h2>
           <p className="text-slate-500 mt-2">Bundle packs — buy for $15 or rent for $5/month. 6 tracks each.</p>
+          <div className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-400/30">
+            <Speaker className="w-4 h-4 text-purple-300" />
+            <span className="text-sm font-bold text-purple-200">Dolby Surround Sound Enhanced</span>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -181,12 +196,62 @@ export default function MerchHub() {
                 <Check className="w-3 h-3" />
                 {getTier(bundle.id) === 'buy' ? 'Instant download · Yours forever' : 'Streaming access · Cancel anytime'}
               </div>
+
+              {/* Formats */}
+              <div className="mt-3 pt-3 border-t border-white/5">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <FileAudio className="w-3.5 h-3.5 text-slate-500" />
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">All formats included</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {bundle.formats.map((fmt) => (
+                    <span key={fmt} className="text-[10px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400">
+                      {fmt}
+                    </span>
+                  ))}
+                </div>
+                {bundle.dolby && (
+                  <div className="flex items-center gap-1.5 mt-2">
+                    <Disc3 className="w-3.5 h-3.5 text-purple-400" />
+                    <span className="text-[11px] text-purple-300 font-semibold">Dolby Atmos Surround Enhanced</span>
+                  </div>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
 
+        {/* Physical Merch */}
+        <motion.div {...fadeUp} className="mt-12">
+          <div className="text-center mb-6">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/30 bg-blue-400/10 px-3.5 py-1.5 text-xs font-medium text-blue-300">
+              <Shirt className="w-3.5 h-3.5" /> Physical Merch
+            </span>
+            <h3 className="mt-3 text-2xl font-black">Wear the fire</h3>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            {MERCH.map((item) => (
+              <div key={item.name} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center">
+                <Shirt className="w-10 h-10 mx-auto mb-3 text-slate-600" />
+                <h4 className="font-bold mb-1">{item.name}</h4>
+                <p className="text-xs text-slate-500 mb-3">{item.desc}</p>
+                <p className="text-xl font-black text-blue-300 mb-3">${item.price}</p>
+                <button
+                  disabled
+                  className="w-full py-2.5 rounded-xl text-sm font-bold bg-white/5 border border-white/10 text-slate-500 cursor-not-allowed"
+                >
+                  Dropping soon
+                </button>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-xs text-slate-600 mt-4">
+            Notify me when merch drops — sign up below
+          </p>
+        </motion.div>
+
         <motion.p {...fadeUp} className="text-center text-sm text-slate-600 mt-8 max-w-lg mx-auto">
-          Physical merch (tees, hoodies, hats) dropping soon — talk to your silk screener and we'll list them here.
+          All track packs include every format. Dolby Atmos versions mixed for immersive surround sound.
         </motion.p>
       </div>
     </section>
