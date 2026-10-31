@@ -4,6 +4,7 @@ import { Flame, ArrowRight } from 'lucide-react';
 import ServicesGrid from '../components/ServicesGrid';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -39,6 +40,9 @@ export default function Landing() {
               <a href="#music" className="px-8 py-3.5 rounded-xl font-bold border border-white/15 hover:border-orange-400/40 transition">
                 Listen to Se Fire
               </a>
+            </div>
+            <div className="mt-4">
+              <ProUpgrade appName="Se Fire Promo" />
             </div>
           </motion.div>
         </div>
