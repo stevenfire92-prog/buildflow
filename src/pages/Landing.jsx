@@ -5,6 +5,7 @@ import InvoiceApp from '../components/InvoiceApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
+import ProUpgrade from '../components/ProUpgrade';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,6 +27,9 @@ export default function Landing() {
             Invoice like a <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">pro.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Create professional invoices in seconds. Track who's paid, print or save as PDF, get your money.</p>
+          <div className="mt-5 flex justify-center">
+            <ProUpgrade appName="Se Fire Invoices" />
+          </div>
         </motion.div>
       </div>
 
