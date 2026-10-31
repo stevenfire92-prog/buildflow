@@ -4,6 +4,7 @@ import { Flame } from 'lucide-react';
 import ExpenseTracker from '../components/ExpenseTracker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import ProUpgrade from '../components/ProUpgrade';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -26,6 +27,9 @@ export default function Landing() {
             Know where <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">every dollar</span> goes.
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Log it in seconds. See the breakdown. Spend smarter.</p>
+          <div className="mt-5">
+            <ProUpgrade appName="Se Fire Expenses" />
+          </div>
         </motion.div>
       </div>
 
