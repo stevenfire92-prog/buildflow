@@ -44,11 +44,7 @@ function ChatMessage({ msg }) {
             ))}
           </div>
         ) : (
-          <span>{msg.text.split(/(\*\*.+?\*\*)/g).map((part, index) => (
-            part.startsWith('**') && part.endsWith('**')
-              ? <strong key={index}>{part.slice(2, -2)}</strong>
-              : part
-          ))}</span>
+          <span dangerouslySetInnerHTML={{ __html: msg.text.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>') }} />
         )}
       </div>
     </motion.div>
@@ -63,6 +59,7 @@ export default function Builder() {
   const [building, setBuilding] = useState(false);
   const [preview, setPreview] = useState(null);
   const [builtApp, setBuiltApp] = useState(null);
+  const [autonomous, setAutonomous] = useState(true);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -81,14 +78,13 @@ export default function Builder() {
     setMessages((m) => [...m, { role: 'ai', text: aiGreeting(prompt, blueprint, appName) }]);
     await wait(800);
 
-    const stepsId = crypto.randomUUID();
-    const stepsMsg = { id: stepsId, role: 'ai', steps: blueprint.steps, stepsDone: 0 };
+    const stepsMsg = { role: 'ai', steps: blueprint.steps, stepsDone: 0 };
     setMessages((m) => [...m, stepsMsg]);
 
     for (let i = 0; i < blueprint.steps.length; i++) {
       await wait(900 + Math.random() * 700);
       const done = i + 1;
-      setMessages((m) => m.map((msg) => (msg.id === stepsId ? { ...msg, stepsDone: done } : msg)));
+      setMessages((m) => m.map((msg) => (msg === stepsMsg ? { ...msg, stepsDone: done } : msg)));
       if (done === 2) setPreview({ blueprintId: blueprint.id, appName, partial: true });
     }
 
@@ -96,8 +92,16 @@ export default function Builder() {
     const app = { name: appName, blueprint: blueprint.id, blueprintName: blueprint.name, prompt };
     setBuiltApp(app);
     await wait(500);
-    setMessages((m) => [...m, { role: 'ai', text: aiDoneMessage(appName, blueprint) }]);
-    confetti({ particleCount: 90, spread: 65, origin: { y: 0.35 }, colors: ['#a78bfa', '#e879f9', '#fbbf24', '#34d399'] });
+    // Autonomous: auto-approve and auto-publish, logical adjustments only
+    if (autonomous) {
+      saveApp({ ...app, published: true, autonomous: true });
+      setMessages((m) => [...m, { role: 'ai', text: `**${appName}** auto-built and published ✓ — no approval needed. It's saved to **My Apps**. Describe your next app or ask me to adjust this one.` }]);
+      confetti({ particleCount: 160, spread: 80, origin: { y: 0.4 }, colors: ['#a78bfa', '#e879f9', '#fbbf24', '#34d399'] });
+      toast.success(`"${appName}" auto-published! 🚀`);
+    } else {
+      setMessages((m) => [...m, { role: 'ai', text: aiDoneMessage(appName, blueprint) }]);
+      confetti({ particleCount: 90, spread: 65, origin: { y: 0.35 }, colors: ['#a78bfa', '#e879f9', '#fbbf24', '#34d399'] });
+    }
     setBuilding(false);
   };
 
@@ -126,12 +130,24 @@ export default function Builder() {
             <span className="grid place-items-center w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500">
               <Bot className="w-4 h-4 text-white" />
             </span>
-            <div>
+            <div className="flex-1">
               <p className="text-sm font-bold">Dr Build</p>
               <p className="text-[11px] text-emerald-300 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Online — ready to build
               </p>
             </div>
+            <button
+              onClick={() => setAutonomous(!autonomous)}
+              title={autonomous ? "Autonomous ON: auto-complete + auto-publish" : "Autonomous OFF: manual approval"}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold transition ${
+                autonomous
+                  ? 'bg-emerald-500/20 border border-emerald-400/40 text-emerald-300'
+                  : 'bg-white/5 border border-white/10 text-slate-400'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${autonomous ? 'bg-emerald-400' : 'bg-slate-500'}`} />
+              {autonomous ? 'Auto' : 'Manual'}
+            </button>
           </div>
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
