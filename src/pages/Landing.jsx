@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Flame, Music2, Play, Bell, ArrowRight, Sparkles,
-  Disc3, Mic2, Radio, Heart,
+  Disc3, Mic2, Radio, Heart, ShoppingBag,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import MusicSection from '../components/MusicSection';
