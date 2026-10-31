@@ -1,4 +1,6 @@
 import { Toaster } from "@/components/ui/toaster"
+import { useEffect } from "react";
+import { checkFounderUrl } from "@/lib/founder";
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -63,6 +65,7 @@ const AuthenticatedApp = () => {
 
 
 function App() {
+  useEffect(() => { checkFounderUrl(); }, []);
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
