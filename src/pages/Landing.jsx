@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
-import { Flame } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Flame, BookOpen, Library as LibraryIcon } from 'lucide-react';
 import Library from '../components/Library';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
 import ProUpgrade from '../components/ProUpgrade';
+import { BookPromoTab } from '../components/BookPromo';
 
 export default function Landing() {
+  const [tab, setTab] = useState('library');
   useEffect(() => { checkFounderUrl(); }, []);
 
   return (
@@ -30,7 +32,22 @@ export default function Landing() {
           </div>
       </div>
 
-      <Library />
+      <div className="flex justify-center gap-2 mt-6 px-4">
+        <button
+          onClick={() => setTab('library')}
+          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition ${tab === 'library' ? 'bg-gradient-to-r from-orange-500 to-red-600' : 'bg-white/5 border border-white/10 hover:border-orange-400/40'}`}
+        >
+          <LibraryIcon className="w-4 h-4" /> My Library
+        </button>
+        <button
+          onClick={() => setTab('shadowpath')}
+          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition ${tab === 'shadowpath' ? 'bg-gradient-to-r from-amber-500 to-orange-600' : 'bg-white/5 border border-white/10 hover:border-amber-400/40'}`}
+        >
+          <BookOpen className="w-4 h-4" /> Shadow Path
+        </button>
+      </div>
+
+      {tab === 'library' ? <Library /> : <BookPromoTab />}
 
       <div className="border-t border-white/5 mt-8">
         <MusicSection />
