@@ -5,6 +5,7 @@ import TipCalc from '../components/TipCalc';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
+import ProUpgrade from '../components/ProUpgrade';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,6 +27,9 @@ export default function Landing() {
             Split the bill. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Tip like a pro.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">No math, no awkward moments. Just punch in the bill and go.</p>
+          <div className="mt-5 flex justify-center">
+            <ProUpgrade appName="Se Fire Tip" />
+          </div>
         </motion.div>
       </div>
 
