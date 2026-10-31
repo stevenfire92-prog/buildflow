@@ -5,6 +5,7 @@ import ServicesGrid from '../components/ServicesGrid';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import ProUpgrade from '../components/ProUpgrade';
+import BookPromo from '../components/BookPromo';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -51,6 +52,11 @@ export default function Landing() {
       {/* Services */}
       <div id="services">
         <ServicesGrid />
+      </div>
+
+      {/* Books */}
+      <div id="books" className="max-w-3xl mx-auto px-4 py-12 border-t border-white/5">
+        <BookPromo />
       </div>
 
       {/* Music */}
