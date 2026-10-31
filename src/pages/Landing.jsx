@@ -5,6 +5,7 @@ import WorkoutTracker from '../components/WorkoutTracker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
+import ProUpgrade from '../components/ProUpgrade';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,6 +27,9 @@ export default function Landing() {
             Train hard. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Track everything.</span>
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Log every set, watch your volume climb, and never plateau again.</p>
+          <div className="mt-5 flex justify-center">
+            <ProUpgrade appName="Se Fire Fit" />
+          </div>
         </motion.div>
       </div>
 
