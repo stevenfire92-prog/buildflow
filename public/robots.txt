@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://buildflow-se-fire-tech.vercel.app/sitemap.xml
+Sitemap: https://se-fire-2048.vercel.app/sitemap.xml
