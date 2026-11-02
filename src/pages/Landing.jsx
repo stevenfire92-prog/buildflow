@@ -1,8 +1,8 @@
-// Se Fire Tetris — landing page
+// Se Fire Block Drop — landing page
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Blocks, Play, Trophy, ChevronRight, Flame, Zap, Star } from 'lucide-react';
-import TetrisGame from '../components/TetrisGame.jsx';
+import BlockDropGame from '../components/BlockDropGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
 import ProUpgrade from '../components/ProUpgrade.jsx';
@@ -37,7 +37,7 @@ export default function Landing() {
         <header className="text-center pt-10 pb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-300 text-sm font-semibold mb-5">
             <Blocks className="w-4 h-4" />
-            Se Fire Tetris
+            Se Fire Block Drop
           </div>
           <h1 className="text-5xl sm:text-6xl font-black tracking-tight mb-4">
             Stack.{' '}
@@ -48,7 +48,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
             The classic falling-block puzzler — rotate, drop, and clear lines as the speed
-            ramps up. Chase a Tetris for max points. How many lines can you clear?
+            ramps up. Chase a quad clear for max points. How many lines can you clear?
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
@@ -57,7 +57,7 @@ export default function Landing() {
             >
               <Play className="w-5 h-5" /> Play Free Now
             </a>
-            <ProUpgrade appName="Se Fire Tetris" />
+            <ProUpgrade appName="Se Fire Block Drop" />
           </div>
           {best > 0 && (
             <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-300 text-sm font-semibold">
@@ -89,7 +89,7 @@ export default function Landing() {
               <p className="text-slate-400">
                 Clearing 1, 2, 3, or 4 lines at once scores{' '}
                 <span className="text-amber-300 font-bold">100 / 300 / 500 / 800</span>{' '}
-                points × your level. Land a Tetris (4 lines) for the big payoff.
+                points × your level. Land a quad clear (4 lines) for the big payoff.
               </p>
             </div>
             <div className="rounded-xl border border-white/10 bg-black/30 p-4">
@@ -106,7 +106,7 @@ export default function Landing() {
 
         {/* game */}
         <section id="play" className="mb-12 scroll-mt-6">
-          <TetrisGame />
+          <BlockDropGame />
         </section>
 
         {/* music */}
@@ -116,7 +116,7 @@ export default function Landing() {
 
         {/* share */}
         <section className="mb-10">
-          <ShareButtons title="Se Fire Tetris — Stack. Clear. Level Up." />
+          <ShareButtons title="Se Fire Block Drop — Stack. Clear. Level Up." />
         </section>
 
         {/* more apps */}
