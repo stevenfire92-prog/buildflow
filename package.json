@@ -1,6 +1,7 @@
 {
   "name": "sefire-whiteboard-build",
   "version": "1.0.0",
+  "type": "module",
   "description": "A simple drawing canvas with brush colors and sizes. Sketch ideas, save your art, start fresh anytime.",
   "main": "index.js",
   "scripts": {
