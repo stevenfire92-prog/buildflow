@@ -28,6 +28,10 @@ export default function NewProject() {
     (step === 1 && name.trim().length > 0) || (step === 2 && type !== null) || step === 3;
 
   const handleCreate = async () => {
+    if (!name.trim() || !["app", "website", "agent", "game"].includes(type)) {
+      toast({ title: "Complete the project name and type before continuing." });
+      return;
+    }
     setCreating(true);
     try {
       const project = await base44.entities.Project.create({
@@ -44,7 +48,7 @@ export default function NewProject() {
       logActivity({ action: "created", projectName: project.name, projectId: project.id });
       navigate(`/project-details?id=${project.id}`);
     } catch {
-      toast({ title: "Could not create the project", description: "Please try again." });
+      toast({ title: "Could not create the project", description: "Your project was not saved. Check the connection and retry." });
       setCreating(false);
     }
   };

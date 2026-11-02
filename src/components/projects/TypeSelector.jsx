@@ -1,15 +1,16 @@
 import React from "react";
-import { Smartphone, Globe, Bot } from "lucide-react";
+import { Smartphone, Globe, Bot, Gamepad2 } from "lucide-react";
 
 const types = [
   { value: "app", icon: Smartphone, title: "App", desc: "A mobile or web application" },
   { value: "website", icon: Globe, title: "Website", desc: "A marketing or content site" },
   { value: "agent", icon: Bot, title: "Agent", desc: "An AI assistant that works for you" },
+  { value: "game", icon: Gamepad2, title: "Game", desc: "An interactive browser game" },
 ];
 
 export default function TypeSelector({ value, onChange }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
       {types.map((t) => (
         <button
           key={t.value}
