@@ -14,10 +14,10 @@ const BOOKS = [
     badge: 'Book 1',
   },
   {
-    title: 'Shadow Path Book 2',
+    title: 'Shadow Path Book 2: Forest Of Whispers',
     url: 'https://a.co/d/09GpOZYh',
     price: 'Kindle',
-    description: 'The shadow deepens. The path continues.',
+    description: 'Whispers in the forest guide the path forward.',
     badge: 'Book 2',
   },
   {
