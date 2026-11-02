@@ -15,3 +15,9 @@ Open `index.html` in a modern browser. Press **Play** to authorize Web Audio. To
 
 ## Revenue roadmap (not implemented)
 Optional paid creator features could include multitrack recording, project cloud sync, WAV export, effects, and collaboration after secure identity, billing, entitlements and Stripe test-mode verification.
+
+## Automated checks
+
+Run `node --test prototypes/se-fire-music-studio/tests/sequencer.test.mjs` from the repository root (Node 20+). The dependency-free tests verify the presence of accessible controls, exercise the actual inline pattern validator in an isolated VM, and check import/export guards and local-only behavior.
+
+On 2026-11-02, source-level checks against the GitHub branch passed (8 markup/guard assertions and 3 validator assertions). The new Node test file itself has **not** been run in a Node environment or GitHub Actions. Browser audio playback, timing, Safari/iOS compatibility, export/import UI, and accessibility still require functional testing before release.
