@@ -1,8 +1,8 @@
-// Se Fire 2048 — landing page
+// Se Fire Number Merge — landing page
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Hash, Play, Trophy, ChevronRight, Flame, Move, Sparkles } from 'lucide-react';
-import Game2048 from '../components/Game2048.jsx';
+import NumberMergeGame from '../components/NumberMergeGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
 import ProUpgrade from '../components/ProUpgrade.jsx';
@@ -37,7 +37,7 @@ export default function Landing() {
         <header className="text-center pt-10 pb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-300 text-sm font-semibold mb-5">
             <Hash className="w-4 h-4" />
-            Se Fire 2048
+            Se Fire Number Merge
           </div>
           <h1 className="text-5xl sm:text-6xl font-black tracking-tight mb-4">
             Slide.{' '}
@@ -48,7 +48,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
             The classic number puzzler with a Se Fire twist — slide the tiles,
-            chain your merges, and chase the magic 2048. One wrong move and the board fills up.
+            chain your merges, and chase the magic tile. One wrong move and the board fills up.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
@@ -57,7 +57,7 @@ export default function Landing() {
             >
               <Play className="w-5 h-5" /> Play Free Now
             </a>
-            <ProUpgrade appName="Se Fire 2048" />
+            <ProUpgrade appName="Se Fire Number Merge" />
           </div>
           {best > 0 && (
             <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-300 text-sm font-semibold">
@@ -93,10 +93,10 @@ export default function Landing() {
             </div>
             <div className="rounded-xl border border-white/10 bg-black/30 p-4">
               <div className="flex items-center gap-2 font-bold mb-2 text-slate-300">
-                <Trophy className="w-4 h-4" /> Reach 2048
+                <Trophy className="w-4 h-4" /> Reach the target
               </div>
               <p className="text-slate-400">
-                Hit the magic <span className="text-yellow-300 font-bold">2048</span> tile to win —
+                Hit the magic <span className="text-yellow-300 font-bold">target</span> tile to win —
                 then keep going for the ultimate high score.
               </p>
             </div>
@@ -105,7 +105,7 @@ export default function Landing() {
 
         {/* game */}
         <section id="play" className="mb-12 scroll-mt-6">
-          <Game2048 />
+          <NumberMergeGame />
         </section>
 
         {/* music */}
@@ -115,7 +115,7 @@ export default function Landing() {
 
         {/* share */}
         <section className="mb-10">
-          <ShareButtons title="Se Fire 2048 — Slide. Merge. Win." />
+          <ShareButtons title="Se Fire Number Merge — Slide. Merge. Win." />
         </section>
 
         {/* more apps */}
