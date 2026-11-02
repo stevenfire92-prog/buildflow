@@ -35,10 +35,10 @@ const BOOKS = [
     badge: 'Book 4',
   },
   {
-    title: 'Shadow Path Book 5',
+    title: 'Shadow Path Book 5: The Shadow King',
     url: 'https://a.co/d/03UYqT2t',
     price: 'Kindle',
-    description: 'The fifth step on the shadow path.',
+    description: 'The Shadow King rises to claim his throne.',
     badge: 'Book 5',
   },
   {
