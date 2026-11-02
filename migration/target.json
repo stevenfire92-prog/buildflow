@@ -1,0 +1,23 @@
+{
+  "app": "BuildFlow",
+  "domain": "builderflowstudio.com",
+  "stripeAccountId": "acct_1RkPHQ064KcAlKx3",
+  "teamId": "team_uKZ3PStlkjpuJsvzGZ5uWwLH",
+  "projectId": "prj_oyA7bHmG1Rtovos8aYPLvK5NP61y",
+  "teamSlug": "se-fire-tech-642c6093",
+  "project": "buildflow",
+  "base44AppId": "6aa0ac8456fc22afdf09666a",
+  "stage": "inventory",
+  "productionCutoverEnabled": false,
+  "proposedBackend": {
+    "runtime": "Vercel Node functions",
+    "database": "PostgreSQL via Vercel Marketplace (not provisioned)",
+    "auth": "provider decision pending; preserve existing user-ID mapping"
+  },
+  "blockers": [
+    "No independent database/auth/storage provisioned",
+    "Customer data export and ownership policies not migrated",
+    "Usable Stripe keys and signed delivery not verified",
+    "AI/email/OAuth provider configuration not migrated"
+  ]
+}
