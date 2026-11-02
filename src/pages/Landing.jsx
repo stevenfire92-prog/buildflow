@@ -1,8 +1,8 @@
-// Se Fire Pong — landing page
+// Se Fire Paddle Clash — landing page
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Gamepad2, Play, Trophy, ChevronRight, Flame, Cpu, Hash } from 'lucide-react';
-import PongGame from '../components/PongGame.jsx';
+import PaddleClashGame from '../components/PaddleClashGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
 import ProUpgrade from '../components/ProUpgrade.jsx';
@@ -37,7 +37,7 @@ export default function Landing() {
         <header className="text-center pt-10 pb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-300 text-sm font-semibold mb-5">
             <Gamepad2 className="w-4 h-4" />
-            Se Fire Pong
+            Se Fire Paddle Clash
           </div>
           <h1 className="text-5xl sm:text-6xl font-black tracking-tight mb-4">
             The Original{' '}
@@ -56,7 +56,7 @@ export default function Landing() {
             >
               <Play className="w-5 h-5" /> Play Free Now
             </a>
-            <ProUpgrade appName="Se Fire Pong" />
+            <ProUpgrade appName="Se Fire Paddle Clash" />
           </div>
           {wins > 0 && (
             <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-300 text-sm font-semibold">
@@ -104,7 +104,7 @@ export default function Landing() {
 
         {/* game */}
         <section id="play" className="mb-12 scroll-mt-6">
-          <PongGame />
+          <PaddleClashGame />
         </section>
 
         {/* music */}
@@ -114,7 +114,7 @@ export default function Landing() {
 
         {/* share */}
         <section className="mb-10">
-          <ShareButtons title="Se Fire Pong — The Original Rally." />
+          <ShareButtons title="Se Fire Paddle Clash — The Original Rally." />
         </section>
 
         {/* more apps */}
