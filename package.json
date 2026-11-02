@@ -1,6 +1,7 @@
 {
   "name": "sefire-snippets-build",
   "version": "1.0.0",
+  "type": "module",
   "description": "Save, tag, search, and copy code snippets in seconds. Your personal code library, always at hand.",
   "main": "index.js",
   "scripts": {
