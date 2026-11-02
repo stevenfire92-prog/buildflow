@@ -1,6 +1,7 @@
 {
   "name": "sefire-flashcards-build",
   "version": "1.0.0",
+  "type": "module",
   "description": "Master any subject with smart flashcards. Create decks, flip cards, and use spaced repetition to lock knowledge in.",
   "main": "index.js",
   "scripts": {
