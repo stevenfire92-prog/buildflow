@@ -8,6 +8,7 @@ import { AuthProvider } from '@/lib/AuthContext';
 import AuthGate from '@/components/AuthGate';
 import ScrollToTop from './components/ScrollToTop';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
+import { Analytics } from '@vercel/analytics/react';
 // Add page imports here
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -76,6 +77,7 @@ function App() {
           </LanguageProvider>
         </Router>
         <Toaster />
+        <Analytics />
       </QueryClientProvider>
     </AuthProvider>
   )
