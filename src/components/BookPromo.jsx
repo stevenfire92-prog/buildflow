@@ -13,6 +13,62 @@ const BOOKS = [
     description: 'Step into the shadows… where fate is forged in blood, fire, and betrayal. When an unknown warrior is drawn into a rising war between ancient forces, he must face creatures long thought extinct and confront a power that threatens to consume everything.',
     badge: 'Book 1',
   },
+  {
+    title: 'Shadow Path Book 2',
+    url: 'https://a.co/d/09GpOZYh',
+    price: 'Kindle',
+    description: 'The shadow deepens. The path continues.',
+    badge: 'Book 2',
+  },
+  {
+    title: 'Shadow Path Book 3: The Fallen Knight',
+    url: 'https://a.co/d/00thTTwC',
+    price: 'Kindle',
+    description: 'A knight fallen from grace walks the shadow path.',
+    badge: 'Book 3',
+  },
+  {
+    title: 'Shadow Path Book 4: The Dragons Trial',
+    url: 'https://a.co/d/08WdzPsD',
+    price: 'Kindle',
+    description: 'Trial by dragon fire. Only the worthy survive.',
+    badge: 'Book 4',
+  },
+  {
+    title: 'Shadow Path Book 5',
+    url: 'https://a.co/d/03UYqT2t',
+    price: 'Kindle',
+    description: 'The fifth step on the shadow path.',
+    badge: 'Book 5',
+  },
+  {
+    title: 'Shadow Path Book 6: Reign of the Shadow King',
+    url: 'https://a.co/d/02FeWZEI',
+    price: 'Kindle',
+    description: 'The Shadow King reigns. Darkness covers the land.',
+    badge: 'Book 6',
+  },
+  {
+    title: 'Shadow Path Book 7: The Last Shadow Rises',
+    url: 'https://a.co/d/000NN1Mw',
+    price: 'Kindle',
+    description: 'The last shadow rises against the coming dark.',
+    badge: 'Book 7',
+  },
+  {
+    title: 'Shadow Path Book 8: Collapse Or Rebirth',
+    url: 'https://a.co/d/06UqTnsk',
+    price: 'Kindle',
+    description: 'Everything collapses — or is reborn from the ashes.',
+    badge: 'Book 8',
+  },
+  {
+    title: 'Shadow Path Book 9: Echoes Of The First Flame',
+    url: 'https://www.amazon.ca/dp/B0GY242TF7',
+    price: 'Kindle',
+    description: 'Echoes of the first flame ignite the final reckoning.',
+    badge: 'Book 9',
+  },
   // Add more books here as they publish
 ];
 
