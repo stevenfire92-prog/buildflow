@@ -1,6 +1,7 @@
 {
   "name": "sefire-palette-build",
   "version": "1.0.0",
+  "type": "module",
   "description": "Generate beautiful color palettes, pick custom colors, copy hex codes, and save your favorites.",
   "main": "index.js",
   "scripts": {
