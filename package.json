@@ -1,6 +1,7 @@
 {
   "name": "sefire-meditate-build",
   "version": "1.0.0",
+  "type": "module",
   "description": "Guided meditation timer with duration presets, ambient tones, and session history. Breathe in, breathe out.",
   "main": "index.js",
   "scripts": {
