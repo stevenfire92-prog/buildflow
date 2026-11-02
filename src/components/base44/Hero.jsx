@@ -22,7 +22,9 @@ export default function Hero() {
     if (e) e.preventDefault();
     const trimmed = value.trim();
     const typeParam =
-      active === "websites"
+      active === "games"
+        ? "game"
+        : active === "websites"
         ? "website"
         : active === "tools"
         ? "agent"
@@ -105,7 +107,7 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={() => {
-                  if (navigator.mediaDevices && window.SpeechRecognition || window.webkitSpeechRecognition) {
+                  if (window.SpeechRecognition || window.webkitSpeechRecognition) {
                     const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
                     const rec = new Speech();
                     rec.onresult = (evt) => {
