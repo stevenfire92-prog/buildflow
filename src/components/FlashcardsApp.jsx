@@ -129,7 +129,7 @@ export default function FlashcardsApp() {
             </div>
 
             {flipped ? (
-              <div className="grid grid-cols-2 gap-3 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                 <button onClick={() => answer(false)} className="flex items-center justify-center gap-2 py-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 font-bold hover:bg-red-500/25">
                   <X className="w-4 h-4" /> Still learning
                 </button>
