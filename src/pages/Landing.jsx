@@ -3,7 +3,7 @@ import { Mail } from 'lucide-react';
 import EmailApp from '../components/EmailApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Email outreach, simplified. Compose campaigns, organize contacts, manage it all from one clean dashboard.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Email" />
+            <PayPalCheckout appName="Se Fire Email" />
           </div>
         </div>
       </div>
