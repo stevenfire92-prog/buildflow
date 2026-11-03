@@ -4,7 +4,7 @@ import { ArrowLeftRight } from 'lucide-react';
 import Converter from '../components/Converter';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Unit conversions without the headache. Length, weight, temperature, currency — punch in the number, get the answer in two taps.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Convert" />
+            <PayPalCheckout appName="Se Fire Convert" />
           </div>
         </motion.div>
       </div>
