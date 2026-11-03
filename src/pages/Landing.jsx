@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Study <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">smarter.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Create decks, flip cards, and master any subject with spaced repetition.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Study like you mean it. Build decks, flip cards, and let spaced repetition burn it into your brain.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Flashcards" />
           </div>
