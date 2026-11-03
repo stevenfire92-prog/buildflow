@@ -3,7 +3,7 @@ import { Timer } from 'lucide-react';
 import TimerApp from '../components/TimerApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Simple timing that never lets you down. Countdowns, stopwatch, intervals — whatever you need timed, it's handled.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Timer" />
+            <PayPalCheckout appName="Se Fire Timer" />
           </div>
         </div>
       </div>
