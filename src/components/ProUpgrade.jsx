@@ -32,11 +32,15 @@ const PLANS = [
   },
 ];
 
+// TEMPORARY: Free access for ALL users until Stripe payments go live.
+const FREE_ACCESS_UNTIL_STRIPE = true;
+
 export function isFounder() {
   try {
+    if (FREE_ACCESS_UNTIL_STRIPE) return true;
     return localStorage.getItem('sfi:founder') === 'true';
   } catch {
-    return false;
+    return FREE_ACCESS_UNTIL_STRIPE;
   }
 }
 
