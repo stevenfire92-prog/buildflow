@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Split the bill. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Tip like a pro.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">No math, no awkward moments. Just punch in the bill and go.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Split the bill without the awkward math. Calculate tips, divide the total, settle up fair — in seconds.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Tip" />
           </div>
