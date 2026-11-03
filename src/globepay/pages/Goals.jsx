@@ -161,7 +161,7 @@ export default function Goals() {
               <Label>Goal name</Label>
               <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="First $10k month" required className="mt-1.5 bg-white/5 border-white/10" />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <Label>Target</Label>
                 <Input type="number" min="1" value={form.target} onChange={(e) => setForm({ ...form, target: e.target.value })} placeholder="10000" required className="mt-1.5 bg-white/5 border-white/10" />

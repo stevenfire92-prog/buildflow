@@ -126,7 +126,7 @@ export default function Products() {
               <Label>Description</Label>
               <Input value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="What do buyers get?" className="mt-1.5 bg-white/5 border-white/10" />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <Label>Price (USD)</Label>
                 <Input type="number" min="1" step="0.01" value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} placeholder="49.00" required className="mt-1.5 bg-white/5 border-white/10" />
