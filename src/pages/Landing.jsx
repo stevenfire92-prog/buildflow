@@ -113,7 +113,7 @@ export default function Landing() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-4 text-lg text-slate-400 max-w-xl mx-auto"
           >
-            Raw tracks. Real stories. Stream the music, follow the journey, join the movement.
+            The full Se Fire catalog in one place. Dark, cinematic hip-hop — 100% human-made, real writing, real recording, real artistry.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
