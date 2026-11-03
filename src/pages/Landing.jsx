@@ -49,7 +49,7 @@ export default function Landing() {
             Smash every last brick. Classic arcade action with a modern edge — pure, satisfying destruction. Clear the board, feel like a legend.
           </p>
           <div className="mt-6 flex justify-center">
-            <ProUpgrade appName="Se Fire Breaker" />
+            <PayPalCheckout appName="Se Fire Breaker" />
           </div>
         </header>
 
