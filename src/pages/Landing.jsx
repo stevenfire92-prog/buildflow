@@ -3,7 +3,7 @@ import { Timer } from 'lucide-react';
 import TimetrackApp from '../components/TimetrackApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Know exactly where your hours go. Track time by project, generate clean reports, bill with confidence.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Timetrack" />
+            <PayPalCheckout appName="Se Fire Timetrack" />
           </div>
         </div>
       </div>
