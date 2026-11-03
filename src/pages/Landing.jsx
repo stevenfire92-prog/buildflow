@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Lock, FolderLock, ShieldCheck, ChevronDown } from 'lucide-react'
 import VaultApp from '../components/VaultApp'
-import ProUpgrade from '../components/ProUpgrade'
+import PayPalCheckout from '../components/PayPalCheckout';
 import MusicSection from '../components/MusicSection'
 import ShareButtons from '../components/ShareButtons'
 
@@ -34,7 +34,7 @@ export default function Landing() {
           >
             Open Vault <ChevronDown className="w-4 h-4" />
           </button>
-          <ProUpgrade appName="Se Fire Vault" />
+          <PayPalCheckout appName="Se Fire Vault" />
         </div>
       </header>
 
