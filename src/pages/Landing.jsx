@@ -3,7 +3,7 @@ import { BookOpen } from 'lucide-react';
 import WikiApp from '../components/WikiApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Your second brain, on demand. Document everything, link ideas together, build a knowledge base that actually grows with you.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Wiki" />
+            <PayPalCheckout appName="Se Fire Wiki" />
           </div>
         </div>
       </div>
