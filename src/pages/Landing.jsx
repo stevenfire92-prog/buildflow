@@ -5,7 +5,7 @@ import WeatherDash from '../components/WeatherDash';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -32,7 +32,7 @@ export default function Landing() {
           Know before you go. Clean, accurate weather at a glance — no ads, no clutter, just the forecast. Check it and get on with your day.
         </p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Weather" />
+            <PayPalCheckout appName="Se Fire Weather" />
           </div>
       </header>
 
