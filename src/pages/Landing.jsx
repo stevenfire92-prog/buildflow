@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Know your <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">numbers.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">KPI dashboards, charts and reports — see exactly what your business is doing, in real time.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Stop flying blind. Track the metrics that matter, see trends as they happen.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Analytics" />
           </div>
