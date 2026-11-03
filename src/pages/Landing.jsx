@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Know every unit. <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">In stock.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Track stock levels, get low-stock alerts, manage suppliers and SKUs — inventory without the spreadsheet chaos.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Know what you've got, always. Track stock levels, manage products, never get caught short.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Inventory" />
           </div>
