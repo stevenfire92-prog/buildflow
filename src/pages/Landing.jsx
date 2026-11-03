@@ -5,7 +5,7 @@ import RecipeBook from '../components/RecipeBook';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -35,7 +35,7 @@ export default function Landing() {
           Cook something worth eating. Browse recipes, save your favorites, plan the week's meals. Dinner panic is officially over.
         </p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Recipes" />
+            <PayPalCheckout appName="Se Fire Recipes" />
           </div>
       </header>
 
