@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Ask, learn, <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">grow.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Build surveys, gather answers and watch results chart themselves in real time.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Ask the question, get the real answer. Create surveys, gather feedback, see results as they land.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Survey" />
           </div>
