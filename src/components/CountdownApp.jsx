@@ -124,7 +124,7 @@ export default function CountdownApp() {
                     </button>
                   </div>
                   {p ? (
-                    <div className="grid grid-cols-4 gap-2 text-center">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
                       {[
                         [p.d, 'days'],
                         [pad(p.h), 'hrs'],
