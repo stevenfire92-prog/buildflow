@@ -83,7 +83,7 @@ export default function BMICalc() {
           <HeartPulse className="w-3.5 h-3.5" /> BMI & HEALTH
         </span>
         <h1 className="text-3xl md:text-4xl font-black mt-3">Know your numbers</h1>
-        <p className="text-slate-400 text-sm mt-1">Calculate your BMI and track your health journey.</p>
+        <p className="text-slate-400 text-sm mt-1">Track the numbers that actually matter. Log workouts, monitor your vitals, and watch your trends move in the right direction.</p>
       </div>
 
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 mb-6">
