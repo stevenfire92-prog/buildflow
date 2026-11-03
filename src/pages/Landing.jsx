@@ -4,7 +4,7 @@ import Library from '../components/Library';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { BookPromoTab } from '../components/BookPromo';
 
 export default function Landing() {
@@ -28,7 +28,7 @@ export default function Landing() {
         </h1>
         <p className="text-slate-400 max-w-xl mx-auto">Your reading companion. Track your library and dive into the Shadow Path series — 9 books of dark fantasy waiting. Turn the page.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Books" />
+            <PayPalCheckout appName="Se Fire Books" />
           </div>
       </div>
 
