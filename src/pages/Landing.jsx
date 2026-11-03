@@ -3,7 +3,7 @@ import { Target, Milestone, TrendingUp, PartyPopper, ChevronDown } from 'lucide-
 import GoalsApp from '../components/GoalsApp'
 import MusicSection from '../components/MusicSection'
 import ShareButtons from '../components/ShareButtons'
-import ProUpgrade from '../components/ProUpgrade'
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   const scrollToApp = () => {
@@ -36,7 +36,7 @@ export default function Landing() {
           >
             <Target className="h-5 w-5" /> Set a Goal
           </button>
-          <ProUpgrade appName="Se Fire Goals" />
+          <PayPalCheckout appName="Se Fire Goals" />
         </div>
         <button
           onClick={scrollToApp}
