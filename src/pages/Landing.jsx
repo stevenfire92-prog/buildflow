@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Draw <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">anything.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">A simple drawing canvas. Sketch ideas, save your art.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">A blank canvas with zero limits. Sketch, draw, brainstorm, doodle — with brushes and colors that feel right.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Whiteboard" />
           </div>
