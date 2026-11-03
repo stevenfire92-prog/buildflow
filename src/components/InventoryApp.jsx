@@ -210,7 +210,7 @@ export default function InventoryApp() {
             </div>
             <input value={fName} onChange={(e) => setFName(e.target.value)} placeholder="Product name *" autoFocus
               className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fSku} onChange={(e) => setFSku(e.target.value)} placeholder="SKU (auto if blank)"
                 className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={fSupplier} onChange={(e) => setFSupplier(e.target.value)} placeholder="Supplier"
