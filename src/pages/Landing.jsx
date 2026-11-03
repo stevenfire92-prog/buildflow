@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Your team's <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">brain.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">A shared wiki with search and categories — every answer your team needs, in one place.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your second brain, on demand. Document everything, link ideas together, build a knowledge base that actually grows with you.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Wiki" />
           </div>
