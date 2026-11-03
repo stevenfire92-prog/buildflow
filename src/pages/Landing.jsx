@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Strong passwords. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">One tap.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Generate unbreakable passwords instantly — right on your device, never sent anywhere.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Stop reusing the same password everywhere. Generate strong, unique passwords for every account in one click.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Passwords" />
           </div>
