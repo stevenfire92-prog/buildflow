@@ -29,7 +29,7 @@ export default function Landing() {
           Your forecast. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">At a glance.</span>
         </h1>
         <p className="mt-4 text-white/60 text-base sm:text-lg">
-          Live weather powered by Open-Meteo. No sign-up, no fees.
+          Know before you go. Clean, accurate weather at a glance — no ads, no clutter, just the forecast. Check it and get on with your day.
         </p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Weather" />
