@@ -28,10 +28,10 @@ export default function Home() {
             <Flame className="w-3.5 h-3.5" /> SE FIRE TECH
           </span>
           <h1 className="text-5xl md:text-6xl font-black mb-4">
-            <span className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent">74 apps.</span> One fire.
+            <span className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent">84 apps.</span> One fire.
           </h1>
           <p className="text-slate-400 max-w-2xl mx-auto mb-8">
-            The front door to the whole empire. Browse all 74 apps, find exactly what you need, and start using it in seconds.
+            The front door to the whole empire. Browse all 84 apps, find exactly what you need, and start using it in seconds.
           </p>
         </motion.div>
       </div>
@@ -88,7 +88,7 @@ export default function Home() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-10 border-t border-white/5">
-        <ShareButtons title="Se Fire Tech — 74 apps. One fire." />
+        <ShareButtons title="Se Fire Tech — 84 apps. One fire." />
       </div>
 
       <footer className="border-t border-white/5 px-4 py-6 text-center">
