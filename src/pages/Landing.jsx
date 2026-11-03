@@ -3,7 +3,7 @@ import { ClipboardList } from 'lucide-react';
 import FormsApp from '../components/FormsApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Build forms in minutes, not hours. Collect responses, share the link, watch the submissions roll in.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Forms" />
+            <PayPalCheckout appName="Se Fire Forms" />
           </div>
         </div>
       </div>
