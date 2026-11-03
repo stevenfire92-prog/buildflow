@@ -128,7 +128,7 @@ export default function ExpenseTracker() {
             className="overflow-hidden mb-6"
           >
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="col-span-2 sm:col-span-1">
                   <label className="text-xs text-slate-500 uppercase tracking-wider">Amount</label>
                   <input
