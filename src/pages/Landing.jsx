@@ -3,7 +3,7 @@ import { MessagesSquare } from 'lucide-react';
 import ChatApp from '../components/ChatApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Messaging without the noise. Clean conversations, no ads, no clutter — just you and the people you're talking to.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Chat" />
+            <PayPalCheckout appName="Se Fire Chat" />
           </div>
         </div>
       </div>
