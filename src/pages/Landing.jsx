@@ -42,8 +42,7 @@ export default function Landing() {
           Se Fire Journal
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-base text-gray-300 sm:text-lg">
-          A private daily journal with moods, a calendar, and search. Write a little every day —
-          your story matters.
+          A daily space that's all yours. Write it down, get it out of your head, look back and see how far you've come.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <button
