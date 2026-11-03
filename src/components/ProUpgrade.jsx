@@ -33,7 +33,7 @@ const PLANS = [
 ];
 
 // TEMPORARY: Free access for ALL users until Stripe payments go live.
-const FREE_ACCESS_UNTIL_STRIPE = true;
+const FREE_ACCESS_UNTIL_STRIPE = false;
 
 export function isFounder() {
   try {
