@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Shifts, <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">solved.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Plan weekly shifts, track availability and handle time-off — scheduling your team in minutes.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Coordinate your crew without the group-chat chaos. Build schedules, manage shifts.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Schedule" />
           </div>
