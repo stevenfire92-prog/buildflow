@@ -77,8 +77,8 @@ export default function Landing() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto"
           >
-            The AI app builder that actually builds. Type what you want, watch it come
-            together live, and publish with one click.
+            The AI that builds apps for you. Describe what you want, watch it generate,
+            preview it live, and ship it.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
