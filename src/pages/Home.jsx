@@ -31,7 +31,7 @@ export default function Home() {
             <span className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent">21 apps.</span> One fire.
           </h1>
           <p className="text-slate-400 max-w-2xl mx-auto mb-8">
-            Every tool, every platform, every experience — built independent, built to last, built to have a positive impact.
+            The front door to the whole empire. Browse all 74 apps, find exactly what you need, and start using it in seconds.
           </p>
         </motion.div>
       </div>
