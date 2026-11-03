@@ -3,7 +3,7 @@ import { Wallet } from 'lucide-react';
 import PayrollApp from '../components/PayrollApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Pay your team right, every time. Calculate payroll, track payments, keep everyone happy.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Payroll" />
+            <PayPalCheckout appName="Se Fire Payroll" />
           </div>
         </div>
       </div>
