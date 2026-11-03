@@ -14,7 +14,7 @@ export default function Landing() {
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2.5 text-center">
         <p className="text-xs text-amber-200/90">
-          🔨 This app is under construction — in no way, shape, or form is the pay option supposed to work right now.
+          💳 Payments are live — upgrade to Pro for full access.
         </p>
       </div>
 
