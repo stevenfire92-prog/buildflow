@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Train hard. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Track everything.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Log every set, watch your volume climb, and never plateau again.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your personal fitness tracker. Log workouts, watch your progress climb, and stay locked in on your goals.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Fit" />
           </div>
