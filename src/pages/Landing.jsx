@@ -24,7 +24,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Roll the <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">bones.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">d4 through d20 with slick animations and full roll history. Made for tabletop nights.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Roll the bones, anywhere. d4 through d20, multiple dice, full roll history.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Dice" />
           </div>
