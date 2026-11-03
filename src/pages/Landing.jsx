@@ -24,7 +24,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Quote it. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Win it.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Professional client quotes with line items, tax, and totals. Save, copy, or print.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Quote like you mean business. Build client quotes with line items, tax, and totals in minutes.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Quotes" />
           </div>
