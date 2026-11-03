@@ -34,7 +34,7 @@ const PLANS = [
 
 // TEMPORARY: Free access for ALL users until Stripe payments go live.
 // Steve's order Nov 2, 2026. To revert: set to false and redeploy.
-const FREE_ACCESS_UNTIL_STRIPE = true;
+const FREE_ACCESS_UNTIL_STRIPE = false;
 
 export function isFounder() {
   try {
