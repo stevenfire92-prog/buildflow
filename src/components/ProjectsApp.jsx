@@ -194,7 +194,7 @@ export default function ProjectsApp() {
               className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             <textarea value={fDesc} onChange={(e) => setFDesc(e.target.value)} placeholder="Description" rows={3}
               className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <select value={fPrio} onChange={(e) => setFPrio(e.target.value)} className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500">
                 {PRIORITIES.map((p) => <option key={p.id} value={p.id}>{p.label} priority</option>)}
               </select>
@@ -202,7 +202,7 @@ export default function ProjectsApp() {
                 {COLUMNS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
               </select>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fAssignee} onChange={(e) => setFAssignee(e.target.value)} placeholder="Assignee"
                 className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={fDue} onChange={(e) => setFDue(e.target.value)} type="date"
