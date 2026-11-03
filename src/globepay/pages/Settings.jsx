@@ -8,6 +8,20 @@ import AppShell from '../components/AppShell';
 import { SectionTitle } from '../components/widgets';
 import { getStatus } from '../api';
 
+// Founder check helper (inline, no imports)
+function checkFounder() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('founder') === 'sefire2026') {
+      localStorage.setItem('sfi:founder', 'true');
+      const url = new URL(window.location.href);
+      url.searchParams.delete('founder');
+      window.history.replaceState({}, '', url.toString());
+    }
+    return localStorage.getItem('sfi:founder') === 'true';
+  } catch { return false; }
+}
+
 export default function Settings() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);

@@ -79,8 +79,8 @@ export default function Landing() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto"
           >
-            GlobePay is the global monetization hub for creators and builders. Products, subscriptions,
-            payment links and a live revenue dashboard — powered by your Stripe account.
+            Your global money command center. Track Stripe revenue, spin up products,
+            fire off payment links, and set income goals — all from one dashboard.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
