@@ -152,7 +152,7 @@ export default function FocusTimer() {
       </div>
 
       {/* Timer ring */}
-      <div className="relative w-72 h-72 mx-auto mb-8">
+      <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto mb-8">
         <svg viewBox="0 0 300 300" className="w-full h-full -rotate-90">
           <circle cx="150" cy="150" r={R} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="14" />
           <motion.circle
@@ -202,7 +202,7 @@ export default function FocusTimer() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
           <Flame className="w-5 h-5 mx-auto text-orange-400 mb-1" />
           <p className="text-2xl font-black">{stats.completed}</p>
