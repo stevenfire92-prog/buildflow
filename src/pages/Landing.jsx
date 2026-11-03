@@ -82,7 +82,7 @@ export default function Landing() {
             Your personal arcade, open all night. Every Se Fire game in one place — pick one and play. No downloads, no waiting, just games.
           </p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Games" />
+            <PayPalCheckout appName="Se Fire Games" />
           </div>
         </header>
 
