@@ -174,11 +174,11 @@ export default function RemindersApp() {
               <button onClick={() => setShowModal(false)} className="p-1.5 rounded-lg hover:bg-white/10 transition"><X className="w-4 h-4 text-slate-400" /></button>
             </div>
             <input value={fTitle} onChange={(e) => setFTitle(e.target.value)} placeholder="Remind me to… *" autoFocus className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fDate} onChange={(e) => setFDate(e.target.value)} type="date" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={fTime} onChange={(e) => setFTime(e.target.value)} type="time" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <select value={fPrio} onChange={(e) => setFPrio(e.target.value)} className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500">
                 {PRIOS.map((p) => <option key={p.id} value={p.id}>{p.label} priority</option>)}
               </select>
