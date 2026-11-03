@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Timer } from 'lucide-react';
 import CountdownApp from '../components/CountdownApp';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,7 +26,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Count down to what matters. Launches, birthdays, big days — watch the seconds tick in real time.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Countdown" />
+            <PayPalCheckout appName="Se Fire Countdown" />
           </div>
         </motion.div>
       </div>
