@@ -79,7 +79,7 @@ export default function Landing() {
             Play. <span className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">Compete.</span> Win.
           </h1>
           <p className="text-white/60 mt-4 max-w-xl mx-auto">
-            Free arcade classics from Se Fire Tech — no sign-up, no ads, just you against your own high score.
+            Your personal arcade, open all night. Every Se Fire game in one place — pick one and play. No downloads, no waiting, just games.
           </p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Games" />
