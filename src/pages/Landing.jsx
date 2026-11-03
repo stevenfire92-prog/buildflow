@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Bill <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">every minute.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Start the timer, log hours per client, and see exactly what you've earned.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Know exactly where your hours go. Track time by project, generate clean reports, bill with confidence.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Timetrack" />
           </div>
