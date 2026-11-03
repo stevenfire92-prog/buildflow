@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Build streaks. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Become unstoppable.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Small daily wins compound into massive change. Track it, streak it, own it.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Stop breaking promises to yourself. Build streaks that stick, watch your progress stack up, and become the person who actually follows through.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Habits" />
           </div>
