@@ -4,7 +4,7 @@ import { Flame } from 'lucide-react';
 import ExpenseTracker from '../components/ExpenseTracker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Know where every dollar goes. Log expenses in seconds, see exactly what you're spending on, and stop wondering where your money disappeared to.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Expenses" />
+            <PayPalCheckout appName="Se Fire Expenses" />
           </div>
         </motion.div>
       </div>
