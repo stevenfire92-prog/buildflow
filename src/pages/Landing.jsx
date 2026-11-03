@@ -5,7 +5,7 @@ import LinkBio from '../components/LinkBio';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Build a beautiful link-in-bio page in seconds. No account, no cost — just links.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Links" />
+            <PayPalCheckout appName="Se Fire Links" />
           </div>
         </motion.div>
       </div>
