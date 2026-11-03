@@ -47,8 +47,7 @@ export default function Landing() {
             Survive.
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            A modern take on the classic — gobble fire orbs, chase the rare golden orb,
-            and dodge the stone as the speed ramps up. How long can you survive?
+            Eat. Grow. Don't die. The timeless classic is back and just as ruthless as you remember. How long can you survive?
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
