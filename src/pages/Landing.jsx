@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Ship every project. <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">On time.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Kanban boards, tasks, deadlines and team assignments — project management that moves at your speed.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Run projects like you own the place. Organize tasks, hit milestones, keep the whole team aligned.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Projects" />
           </div>
