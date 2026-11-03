@@ -3,7 +3,7 @@ import { Wallet } from 'lucide-react';
 import BudgetApp from '../components/BudgetApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Take control of your money before it controls you. Set budgets by category, track every spend, stay in the green.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Budget" />
+            <PayPalCheckout appName="Se Fire Budget" />
           </div>
         </div>
       </div>
