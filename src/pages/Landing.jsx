@@ -47,8 +47,7 @@ export default function Landing() {
             Level Up.
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            The classic falling-block puzzler — rotate, drop, and clear lines as the speed
-            ramps up. Chase a quad clear for max points. How many lines can you clear?
+            The puzzle legend, reborn. Stack the blocks, clear the lines, chase the quad clear. Simple to learn, impossible to master.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
