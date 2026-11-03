@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Get it <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">done.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Priorities, subtasks, due dates and smart filters — the to-do list that actually gets things done.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Get it out of your head and onto the list. Priorities, due dates, and the most satisfying check-off you've ever tapped.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Tasks" />
           </div>
