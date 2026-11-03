@@ -342,7 +342,7 @@ export default function TimetrackApp() {
             </select>
             <input value={mDesc} onChange={(e) => setMDesc(e.target.value)} placeholder="Description" className={inputCls} />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input type="number" min="0" step="1" value={mMins} onChange={(e) => setMMins(e.target.value)} placeholder="Duration (minutes)" className={inputCls} />
             <input type="date" value={mDate} onChange={(e) => setMDate(e.target.value)} className={`${inputCls} text-slate-300`} />
           </div>
