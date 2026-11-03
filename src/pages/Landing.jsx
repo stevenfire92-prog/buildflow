@@ -3,7 +3,7 @@ import { FolderOpen } from 'lucide-react';
 import FilesApp from '../components/FilesApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Your digital life, organized. Store files, sort by category, find anything in seconds.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Files" />
+            <PayPalCheckout appName="Se Fire Files" />
           </div>
         </div>
       </div>
