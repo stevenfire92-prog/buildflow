@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Know where <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">every dollar</span> goes.
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Log it in seconds. See the breakdown. Spend smarter.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Know where every dollar goes. Log expenses in seconds, see exactly what you're spending on, and stop wondering where your money disappeared to.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Expenses" />
           </div>
