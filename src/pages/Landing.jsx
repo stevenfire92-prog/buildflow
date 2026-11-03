@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Everyone, <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">at hand.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Groups, favorites and lightning search — every contact you'll ever need.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your people, all in one place. Keep track of everyone that matters — names, numbers, notes, the works.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Contacts" />
           </div>
