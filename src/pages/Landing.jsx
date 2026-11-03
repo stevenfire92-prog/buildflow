@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Spend smart. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Save more.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Set monthly budgets per category, track every dollar, and get alerted before you overspend.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Take control of your money before it controls you. Set budgets by category, track every spend, stay in the green.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Budget" />
           </div>
