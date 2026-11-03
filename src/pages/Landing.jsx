@@ -28,7 +28,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Lock in. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Stay focused.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">The Pomodoro technique — 25 minutes of deep work, then a break. Simple and it works.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Deep work, no distractions. A clean timer that tracks your sessions so you can actually concentrate.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Focus" />
           </div>
