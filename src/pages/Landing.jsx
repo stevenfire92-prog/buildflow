@@ -34,7 +34,7 @@ export default function Landing() {
             </span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-sm text-slate-400 sm:text-base">
-            Your AI companion for ideas, questions, and late-night thoughts.
+            Your AI conversation partner, always on. Ask questions, brainstorm ideas, think out loud. It's like having a genius on speed dial.
           </p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire AI Chat" />
