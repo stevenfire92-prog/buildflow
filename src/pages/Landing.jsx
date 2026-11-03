@@ -5,7 +5,7 @@ import SnippetsApp from '../components/SnippetsApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Your personal code library. Save snippets, tag them, search them, reuse them.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Snippets" />
+            <PayPalCheckout appName="Se Fire Snippets" />
           </div>
         </motion.div>
       </div>
