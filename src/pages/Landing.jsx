@@ -24,7 +24,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Write <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">smarter.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Draft blogs, emails, stories and product copy with templates, tone control, and word counts.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Beat the blank page. Templates for blogs, emails, and stories with a clean space to draft. Write faster, write better, ship it.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire AI Writer" />
           </div>
