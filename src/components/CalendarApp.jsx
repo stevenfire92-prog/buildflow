@@ -100,7 +100,7 @@ export default function CalendarApp() {
                       {evts.slice(0, 3).map((e) => (
                         <span key={e.id} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: colorOf(e.color).dot }} />
                       ))}
-                      {evts.length > 3 && <span className="text-[9px] text-slate-500">+{evts.length - 3}</span>}
+                      {evts.length > 3 && <span className="text-[10px] text-slate-500">+{evts.length - 3}</span>}
                     </div>
                   </button>
                 );
