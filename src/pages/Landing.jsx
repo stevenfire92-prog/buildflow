@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Your team. <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Organized.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Employee records, time-off requests and onboarding checklists — HR without the paperwork pile.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Manage your people without the paperwork nightmare. Track employees, keep records clean.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire HR" />
           </div>
