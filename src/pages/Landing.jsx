@@ -3,7 +3,7 @@ import { ChartColumn } from 'lucide-react';
 import AnalyticsApp from '../components/AnalyticsApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Stop flying blind. Track the metrics that matter, see trends as they happen.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Analytics" />
+            <PayPalCheckout appName="Se Fire Analytics" />
           </div>
         </div>
       </div>
