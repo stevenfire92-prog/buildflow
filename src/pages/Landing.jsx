@@ -3,7 +3,7 @@ import { ChartPie } from 'lucide-react';
 import SurveyApp from '../components/SurveyApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Ask the question, get the real answer. Create surveys, gather feedback, see results as they land.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Survey" />
+            <PayPalCheckout appName="Se Fire Survey" />
           </div>
         </div>
       </div>
