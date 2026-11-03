@@ -275,7 +275,7 @@ export default function TimerApp() {
         <div className="text-center">
           {!ivState ? (
             <>
-              <div className="grid grid-cols-3 gap-3 mb-6 max-w-md mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 max-w-md mx-auto">
                 <div>
                   <label className="text-[11px] uppercase text-slate-500 font-bold">Work (min)</label>
                   <input type="number" min="1" value={workMin} onChange={(e) => setWorkMin(Math.max(1, parseInt(e.target.value) || 1))} className="w-full mt-1 px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-center font-black outline-none focus:border-orange-500" />
