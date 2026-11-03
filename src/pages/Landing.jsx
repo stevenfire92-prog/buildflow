@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { KanbanSquare } from 'lucide-react';
 import KanbanApp from '../components/KanbanApp';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,7 +26,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">See your work, move your work. Drag cards from To Do to Done and feel the momentum build.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Kanban" />
+            <PayPalCheckout appName="Se Fire Kanban" />
           </div>
         </motion.div>
       </div>
