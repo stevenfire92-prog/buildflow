@@ -5,7 +5,7 @@ import CardMaker from '../components/CardMaker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -14,7 +14,7 @@ export default function Landing() {
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2.5 text-center">
         <p className="text-xs text-amber-200/90">
-          🔨 This app is under construction — in no way, shape, or form is the pay option supposed to work right now. Create free.
+          💳 Payments are live — upgrade to Pro for full access. Create free.
         </p>
       </div>
 
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Ditch the paper. Digital business cards that actually impress — share your contact with a tap.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Cards" />
+            <PayPalCheckout appName="Se Fire Cards" />
           </div>
         </motion.div>
       </div>
