@@ -3,7 +3,7 @@ import { Store } from 'lucide-react';
 import StoreApp from '../components/StoreApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Your storefront, open 24/7. Showcase products, manage listings, start selling today.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Store" />
+            <PayPalCheckout appName="Se Fire Store" />
           </div>
         </div>
       </div>
