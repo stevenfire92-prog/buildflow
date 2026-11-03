@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Invoice like a <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">pro.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Create professional invoices in seconds. Track who's paid, print or save as PDF, get your money.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Stop chasing payments. Fire off professional invoices in seconds, track who's paid and who owes you.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Invoices" />
           </div>
