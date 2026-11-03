@@ -47,8 +47,7 @@ export default function Landing() {
             Win.
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            The classic number puzzler with a Se Fire twist — slide the tiles,
-            chain your merges, and chase the magic tile. One wrong move and the board fills up.
+            Slide. Merge. Win. Combine the tiles, chase the magic number, and don't let the board fill up. Deceptively calm, secretly intense.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
