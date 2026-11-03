@@ -60,7 +60,7 @@ export default function DesignSection() {
 
           <div className="relative">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-6 overflow-hidden">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[...Array(4)].map((_, i) => (
                   <div
                     key={i}

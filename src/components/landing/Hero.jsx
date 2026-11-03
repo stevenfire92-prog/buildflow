@@ -45,7 +45,7 @@ export default function Hero() {
   return (
     <section className="relative pt-32 pb-20 overflow-hidden bg-black">
       <div className="absolute inset-0 opacity-60">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-br from-violet-600/30 via-blue-600/20 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] max-w-[100vw] h-[500px] bg-gradient-to-br from-violet-600/30 via-blue-600/20 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
