@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Payday, <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">simplified.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Run pay periods, calculate gross-to-net and generate pay stubs — payroll without the headache.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Pay your team right, every time. Calculate payroll, track payments, keep everyone happy.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Payroll" />
           </div>
