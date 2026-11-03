@@ -5,7 +5,7 @@ import Booker from '../components/Booker';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Let clients book you while you sleep. Clean scheduling that handles appointments without the back-and-forth.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Bookings" />
+            <PayPalCheckout appName="Se Fire Bookings" />
           </div>
         </motion.div>
       </div>
