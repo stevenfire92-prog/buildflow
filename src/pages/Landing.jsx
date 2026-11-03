@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FileText } from 'lucide-react';
 import QuotesApp from '../components/QuotesApp';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,7 +26,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Quote like you mean business. Build client quotes with line items, tax, and totals in minutes.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Quotes" />
+            <PayPalCheckout appName="Se Fire Quotes" />
           </div>
         </motion.div>
       </div>
