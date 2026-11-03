@@ -280,7 +280,7 @@ export default function CrmApp() {
             </div>
             <input value={fName} onChange={(e) => setFName(e.target.value)} placeholder="Name *" className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" autoFocus />
             <input value={fCompany} onChange={(e) => setFCompany(e.target.value)} placeholder="Company" className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fEmail} onChange={(e) => setFEmail(e.target.value)} placeholder="Email" type="email" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={fPhone} onChange={(e) => setFPhone(e.target.value)} placeholder="Phone" type="tel" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             </div>
