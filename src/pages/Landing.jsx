@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Every second <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">counts.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Stopwatch with laps, countdown with presets, and work/rest interval cycles.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Simple timing that never lets you down. Countdowns, stopwatch, intervals — whatever you need timed, it's handled.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Timer" />
           </div>
