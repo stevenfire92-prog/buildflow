@@ -44,7 +44,7 @@ export default function Landing() {
           <p className="text-gray-400 text-lg max-w-xl mx-auto mb-8">
             How far can you go? A fast-paced endless runner that punishes slow reflexes. One more run — you know you want to.
           </p>
-          <ProUpgrade appName="Se Fire Runner" />
+          <PayPalCheckout appName="Se Fire Runner" />
         </header>
 
         {/* Pro perks strip */}
