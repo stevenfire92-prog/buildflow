@@ -3,7 +3,7 @@ import BMICalc from '../components/BMICalc';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -12,13 +12,13 @@ export default function Landing() {
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2.5 text-center">
         <p className="text-xs text-amber-200/90">
-          🔨 This app is under construction — in no way, shape, or form is the pay option supposed to work right now. Calculate free.
+          💳 Payments are live — upgrade to Pro for full access. Calculate free.
         </p>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 pt-8 flex items-center justify-between">
         <h1 className="text-2xl font-black">Se Fire <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Health</span></h1>
-        <ProUpgrade appName="Se Fire Health" />
+        <PayPalCheckout appName="Se Fire Health" />
       </div>
 
       <BMICalc />
