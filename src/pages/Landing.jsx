@@ -5,7 +5,7 @@ import Chat from '../components/Chat';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function Landing() {
             Your AI conversation partner, always on. Ask questions, brainstorm ideas, think out loud. It's like having a genius on speed dial.
           </p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire AI Chat" />
+            <PayPalCheckout appName="Se Fire AI Chat" />
           </div>
         </div>
 
