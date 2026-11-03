@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Sell anything. <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Online.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">List products, run a beautiful storefront with cart and checkout — your online store in minutes.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your storefront, open 24/7. Showcase products, manage listings, start selling today.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Store" />
           </div>
