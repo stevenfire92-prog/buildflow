@@ -3,7 +3,7 @@ import { BellRing } from 'lucide-react';
 import RemindersApp from '../components/RemindersApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Never forget again. Set it, forget it, get nudged at exactly the right time.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Reminders" />
+            <PayPalCheckout appName="Se Fire Reminders" />
           </div>
         </div>
       </div>
