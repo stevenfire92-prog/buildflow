@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Campaigns that <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">convert.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Build email campaigns, grow subscriber lists and send with pro templates — marketing that pays.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Email outreach, simplified. Compose campaigns, organize contacts, manage it all from one clean dashboard.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Email" />
           </div>
