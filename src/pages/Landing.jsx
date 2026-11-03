@@ -27,8 +27,7 @@ export default function Landing() {
           Se Fire Goals
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">
-          Set goals, break them into milestones, and celebrate every win. Big dreams become daily
-          progress.
+          Turn “someday” into “done.” Set the goal, break it into milestones, track every step.
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <button
