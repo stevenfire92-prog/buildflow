@@ -3,7 +3,7 @@ import { Boxes } from 'lucide-react';
 import InventoryApp from '../components/InventoryApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Know what you've got, always. Track stock levels, manage products, never get caught short.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Inventory" />
+            <PayPalCheckout appName="Se Fire Inventory" />
           </div>
         </div>
       </div>
