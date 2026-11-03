@@ -4,7 +4,7 @@ import { Timer } from 'lucide-react';
 import FocusTimer from '../components/FocusTimer';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -30,7 +30,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Deep work, no distractions. A clean timer that tracks your sessions so you can actually concentrate.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Focus" />
+            <PayPalCheckout appName="Se Fire Focus" />
           </div>
         </motion.div>
       </div>
