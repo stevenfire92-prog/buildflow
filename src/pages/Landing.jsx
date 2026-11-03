@@ -3,7 +3,7 @@ import { CalendarDays } from 'lucide-react';
 import CalendarApp from '../components/CalendarApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Your schedule, minus the chaos. See what's coming, add what's new, never double-book again.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Calendar" />
+            <PayPalCheckout appName="Se Fire Calendar" />
           </div>
         </div>
       </div>
