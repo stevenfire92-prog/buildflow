@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Dices } from 'lucide-react';
 import DiceApp from '../components/DiceApp';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,7 +26,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Roll the bones, anywhere. d4 through d20, multiple dice, full roll history.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Dice" />
+            <PayPalCheckout appName="Se Fire Dice" />
           </div>
         </motion.div>
       </div>
