@@ -4,7 +4,7 @@ import { StickyNote } from 'lucide-react';
 import NotesApp from '../components/NotesApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Your thoughts, captured before they vanish. Fast, clean note-taking with search that actually finds things.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Notes" />
+            <PayPalCheckout appName="Se Fire Notes" />
           </div>
         </motion.div>
       </div>
