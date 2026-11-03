@@ -46,8 +46,7 @@ export default function Landing() {
             </span>
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            Paddle vs AI in the timeless table-tennis duel. Track the ball,
-            angle your returns, and outlast the machine — first to 11 wins.
+            The original rally, remastered. You versus the AI — simple, fast, brutally competitive. First to blink loses.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
