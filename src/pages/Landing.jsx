@@ -3,7 +3,7 @@ import { CalendarClock } from 'lucide-react';
 import ScheduleApp from '../components/ScheduleApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Coordinate your crew without the group-chat chaos. Build schedules, manage shifts.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Schedule" />
+            <PayPalCheckout appName="Se Fire Schedule" />
           </div>
         </div>
       </div>
