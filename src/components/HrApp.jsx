@@ -235,7 +235,7 @@ export default function HrApp() {
               <button onClick={() => setShowEmpModal(false)} className="p-1.5 rounded-lg hover:bg-white/10 transition"><X className="w-4 h-4 text-slate-400" /></button>
             </div>
             <input value={fName} onChange={(e) => setFName(e.target.value)} placeholder="Full name *" autoFocus className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fRole} onChange={(e) => setFRole(e.target.value)} placeholder="Role / title" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={fDept} onChange={(e) => setFDept(e.target.value)} placeholder="Department" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             </div>
@@ -263,7 +263,7 @@ export default function HrApp() {
             <select value={lType} onChange={(e) => setLType(e.target.value)} className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500">
               {['Vacation', 'Sick', 'Personal', 'Remote', 'Other'].map((t) => <option key={t}>{t}</option>)}
             </select>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={lFrom} onChange={(e) => setLFrom(e.target.value)} type="date" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={lTo} onChange={(e) => setLTo(e.target.value)} type="date" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             </div>
