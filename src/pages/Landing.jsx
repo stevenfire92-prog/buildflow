@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Colors that <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">click.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Generate palettes, pick custom colors, copy hex codes, save favorites.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Colors that actually work together. Generate palettes, pick custom shades, save your favorites.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Palette" />
           </div>
