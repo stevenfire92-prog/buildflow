@@ -149,7 +149,7 @@ export default function Tracker() {
                           <span
                             key={d.date}
                             title={d.date}
-                            className="w-5 h-5 rounded text-[9px] grid place-items-center font-bold"
+                            className="w-5 h-5 rounded text-[10px] grid place-items-center font-bold"
                             style={{
                               background: d.done ? habit.color : 'rgba(255,255,255,0.06)',
                               color: d.done ? '#fff' : '#64748b',
