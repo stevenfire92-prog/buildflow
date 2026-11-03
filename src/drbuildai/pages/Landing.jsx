@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import PayPalCheckout from '@/components/PayPalCheckout';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 
@@ -50,7 +51,7 @@ export default function Landing() {
       <div className="pt-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-center text-sm text-amber-200">
-            This app is under construction — in no way, shape, or form is the pay option supposed to work right now. Enjoy the full free demo.
+            💳 Payments are live — upgrade to Pro for full access. Enjoy the full free demo.
           </div>
         </div>
       </div>
@@ -177,7 +178,9 @@ export default function Landing() {
                       <li key={t} className="flex items-center gap-2"><Check className="w-4 h-4 text-violet-300" /> {t}</li>
                     ))}
                   </ul>
-                  <Button onClick={() => navigate('/builder')} className="w-full mt-8 bg-gradient-to-r from-violet-500 to-fuchsia-500 font-bold">Go Pro</Button>
+                  <div className="w-full mt-8 flex justify-center">
+                    <PayPalCheckout appName="Dr Build AI" />
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
