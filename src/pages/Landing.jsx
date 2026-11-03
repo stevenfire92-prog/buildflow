@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Every day, <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">planned.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Month view, agenda, event reminders — your schedule in one clean calendar.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your schedule, minus the chaos. See what's coming, add what's new, never double-book again.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Calendar" />
           </div>
