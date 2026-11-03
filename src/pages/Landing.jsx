@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import AIWriterApp from '../components/AIWriterApp';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -26,7 +26,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Beat the blank page. Templates for blogs, emails, and stories with a clean space to draft. Write faster, write better, ship it.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire AI Writer" />
+            <PayPalCheckout appName="Se Fire AI Writer" />
           </div>
         </motion.div>
       </div>
