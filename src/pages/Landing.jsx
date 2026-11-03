@@ -5,7 +5,7 @@ import FlashcardsApp from '../components/FlashcardsApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Study like you mean it. Build decks, flip cards, and let spaced repetition burn it into your brain.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Flashcards" />
+            <PayPalCheckout appName="Se Fire Flashcards" />
           </div>
         </motion.div>
       </div>
