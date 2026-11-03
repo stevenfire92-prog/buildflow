@@ -3,7 +3,7 @@ import { CalendarDays, Heart, Lock } from 'lucide-react';
 import JournalApp from '../components/JournalApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 const FEATURES = [
   {
@@ -51,7 +51,7 @@ export default function Landing() {
           >
             Start Writing
           </button>
-          <ProUpgrade appName="Se Fire Journal" />
+          <PayPalCheckout appName="Se Fire Journal" />
         </div>
       </header>
 
