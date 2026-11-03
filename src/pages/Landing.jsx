@@ -3,7 +3,7 @@ import { FileText } from 'lucide-react';
 import ProposalsApp from '../components/ProposalsApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Win the deal before the meeting ends. Build polished proposals that make "yes" the easy answer.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Proposals" />
+            <PayPalCheckout appName="Se Fire Proposals" />
           </div>
         </div>
       </div>
