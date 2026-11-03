@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Capture it <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">before it's gone.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Quick notes, pinned ideas, color-coded thoughts. All yours, saved on your device.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your thoughts, captured before they vanish. Fast, clean note-taking with search that actually finds things.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Notes" />
           </div>
