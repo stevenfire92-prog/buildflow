@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Your code, <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">organized.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Save, tag, search, and copy code snippets in seconds.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Your personal code library. Save snippets, tag them, search them, reuse them.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Snippets" />
           </div>
