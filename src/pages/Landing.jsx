@@ -47,8 +47,7 @@ export default function Landing() {
             Survive.
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            The addictive arcade classic, Se Fire style — tap to flap through the pipes
-            as they come faster and faster. One tap too many and it's over. How far can you fly?
+            Tap to fly, pray to survive. Deceptively simple, impossibly addictive — one more try always turns into twenty. You know how this goes.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
