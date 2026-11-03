@@ -149,7 +149,7 @@ export default function TipCalc() {
           animate={{ scale: 1, opacity: 1 }}
           className="rounded-2xl bg-gradient-to-br from-orange-500/15 to-red-500/10 border border-orange-500/20 p-6 mb-6"
         >
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Tip</p>
               <p className="text-2xl font-black text-orange-300">{fmt(tip)}</p>
