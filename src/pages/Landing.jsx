@@ -3,7 +3,7 @@ import { IdCard } from 'lucide-react';
 import HrApp from '../components/HrApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Manage your people without the paperwork nightmare. Track employees, keep records clean.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire HR" />
+            <PayPalCheckout appName="Se Fire HR" />
           </div>
         </div>
       </div>
