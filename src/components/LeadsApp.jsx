@@ -200,17 +200,17 @@ export default function LeadsApp() {
             </div>
             <input value={fName} onChange={(e) => setFName(e.target.value)} placeholder="Name *" autoFocus className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             <input value={fCompany} onChange={(e) => setFCompany(e.target.value)} placeholder="Company" className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fEmail} onChange={(e) => setFEmail(e.target.value)} type="email" placeholder="Email" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <input value={fPhone} onChange={(e) => setFPhone(e.target.value)} type="tel" placeholder="Phone" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input value={fValue} onChange={(e) => setFValue(e.target.value)} type="number" min="0" placeholder="Deal value $" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
               <select value={fSource} onChange={(e) => setFSource(e.target.value)} className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500">
                 {SOURCES.map((s) => <option key={s}>{s}</option>)}
               </select>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <select value={fStage} onChange={(e) => setFStage(e.target.value)} className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500">
                 {STAGES.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
               </select>
