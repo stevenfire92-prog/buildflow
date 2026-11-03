@@ -42,8 +42,7 @@ export default function Landing() {
             </span>
           </h1>
           <p className="text-gray-400 text-lg max-w-xl mx-auto mb-8">
-            An endless runner built for speed. Weave through three lanes, leap the barriers, slide
-            under the gates, and grab every coin. How far can you make it?
+            How far can you go? A fast-paced endless runner that punishes slow reflexes. One more run — you know you want to.
           </p>
           <ProUpgrade appName="Se Fire Runner" />
         </header>
