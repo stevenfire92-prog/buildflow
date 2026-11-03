@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Contracts in minutes, <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">not billable hours.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Professional templates for freelancers, services, NDAs and music licenses.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Protect your bag. Create professional contracts in minutes — no lawyer fees, no legalese headaches.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Contracts" />
           </div>
