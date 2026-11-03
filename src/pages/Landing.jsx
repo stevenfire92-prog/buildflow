@@ -47,9 +47,7 @@ export default function Landing() {
             Climb.
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            A timing-based tower stacker — tap to drop each sliding block, trim the
-            overhang, and build your tower to the sky. How high can you climb?
-          </p>
+            Timing is everything. Stack the blocks higher and higher until one wrong move brings it all down. Nerves of steel required.</p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
               href="#play"
