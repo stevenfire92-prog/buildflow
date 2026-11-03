@@ -4,7 +4,7 @@ import { Gamepad2, Play, Trophy, ChevronRight, Rocket, Shield, Zap } from 'lucid
 import InvadersGame from '../components/InvadersGame';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   const [best, setBest] = useState(0);
@@ -36,7 +36,7 @@ export default function Landing() {
           </h1>
           <p className="text-zinc-400 text-lg max-w-xl mx-auto mb-6">
             The galaxy needs defending and you're the last ship standing. Blast through waves of invaders before they blast through you. No pressure.</p>
-          <ProUpgrade appName="Se Fire Invaders" />
+          <PayPalCheckout appName="Se Fire Invaders" />
         </header>
 
         {/* best score chip */}
