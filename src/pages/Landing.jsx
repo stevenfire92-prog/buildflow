@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Every client. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">One pipeline.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Track contacts, move deals through your pipeline, and never let a lead slip.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Know every customer like they're your only one. Track leads, manage relationships, never let an opportunity slip.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire CRM" />
           </div>
