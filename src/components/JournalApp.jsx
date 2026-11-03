@@ -195,7 +195,7 @@ export default function JournalApp() {
   return (
     <div className="w-full">
       {/* Stats row */}
-      <div className="mb-6 grid grid-cols-3 gap-3">
+      <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
           <BookOpen size={22} className="shrink-0 text-amber-400" />
           <div>
