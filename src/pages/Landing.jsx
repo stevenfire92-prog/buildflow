@@ -3,7 +3,7 @@ import { LifeBuoy } from 'lucide-react';
 import SupportApp from '../components/SupportApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Turn frustrated customers into loyal ones. Manage tickets, track issues, resolve them fast.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Support" />
+            <PayPalCheckout appName="Se Fire Support" />
           </div>
         </div>
       </div>
