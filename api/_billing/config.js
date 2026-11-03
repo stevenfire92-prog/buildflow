@@ -2,7 +2,7 @@ export default {
   "appId": "6aa0ac8456fc22afdf09666a",
   "accountId": "acct_1RkPHQ064KcAlKx3",
   "origin": "https://buildflow-plum.vercel.app",
-  "hostedOrigin": "https://builderflowstudio.base44.app",
+  "hostedOrigin": "https://dr-build-ai.vercel.app",
   "defaultPlan": "pro",
   "legacySecretKeys": ["se_fire_tech", "Steven_Thomas_Turcott"],
   "defaultReturnPath": "/dashboard",

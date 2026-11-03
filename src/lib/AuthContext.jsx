@@ -1,5 +1,12 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
-import { getAccessToken } from '@base44/sdk';
+// Local token helper — no Base44 SDK dependency.
+function getAccessToken() {
+  try {
+    return localStorage.getItem('sfi:token') || null;
+  } catch {
+    return null;
+  }
+}
 import { base44 } from '@/api/base44Client';
 import { readSession, publicSettingsError, loginPath } from './auth-session';
 

@@ -1,4 +1,11 @@
-import { getAccessToken } from '@base44/sdk';
+// Local token helper — no Base44 SDK dependency.
+function getAccessToken() {
+  try {
+    return localStorage.getItem('sfi:token') || null;
+  } catch {
+    return null;
+  }
+}
 
 const ROUTES = {
   createCheckoutSession: '/api/checkout',

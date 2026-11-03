@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://buildflow-se-fire-tech.vercel.app/sitemap.xml
+Sitemap: https://dr-build-ai.com/sitemap.xml

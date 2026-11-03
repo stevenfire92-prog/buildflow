@@ -85,7 +85,7 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     if (!/^Bearer \S+$/.test(authorization)) throw new BillingError(401, 'login_required', 'Sign in to continue.');
     let user;
     try {
-      const auth = createClient({ appId: config.appId, serverUrl: 'https://base44.app', token: authorization.slice(7), analytics: { enabled: false } });
+      const auth = createClient({ appId: config.appId, serverUrl: '""', token: authorization.slice(7), analytics: { enabled: false } });
       user = await auth.auth.me();
     } catch (error) {
       const status = error.status || error.response?.status;
@@ -97,12 +97,12 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
   }
 
   function metadata(user, extra = {}) {
-    return { base44_app_id: config.appId, base44_user_id: String(user.id), ...extra };
+    return { app_id: config.appId, user_id: String(user.id), ...extra };
   }
 
   async function findCustomer(client, user, create = false) {
     const customers = await client.customers.list({ email: user.email, limit: 100 });
-    const customer = customers.data.find(c => !c.deleted && c.metadata?.base44_app_id === config.appId && c.metadata?.base44_user_id === String(user.id));
+    const customer = customers.data.find(c => !c.deleted && c.metadata?.app_id === config.appId && c.metadata?.user_id === String(user.id));
     if (customer || !create) return customer;
     if (customers.has_more) throw new BillingError(503, 'customer_lookup_incomplete', 'Payments are temporarily unavailable.');
     return client.customers.create({ email: user.email, metadata: metadata(user) }, { idempotencyKey: `customer-${config.appId}-${user.id}` });
@@ -173,7 +173,7 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     if (typeof id !== 'string' || !/^cs_(live|test)_[A-Za-z0-9]+$/.test(id)) throw new BillingError(400, 'invalid_session', 'Invalid checkout session.');
     const { client, live } = await stripe();
     const session = await client.checkout.sessions.retrieve(id);
-    if (session.livemode !== live || session.client_reference_id !== String(user.id) || session.metadata?.base44_app_id !== config.appId) {
+    if (session.livemode !== live || session.client_reference_id !== String(user.id) || session.metadata?.app_id !== config.appId) {
       throw new BillingError(403, 'session_not_owned', 'This checkout session belongs to another account.');
     }
     return { paid: session.status === 'complete' && session.payment_status === 'paid', status: session.status, payment_status: session.payment_status };
@@ -192,7 +192,7 @@ export function createBillingHandlers({ StripeClient, createClient, config, env 
     let plan = 'free';
     for (const sub of subs.data) {
       const key = sub.metadata?.plan;
-      if (sub.metadata?.base44_app_id === config.appId && sub.metadata?.base44_user_id === String(user.id) &&
+      if (sub.metadata?.app_id === config.appId && sub.metadata?.user_id === String(user.id) &&
           ['active', 'trialing'].includes(sub.status) && Object.hasOwn(config.plans, key) && order.indexOf(key) > order.indexOf(plan)) plan = key;
     }
     return { authenticated: true, founder: false, plan, unlockedPlans: order.slice(0, order.indexOf(plan) + 1), lifetime: false, unlimitedCredits: false };

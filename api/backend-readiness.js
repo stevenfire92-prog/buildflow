@@ -11,6 +11,6 @@ export default function handler(req, res) {
     ready: false,
     provider: 'vercel',
     blockedBy: ['independent_authentication', 'database_provisioning',
-      'data_migration', 'base44_call_replacement', 'stripe_webhook_verification']
+      'data_migration', 'legacy_api_replacement', 'stripe_webhook_verification']
   });
 }
