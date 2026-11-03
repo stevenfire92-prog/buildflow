@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Book it. <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Show up. Get paid.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Clients book your services in seconds — you manage every appointment in one place.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Let clients book you while you sleep. Clean scheduling that handles appointments without the back-and-forth.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Bookings" />
           </div>
