@@ -32,7 +32,7 @@ export default function Landing() {
           </span>
         </h1>
         <p className="text-white/60 text-lg mt-4">
-          Save your favorites, discover new ones. Your kitchen, your rules.
+          Cook something worth eating. Browse recipes, save your favorites, plan the week's meals. Dinner panic is officially over.
         </p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Recipes" />
