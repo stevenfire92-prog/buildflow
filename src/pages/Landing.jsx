@@ -3,7 +3,7 @@ import { Bookmark } from 'lucide-react';
 import BookmarksApp from '../components/BookmarksApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Save the web before it disappears. Bookmark the good stuff, organize by topic, find it when you actually need it.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Bookmarks" />
+            <PayPalCheckout appName="Se Fire Bookmarks" />
           </div>
         </div>
       </div>
