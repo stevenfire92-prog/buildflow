@@ -25,7 +25,7 @@ export default function Landing() {
           Se Fire Vault
         </h1>
         <p className="text-lg text-zinc-400 max-w-xl mx-auto mb-8">
-          Your private notes vault with a PIN lock. Keep what matters secure — on your device, away from prying eyes.
+          Your private digital safe. Stash sensitive notes, credentials, and the stuff you can't afford to lose — locked down and only yours.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
           <button
