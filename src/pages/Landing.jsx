@@ -46,8 +46,7 @@ export default function Landing() {
             Level up.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            The classic brick breaker, rebuilt with neon glow, power-up capsules, multi-ball chaos
-            and endless levels. Bounce the ball, crack every brick, chase the high score.
+            Smash every last brick. Classic arcade action with a modern edge — pure, satisfying destruction. Clear the board, feel like a legend.
           </p>
           <div className="mt-6 flex justify-center">
             <ProUpgrade appName="Se Fire Breaker" />
