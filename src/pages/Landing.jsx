@@ -32,7 +32,7 @@ export default function Landing() {
               We build <span className="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent">everything digital</span>
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
-              Websites, apps, games, software, music & books — professional quality at prices that beat the competition. Built to have a positive impact.
+              Need something built? Websites from $2,500, apps from $3,500 — custom work, deliberately priced under the competition.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a href="#services" className="px-8 py-3.5 rounded-xl font-bold bg-gradient-to-r from-orange-500 to-red-600 hover:brightness-110 transition flex items-center gap-2">
