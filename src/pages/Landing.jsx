@@ -3,7 +3,7 @@ import { Users } from 'lucide-react';
 import CrmApp from '../components/CrmApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Know every customer like they're your only one. Track leads, manage relationships, never let an opportunity slip.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire CRM" />
+            <PayPalCheckout appName="Se Fire CRM" />
           </div>
         </div>
       </div>
