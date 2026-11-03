@@ -24,7 +24,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Never miss a <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">moment.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Create live countdown timers for launches, events, and deadlines. Watch every second tick.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Count down to what matters. Launches, birthdays, big days — watch the seconds tick in real time.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Countdown" />
           </div>
