@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Proposals that <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">close deals.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Build polished proposals with line items and totals. Print or save as PDF in one click.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Win the deal before the meeting ends. Build polished proposals that make "yes" the easy answer.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Proposals" />
           </div>
