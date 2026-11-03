@@ -23,7 +23,7 @@ export const STRINGS = {
   "hero.badge": "Build with AI, ship in minutes",
   "hero.title": "Every builder needs a base",
   "hero.subtitle":
-    "Build your own apps, websites, products and AI agents on Builder Flow using your own words. Get ahead — and make sure it stays that way.",
+    "Automate your business without writing a line of code. Design visual workflows, connect the steps, and let the system do the heavy lifting.",
   "hero.apps": "Apps",
   "hero.websites": "Websites",
   "hero.games": "Games",

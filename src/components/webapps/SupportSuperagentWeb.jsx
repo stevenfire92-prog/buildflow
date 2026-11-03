@@ -55,7 +55,7 @@ export default function SupportSuperagentWeb() {
         botResponse = "I've generated a 1-on-1 VIP calendar link for you. Thursday at 2:00 PM EST is currently open with our lead engineer Steven. Would you like me to confirm?";
         setSentimentStatus("High Intent / Demo Booking");
       } else if (userText.toLowerCase().includes("api") || userText.toLowerCase().includes("webhook") || userText.toLowerCase().includes("code")) {
-        botResponse = "Our REST API documentation is accessible directly through your Base44 backend function hooks. You can issue bearer tokens and listen to the real-time websocket endpoint.";
+        botResponse = "Our REST API documentation is accessible directly through your backend function hooks. You can issue bearer tokens and listen to the real-time websocket endpoint.";
         setSentimentStatus("Technical Support / Resolution: 100%");
       } else {
         botResponse = `Understood. I have verified your account telemetry. Your request regarding "${userText.slice(0, 30)}..." has been resolved and logged into your CRM dashboard.`;
