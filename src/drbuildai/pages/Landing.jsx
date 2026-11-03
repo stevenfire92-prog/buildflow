@@ -57,7 +57,7 @@ export default function Landing() {
 
       <section className="relative pt-20 pb-20 px-4">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-violet-500/15 blur-[120px]" />
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] max-w-[100vw] h-[400px] rounded-full bg-violet-500/15 blur-[120px]" />
           <div className="absolute top-40 left-1/4 w-[300px] h-[300px] rounded-full bg-fuchsia-500/10 blur-[100px]" />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
