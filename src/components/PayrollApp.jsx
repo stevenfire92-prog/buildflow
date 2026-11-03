@@ -236,7 +236,7 @@ export default function PayrollApp() {
               <button onClick={() => setShowEmpModal(false)} className="p-1.5 rounded-lg hover:bg-white/10 transition"><X className="w-4 h-4 text-slate-400" /></button>
             </div>
             <input value={fName} onChange={(e) => setFName(e.target.value)} placeholder="Full name *" autoFocus className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <select value={fType} onChange={(e) => setFType(e.target.value)} className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500">
                 <option value="hourly">Hourly</option>
                 <option value="salary">Salary</option>
