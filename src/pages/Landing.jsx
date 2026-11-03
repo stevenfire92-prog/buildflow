@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Find your <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">calm.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Meditation timer with presets, ambient tones, and session history.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Find your calm in the chaos. Guided timers with ambient tones that actually help you breathe.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Meditate" />
           </div>
