@@ -3,7 +3,7 @@ import { KanbanSquare } from 'lucide-react';
 import ProjectsApp from '../components/ProjectsApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Run projects like you own the place. Organize tasks, hit milestones, keep the whole team aligned.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Projects" />
+            <PayPalCheckout appName="Se Fire Projects" />
           </div>
         </div>
       </div>
