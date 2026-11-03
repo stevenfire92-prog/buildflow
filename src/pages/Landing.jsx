@@ -3,7 +3,7 @@ import { ListChecks } from 'lucide-react';
 import TasksApp from '../components/TasksApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Get it out of your head and onto the list. Priorities, due dates, and the most satisfying check-off you've ever tapped.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Tasks" />
+            <PayPalCheckout appName="Se Fire Tasks" />
           </div>
         </div>
       </div>
