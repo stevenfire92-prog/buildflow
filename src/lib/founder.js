@@ -6,7 +6,7 @@ const FOUNDER_CODE = 'sefire2026';
 
 // TEMPORARY: Free access for ALL users until Stripe payments go live.
 // Steve's order Nov 2, 2026. To revert: set to false and redeploy.
-export const FREE_ACCESS_UNTIL_STRIPE = true;
+export const FREE_ACCESS_UNTIL_STRIPE = false;
 
 export function isFounder() {
   try {
