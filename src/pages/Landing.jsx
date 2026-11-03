@@ -3,7 +3,7 @@ import { Target } from 'lucide-react';
 import LeadsApp from '../components/LeadsApp.jsx';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -27,7 +27,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Fill your pipeline on purpose. Capture leads, track every touchpoint, nurture them into customers.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Leads" />
+            <PayPalCheckout appName="Se Fire Leads" />
           </div>
         </div>
       </div>
