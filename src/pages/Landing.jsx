@@ -26,7 +26,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Your network, <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">in your pocket.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Design digital business cards, flip them, save them, and share as vCard — all free.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Ditch the paper. Digital business cards that actually impress — share your contact with a tap.</p>
           <div className="mt-5 flex justify-center">
             <ProUpgrade appName="Se Fire Cards" />
           </div>
