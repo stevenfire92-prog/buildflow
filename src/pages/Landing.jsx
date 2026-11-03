@@ -47,10 +47,7 @@ export default function Landing() {
             Pop.
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-6">
-            Aim your shooter, bounce bubbles off the walls, and match 3 or more of a
-            color to pop them. Stranded bubbles drop for bonus points — but don't let
-            the ceiling creep down to your shooter!
-          </p>
+            Pop your way to victory. Match the colors, clear the board, and watch the whole thing go down in the most satisfying way possible.</p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
               href="#play"
