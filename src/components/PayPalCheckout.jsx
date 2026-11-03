@@ -50,7 +50,7 @@ const PLANS = [
 // TEMPORARY: Free access for ALL users until payments go live.
 // Steve's order Nov 2, 2026: "Make all free accounts have all paid services till we figure out Stripe"
 // To revert: set to false and redeploy.
-const FREE_ACCESS_UNTIL_STRIPE = true;
+const FREE_ACCESS_UNTIL_STRIPE = false;
 
 const FOUNDER_KEY = 'sfi:founder';
 const PRO_KEY = 'sfi:pro';
