@@ -35,8 +35,7 @@ export default function Landing() {
             </span>
           </h1>
           <p className="text-zinc-400 text-lg max-w-xl mx-auto mb-6">
-            The classic arcade shooter, reborn. Hold the line against endless waves of glowing invaders — dodge their fire, shatter their ranks, and chase the high score.
-          </p>
+            The galaxy needs defending and you're the last ship standing. Blast through waves of invaders before they blast through you. No pressure.</p>
           <ProUpgrade appName="Se Fire Invaders" />
         </header>
 
