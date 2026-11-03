@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { CreditCard, Crown } from "lucide-react";
+import { CreditCard, Crown, Check } from "lucide-react";
 import { client } from "@/api/localClient";
 import AppHeader from "@/components/AppHeader";
 import PlanCard from "@/components/subscription/PlanCard";
+import PayPalCheckout, { hasProAccess } from "@/components/PayPalCheckout";
 
 const freeFeatures = ["3 active projects", "Community support", "Basic analytics"];
 const proFeatures = [
@@ -14,8 +15,6 @@ const proFeatures = [
 
 export default function Subscription() {
   const [plan, setPlan] = useState(null);
-  const [upgradeLoading, setUpgradeLoading] = useState(false);
-  const [portalLoading, setPortalLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -32,43 +31,16 @@ export default function Subscription() {
         setPlan("pro");
         return;
       }
+      // PayPal purchase check (localStorage)
+      if (hasProAccess()) {
+        setPlan("pro");
+        return;
+      }
     } catch (e) { /* ignore */ }
     client.functions.invoke("getEntitlements", {})
       .then(({ data }) => setPlan(data.plan === "pro" ? "pro" : "free"))
       .catch(() => { setPlan("free"); setError("Your subscription could not be verified. Please try again later."); });
   }, []);
-
-  const startCheckout = async () => {
-    setError("");
-    if (window.self !== window.top) {
-      setError("Checkout works only from the published app — open the app in a new tab to upgrade.");
-      return;
-    }
-    setUpgradeLoading(true);
-    try {
-      const res = await client.functions.invoke("createCheckoutSession", {});
-      window.location.href = res.data.url;
-    } catch {
-      setError("Could not start checkout. Please try again.");
-      setUpgradeLoading(false);
-    }
-  };
-
-  const openPortal = async () => {
-    setError("");
-    if (window.self !== window.top) {
-      setError("The billing portal works only from the published app — open the app in a new tab.");
-      return;
-    }
-    setPortalLoading(true);
-    try {
-      const res = await client.functions.invoke("createBillingPortalSession", {});
-      window.location.href = res.data.url;
-    } catch {
-      setError("Could not open the billing portal. Please try again.");
-      setPortalLoading(false);
-    }
-  };
 
   if (plan === null) {
     return (
@@ -121,16 +93,39 @@ export default function Subscription() {
 
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <PlanCard title="Free" price="$0" features={freeFeatures} current={plan === "free"} />
-          <PlanCard
-            title="Pro"
-            price="$16/month"
-            features={proFeatures}
-            current={plan === "pro"}
-            highlighted
-            onCta={startCheckout}
-            ctaLabel="Upgrade to Pro"
-            ctaLoading={upgradeLoading}
-          />
+          <div className="rounded-2xl border p-6 border-white/40 bg-white/[0.06]">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="font-medium text-white">Pro</h3>
+              {plan === "pro" && (
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/15 text-emerald-400">
+                  Current plan
+                </span>
+              )}
+            </div>
+            <div className="mt-3 text-3xl font-semibold text-white">
+              $4.99<span className="text-base font-normal text-white/50">/mo</span>
+            </div>
+            <ul className="mt-5 space-y-2.5">
+              {proFeatures.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm text-white/60">
+                  <Check className="w-4 h-4 mt-0.5 text-white/40 shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex justify-center">
+              {plan === "pro" ? (
+                <button
+                  disabled
+                  className="w-full px-4 py-2.5 text-sm font-medium rounded-full bg-white/10 text-white/40 cursor-default"
+                >
+                  Current plan
+                </button>
+              ) : (
+                <PayPalCheckout appName="BuildFlow" />
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="mt-4 rounded-2xl bg-white/[0.03] border border-white/10 p-6">
@@ -139,16 +134,9 @@ export default function Subscription() {
             <h3 className="font-medium">Payment methods</h3>
           </div>
           <p className="mt-2 text-sm text-white/45">
-            Update your card, billing address, or cancel your subscription any time through the
-            secure Stripe billing portal.
+            Payments are processed securely through PayPal. Manage your subscription
+            any time from your PayPal account.
           </p>
-          <button
-            onClick={openPortal}
-            disabled={portalLoading}
-            className="mt-4 px-5 py-2.5 text-sm font-medium text-white bg-white/10 border border-white/15 rounded-full hover:bg-white/15 transition-colors disabled:opacity-60"
-          >
-            {portalLoading ? "Opening portal..." : "Open billing portal"}
-          </button>
           {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
         </div>
       </div>
