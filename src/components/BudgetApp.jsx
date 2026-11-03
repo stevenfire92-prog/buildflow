@@ -86,7 +86,7 @@ export default function BudgetApp() {
       </div>
 
       {/* Totals */}
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
           <p className="text-[11px] uppercase tracking-wide text-slate-500 mb-1">Budget</p>
           <p className="text-lg font-black">{money(summary.totalBudget)}</p>
@@ -165,7 +165,7 @@ export default function BudgetApp() {
 
       {showAdd && (
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 mb-4 space-y-3">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input type="number" min="0" step="0.01" value={amt} onChange={(e) => setAmt(e.target.value)} placeholder="Amount" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
             <input value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Description" className="px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm outline-none focus:border-orange-500" />
           </div>
