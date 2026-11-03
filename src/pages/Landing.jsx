@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Save <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">everything.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Tags, folders and instant search — every link you save, found in seconds.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Save the web before it disappears. Bookmark the good stuff, organize by topic, find it when you actually need it.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Bookmarks" />
           </div>
