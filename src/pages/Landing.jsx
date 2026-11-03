@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Customers, <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">handled.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Tickets, knowledge base and priorities — a helpdesk that keeps every customer happy.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Turn frustrated customers into loyal ones. Manage tickets, track issues, resolve them fast.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Support" />
           </div>
