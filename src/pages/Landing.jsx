@@ -4,7 +4,7 @@ import { KeyRound } from 'lucide-react';
 import PasswordGen from '../components/PasswordGen';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Landing() {
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Stop reusing the same password everywhere. Generate strong, unique passwords for every account in one click.</p>
           <div className="mt-5">
-            <ProUpgrade appName="Se Fire Passwords" />
+            <PayPalCheckout appName="Se Fire Passwords" />
           </div>
         </motion.div>
       </div>
