@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Forms in <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">minutes.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Build forms with a live preview, share the link, collect responses — no code needed.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Build forms in minutes, not hours. Collect responses, share the link, watch the submissions roll in.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Forms" />
           </div>
