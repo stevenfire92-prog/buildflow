@@ -231,7 +231,7 @@ export default function InvoiceApp() {
               <label className="text-xs font-bold text-slate-400 uppercase">Invoice #</label>
               <input value={editing.number} onChange={(e) => updateField('number', e.target.value)} className={inputCls} />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="text-xs font-bold text-slate-400 uppercase">Issue date</label>
                 <input type="date" value={editing.issueDate} onChange={(e) => updateField('issueDate', e.target.value)} className={inputCls} />
@@ -298,7 +298,7 @@ export default function InvoiceApp() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="text-xs font-bold text-slate-400 uppercase">Tax %</label>
                 <input type="number" min="0" step="any" value={editing.taxRate} onChange={(e) => updateField('taxRate', e.target.value)} className={inputCls} />
