@@ -25,7 +25,7 @@ export default function Landing() {
           <h1 className="text-4xl md:text-5xl font-black mb-2">
             Never lose <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">a lead.</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">Capture leads, move them through your pipeline and follow up on time — every deal counts.</p>
+          <p className="text-slate-400 max-w-xl mx-auto">Fill your pipeline on purpose. Capture leads, track every touchpoint, nurture them into customers.</p>
           <div className="mt-5">
             <ProUpgrade appName="Se Fire Leads" />
           </div>
