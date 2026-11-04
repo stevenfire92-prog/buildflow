@@ -6,6 +6,7 @@ import SkyHopGame from '../components/SkyHopGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
 import ProUpgrade from '../components/ProUpgrade.jsx';
+import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function loadBest() {
   try {
