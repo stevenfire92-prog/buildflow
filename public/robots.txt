@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /api/
 
-Sitemap: https://dr-build-ai.com/sitemap.xml
+Sitemap: https://se-fire-crystalcascade.vercel.app/sitemap.xml
