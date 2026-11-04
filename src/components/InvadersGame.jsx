@@ -498,7 +498,7 @@ export default function InvadersGame() {
         {state === 'start' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm text-center p-6">
             <div className="text-5xl mb-4">👾</div>
-            <h2 className="text-3xl font-extrabold text-white mb-2">Se Fire Invaders</h2>
+            <h2 className="text-3xl font-extrabold text-white mb-2">Se Fire Star Defenders</h2>
             <p className="text-zinc-400 text-sm mb-1">← → / A D to move · Space to shoot</p>
             <p className="text-zinc-400 text-sm mb-6">On mobile: drag to move, tap canvas or FIRE to shoot</p>
             <button

@@ -26,7 +26,7 @@ export default function Landing() {
         {/* hero */}
         <header className="text-center pt-12 pb-8">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-300 text-sm font-semibold mb-5">
-            <Gamepad2 className="w-4 h-4" /> Se Fire Invaders
+            <Gamepad2 className="w-4 h-4" /> Se Fire Star Defenders
           </span>
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
             Defend. Blast.{' '}
@@ -36,7 +36,7 @@ export default function Landing() {
           </h1>
           <p className="text-zinc-400 text-lg max-w-xl mx-auto mb-6">
             The galaxy needs defending and you're the last ship standing. Blast through waves of invaders before they blast through you. No pressure.</p>
-          <PayPalCheckout appName="Se Fire Invaders" />
+          <PayPalCheckout appName="Se Fire Star Defenders" />
         </header>
 
         {/* best score chip */}
@@ -97,7 +97,7 @@ export default function Landing() {
 
         {/* share */}
         <section className="mb-12 text-center">
-          <ShareButtons title="Se Fire Invaders — Defend. Blast. Survive." />
+          <ShareButtons title="Se Fire Star Defenders — Defend. Blast. Survive." />
         </section>
 
         {/* footer */}
