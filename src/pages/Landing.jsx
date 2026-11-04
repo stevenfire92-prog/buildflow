@@ -5,6 +5,7 @@ import RunnerGame from '../components/RunnerGame.jsx';
 import ProUpgrade from '../components/ProUpgrade.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
+import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 const BEST_KEY = 'sfrunner:best';
 
