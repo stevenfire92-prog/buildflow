@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, Check, Clock, Flame } from 'lucide-react';
 import { APPS } from '../data/apps';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function AppDetail() {
@@ -65,6 +66,9 @@ export default function AppDetail() {
               <Clock className="w-4 h-4" /> Deploying Oct 31
             </div>
           )}
+          <div className="mt-4 flex justify-center">
+            <PayPalCheckout appName={app.name} />
+          </div>
         </motion.div>
       </div>
 

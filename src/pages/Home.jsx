@@ -6,6 +6,7 @@ import { APPS, CATEGORIES } from '../data/apps';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import BookPromo from '../components/BookPromo';
+import PayPalCheckout from '../components/PayPalCheckout';
 import { checkFounderUrl } from '../lib/founder';
 
 export default function Home() {
@@ -33,6 +34,9 @@ export default function Home() {
           <p className="text-slate-400 max-w-2xl mx-auto mb-8">
             The front door to the whole empire. Browse all 84 apps, find exactly what you need, and start using it in seconds.
           </p>
+          <div className="flex justify-center mb-2">
+            <PayPalCheckout appName="Se Fire Hub" />
+          </div>
         </motion.div>
       </div>
 
