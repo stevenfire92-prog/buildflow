@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import AppDetail from './pages/AppDetail';
 import Disclaimer from './components/Disclaimer';
 import { checkFounderUrl } from './lib/founder';
+import SeFireWatermark from './components/SeFireWatermark.jsx';
 
 export default function App() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <SeFireWatermark />
     </Router>
   );
 }
