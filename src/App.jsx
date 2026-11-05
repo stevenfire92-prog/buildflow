@@ -4,6 +4,7 @@ import { Toaster } from 'sonner'
 import Landing from './pages/Landing'
 import Disclaimer from './components/Disclaimer'
 import { checkFounderUrl } from './lib/founder'
+import SeFireWatermark from './components/SeFireWatermark.jsx';
 
 function App() {
   useEffect(() => {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <SeFireWatermark />
     </BrowserRouter>
   )
 }
