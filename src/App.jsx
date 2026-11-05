@@ -4,8 +4,10 @@ import { Toaster } from 'sonner';
 import Landing from './pages/Landing';
 import Disclaimer from './components/Disclaimer';
 import { checkFounderUrl } from './lib/founder';
+import SeFireWatermark from './components/SeFireWatermark.jsx';
 export default function App() {
   useEffect(() => { checkFounderUrl(); }, []);
   return (<Router><Toaster position="top-center" theme="dark" richColors />
+      <SeFireWatermark />
     <Routes><Route path="/" element={<Landing />} /><Route path="/disclaimer" element={<Disclaimer />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></Router>);
 }
