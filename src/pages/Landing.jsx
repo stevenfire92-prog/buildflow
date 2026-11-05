@@ -32,8 +32,7 @@ export default function Landing() {
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       {/* Maintenance banner */}
       <div className="bg-amber-500/90 px-4 py-2.5 text-center text-xs font-medium text-black sm:text-sm">
-        Our apps are currently being upgraded and under maintenance — paid features don&apos;t work
-        right now. Enjoy the full free demo!
+        💳 Payments are live — upgrade to Pro for full access
       </div>
 
       {/* Hero */}
