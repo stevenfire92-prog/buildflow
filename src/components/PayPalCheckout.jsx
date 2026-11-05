@@ -70,13 +70,9 @@ export function hasProAccess() {
     if (FREE_ACCESS_UNTIL_STRIPE) return true;
     if (localStorage.getItem(FOUNDER_KEY) === 'true') return true;
     const raw = localStorage.getItem(PRO_KEY);
-    if (raw) {
-      const pro = JSON.parse(raw);
-      if (pro && (pro.orderId || pro.subscriptionId)) return true;
-    }
-    // Any active membership in the ledger also grants Pro.
-    const ledger = getMemberships();
-    return LEVELS.some((l) => isLevelActive(l, ledger));
+    if (!raw) return false;
+    const pro = JSON.parse(raw);
+    return !!(pro && (pro.orderId || pro.subscriptionId));
   } catch {
     return FREE_ACCESS_UNTIL_STRIPE;
   }
@@ -90,110 +86,6 @@ function markPro(purchase) {
     );
   } catch {
     // storage unavailable — access check will fall back to flag
-  }
-}
-
-// ============================================================================
-// Membership ledger (Steve, Nov 5, 2026): one active membership per level per
-// person. Stored in localStorage as sfi:memberships:
-//   { monthly: { status: 'active', subscriptionId, date }, yearly: {...}, lifetime: { status: 'active', orderId, date } }
-// The legacy single sfi:pro record is kept in sync (hasProAccess reads it) and
-// is migrated into the ledger on read, so existing paying users keep their level.
-// Scope: per app (each app is its own product with its own subscription).
-// Note: there is no user-account DB in these apps, so the browser's localStorage
-// is the ledger — this stops accidental double-purchases and honest users; it
-// cannot stop someone who clears their browser data.
-// ============================================================================
-const MEMBERSHIPS_KEY = 'sfi:memberships';
-const LEVELS = ['monthly', 'yearly', 'lifetime'];
-
-export function getMemberships() {
-  let ledger = {};
-  try {
-    const raw = localStorage.getItem(MEMBERSHIPS_KEY);
-    if (raw) ledger = JSON.parse(raw) || {};
-  } catch {
-    ledger = {};
-  }
-  // Legacy migration: a single sfi:pro record implies an active membership at its plan.
-  try {
-    const raw = localStorage.getItem(PRO_KEY);
-    if (raw) {
-      const pro = JSON.parse(raw);
-      if (pro && pro.plan && LEVELS.includes(pro.plan) && !ledger[pro.plan]) {
-        ledger[pro.plan] = {
-          status: 'active',
-          provider: pro.provider || 'paypal',
-          date: pro.date || null,
-          subscriptionId: pro.subscriptionId || null,
-          orderId: pro.orderId || null,
-        };
-      }
-    }
-  } catch {
-    // ignore
-  }
-  return ledger;
-}
-
-function isLevelActive(level, ledger) {
-  const m = ledger && ledger[level];
-  return !!(m && m.status === 'active');
-}
-
-export function getActiveMembership(level) {
-  if (!LEVELS.includes(level)) return null;
-  const m = getMemberships()[level];
-  return m && m.status === 'active' ? m : null;
-}
-
-export function hasActiveMembership(level) {
-  return !!getActiveMembership(level);
-}
-
-// Lifetime covers every level: a lifetime member already has it all.
-export function isCoveredByLifetime() {
-  return hasActiveMembership('lifetime');
-}
-
-function recordMembership(purchase) {
-  // purchase: { plan, subscriptionId?, orderId? }
-  if (!purchase || !LEVELS.includes(purchase.plan)) return;
-  try {
-    const ledger = getMemberships();
-    ledger[purchase.plan] = {
-      status: 'active',
-      provider: 'paypal',
-      date: new Date().toISOString(),
-      subscriptionId: purchase.subscriptionId || null,
-      orderId: purchase.orderId || null,
-    };
-    localStorage.setItem(MEMBERSHIPS_KEY, JSON.stringify(ledger));
-  } catch {
-    // ignore
-  }
-  // Keep the legacy single record in sync (hasProAccess reads it).
-  markPro(purchase);
-}
-
-function clearMembership(level) {
-  if (!LEVELS.includes(level)) return;
-  try {
-    const ledger = getMemberships();
-    delete ledger[level];
-    localStorage.setItem(MEMBERSHIPS_KEY, JSON.stringify(ledger));
-  } catch {
-    // ignore
-  }
-  // If the legacy record was this level, clear it too.
-  try {
-    const raw = localStorage.getItem(PRO_KEY);
-    if (raw) {
-      const pro = JSON.parse(raw);
-      if (pro && pro.plan === level) localStorage.removeItem(PRO_KEY);
-    }
-  } catch {
-    // ignore
   }
 }
 
@@ -274,37 +166,7 @@ export default function PayPalCheckout({ appName = 'this app' }) {
   const [sdkError, setSdkError] = useState('');
   const [verifying, setVerifying] = useState(false);
   const [paypalReady, setPaypalReady] = useState(false);
-  const [memberships, setMemberships] = useState(() => getMemberships());
   const buttonsRef = useRef(null);
-
-  // Membership rule: re-check stored subscription memberships with PayPal when
-  // the modal opens, so a cancelled/expired subscription frees the level again.
-  // Conservative: only an explicit terminal status clears a level — network
-  // errors or unknown statuses never remove a membership.
-  useEffect(() => {
-    if (!showModal) return;
-    let cancelled = false;
-    (async () => {
-      const ledger = getMemberships();
-      for (const level of ['monthly', 'yearly']) {
-        const m = ledger[level];
-        if (!m || m.status !== 'active' || !m.subscriptionId) continue;
-        try {
-          const r = await fetch(`/api/paypal/subscription/${m.subscriptionId}`);
-          const d = await r.json();
-          if (d && ['CANCELLED', 'EXPIRED', 'SUSPENDED'].includes(d.status)) {
-            clearMembership(level);
-          }
-        } catch {
-          // keep the membership on any verification failure
-        }
-      }
-      if (!cancelled) setMemberships(getMemberships());
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [showModal]);
 
   // Check server-side PayPal configuration on mount.
   useEffect(() => {
@@ -361,8 +223,7 @@ export default function PayPalCheckout({ appName = 'this app' }) {
                 const r = await fetch(`/api/paypal/subscription/${data.subscriptionID}`);
                 const d = await r.json();
                 if (d.status === 'ACTIVE' || d.status === 'APPROVAL_PENDING') {
-                  recordMembership({ plan: plan.id, subscriptionId: data.subscriptionID });
-                  setMemberships(getMemberships());
+                  markPro({ plan: plan.id, subscriptionId: data.subscriptionID });
                   toast.success('Subscription active — Pro unlocked! 🎉');
                   setShowModal(false);
                   setPlan(null);
@@ -399,8 +260,7 @@ export default function PayPalCheckout({ appName = 'this app' }) {
                 });
                 const d = await r.json();
                 if (d.status === 'COMPLETED') {
-                  recordMembership({ plan: plan.id, orderId: data.orderID });
-                  setMemberships(getMemberships());
+                  markPro({ plan: plan.id, orderId: data.orderID });
                   toast.success('Payment successful — Pro unlocked! 🎉');
                   setShowModal(false);
                   setPlan(null);
@@ -439,15 +299,6 @@ export default function PayPalCheckout({ appName = 'this app' }) {
     if (!paypalReady) {
       toast.info('Payments coming soon — enjoy Pro free during construction! 🚧');
       setShowModal(false);
-      return;
-    }
-    // Membership rule (Steve, Nov 5, 2026): one active membership per level per person.
-    if (isLevelActive(p.id, memberships)) {
-      toast.info(`You already have an active ${p.name} membership.`);
-      return;
-    }
-    if (p.id !== 'lifetime' && isLevelActive('lifetime', memberships)) {
-      toast.info('Your Lifetime membership already unlocks everything.');
       return;
     }
     setPlan(p);
@@ -521,13 +372,7 @@ export default function PayPalCheckout({ appName = 'this app' }) {
                 </p>
 
                 <div className="grid sm:grid-cols-3 gap-4">
-                  {PLANS.map((p) => {
-                    // Membership rule: a level already held can't be bought again.
-                    const alreadyActive = isLevelActive(p.id, memberships);
-                    const coveredByLifetime =
-                      p.id !== 'lifetime' && isLevelActive('lifetime', memberships);
-                    const owned = alreadyActive || coveredByLifetime;
-                    return (
+                  {PLANS.map((p) => (
                     <div
                       key={p.id}
                       className={`rounded-xl border p-5 ${
@@ -539,11 +384,6 @@ export default function PayPalCheckout({ appName = 'this app' }) {
                       {p.highlight && (
                         <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-amber-400/20 text-amber-300 mb-3 inline-block">
                           BEST VALUE
-                        </span>
-                      )}
-                      {owned && (
-                        <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-emerald-400/20 text-emerald-300 mb-3 inline-block ml-2">
-                          {alreadyActive ? 'ACTIVE ✓' : 'INCLUDED IN LIFETIME'}
                         </span>
                       )}
                       <h3 className="font-bold mb-1">{p.name}</h3>
@@ -560,18 +400,12 @@ export default function PayPalCheckout({ appName = 'this app' }) {
                       </ul>
                       <button
                         onClick={() => handleChoose(p)}
-                        disabled={owned}
-                        className={`w-full py-2.5 rounded-lg font-bold text-sm transition ${
-                          owned
-                            ? 'bg-white/10 text-slate-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-amber-400 to-orange-500 text-black hover:brightness-110'
-                        }`}
+                        className="w-full py-2.5 rounded-lg font-bold text-sm bg-gradient-to-r from-amber-400 to-orange-500 text-black hover:brightness-110 transition"
                       >
-                        {owned ? (alreadyActive ? 'Active' : 'Included') : 'Choose'}
+                        Choose
                       </button>
                     </div>
-                    );
-                  })}
+                  ))}
                 </div>
               </>
             ) : (
