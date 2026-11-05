@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { checkFounderUrl } from './lib/founder';
 import Landing from './pages/Landing';
 import Disclaimer from './components/Disclaimer';
+import SeFireWatermark from './components/SeFireWatermark.jsx';
 
 export default function App() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <SeFireWatermark />
     </Router>
   );
 }
