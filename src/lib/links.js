@@ -8,7 +8,7 @@ const DEFAULT = {
   theme: '#f97316',
   links: [
     { id: '1', title: 'Latest music 🎵', url: 'https://open.spotify.com/artist/0pvxsVN3Cj3MochJhfROvm', visible: true },
-    { id: '2', title: 'Se Fire Tech services', url: 'https://globalscalemonetizer.com', visible: true },
+    { id: '2', title: 'Se Fire Tech services', url: 'https://globepay.vercel.app', visible: true },
   ],
 };
 
