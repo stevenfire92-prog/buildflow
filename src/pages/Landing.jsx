@@ -5,7 +5,7 @@ import InvoiceApp from '../components/InvoiceApp';
 import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 import { checkFounderUrl } from '../lib/founder';
-import ProUpgrade from '../components/ProUpgrade';
+import PayPalCheckout from '../components/PayPalCheckout';
 
 export default function Landing() {
   useEffect(() => { checkFounderUrl(); }, []);
@@ -14,7 +14,7 @@ export default function Landing() {
     <div className="min-h-screen bg-[#0a0a0f] text-white">
       <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2.5 text-center print:hidden">
         <p className="text-xs text-amber-200/90">
-          🔨 This app is under construction — in no way, shape, or form is the pay option supposed to work right now. Invoice free.
+          💳 Payments are live — upgrade to Pro for full access. Invoice free.
         </p>
       </div>
 
@@ -28,7 +28,7 @@ export default function Landing() {
           </h1>
           <p className="text-slate-400 max-w-xl mx-auto">Stop chasing payments. Fire off professional invoices in seconds, track who's paid and who owes you.</p>
           <div className="mt-5 flex justify-center">
-            <ProUpgrade appName="Se Fire Invoices" />
+            <PayPalCheckout appName="Se Fire Invoices" />
           </div>
         </motion.div>
       </div>
