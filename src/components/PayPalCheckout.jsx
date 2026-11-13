@@ -1,5 +1,5 @@
 // ============================================================================
-// PayPalCheckout.jsx — drop-in PayPal replacement for the Stripe ProUpgrade flow
+// PayPalCheckout.jsx — the PayPal checkout flow (replaced the legacy ProUpgrade flow)
 // SAVE AS: src/components/PayPalCheckout.jsx
 //
 // Requires (see templates/paypal-env.md):
@@ -48,33 +48,33 @@ const PLANS = [
 ];
 
 // TEMPORARY: Free access for ALL users until payments go live.
-// Steve's order Nov 2, 2026: "Make all free accounts have all paid services till we figure out Stripe"
+// Steve's order Nov 2, 2026: "Make all free accounts have all paid services till we figure out payments" (resolved: PayPal is the payment provider)
 // To revert: set to false and redeploy.
-const FREE_ACCESS_UNTIL_STRIPE = false;
+const FREE_ACCESS_ENABLED = false;
 
 const FOUNDER_KEY = 'sfi:founder';
 const PRO_KEY = 'sfi:pro';
 
 export function isFounder() {
   try {
-    if (FREE_ACCESS_UNTIL_STRIPE) return true;
+    if (FREE_ACCESS_ENABLED) return true;
     return localStorage.getItem(FOUNDER_KEY) === 'true';
   } catch {
-    return FREE_ACCESS_UNTIL_STRIPE;
+    return FREE_ACCESS_ENABLED;
   }
 }
 
 // True when the user has paid (PayPal) or has founder/free access.
 export function hasProAccess() {
   try {
-    if (FREE_ACCESS_UNTIL_STRIPE) return true;
+    if (FREE_ACCESS_ENABLED) return true;
     if (localStorage.getItem(FOUNDER_KEY) === 'true') return true;
     const raw = localStorage.getItem(PRO_KEY);
     if (!raw) return false;
     const pro = JSON.parse(raw);
     return !!(pro && (pro.orderId || pro.subscriptionId));
   } catch {
-    return FREE_ACCESS_UNTIL_STRIPE;
+    return FREE_ACCESS_ENABLED;
   }
 }
 
@@ -305,7 +305,7 @@ export default function PayPalCheckout({ appName = 'this app' }) {
   };
 
   // Free-access period: show an "everything is free" badge instead of any paywall UI.
-  if (FREE_ACCESS_UNTIL_STRIPE) {
+  if (FREE_ACCESS_ENABLED) {
     return (
       <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-400/10 text-emerald-300 border border-emerald-400/30">
         <Zap className="w-3.5 h-3.5" /> Pro free — limited time
