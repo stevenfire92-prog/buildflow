@@ -57,8 +57,8 @@ const fadeUp = {
   transition: { duration: 0.55 },
 };
 
-// Stripe not connected yet — checkout in demo mode.
-const STRIPE_CONNECTED = false;
+// Payments not connected yet — checkout in demo mode.
+const PAYMENTS_CONNECTED = false;
 
 export default function MerchHub() {
   const [previewing, setPreviewing] = useState(null);
@@ -86,11 +86,11 @@ export default function MerchHub() {
       toast.success(`Founder access — "${bundle.name}" (${tier}) is yours`);
       return;
     }
-    if (!STRIPE_CONNECTED) {
+    if (!PAYMENTS_CONNECTED) {
       toast.info('Checkout coming soon — paid features are under maintenance.');
       return;
     }
-    // TODO: wire to Stripe checkout when keys are available
+    // TODO: wire to PayPal checkout when available
     toast.info(`Redirecting to checkout…`);
   };
 
@@ -178,15 +178,15 @@ export default function MerchHub() {
 
               <button
                 onClick={() => handleBuy(bundle)}
-                disabled={!STRIPE_CONNECTED && !isFounder()}
+                disabled={!PAYMENTS_CONNECTED && !isFounder()}
                 className={`w-full rounded-xl py-3.5 font-bold flex items-center justify-center gap-2 transition ${
-                  STRIPE_CONNECTED || isFounder()
+                  PAYMENTS_CONNECTED || isFounder()
                     ? 'bg-gradient-to-r from-orange-500 to-red-600 hover:brightness-110'
                     : 'bg-white/5 border border-white/10 text-slate-500 cursor-not-allowed'
                 }`}
               >
-                {!STRIPE_CONNECTED && !isFounder() && <Lock className="w-4 h-4" />}
-                {isFounder() ? `Get free — Founder` : STRIPE_CONNECTED
+                {!PAYMENTS_CONNECTED && !isFounder() && <Lock className="w-4 h-4" />}
+                {isFounder() ? `Get free — Founder` : PAYMENTS_CONNECTED
                   ? getTier(bundle.id) === 'buy'
                     ? `Buy now — $${bundle.buyPrice}`
                     : `Rent now — $${bundle.rentPrice}/mo`
