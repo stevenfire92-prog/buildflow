@@ -5,7 +5,6 @@ import { Blocks, Play, Trophy, ChevronRight, Flame, Zap, Star } from 'lucide-rea
 import BlockDropGame from '../components/BlockDropGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function loadBest() {
