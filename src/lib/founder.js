@@ -4,16 +4,16 @@
 const FOUNDER_KEY = 'sfi:founder';
 const FOUNDER_CODE = 'sefire2026';
 
-// TEMPORARY: Free access for ALL users until Stripe payments go live.
-// Steve's order Nov 2, 2026. To revert: set to false and redeploy.
-export const FREE_ACCESS_UNTIL_STRIPE = true;
+// Free-access toggle for ALL users (Steve's order Nov 2, 2026).
+// Payments run through PayPal only.
+export const FREE_ACCESS_ENABLED = false;
 
 export function isFounder() {
   try {
-    if (FREE_ACCESS_UNTIL_STRIPE) return true;
+    if (FREE_ACCESS_ENABLED) return true;
     return localStorage.getItem(FOUNDER_KEY) === 'true';
   } catch {
-    return FREE_ACCESS_UNTIL_STRIPE;
+    return FREE_ACCESS_ENABLED;
   }
 }
 
