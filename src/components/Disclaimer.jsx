@@ -7,7 +7,7 @@ const SECTIONS = [
   { t: 'No guarantees', d: 'We do not guarantee earnings, results, or uptime. Past performance and demo data do not predict future results.' },
   { t: 'AI-generated content', d: 'AI features may produce inaccurate or incomplete outputs. Review everything before relying on it or publishing it.' },
   { t: 'Your responsibility', d: 'You are responsible for how you use this product, the content you create with it, and for complying with the laws in your jurisdiction.' },
-  { t: 'Third-party services', d: 'Integrations such as Stripe for payments are governed by those services\u2019 own terms and privacy policies.' },
+  { t: 'Third-party services', d: 'Integrations such as PayPal for payments are governed by those services\u2019 own terms and privacy policies.' },
   { t: 'Limitation of liability', d: 'To the maximum extent permitted by law, the operator shall not be liable for indirect, incidental, or consequential damages arising from use of this product.' },
 ];
 
