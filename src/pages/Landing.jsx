@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Gamepad2, Play, Trophy, ChevronRight, Flame, Layers, Zap } from 'lucide-react';
 import BreakerGame from '../components/BreakerGame.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
