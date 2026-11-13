@@ -27,7 +27,7 @@ export default function AppShell({ children, demo }) {
         {demo && (
           <div className="mx-4 mb-3 rounded-lg border border-amber-400/30 bg-amber-400/10 px-3 py-2 text-xs text-amber-200 flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 shrink-0" />
-            Demo mode — connect Stripe in Settings to go live
+            Demo mode — payments run through PayPal at checkout
           </div>
         )}
         <nav className="flex-1 px-3 space-y-1">

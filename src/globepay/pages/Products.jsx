@@ -38,7 +38,7 @@ export default function Products() {
   const submit = async (e) => {
     e.preventDefault();
     if (demo) {
-      toast.info('Demo mode — connect Stripe in Settings to create real products.');
+      toast.info('Demo mode — product creation is disabled in the demo.');
       return;
     }
     setSaving(true);

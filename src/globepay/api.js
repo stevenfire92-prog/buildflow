@@ -1,4 +1,4 @@
-// GlobePay API client. Falls back to demo data when Stripe isn't connected,
+// GlobePay API client. Falls back to demo data when the backend isn't connected,
 // so the product experience is fully explorable before going live.
 import { demoStats, demoProducts, demoLinks } from './demo-data';
 

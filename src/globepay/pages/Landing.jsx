@@ -11,12 +11,12 @@ import MusicSection from '../components/MusicSection';
 import ShareButtons from '../components/ShareButtons';
 
 const FEATURES = [
-  { icon: BarChart3, title: 'Live revenue dashboard', text: 'Gross volume, MRR, sales streaks and every payment — live from Stripe, beautifully visualized.' },
+  { icon: BarChart3, title: 'Live revenue dashboard', text: 'Gross volume, MRR, sales streaks and every payment — beautifully visualized.' },
   { icon: Link2, title: 'Payment links in seconds', text: 'Turn any product into a shareable checkout link. Sell in DMs, posts, emails — no website needed.' },
   { icon: Target, title: 'Revenue goals that pull you forward', text: 'Set targets, watch the rings fill, and get a confetti storm when you hit them.' },
-  { icon: Zap, title: 'Products & subscriptions', text: 'Create one-time products and recurring plans directly — synced straight to Stripe.' },
+  { icon: Zap, title: 'Products & subscriptions', text: 'Create one-time products and recurring plans directly — payments powered by PayPal.' },
   { icon: Globe2, title: 'Global by default', text: '135+ currencies, international cards and payouts. Sell anywhere, get paid everywhere.' },
-  { icon: ShieldCheck, title: 'Your keys, your money', text: 'Connects to your own Stripe account. Funds go to you — GlobePay never touches them.' },
+  { icon: ShieldCheck, title: 'Your keys, your money', text: 'Payments run through your own PayPal account. Funds go to you — GlobePay never touches them.' },
 ];
 
 const fadeUp = {
@@ -80,7 +80,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto"
           >
-            Your global money command center. Track Stripe revenue, spin up products,
+            Your global money command center. Track PayPal revenue, spin up products,
             fire off payment links, and set income goals — all from one dashboard.
           </motion.p>
           <motion.div
@@ -95,7 +95,7 @@ export default function Landing() {
             </Button>
           </motion.div>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4 text-xs text-slate-500">
-            Free to start · Your Stripe account · Your money
+            Free to start · Your PayPal account · Your money
           </motion.p>
         </div>
       </section>
@@ -212,7 +212,7 @@ export default function Landing() {
       <section className="px-4 py-20">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center rounded-2xl border border-emerald-400/25 bg-gradient-to-b from-emerald-400/[0.08] to-transparent p-10 md:p-14">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Your next dollar is waiting.</h2>
-          <p className="mt-3 text-slate-400">Connect Stripe, create a product, share a link. Three steps to your first sale.</p>
+          <p className="mt-3 text-slate-400">Create a product, share a link, get paid. Three steps to your first sale.</p>
           <Button size="lg" onClick={() => navigate('/dashboard')} className="mt-8 bg-gradient-to-r from-emerald-400 to-cyan-500 text-slate-950 font-bold text-base px-10">
             Start monetizing <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
@@ -225,7 +225,7 @@ export default function Landing() {
             <Globe2 className="w-4 h-4 text-emerald-300" />
             <span className="font-semibold text-slate-300">GlobePay</span> · Monetize everything, everywhere.
           </div>
-          <p>Payments processed securely by Stripe. GlobePay never holds your funds. <a href="/disclaimer" class="underline hover:text-slate-300">Disclaimer</a></p>
+          <p>Payments processed securely by PayPal. GlobePay never holds your funds. <a href="/disclaimer" class="underline hover:text-slate-300">Disclaimer</a></p>
         </div>
       </footer>
     </div>

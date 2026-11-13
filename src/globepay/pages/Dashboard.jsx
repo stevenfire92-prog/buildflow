@@ -56,7 +56,7 @@ export default function Dashboard() {
     <AppShell demo={stats.demo}>
       <SectionTitle
         title={stats.demo ? 'Demo dashboard' : 'Revenue dashboard'}
-        sub={stats.demo ? 'Sample data — connect Stripe to see your live numbers.' : 'Live from your Stripe account.'}
+        sub={stats.demo ? 'Sample data — demo preview of your dashboard.' : 'Your live numbers.'}
         action={
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={() => load()} className="border-white/10">

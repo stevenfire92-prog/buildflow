@@ -1,4 +1,4 @@
-// Demo dataset shown when Stripe isn't connected yet.
+// Demo dataset shown in demo mode.
 // Makes the product feel alive immediately; replaced by live data on connect.
 const today = new Date();
 const dayISO = (ago) => {
@@ -52,6 +52,6 @@ export const demoProducts = [
 ];
 
 export const demoLinks = [
-  { id: 'plink_demo_1', url: 'https://buy.stripe.com/demo-pro-plan', active: true },
-  { id: 'plink_demo_2', url: 'https://buy.stripe.com/demo-template-pack', active: true },
+  { id: 'plink_demo_1', url: '#demo-pro-plan', active: true },
+  { id: 'plink_demo_2', url: '#demo-template-pack', active: true },
 ];

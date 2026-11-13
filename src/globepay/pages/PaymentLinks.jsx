@@ -42,7 +42,7 @@ export default function PaymentLinks() {
   const submit = async (e) => {
     e.preventDefault();
     if (demo) {
-      toast.info('Demo mode — connect Stripe in Settings to create real links.');
+      toast.info('Demo mode — link creation is disabled in the demo.');
       return;
     }
     setSaving(true);
