@@ -5,7 +5,6 @@ import { Gamepad2, Play, Trophy, ChevronRight, Flame, Cpu, Hash } from 'lucide-r
 import PaddleClashGame from '../components/PaddleClashGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function loadWins() {
