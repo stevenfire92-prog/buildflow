@@ -6,7 +6,6 @@ import ShareButtons from '../components/ShareButtons.jsx';
 import MemoryGame from '../components/MemoryGame.jsx';
 import SnakeGame from '../components/SnakeGame.jsx';
 import TicTacToe from '../components/TicTacToe.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function readBest(key) {
