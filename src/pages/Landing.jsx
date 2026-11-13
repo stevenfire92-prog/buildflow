@@ -5,7 +5,6 @@ import { Hash, Play, Trophy, ChevronRight, Flame, Move, Sparkles } from 'lucide-
 import NumberMergeGame from '../components/NumberMergeGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function loadBest() {
