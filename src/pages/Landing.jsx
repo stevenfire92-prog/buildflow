@@ -5,7 +5,6 @@ import { Gamepad2, Play, Trophy, ChevronRight, Flame, Zap, Star } from 'lucide-r
 import SnakeGame from '../components/SnakeGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function loadBest() {
