@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Gamepad2, Play, Trophy, ChevronRight, Flame, Coins, Zap, Timer } from 'lucide-react';
 import RunnerGame from '../components/RunnerGame.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
