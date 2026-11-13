@@ -158,7 +158,7 @@ export default function BulkEditBooksDialog({
           <div>
             <h4 className="text-xs font-semibold text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <DollarSign className="w-3.5 h-3.5" />
-              <span>Stripe Prices & Rental</span>
+              <span>PayPal Prices & Rental</span>
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

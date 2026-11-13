@@ -33,7 +33,7 @@ export default function Portfolio() {
     if (checkout === "book_success") {
       toast({
         title: "Payment verification required",
-        description: "Check your Stripe receipt. This return link alone does not confirm payment or access.",
+        description: "Check your PayPal receipt. This return link alone does not confirm payment or access.",
       });
       window.history.replaceState({}, "", window.location.pathname);
     }
@@ -235,7 +235,7 @@ export default function Portfolio() {
           <StanStoreCard />
         </div>
 
-        {/* Published Books & Works with Integrated Bulk Update & Stripe Controls */}
+        {/* Published Books & Works with Integrated Bulk Update & PayPal Controls */}
         <div className="mt-14 pt-10 border-t border-white/10">
           <KindleBooks />
         </div>

@@ -38,10 +38,10 @@ const appsList = [
   {
     id: "expenses",
     name: "Team Expense Splitter Web Platform",
-    tagline: "Optimal Cash-Flow Graph & Automated Stripe Settlement",
+    tagline: "Optimal Cash-Flow Graph & Automated PayPal Settlement",
     icon: Receipt,
     accent: "text-sky-400 bg-sky-500/10 border-sky-500/25",
-    pricing: "Free + 1.5% Stripe Fee or $4.99/mo",
+    pricing: "Free + 1.5% PayPal Fee or $4.99/mo",
     badge: "100% Complete · Live Web App",
   },
   {
@@ -78,7 +78,7 @@ export default function WebApps() {
   const current = appsList.find((a) => a.id === activeApp) || appsList[0];
   const CurrentIcon = current.icon;
 
-  const [buyingStripe, setBuyingStripe] = useState(false);
+  const [buyingPayPal, setBuyingPayPal] = useState(false);
 
   const handleShare = () => {
     const url = window.location.href;
@@ -91,14 +91,14 @@ export default function WebApps() {
     }
   };
 
-  const handleStripeBuyApp = async (appId) => {
-    setBuyingStripe(true);
+  const handlePayPalBuyApp = async (appId) => {
+    setBuyingPayPal(true);
     const targetApp = appsList.find(a => a.id === appId) || current;
     try {
       if (window.self !== window.top) {
         toast({
           title: "Open the published app",
-          description: "Stripe secure checkout launches on the published app or in a new browser tab.",
+          description: "PayPal secure checkout launches on the published app or in a new browser tab.",
         });
       }
       const res = await client.functions.invoke("createCheckoutSession", {
@@ -113,7 +113,7 @@ export default function WebApps() {
         variant: "destructive",
       });
     } finally {
-      setBuyingStripe(false);
+      setBuyingPayPal(false);
     }
   };
 
@@ -133,18 +133,18 @@ export default function WebApps() {
               Web Editions of Your Apps
             </h1>
             <p className="mt-1 text-sm text-white/50 max-w-2xl">
-              Fully responsive browser web applications with live interactivity, local persistence, real-time analytics, auto-connected Stripe payments, and Steven's motivational soundtrack.
+              Fully responsive browser web applications with live interactivity, local persistence, real-time analytics, auto-connected PayPal payments, and Steven's motivational soundtrack.
             </p>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
             <button
-              onClick={() => handleStripeBuyApp(activeApp)}
-              disabled={buyingStripe}
+              onClick={() => handlePayPalBuyApp(activeApp)}
+              disabled={buyingPayPal}
               className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-black bg-gradient-to-r from-emerald-400 to-teal-300 hover:from-emerald-300 hover:to-teal-200 rounded-full transition-all shadow-md shadow-emerald-500/20 disabled:opacity-50"
             >
               <CreditCard className="w-3.5 h-3.5" />
-              <span>{buyingStripe ? "Opening Stripe..." : `Buy ${current.name.split(" ")[0]} via Stripe`}</span>
+              <span>{buyingPayPal ? "Opening PayPal..." : `Buy ${current.name.split(" ")[0]} via PayPal`}</span>
             </button>
             <button
               onClick={handleShare}
@@ -160,7 +160,7 @@ export default function WebApps() {
         <div className="mb-6">
           <FounderMusicPlayer
             activeApp={activeApp}
-            onBuyWithStripe={() => handleStripeBuyApp(activeApp)}
+            onBuyWithPayPal={() => handlePayPalBuyApp(activeApp)}
           />
         </div>
 

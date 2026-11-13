@@ -143,7 +143,7 @@ export default function Dashboard() {
       .catch(() => setProjects([]));
   }, []);
 
-  // Handle return from Stripe checkout
+  // Handle return from PayPal checkout
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get("session_id");
@@ -168,7 +168,7 @@ export default function Dashboard() {
           if (res.data.paid === true) {
             toast({
               title: "Payment confirmed",
-              description: "Your billing status has been verified with Stripe.",
+              description: "Your billing status has been verified with PayPal.",
             });
           }
         })

@@ -17,7 +17,7 @@ This is a staged implementation; **not yet independent of Base44**.
 5. Implement parameterized SQL queries and transaction-scoped owner claims.
 6. Export and migrate Base44 records, validate counts and ownership.
 7. Replace **all** SDK uses before removing Base44 dependencies.
-8. Test Stripe in sandbox using server-side keys and verified webhooks.
+8. Test PayPal in sandbox using server-side keys and verified webhooks.
 9. Promote only after functional and security tests pass.
 
-Never put database passwords, OAuth client secrets, signing secrets, or Stripe secret keys into VITE_* variables or Git.
+Never put database passwords, OAuth client secrets, signing secrets, or PayPal secret keys into VITE_* variables or Git.

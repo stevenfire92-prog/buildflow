@@ -1,4 +1,4 @@
-// Public deployment identifiers only. Never put Stripe keys in VITE_* variables.
+// Public deployment identifiers only. Never put PayPal keys in VITE_* variables.
 export function resolveAppConfig(env = {}, hostname = '') {
   return {
     appId: env.VITE_APP_ID || APP_ID,

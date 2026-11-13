@@ -69,7 +69,7 @@ export default function KindleBooks() {
       });
       toast({
         title: "Kindle book added",
-        description: `${trimmedTitle} is now connected with Stripe Buy & Rent options.`,
+        description: `${trimmedTitle} is now connected with PayPal Buy & Rent options.`,
       });
       setShowAdd(false);
       loadBooks();
@@ -291,7 +291,7 @@ export default function KindleBooks() {
         <div className="flex items-center gap-2 flex-wrap">
           <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Stripe Buy & Rent Active</span>
+            <span>PayPal Buy & Rent Active</span>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-amber-400/90 font-medium bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
             <Layers className="w-3.5 h-3.5" />

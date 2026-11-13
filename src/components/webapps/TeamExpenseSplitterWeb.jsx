@@ -91,10 +91,10 @@ export default function TeamExpenseSplitterWeb() {
     setExpenses((prev) => prev.filter((x) => x.id !== id));
   };
 
-  const handleGenerateStripeLinks = () => {
+  const handleGeneratePayPalLinks = () => {
     setPayoutGenerated(true);
     toast({
-      title: "Stripe Settlement Links Created",
+      title: "PayPal Settlement Links Created",
       description: "Direct instant checkout links generated for each member's debt balance.",
     });
   };
@@ -177,10 +177,10 @@ export default function TeamExpenseSplitterWeb() {
               <Download className="w-3.5 h-3.5" /> Export CSV
             </button>
             <button
-              onClick={handleGenerateStripeLinks}
+              onClick={handleGeneratePayPalLinks}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-black rounded-full transition-colors"
             >
-              <CreditCard className="w-3.5 h-3.5" /> One-Click Stripe Payout
+              <CreditCard className="w-3.5 h-3.5" /> One-Click PayPal Payout
             </button>
           </div>
         </div>

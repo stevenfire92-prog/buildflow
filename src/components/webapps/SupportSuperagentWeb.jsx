@@ -17,7 +17,7 @@ const initialMessages = [
   },
   {
     sender: "bot",
-    text: "I see the duplicate transaction in your Stripe billing history. I have processed an immediate refund of $16.00 back to your original payment method and synced this with Zendesk ticket #4819. You will see the credit within 2-3 business days.",
+    text: "I see the duplicate transaction in your PayPal billing history. I have processed an immediate refund of $16.00 back to your original payment method and synced this with Zendesk ticket #4819. You will see the credit within 2-3 business days.",
     time: "10:01 AM",
     sentiment: "positive",
   },
@@ -185,7 +185,7 @@ export default function SupportSuperagentWeb() {
         <div className="px-4 py-2 bg-white/[0.01] border-t border-white/5 flex gap-2 overflow-x-auto text-xs">
           {[
             "Book a technical onboarding call",
-            "How do I set up Stripe webhook subscriptions?",
+            "How do I set up PayPal webhook subscriptions?",
             "Can you export my support SLA logs to CSV?",
           ].map((prompt, i) => (
             <button

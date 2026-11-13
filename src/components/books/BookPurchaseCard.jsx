@@ -26,7 +26,7 @@ export default function BookPurchaseCard({
     if (window.self !== window.top) {
       toast({
         title: "Live checkout required",
-        description: "Stripe checkout operates securely on the published app. Please open in a new tab.",
+        description: "PayPal checkout operates securely on the published app. Please open in a new tab.",
       });
       return;
     }
@@ -45,13 +45,13 @@ export default function BookPurchaseCard({
       } else {
         toast({
           title: "Payment error",
-          description: res.data?.error || "Could not start Stripe checkout. Please try again.",
+          description: res.data?.error || "Could not start PayPal checkout. Please try again.",
         });
       }
     } catch (err) {
       toast({
         title: "Checkout failed",
-        description: err.message || "Failed to initialize Stripe checkout.",
+        description: err.message || "Failed to initialize PayPal checkout.",
       });
     } finally {
       setLoadingAction(null);
@@ -96,7 +96,7 @@ export default function BookPurchaseCard({
               Book {book.series_order || "•"}
             </span>
             <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
-              <ShieldCheck className="w-3 h-3" /> Stripe Verified
+              <ShieldCheck className="w-3 h-3" /> PayPal Verified
             </span>
           </div>
 
@@ -214,7 +214,7 @@ export default function BookPurchaseCard({
             <>
               <CreditCard className="w-3.5 h-3.5" />
               <span>
-                {activeTab === "buy" ? `Buy Now with Stripe · $${buyPrice}` : `Rent for ${rentDays} Days · $${rentPrice}`}
+                {activeTab === "buy" ? `Buy Now with PayPal · $${buyPrice}` : `Rent for ${rentDays} Days · $${rentPrice}`}
               </span>
             </>
           )}

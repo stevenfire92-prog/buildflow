@@ -12,7 +12,7 @@ entities, functions and integrations. Do NOT uninstall @base44/sdk or
 - [ ] Migrate existing user data after export and verified backup (do not copy passwords).
 - [ ] Implement owner-scoped CRUD API for projects and all other entities.
 - [ ] Convert client calls from base44.* to own API and test flows.
-- [ ] Implement and sandbox-test Stripe Checkout and signature-verified idempotent webhooks.
+- [ ] Implement and sandbox-test PayPal Checkout and signature-verified idempotent webhooks.
 - [ ] Test all auth/authorization, storage and payment workflows in Preview.
 - [ ] Remove remaining Base44 imports, package/plugin, variables and branding references.
 - [ ] Release to production only after end-to-end verification and rollback plan.

@@ -35,8 +35,8 @@ export function attachVercelBilling(client, params) {
 
 export function validatedCheckoutUrl(value) {
   const url = new URL(value);
-  if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com') {
-    throw new Error('Invalid Stripe checkout destination');
+  if (url.protocol !== 'https:' || url.hostname !== 'www.paypal.com') {
+    throw new Error('Invalid PayPal checkout destination');
   }
   return url.href;
 }

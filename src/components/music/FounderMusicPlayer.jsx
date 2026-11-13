@@ -50,7 +50,7 @@ const TRACKS = [
   },
 ];
 
-export default function FounderMusicPlayer({ activeApp = null, compact = false, onBuyWithStripe = null }) {
+export default function FounderMusicPlayer({ activeApp = null, compact = false, onBuyWithPayPal = null }) {
   const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -171,17 +171,17 @@ export default function FounderMusicPlayer({ activeApp = null, compact = false, 
     }
   };
 
-  const handleStripeCheckout = async () => {
-    if (onBuyWithStripe) {
-      onBuyWithStripe();
+  const handlePayPalCheckout = async () => {
+    if (onBuyWithPayPal) {
+      onBuyWithPayPal();
       return;
     }
     setCheckoutBusy(true);
     try {
       if (window.self !== window.top) {
         toast({
-          title: "Stripe Live Mode",
-          description: "Stripe secure checkout launches on the published app or in a new browser tab.",
+          title: "PayPal Live Mode",
+          description: "PayPal secure checkout launches on the published app or in a new browser tab.",
         });
       }
       const slug = activeApp || "pro";
@@ -192,10 +192,10 @@ export default function FounderMusicPlayer({ activeApp = null, compact = false, 
       if (res.data?.url) {
         window.open(res.data.url, "_blank");
       } else {
-        toast({ title: "Could not open Stripe session", description: "Please check your network connection." });
+        toast({ title: "Could not open PayPal session", description: "Please check your network connection." });
       }
     } catch (err) {
-      toast({ title: "Stripe Checkout Initiated", description: "Redirecting to secure Stripe checkout..." });
+      toast({ title: "PayPal Checkout Initiated", description: "Redirecting to secure PayPal checkout..." });
     } finally {
       setCheckoutBusy(false);
     }
@@ -333,7 +333,7 @@ export default function FounderMusicPlayer({ activeApp = null, compact = false, 
           </button>
         </div>
 
-        {/* Right: Direct Streaming Links + Stripe Buy Call to Action */}
+        {/* Right: Direct Streaming Links + PayPal Buy Call to Action */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-2 lg:pt-0">
           <div className="flex items-center gap-1.5">
             <a
@@ -355,12 +355,12 @@ export default function FounderMusicPlayer({ activeApp = null, compact = false, 
           </div>
 
           <button
-            onClick={handleStripeCheckout}
+            onClick={handlePayPalCheckout}
             disabled={checkoutBusy}
             className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-300 hover:to-amber-200 text-black font-bold text-xs shadow-lg shadow-amber-400/20 transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <CreditCard className="w-4 h-4" />
-            <span>{checkoutBusy ? "Opening Stripe..." : "Buy App via Stripe"}</span>
+            <span>{checkoutBusy ? "Opening PayPal..." : "Buy App via PayPal"}</span>
           </button>
         </div>
       </div>

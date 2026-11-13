@@ -8,7 +8,7 @@ const NARRATOR_CHAPTERS = [
     title: "1. Welcome & Platform Tour",
     subtitle: "By Steven Thomas Turcott",
     script:
-      "Hello and welcome! I'm Steven Thomas Turcott, founder of Se Fire Tech. You're exploring Builder Flow, our intelligent platform designed to build, deploy, and scale custom applications with natural language. From full-stack web and mobile apps to Stripe monetization and automated workflows, everything here is built to give you total creative and engineering control.",
+      "Hello and welcome! I'm Steven Thomas Turcott, founder of Se Fire Tech. You're exploring Builder Flow, our intelligent platform designed to build, deploy, and scale custom applications with natural language. From full-stack web and mobile apps to PayPal monetization and automated workflows, everything here is built to give you total creative and engineering control.",
   },
   {
     id: "dashboard",
@@ -22,14 +22,14 @@ const NARRATOR_CHAPTERS = [
     title: "3. Shadow Path & Kindle Books",
     subtitle: "Dark fantasy publication suite",
     script:
-      "Here you'll find my complete nine-book dark fantasy series, Shadow Path. We've integrated direct Stripe purchase and thirty-day rental checkout right into the app, alongside direct links to the official Amazon Kindle store.",
+      "Here you'll find my complete nine-book dark fantasy series, Shadow Path. We've integrated direct PayPal purchase and thirty-day rental checkout right into the app, alongside direct links to the official Amazon Kindle store.",
   },
   {
     id: "growth",
     title: "4. Google Sheets & Automation",
     subtitle: "Metrics and automated reporting",
     script:
-      "Builder Flow automatically syncs all project activities and Stripe sales data straight into your Google Sheets spreadsheet. Every Monday at 9:00 AM, our automated workflow compiles an executive recap and emails it directly to your inbox via Gmail.",
+      "Builder Flow automatically syncs all project activities and PayPal sales data straight into your Google Sheets spreadsheet. Every Monday at 9:00 AM, our automated workflow compiles an executive recap and emails it directly to your inbox via Gmail.",
   },
   {
     id: "languages",
@@ -43,7 +43,7 @@ const NARRATOR_CHAPTERS = [
     title: "6. Quick Setup & Deployment",
     subtitle: "Live app launch guide",
     script:
-      "Ready to launch? Our AI Setup Assistant is here to guide you step-by-step through connecting Stripe live payments, syncing your Google Calendar deadlines, attaching custom domains, and publishing your applications worldwide.",
+      "Ready to launch? Our AI Setup Assistant is here to guide you step-by-step through connecting PayPal live payments, syncing your Google Calendar deadlines, attaching custom domains, and publishing your applications worldwide.",
   },
 ];
 

@@ -1,6 +1,6 @@
 {
   "name": "Daily Sales and Metrics To Sheet",
-  "description": "Automatically syncs Stripe sales data, book sales revenue, and project activity metrics to Google Sheets every day at 9:00 AM so portfolio charts remain up to date without manual work",
+  "description": "Automatically syncs PayPal sales data, book sales revenue, and project activity metrics to Google Sheets every day at 9:00 AM so portfolio charts remain up to date without manual work",
   "trigger": {
     "condition": null,
     "config": {
@@ -35,7 +35,7 @@
           "then": "end",
           "x-base44": {
             "title": "Daily Sales & Metrics Export to Google Sheets",
-            "description": "Appends latest Stripe sales and project snapshot rows"
+            "description": "Appends latest PayPal sales and project snapshot rows"
           }
         }
       }

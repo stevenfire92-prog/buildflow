@@ -8,7 +8,7 @@ const initialHabits = [
   { id: "h-3", title: "Shadow Path Novel Writing (1,000 words)", category: "Focus", streak: 42, completedToday: false, freezeUsed: false },
   { id: "h-4", title: "Post-Workout Foam Rolling & Mobility", category: "Health", streak: 7, completedToday: false, freezeUsed: false },
   { id: "h-5", title: "Evening Journaling & Retrospective", category: "Mindfulness", streak: 19, completedToday: true, freezeUsed: false },
-  { id: "h-6", title: "Review Cash-Flow & Stripe Invoices", category: "Finance", streak: 11, completedToday: false, freezeUsed: false },
+  { id: "h-6", title: "Review Cash-Flow & PayPal Invoices", category: "Finance", streak: 11, completedToday: false, freezeUsed: false },
 ];
 
 export default function HabitStreakWeb() {

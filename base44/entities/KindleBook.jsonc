@@ -65,9 +65,9 @@
       "default": 30,
       "title": "Rent duration in days"
     },
-    "stripe_product_id": {
+    "paypal_product_id": {
       "type": "string",
-      "title": "Stripe Product ID"
+      "title": "PayPal Product ID"
     }
   },
   "required": [
