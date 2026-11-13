@@ -160,7 +160,7 @@ export default function StoreApp() {
                 <button onClick={checkout} className="w-full py-3 rounded-xl font-bold bg-gradient-to-r from-orange-500 to-red-600 hover:brightness-110 transition">
                   Checkout — {money(subtotal)}
                 </button>
-                <p className="text-center text-[11px] text-slate-600 mt-2">Demo checkout — connect Stripe to accept real payments.</p>
+                <p className="text-center text-[11px] text-slate-600 mt-2">Demo checkout — real payments are processed through PayPal.</p>
               </div>
             </>
           )}
