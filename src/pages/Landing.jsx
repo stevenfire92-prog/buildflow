@@ -5,7 +5,6 @@ import { CircleDot, Play, Trophy, ChevronRight, Flame, Crosshair, Layers } from 
 import BubblesGame from '../components/BubblesGame.jsx';
 import MusicSection from '../components/MusicSection.jsx';
 import ShareButtons from '../components/ShareButtons.jsx';
-import ProUpgrade from '../components/ProUpgrade.jsx';
 import PayPalCheckout from '../components/PayPalCheckout.jsx';
 
 function loadBest() {
