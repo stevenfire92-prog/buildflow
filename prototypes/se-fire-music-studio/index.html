@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101014">
+<title>Se Fire Music Studio — Drum Sequencer Prototype</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#f5f5f7;background:#101014}
+*{box-sizing:border-box}body{max-width:1100px;margin:0 auto;padding:24px}header{border-bottom:1px solid #393943;padding-bottom:16px;margin-bottom:20px}
+h1{margin:0;color:#ff4545;font-size:clamp(1.5rem,4vw,2.4rem)}p{color:#b8b8c1}main{display:grid;gap:18px}
+.panel{border:1px solid #34343e;border-radius:14px;background:#1b1b23;padding:18px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+button,input{font:inherit}button{cursor:pointer;border:1px solid #777784;background:#282833;color:white;border-radius:8px;padding:10px}
+button:hover{border-color:#ff6666}button:focus-visible,input:focus-visible{outline:3px solid #ff9b9b;outline-offset:2px}
+button.primary{background:#ba2222;border-color:#ff6666;font-weight:700}
+input[type=range]{accent-color:#f33}#tempoValue{font-variant-numeric:tabular-nums}
+.sequence{overflow-x:auto}.grid{display:grid;grid-template-columns:90px repeat(16,minmax(34px,1fr));gap:5px;min-width:760px;align-items:center}
+.track{font-weight:700}.step{height:40px;padding:0;border-color:#454550;background:#292932}
+.step.on{background:#c62b2b;border-color:#f66}.step.playhead{box-shadow:0 0 0 2px #fff inset}
+.count{text-align:center;color:#9999a5;font-size:.75rem}.count.beat{color:#f7b4b4}
+.status{min-height:1.5em;color:#d6d6de}.small{font-size:.85rem}
+@media(max-width:600px){body{padding:14px}.panel{padding:12px}}
+</style>
+</head>
+<body>
+<header><h1>SE FIRE TECH · MUSIC STUDIO</h1><p>POWER. PROTECT. PERFORM. — Original browser drum sequencer prototype</p></header>
+<main>
+<section class="panel controls" aria-label="Transport">
+<button id="play" class="primary" type="button">Play</button>
+<button id="stop" type="button">Stop</button>
+<label for="tempo">Tempo <output id="tempoValue" for="tempo">110 BPM</output></label>
+<input id="tempo" type="range" min="60" max="180" value="110">
+<button id="clear" type="button">Clear pattern</button>
+<button id="export" type="button">Export JSON</button>
+<label for="import">Import JSON</label><input id="import" type="file" accept=".json,application/json">
+</section>
+<section class="panel sequence" aria-label="16-step sequencer"><div id="grid" class="grid"></div></section>
+<section class="panel"><div id="status" class="status" role="status" aria-live="polite">Ready. Press Play to enable audio.</div>
+<p class="small">Local-only prototype. Patterns are stored in this browser, not a cloud account. No subscriptions, payment processing, uploads or backend are connected. The approved official logo image is not bundled yet; text branding is temporary.</p></section>
+</main>
+<script>
+"use strict";
+const TRACKS=["Kick","Snare","Closed hat","Clap"],STEPS=16,STORE="se-fire-music-studio-pattern-v1";
+const initial=[[0,4,8,12],[4,12],[0,2,4,6,8,10,12,14],[12]];
+const fresh=()=>TRACKS.map((_,i)=>Array.from({length:STEPS},(_,s)=>initial[i].includes(s)));
+const valid=x=>Array.isArray(x)&&x.length===TRACKS.length&&x.every(row=>Array.isArray(row)&&row.length===STEPS&&row.every(v=>typeof v==="boolean"));
+let pattern=fresh();try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(valid(saved))pattern=saved;}catch{}
+const grid=document.getElementById("grid"),status=document.getElementById("status");
+let audio=null,timer=null,nextTime=0,step=0,playing=false,noiseBuffer=null;
+const report=s=>{status.textContent=s;};
+function save(){try{localStorage.setItem(STORE,JSON.stringify(pattern));}catch{report("Pattern updated; local storage unavailable.");}}
+function draw(){
+ grid.replaceChildren();
+ const head=document.createElement("span");head.textContent="Track";grid.append(head);
+ for(let s=0;s<STEPS;s++){const el=document.createElement("span");el.className="count"+(s%4===0?" beat":"");el.textContent=String(s+1);grid.append(el);}
+ TRACKS.forEach((name,t)=>{
+  const label=document.createElement("span");label.className="track";label.textContent=name;grid.append(label);
+  for(let s=0;s<STEPS;s++){const btn=document.createElement("button");btn.type="button";btn.className="step"+(pattern[t][s]?" on":"");btn.setAttribute("aria-label",name+" step "+(s+1));btn.setAttribute("aria-pressed",String(pattern[t][s]));btn.dataset.track=t;btn.dataset.step=s;btn.addEventListener("click",()=>{pattern[t][s]=!pattern[t][s];save();draw();});grid.append(btn);}
+ });
+}
+function showPlayhead(n){grid.querySelectorAll(".step").forEach(el=>el.classList.toggle("playhead",playing&&Number(el.dataset.step)===n));}
+function makeNoise(){
+ const b=audio.createBuffer(1,audio.sampleRate, audio.sampleRate);
+ const a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=Math.random()*2-1;return b;
+}
+function tone(at,startFreq,endFreq,duration,gain){
+ const o=audio.createOscillator(),g=audio.createGain();o.type="sine";
+ o.frequency.setValueAtTime(startFreq,at);o.frequency.exponentialRampToValueAtTime(endFreq,at+duration);
+ g.gain.setValueAtTime(gain,at);g.gain.exponentialRampToValueAtTime(.001,at+duration);
+ o.connect(g).connect(audio.destination);o.start(at);o.stop(at+duration+.01);
+}
+function noise(at,duration,gain,highpass){
+ const src=audio.createBufferSource(),filter=audio.createBiquadFilter(),g=audio.createGain();
+ src.buffer=noiseBuffer;filter.type="highpass";filter.frequency.value=highpass;
+ g.gain.setValueAtTime(gain,at);g.gain.exponentialRampToValueAtTime(.001,at+duration);
+ src.connect(filter).connect(g).connect(audio.destination);src.start(at);src.stop(at+duration+.01);
+}
+function trigger(t,at){
+ if(t===0)tone(at,155,43,.24,.75);
+ if(t===1){noise(at,.16,.35,1200);tone(at,180,90,.1,.14);}
+ if(t===2)noise(at,.055,.16,6500);
+ if(t===3){noise(at,.08,.25,900);noise(at+.027,.1,.15,900);}
+}
+function bpm(){return Math.min(180,Math.max(60,Number(document.getElementById("tempo").value)||110));}
+function tick(){
+ if(!audio)return;
+ while(nextTime<audio.currentTime+.12){
+  const current=step,at=nextTime;
+  for(let t=0;t<TRACKS.length;t++)if(pattern[t][current])trigger(t,at);
+  const delay=Math.max(0,(at-audio.currentTime)*1000);
+  setTimeout(()=>{if(playing)showPlayhead(current);},delay);
+  nextTime+=60/bpm()/4;step=(step+1)%STEPS;
+ }
+}
+async function play(){
+ if(playing)return;
+ try{
+  audio=audio||new (window.AudioContext||window.webkitAudioContext)();
+  await audio.resume();
+  noiseBuffer=noiseBuffer||makeNoise();
+  playing=true;step=0;nextTime=audio.currentTime+.05;
+  timer=setInterval(tick,25);tick();report("Playing "+bpm()+" BPM");
+ }catch{report("Audio unavailable. Try a browser with Web Audio support.");}
+}
+function stop(){
+ playing=false;if(timer!==null){clearInterval(timer);timer=null;}
+ showPlayhead(-1);report("Stopped");
+}
+document.getElementById("play").addEventListener("click",play);
+document.getElementById("stop").addEventListener("click",stop);
+document.getElementById("tempo").addEventListener("input",e=>{document.getElementById("tempoValue").textContent=bpm()+" BPM";if(playing)report("Playing "+bpm()+" BPM");});
+document.getElementById("clear").addEventListener("click",()=>{pattern=TRACKS.map(()=>Array(STEPS).fill(false));save();draw();report("Pattern cleared");});
+document.getElementById("export").addEventListener("click",()=>{
+ const blob=new Blob([JSON.stringify({format:"se-fire-studio-v1",tempo:bpm(),tracks:TRACKS,pattern},null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="se-fire-pattern.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+document.getElementById("import").addEventListener("change",async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ try{if(file.size>100000)throw Error("File too large");const d=JSON.parse(await file.text());if(d.format!=="se-fire-studio-v1"||!valid(d.pattern))throw Error("Invalid pattern");pattern=d.pattern;save();draw();if(Number.isFinite(d.tempo))document.getElementById("tempo").value=Math.min(180,Math.max(60,d.tempo));document.getElementById("tempoValue").textContent=bpm()+" BPM";report("Pattern imported");}catch(err){report("Import rejected: "+err.message);}finally{e.target.value="";}
+});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+draw();
+</script>
+</body>
+</html>
