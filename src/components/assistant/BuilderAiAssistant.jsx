@@ -1,54 +1,74 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Bot, Sparkles, Send, X, RefreshCw, Volume2, CheckCircle2, Copy, Check, ShieldCheck, Zap } from "lucide-react";
-import { vercelApi } from "@/lib/vercelApi";
-import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { Sparkles, Send, X, Trash2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-const QUICK_ACTIONS = [
-  {
-    label: "App Setup Checklist",
-    prompt: "Guide me through the complete step-by-step setup checklist for my Builder Flow applications and production deployment.",
-    icon: CheckCircle2,
-  },
-  {
-    label: "PayPal Monetization",
-    prompt: "How do I configure my PayPal live keys, products ($16/mo and $28 one-time), and digital checkouts?",
-    icon: Zap,
-  },
-  {
-    label: "Google Sheets & Gmail Reports",
-    prompt: "Explain how my Google Sheets sync and automated Monday 9:00 AM Gmail reports work and how to test them.",
-    icon: ShieldCheck,
-  },
-  {
-    label: "190+ Languages & Accents",
-    prompt: "How does the 190+ languages and regional accents engine work with Steven's narrator voice?",
-    icon: Sparkles,
-  },
+const STORAGE_KEY = "bf:assistant:history";
+
+const GREETING = {
+  role: "assistant",
+  content:
+    "Hey, I'm **Spark** — the AI assistant for BuildFlow by Se Fire Tech. I can help you explore Steve's 87 live apps and games, price out a website, app, or game build, draft copy, or spec out a project idea. What are we working on?",
+};
+
+const SUGGESTIONS = [
+  "What can you build for my business?",
+  "How much is a custom app?",
+  "Show me the games",
+  "Write copy for my homepage",
 ];
 
+const NOT_CONFIGURED_MESSAGE =
+  "I'm still being switched on — check back soon, or reach Steve directly at stevenfire92@yahoo.com and he'll take care of you.";
+
+const RATE_LIMITED_MESSAGE =
+  "Whoa, I'm getting a lot of questions at once — give me a few minutes to catch up, then ask me again.";
+
+const GENERIC_ERROR_MESSAGE =
+  "Something glitched on my end — sorry about that. Give it another try, and if it keeps happening, reach Steve at stevenfire92@yahoo.com.";
+
+function loadHistory() {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [GREETING];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [GREETING];
+    const clean = parsed.filter(
+      (m) =>
+        m &&
+        (m.role === "user" || m.role === "assistant") &&
+        typeof m.content === "string"
+    );
+    return clean.length > 0 ? clean : [GREETING];
+  } catch {
+    return [GREETING];
+  }
+}
+
 export default function BuilderAiAssistant() {
-  const { lang, activeAccent } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content:
-        "Hello! I am your **Builder Flow AI Setup Assistant**, created by Steven Thomas Turcott (Se Fire Tech). I am here to help you configure, launch, and monetize your apps. What would you like to set up today?",
-    },
-  ]);
+  const [messages, setMessages] = useState(loadHistory);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [copiedIndex, setCopiedIndex] = useState(null);
-  const [narratingIndex, setNarratingIndex] = useState(null);
 
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {
+      // Storage full or unavailable — chat still works for this session.
+    }
+  }, [messages]);
 
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, loading]);
+
+  const clearChat = () => {
+    setMessages([GREETING]);
+  };
 
   const handleSend = async (textToSend) => {
     const text = typeof textToSend === "string" ? textToSend.trim() : input.trim();
@@ -60,56 +80,48 @@ export default function BuilderAiAssistant() {
     setInput("");
     setLoading(true);
 
+    // Send the full conversation (minus local-only notices like error lines).
+    const payload = newHistory
+      .filter((m) => !m.transient)
+      .map((m) => ({ role: m.role, content: m.content }));
+
     try {
-      const res = await vercelApi("/api/ai-assistant", {
+      const response = await fetch("/api/ai-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: messages.slice(-5) }),
+        body: JSON.stringify({ messages: payload }),
       });
+      const data = await response.json().catch(() => null);
 
-      const reply = res.reply || "I'm ready to help with your setup. What would you like to configure next?";
-      setMessages([...newHistory, { role: "assistant", content: reply }]);
-    } catch (err) {
+      if (response.ok && typeof data?.reply === "string") {
+        setMessages([...newHistory, { role: "assistant", content: data.reply }]);
+      } else if (data?.error === "ai_not_configured") {
+        setMessages([
+          ...newHistory,
+          { role: "assistant", content: NOT_CONFIGURED_MESSAGE, transient: true },
+        ]);
+      } else if (response.status === 429 || data?.error === "rate_limited") {
+        setMessages([
+          ...newHistory,
+          { role: "assistant", content: RATE_LIMITED_MESSAGE, transient: true },
+        ]);
+      } else {
+        setMessages([
+          ...newHistory,
+          { role: "assistant", content: GENERIC_ERROR_MESSAGE, transient: true },
+        ]);
+      }
+    } catch {
       setMessages([
         ...newHistory,
-        {
-          role: "assistant",
-          content:
-            "The independent AI service is not ready yet. Secure sign-in and an AI provider must be configured in Vercel.",
-        },
+        { role: "assistant", content: GENERIC_ERROR_MESSAGE, transient: true },
       ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const copyToClipboard = (text, index) => {
-    navigator.clipboard.writeText(text);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2000);
-  };
-
-  const narrateMessage = (text, index) => {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-
-    if (narratingIndex === index) {
-      setNarratingIndex(null);
-      return;
-    }
-
-    setNarratingIndex(index);
-    const cleanText = text.replace(/[*#_`]/g, "");
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.rate = 1.05 * (activeAccent?.rate || 1.0);
-    utterance.pitch = 0.95 * (activeAccent?.pitch || 1.0);
-    utterance.lang = activeAccent?.speechLang || "en-US";
-
-    utterance.onend = () => setNarratingIndex(null);
-    utterance.onerror = () => setNarratingIndex(null);
-
-    window.speechSynthesis.speak(utterance);
-  };
+  const showSuggestions = messages.length <= 1 && !loading;
 
   return (
     <>
@@ -118,20 +130,20 @@ export default function BuilderAiAssistant() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-black font-semibold text-xs shadow-2xl hover:shadow-amber-500/30 hover:scale-105 transition-all duration-300"
-          title="Open AI Setup Assistant"
+          title="Chat with Spark"
         >
           <span className="relative flex items-center justify-center">
-            <Bot className="w-4 h-4 fill-black" />
+            <Sparkles className="w-4 h-4 fill-black" />
             <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-white animate-ping" />
           </span>
-          <span className="tracking-wide">AI Setup Assistant</span>
+          <span className="tracking-wide">Ask Spark</span>
           <span className="px-1.5 py-0.5 rounded-full bg-black/15 text-[10px] font-bold">
-            PRO
+            AI
           </span>
         </button>
       </div>
 
-      {/* AI Assistant Chat Modal / Drawer */}
+      {/* Spark Chat Panel */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:justify-end p-3 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
           <div className="w-full sm:w-[460px] h-[90vh] sm:h-[680px] rounded-3xl bg-neutral-950 border border-amber-500/30 shadow-2xl flex flex-col overflow-hidden text-white animate-in slide-in-from-bottom-5 sm:slide-in-from-right-5 duration-300">
@@ -139,64 +151,38 @@ export default function BuilderAiAssistant() {
             <div className="px-5 py-4 bg-gradient-to-r from-amber-500/20 via-neutral-900 to-transparent border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-amber-400 text-black flex items-center justify-center shadow-md shadow-amber-400/20 font-bold shrink-0">
-                  <Bot className="w-5 h-5 fill-black" />
+                  <Sparkles className="w-5 h-5 fill-black" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-semibold text-white">
-                      Builder Flow AI Assistant
-                    </h3>
+                    <h3 className="text-sm font-semibold text-white">Spark</h3>
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
-                      Best-in-Class
+                      AI Assistant
                     </span>
                   </div>
                   <p className="text-xs text-white/50">
-                    Se Fire Tech · Intelligent Architecture & Setup Guide
+                    BuildFlow · Se Fire Tech
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-1">
                 <button
-                  onClick={() => {
-                    setMessages([
-                      {
-                        role: "assistant",
-                        content:
-                          "Chat reset. How can I help you set up or optimize your Builder Flow applications?",
-                      },
-                    ]);
-                  }}
+                  onClick={clearChat}
                   className="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
-                  title="Clear conversation"
+                  title="Clear chat"
+                  aria-label="Clear chat"
                 >
-                  <RefreshCw className="w-3.5 h-3.5" />
+                  <Trash2 className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => {
-                    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-                    setIsOpen(false);
-                  }}
+                  onClick={() => setIsOpen(false)}
                   className="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                  aria-label="Close chat"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
-            </div>
-
-            {/* Quick Action Chips */}
-            <div className="px-4 py-2.5 bg-black/40 border-b border-white/5 overflow-x-auto flex items-center gap-1.5 scrollbar-none">
-              {QUICK_ACTIONS.map((action, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleSend(action.prompt)}
-                  disabled={loading}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/30 text-white/70 hover:text-white whitespace-nowrap transition-colors"
-                >
-                  <action.icon className="w-3 h-3 text-amber-400" />
-                  <span>{action.label}</span>
-                </button>
-              ))}
             </div>
 
             {/* Messages Area */}
@@ -206,9 +192,7 @@ export default function BuilderAiAssistant() {
                 return (
                   <div
                     key={idx}
-                    className={`flex flex-col ${
-                      isAssistant ? "items-start" : "items-end"
-                    }`}
+                    className={`flex ${isAssistant ? "justify-start" : "justify-end"}`}
                   >
                     <div
                       className={`max-w-[88%] rounded-2xl p-4 text-xs sm:text-sm leading-relaxed ${
@@ -225,56 +209,34 @@ export default function BuilderAiAssistant() {
                         <div>{m.content}</div>
                       )}
                     </div>
-
-                    {/* Assistant Action Bar: Copy & Narrate with Steven's Voice */}
-                    {isAssistant && (
-                      <div className="mt-1.5 flex items-center gap-2 text-[11px] text-white/40">
-                        <button
-                          onClick={() => copyToClipboard(m.content, idx)}
-                          className="flex items-center gap-1 hover:text-white transition-colors"
-                          title="Copy response"
-                        >
-                          {copiedIndex === idx ? (
-                            <>
-                              <Check className="w-3 h-3 text-emerald-400" />
-                              <span className="text-emerald-400">Copied</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3 h-3" />
-                              <span>Copy</span>
-                            </>
-                          )}
-                        </button>
-
-                        <span>·</span>
-
-                        <button
-                          onClick={() => narrateMessage(m.content, idx)}
-                          className={`flex items-center gap-1 transition-colors ${
-                            narratingIndex === idx
-                              ? "text-amber-400 font-semibold"
-                              : "hover:text-amber-400"
-                          }`}
-                          title="Listen with Steven's voice narrator"
-                        >
-                          <Volume2 className="w-3 h-3" />
-                          <span>
-                            {narratingIndex === idx
-                              ? "Speaking..."
-                              : "Listen with Steven's Voice"}
-                          </span>
-                        </button>
-                      </div>
-                    )}
                   </div>
                 );
               })}
 
+              {/* Starter suggestion chips (empty state) */}
+              {showSuggestions && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {SUGGESTIONS.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      onClick={() => handleSend(suggestion)}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/30 text-white/70 hover:text-white transition-colors"
+                    >
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      <span>{suggestion}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
               {loading && (
                 <div className="flex items-center gap-2 p-3 rounded-2xl bg-white/[0.04] border border-white/10 text-xs text-white/60 w-fit">
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-amber-400" />
-                  <span>AI Assistant is compiling recommendations...</span>
+                  <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-bounce" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-bounce [animation-delay:150ms]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-bounce [animation-delay:300ms]" />
+                  </span>
+                  <span>Spark is thinking…</span>
                 </div>
               )}
 
@@ -292,13 +254,15 @@ export default function BuilderAiAssistant() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask setup, PayPal, Google Sheets, or deployment questions..."
+                placeholder="Ask Spark about apps, prices, or your project idea…"
+                maxLength={2000}
                 className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-amber-400/50"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
                 className="w-10 h-10 rounded-full bg-amber-400 hover:bg-amber-300 disabled:opacity-40 text-black flex items-center justify-center font-bold transition-all shrink-0"
+                aria-label="Send message"
               >
                 <Send className="w-4 h-4 fill-black" />
               </button>
