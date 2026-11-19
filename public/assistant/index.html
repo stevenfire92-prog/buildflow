@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Se Fire — AI Assistant | Se Fire Tech</title>
+<meta name="description" content="Chat with Se Fire, the Se Fire Tech guide. Ask about 89 apps and games, the Shadow Path books, 100% human-made music, and builder services from Toronto's Se Fire Tech.">
+<meta name="keywords" content="se fire, se fire tech, ai assistant, se fire apps, steven turcott, toronto builder">
+<link rel="canonical" href="https://se-fire-tech.vercel.app/assistant">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://se-fire-tech.vercel.app/assistant">
+<meta property="og:title" content="Se Fire — AI Assistant | Se Fire Tech">
+<meta property="og:description" content="Ask Se Fire about 89 apps and games, books, music, and builder services.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Se Fire — AI Assistant | Se Fire Tech">
+<meta name="twitter:description" content="Ask Se Fire about 89 apps and games, books, music, and builder services.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a12; color:#e8e6f0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:36px 16px 32px; }
+  .back { align-self:flex-start; max-width:560px; width:100%; margin:0 auto; }
+  .back a { color:#9d97b8; text-decoration:none; font-size:14px; }
+  .back a:hover { color:#e8e6f0; }
+  .wrap { width:100%; max-width:560px; }
+  .profile { text-align:center; margin-top:10px; }
+  .avatar { width:88px; height:88px; border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:42px; background:radial-gradient(circle at 35% 30%, #2a2542, #14121f); border:2px solid #a855f7; }
+  h1 { font-size:34px; letter-spacing:1px; margin:12px 0 2px; background:linear-gradient(90deg,#ff5e3a,#a855f7); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .title { color:#c9c4de; font-size:15px; font-weight:600; }
+  .bio { color:#9d97b8; font-size:15px; line-height:1.55; margin:14px auto 4px; max-width:500px; }
+  .bio a { color:#c9c4de; }
+  .ask { margin:20px 0 8px; font-size:13px; letter-spacing:1px; color:#7a7494; text-transform:uppercase; text-align:center; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .chip { background:#14121f; border:1px solid #2a2542; color:#e8e6f0; border-radius:999px; padding:10px 14px; font-size:14px; cursor:pointer; min-height:44px; }
+  .chip:hover { border-color:#a855f7; }
+  .chat { margin-top:20px; background:#14121f; border:1px solid #2a2542; border-radius:16px; display:flex; flex-direction:column; overflow:hidden; }
+  .msgs { padding:16px; display:flex; flex-direction:column; gap:10px; min-height:220px; max-height:46vh; overflow-y:auto; }
+  .msg { max-width:85%; padding:11px 14px; border-radius:14px; font-size:15px; line-height:1.5; white-space:pre-wrap; word-wrap:break-word; }
+  .msg.bot { background:#1d1930; align-self:flex-start; border-bottom-left-radius:4px; }
+  .msg.user { background:linear-gradient(90deg,#7c3aed,#a855f7); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+  .msg.sys { background:transparent; color:#9d97b8; align-self:center; text-align:center; font-size:14px; }
+  .row { display:flex; gap:8px; padding:12px; border-top:1px solid #2a2542; }
+  .row input { flex:1; background:#0a0a12; border:1px solid #2a2542; border-radius:10px; color:#e8e6f0; padding:12px; font-size:16px; min-height:48px; }
+  .row input:focus { outline:none; border-color:#a855f7; }
+  .row button { background:linear-gradient(90deg,#ff5e3a,#a855f7); color:#fff; border:none; border-radius:10px; padding:0 20px; font-size:15px; font-weight:700; cursor:pointer; min-height:48px; min-width:76px; }
+  .row button:disabled { opacity:.55; cursor:wait; }
+  .fine { margin-top:14px; color:#5d5878; font-size:13px; text-align:center; line-height:1.5; }
+  .fine a { color:#9d97b8; }
+</style>
+</head>
+<body>
+  <div class="back"><a href="/">← Se Fire Tech home</a></div>
+  <div class="wrap">
+    <div class="profile">
+      <div class="avatar">🔥</div>
+      <h1>Se Fire</h1>
+      <p class="title">Founder &amp; Content Creator — Se Fire Tech</p>
+      <p class="bio">I'm the Se Fire Tech Guide — here to help you explore everything Toronto builder Steven Turcott has created: 89 live apps and games, the Shadow Path dark-fantasy e-book series, and 100% human-made music by Se Fire. I can point you to the right app, game, book, or track, explain builder services and pricing, and send you to the full catalogue at <a href="https://se-fire-links.vercel.app">se-fire-links.vercel.app</a>. Payments are handled securely through PayPal on each app, and new drops land every week.</p>
+    </div>
+    <p class="ask">Ask me about</p>
+    <div class="chips">
+      <button class="chip" type="button">What apps and games do you have?</button>
+      <button class="chip" type="button">How much is a custom app or website?</button>
+      <button class="chip" type="button">Where can I hear the music and read the books?</button>
+      <button class="chip" type="button">How do subscriptions work?</button>
+    </div>
+    <div class="chat">
+      <div class="msgs" id="msgs"></div>
+      <div class="row">
+        <input id="inp" type="text" placeholder="Ask Se Fire anything…" autocomplete="off" maxlength="2000">
+        <button id="send" type="button">Send</button>
+      </div>
+    </div>
+    <p class="fine">AI can make mistakes — always double-check important details. For a confirmed quote or anything I can't answer, email <a href="mailto:stevenfire92@yahoo.com">stevenfire92@yahoo.com</a>.<br>🔥 Se Fire Tech · Toronto · Nov 2026</p>
+  </div>
+<script>
+(function () {
+  var msgsEl = document.getElementById('msgs');
+  var inp = document.getElementById('inp');
+  var sendBtn = document.getElementById('send');
+  var KEY = 'sefire-assistant-history-v1';
+  var history = [];
+  try { history = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { history = []; }
+  if (!Array.isArray(history)) history = [];
+
+  function addMsg(role, text) {
+    var d = document.createElement('div');
+    d.className = 'msg ' + (role === 'user' ? 'user' : role === 'sys' ? 'sys' : 'bot');
+    d.textContent = text;
+    msgsEl.appendChild(d);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    return d;
+  }
+
+  if (history.length) {
+    history.forEach(function (m) { addMsg(m.role, m.content); });
+  } else {
+    addMsg('bot', "Hey — I'm Se Fire, your guide to everything Se Fire Tech. Ask me about the apps and games, the books, the music, or getting something built.");
+  }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(history.slice(-20))); } catch (e) {}
+  }
+
+  var busy = false;
+  function send(text) {
+    var content = (text || inp.value || '').trim();
+    if (!content || busy) return;
+    busy = true; sendBtn.disabled = true;
+    inp.value = '';
+    history.push({ role: 'user', content: content });
+    addMsg('user', content);
+    var thinking = addMsg('bot', '…');
+    fetch('/api/ai-assistant', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history.slice(-20) })
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (data) { return { status: r.status, data: data }; });
+    }).then(function (res) {
+      var reply;
+      if (res.status === 200 && res.data.reply) {
+        reply = res.data.reply;
+      } else if (res.status === 503) {
+        reply = "I'm still warming up — my connection isn't switched on yet. In the meantime, the full catalogue is at se-fire-links.vercel.app, or email Steve at stevenfire92@yahoo.com.";
+        history.pop();
+      } else if (res.status === 429) {
+        reply = res.data.message || "I'm getting a lot of questions right now — give it a few minutes and try again.";
+        history.pop();
+      } else {
+        reply = "Something hiccuped on my end — try again in a moment, or reach Steve at stevenfire92@yahoo.com.";
+        history.pop();
+      }
+      thinking.textContent = reply;
+      if (res.status === 200) { history.push({ role: 'assistant', content: reply }); save(); }
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    }).catch(function () {
+      thinking.textContent = "I couldn't connect just now — check your connection and try again, or email stevenfire92@yahoo.com.";
+      history.pop();
+    }).then(function () {
+      busy = false; sendBtn.disabled = false; inp.focus();
+    });
+  }
+
+  sendBtn.addEventListener('click', function () { send(); });
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') send(); });
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () { send(c.textContent); });
+  });
+})();
+</script>
+</body>
+</html>
