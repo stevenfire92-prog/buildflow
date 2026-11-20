@@ -18,7 +18,7 @@ export default function SeFireWatermark() {
       href="https://se-fire-links.vercel.app"
       target="_blank"
       rel="noopener noreferrer"
-      title="Built by Se Fire Tech — see all 89 apps"
+      title="Built by Se Fire Tech — see all 90 apps"
       style={{
         position: 'fixed',
         bottom: '12px',
